@@ -1,0 +1,11 @@
+.icon-search:before {
+  content: url('../lib/icons/ic_search_white_24px.svg');
+}
+
+.header-bar.red {
+  background-color: #F44336;
+}
+
+.ellipsis:after {
+  content:'...';
+}
