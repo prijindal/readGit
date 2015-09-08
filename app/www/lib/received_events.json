@@ -1,0 +1,2367 @@
+[
+  {
+    "id": "3124717191",
+    "type": "MemberEvent",
+    "actor": {
+      "id": 2049935,
+      "login": "joni2back",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/joni2back",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2049935?"
+    },
+    "repo": {
+      "id": 24677116,
+      "name": "joni2back/angular-filemanager",
+      "url": "https://api.github.com/repos/joni2back/angular-filemanager"
+    },
+    "payload": {
+      "member": {
+        "login": "mdo",
+        "id": 98681,
+        "avatar_url": "https://avatars.githubusercontent.com/u/98681?v=3",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/mdo",
+        "html_url": "https://github.com/mdo",
+        "followers_url": "https://api.github.com/users/mdo/followers",
+        "following_url": "https://api.github.com/users/mdo/following{/other_user}",
+        "gists_url": "https://api.github.com/users/mdo/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/mdo/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/mdo/subscriptions",
+        "organizations_url": "https://api.github.com/users/mdo/orgs",
+        "repos_url": "https://api.github.com/users/mdo/repos",
+        "events_url": "https://api.github.com/users/mdo/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/mdo/received_events",
+        "type": "User",
+        "site_admin": true
+      },
+      "action": "added"
+    },
+    "public": true,
+    "created_at": "2015-09-07T15:19:16Z"
+  },
+  {
+    "id": "3123829632",
+    "type": "IssueCommentEvent",
+    "actor": {
+      "id": 1753553,
+      "login": "hunbubu",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/hunbubu",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1753553?"
+    },
+    "repo": {
+      "id": 25199193,
+      "name": "quark-dev/Phonon-Framework",
+      "url": "https://api.github.com/repos/quark-dev/Phonon-Framework"
+    },
+    "payload": {
+      "action": "created",
+      "issue": {
+        "url": "https://api.github.com/repos/quark-dev/Phonon-Framework/issues/6",
+        "labels_url": "https://api.github.com/repos/quark-dev/Phonon-Framework/issues/6/labels{/name}",
+        "comments_url": "https://api.github.com/repos/quark-dev/Phonon-Framework/issues/6/comments",
+        "events_url": "https://api.github.com/repos/quark-dev/Phonon-Framework/issues/6/events",
+        "html_url": "https://github.com/quark-dev/Phonon-Framework/issues/6",
+        "id": 104655128,
+        "number": 6,
+        "title": "Phonegap - on Android devices external HTML files are not working",
+        "user": {
+          "login": "hunbubu",
+          "id": 1753553,
+          "avatar_url": "https://avatars.githubusercontent.com/u/1753553?v=3",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/hunbubu",
+          "html_url": "https://github.com/hunbubu",
+          "followers_url": "https://api.github.com/users/hunbubu/followers",
+          "following_url": "https://api.github.com/users/hunbubu/following{/other_user}",
+          "gists_url": "https://api.github.com/users/hunbubu/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/hunbubu/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/hunbubu/subscriptions",
+          "organizations_url": "https://api.github.com/users/hunbubu/orgs",
+          "repos_url": "https://api.github.com/users/hunbubu/repos",
+          "events_url": "https://api.github.com/users/hunbubu/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/hunbubu/received_events",
+          "type": "User",
+          "site_admin": false
+        },
+        "labels": [
+
+        ],
+        "state": "open",
+        "locked": false,
+        "assignee": null,
+        "milestone": null,
+        "comments": 2,
+        "created_at": "2015-09-03T09:28:32Z",
+        "updated_at": "2015-09-07T09:44:34Z",
+        "closed_at": null,
+        "body": "On Android devices (tested in  external HTML files are not working as pages on Phonegap apps. When they are inserted to index.html everything works well. On IOS devices and desktop browsers it's working fine.\r\n\r\nTests were run with the offical Phonegap android and IOS apps."
+      },
+      "comment": {
+        "url": "https://api.github.com/repos/quark-dev/Phonon-Framework/issues/comments/138253726",
+        "html_url": "https://github.com/quark-dev/Phonon-Framework/issues/6#issuecomment-138253726",
+        "issue_url": "https://api.github.com/repos/quark-dev/Phonon-Framework/issues/6",
+        "id": 138253726,
+        "user": {
+          "login": "hunbubu",
+          "id": 1753553,
+          "avatar_url": "https://avatars.githubusercontent.com/u/1753553?v=3",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/hunbubu",
+          "html_url": "https://github.com/hunbubu",
+          "followers_url": "https://api.github.com/users/hunbubu/followers",
+          "following_url": "https://api.github.com/users/hunbubu/following{/other_user}",
+          "gists_url": "https://api.github.com/users/hunbubu/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/hunbubu/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/hunbubu/subscriptions",
+          "organizations_url": "https://api.github.com/users/hunbubu/orgs",
+          "repos_url": "https://api.github.com/users/hunbubu/repos",
+          "events_url": "https://api.github.com/users/hunbubu/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/hunbubu/received_events",
+          "type": "User",
+          "site_admin": false
+        },
+        "created_at": "2015-09-07T09:44:34Z",
+        "updated_at": "2015-09-07T09:44:34Z",
+        "body": "I have run some more tests:\r\n\r\nYes, I have used page wrapper in my external HTML files. It works well in desktop browsers, on IOS with PhoneGap testing app. It works in Android too when I build the app, only fails in PhoneGap testing app on Android, so it's not critical for us, only takes a bit more development time.\r\n\r\nAnyway it's a great and lightweight framework and thanks for making and sharing it."
+      }
+    },
+    "public": true,
+    "created_at": "2015-09-07T09:44:35Z",
+    "org": {
+      "id": 7924140,
+      "login": "quark-dev",
+      "gravatar_id": "",
+      "url": "https://api.github.com/orgs/quark-dev",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7924140?"
+    }
+  },
+  {
+    "id": "3123513060",
+    "type": "IssueCommentEvent",
+    "actor": {
+      "id": 1264963,
+      "login": "metacatdud",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/metacatdud",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1264963?"
+    },
+    "repo": {
+      "id": 25199193,
+      "name": "quark-dev/Phonon-Framework",
+      "url": "https://api.github.com/repos/quark-dev/Phonon-Framework"
+    },
+    "payload": {
+      "action": "created",
+      "issue": {
+        "url": "https://api.github.com/repos/quark-dev/Phonon-Framework/issues/5",
+        "labels_url": "https://api.github.com/repos/quark-dev/Phonon-Framework/issues/5/labels{/name}",
+        "comments_url": "https://api.github.com/repos/quark-dev/Phonon-Framework/issues/5/comments",
+        "events_url": "https://api.github.com/repos/quark-dev/Phonon-Framework/issues/5/events",
+        "html_url": "https://github.com/quark-dev/Phonon-Framework/issues/5",
+        "id": 104122701,
+        "number": 5,
+        "title": "Page html context",
+        "user": {
+          "login": "metacatdud",
+          "id": 1264963,
+          "avatar_url": "https://avatars.githubusercontent.com/u/1264963?v=3",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/metacatdud",
+          "html_url": "https://github.com/metacatdud",
+          "followers_url": "https://api.github.com/users/metacatdud/followers",
+          "following_url": "https://api.github.com/users/metacatdud/following{/other_user}",
+          "gists_url": "https://api.github.com/users/metacatdud/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/metacatdud/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/metacatdud/subscriptions",
+          "organizations_url": "https://api.github.com/users/metacatdud/orgs",
+          "repos_url": "https://api.github.com/users/metacatdud/repos",
+          "events_url": "https://api.github.com/users/metacatdud/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/metacatdud/received_events",
+          "type": "User",
+          "site_admin": false
+        },
+        "labels": [
+
+        ],
+        "state": "open",
+        "locked": false,
+        "assignee": null,
+        "milestone": null,
+        "comments": 2,
+        "created_at": "2015-08-31T19:54:00Z",
+        "updated_at": "2015-09-07T07:45:31Z",
+        "closed_at": null,
+        "body": "Hi, \r\nFirst of all. congrats on the new release! Looks awesome. I just started using your framework 3 weeks ago. This last release kicks ass! I'm a big fan of Vanilla JS so I really enjoy the look and feel oh Phonon! It's a bit tricky thought , it'd doesn't have backward compatibility but is ok!\r\n\r\nI have one question though, how to retrieve the page object from within the activity?\r\n\r\nAwesome job guys!"
+      },
+      "comment": {
+        "url": "https://api.github.com/repos/quark-dev/Phonon-Framework/issues/comments/138217505",
+        "html_url": "https://github.com/quark-dev/Phonon-Framework/issues/5#issuecomment-138217505",
+        "issue_url": "https://api.github.com/repos/quark-dev/Phonon-Framework/issues/5",
+        "id": 138217505,
+        "user": {
+          "login": "metacatdud",
+          "id": 1264963,
+          "avatar_url": "https://avatars.githubusercontent.com/u/1264963?v=3",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/metacatdud",
+          "html_url": "https://github.com/metacatdud",
+          "followers_url": "https://api.github.com/users/metacatdud/followers",
+          "following_url": "https://api.github.com/users/metacatdud/following{/other_user}",
+          "gists_url": "https://api.github.com/users/metacatdud/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/metacatdud/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/metacatdud/subscriptions",
+          "organizations_url": "https://api.github.com/users/metacatdud/orgs",
+          "repos_url": "https://api.github.com/users/metacatdud/repos",
+          "events_url": "https://api.github.com/users/metacatdud/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/metacatdud/received_events",
+          "type": "User",
+          "site_admin": false
+        },
+        "created_at": "2015-09-07T07:45:31Z",
+        "updated_at": "2015-09-07T07:45:31Z",
+        "body": "Uhmm. I thought so! I used the same thing. I'm currently  writing a wrapper over phonon because how it is now is more of a librarie suite then a full fledged framework. This is awesome because you can use only the libs you want!\r\n\r\nWhat i'm trying to polish right now is the following format\r\n```\r\nphonon.module('module_name', function(ph) {    \r\n   //code goes here\r\n   //ph - internal facade for module \"module_name\" with phonon libraries and stuff such as html context and what ever else it's needed here :)\r\n   - or -\r\n   //ph - will have only two instructions require and instance\r\n\r\n    //v1\r\n    var ajax = ph.ajax({/* config */});\r\n\r\n    //v2\r\n    var ajax = ph.require('ajax');\r\n    // if case\r\n    var instance = ph.instance('some_lib_with_instance'); //This of course will held the local scope of \"module_name ;)\"  \r\n\r\n    // on both v1 and v2\r\n    ph.name -> \"module_name\"\r\n    ph.DOM -> html component of this module\r\n})\r\n```\r\n\r\nWhat do you think?\r\n"
+      }
+    },
+    "public": true,
+    "created_at": "2015-09-07T07:45:31Z",
+    "org": {
+      "id": 7924140,
+      "login": "quark-dev",
+      "gravatar_id": "",
+      "url": "https://api.github.com/orgs/quark-dev",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7924140?"
+    }
+  },
+  {
+    "id": "3122660576",
+    "type": "IssuesEvent",
+    "actor": {
+      "id": 5703536,
+      "login": "Qathom",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Qathom",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5703536?"
+    },
+    "repo": {
+      "id": 25199193,
+      "name": "quark-dev/Phonon-Framework",
+      "url": "https://api.github.com/repos/quark-dev/Phonon-Framework"
+    },
+    "payload": {
+      "action": "closed",
+      "issue": {
+        "url": "https://api.github.com/repos/quark-dev/Phonon-Framework/issues/7",
+        "labels_url": "https://api.github.com/repos/quark-dev/Phonon-Framework/issues/7/labels{/name}",
+        "comments_url": "https://api.github.com/repos/quark-dev/Phonon-Framework/issues/7/comments",
+        "events_url": "https://api.github.com/repos/quark-dev/Phonon-Framework/issues/7/events",
+        "html_url": "https://github.com/quark-dev/Phonon-Framework/issues/7",
+        "id": 105077412,
+        "number": 7,
+        "title": "Input floating label is not cleared",
+        "user": {
+          "login": "prijindal",
+          "id": 10034872,
+          "avatar_url": "https://avatars.githubusercontent.com/u/10034872?v=3",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/prijindal",
+          "html_url": "https://github.com/prijindal",
+          "followers_url": "https://api.github.com/users/prijindal/followers",
+          "following_url": "https://api.github.com/users/prijindal/following{/other_user}",
+          "gists_url": "https://api.github.com/users/prijindal/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/prijindal/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/prijindal/subscriptions",
+          "organizations_url": "https://api.github.com/users/prijindal/orgs",
+          "repos_url": "https://api.github.com/users/prijindal/repos",
+          "events_url": "https://api.github.com/users/prijindal/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/prijindal/received_events",
+          "type": "User",
+          "site_admin": false
+        },
+        "labels": [
+
+        ],
+        "state": "closed",
+        "locked": false,
+        "assignee": null,
+        "milestone": null,
+        "comments": 1,
+        "created_at": "2015-09-06T07:42:13Z",
+        "updated_at": "2015-09-06T18:59:18Z",
+        "closed_at": "2015-09-06T18:59:18Z",
+        "body": "After entering an input in an input with floating label\r\nfloating label is coming on top of the input text\r\n![errorphoneon](https://cloud.githubusercontent.com/assets/10034872/9703190/dfa4c88e-5498-11e5-89b3-3d228941f820.PNG)\r\n"
+      }
+    },
+    "public": true,
+    "created_at": "2015-09-06T18:59:18Z",
+    "org": {
+      "id": 7924140,
+      "login": "quark-dev",
+      "gravatar_id": "",
+      "url": "https://api.github.com/orgs/quark-dev",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7924140?"
+    }
+  },
+  {
+    "id": "3122539319",
+    "type": "WatchEvent",
+    "actor": {
+      "id": 1357868,
+      "login": "saurabhsjoshi",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/saurabhsjoshi",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1357868?"
+    },
+    "repo": {
+      "id": 39021214,
+      "name": "prijindal/vitacademics-web",
+      "url": "https://api.github.com/repos/prijindal/vitacademics-web"
+    },
+    "payload": {
+      "action": "started"
+    },
+    "public": true,
+    "created_at": "2015-09-06T16:44:37Z"
+  },
+  {
+    "id": "3122404940",
+    "type": "IssuesEvent",
+    "actor": {
+      "id": 5703536,
+      "login": "Qathom",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Qathom",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5703536?"
+    },
+    "repo": {
+      "id": 25199193,
+      "name": "quark-dev/Phonon-Framework",
+      "url": "https://api.github.com/repos/quark-dev/Phonon-Framework"
+    },
+    "payload": {
+      "action": "closed",
+      "issue": {
+        "url": "https://api.github.com/repos/quark-dev/Phonon-Framework/issues/2",
+        "labels_url": "https://api.github.com/repos/quark-dev/Phonon-Framework/issues/2/labels{/name}",
+        "comments_url": "https://api.github.com/repos/quark-dev/Phonon-Framework/issues/2/comments",
+        "events_url": "https://api.github.com/repos/quark-dev/Phonon-Framework/issues/2/events",
+        "html_url": "https://github.com/quark-dev/Phonon-Framework/issues/2",
+        "id": 72801161,
+        "number": 2,
+        "title": "[Request] Side Menu ",
+        "user": {
+          "login": "alewin",
+          "id": 980844,
+          "avatar_url": "https://avatars.githubusercontent.com/u/980844?v=3",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/alewin",
+          "html_url": "https://github.com/alewin",
+          "followers_url": "https://api.github.com/users/alewin/followers",
+          "following_url": "https://api.github.com/users/alewin/following{/other_user}",
+          "gists_url": "https://api.github.com/users/alewin/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/alewin/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/alewin/subscriptions",
+          "organizations_url": "https://api.github.com/users/alewin/orgs",
+          "repos_url": "https://api.github.com/users/alewin/repos",
+          "events_url": "https://api.github.com/users/alewin/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/alewin/received_events",
+          "type": "User",
+          "site_admin": false
+        },
+        "labels": [
+          {
+            "url": "https://api.github.com/repos/quark-dev/Phonon-Framework/labels/enhancement",
+            "name": "enhancement",
+            "color": "84b6eb"
+          }
+        ],
+        "state": "closed",
+        "locked": false,
+        "assignee": {
+          "login": "Qathom",
+          "id": 5703536,
+          "avatar_url": "https://avatars.githubusercontent.com/u/5703536?v=3",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/Qathom",
+          "html_url": "https://github.com/Qathom",
+          "followers_url": "https://api.github.com/users/Qathom/followers",
+          "following_url": "https://api.github.com/users/Qathom/following{/other_user}",
+          "gists_url": "https://api.github.com/users/Qathom/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/Qathom/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/Qathom/subscriptions",
+          "organizations_url": "https://api.github.com/users/Qathom/orgs",
+          "repos_url": "https://api.github.com/users/Qathom/repos",
+          "events_url": "https://api.github.com/users/Qathom/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/Qathom/received_events",
+          "type": "User",
+          "site_admin": false
+        },
+        "milestone": null,
+        "comments": 4,
+        "created_at": "2015-05-03T12:42:41Z",
+        "updated_at": "2015-09-06T14:15:26Z",
+        "closed_at": "2015-09-06T14:15:26Z",
+        "body": "you can add the side menu? \r\nresponsive ( mobile, tablet ) like this http://codepen.io/ionic/full/cDbFg/\r\n\r\nthanks"
+      }
+    },
+    "public": true,
+    "created_at": "2015-09-06T14:15:26Z",
+    "org": {
+      "id": 7924140,
+      "login": "quark-dev",
+      "gravatar_id": "",
+      "url": "https://api.github.com/orgs/quark-dev",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7924140?"
+    }
+  },
+  {
+    "id": "3122404540",
+    "type": "IssuesEvent",
+    "actor": {
+      "id": 5703536,
+      "login": "Qathom",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Qathom",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5703536?"
+    },
+    "repo": {
+      "id": 25199193,
+      "name": "quark-dev/Phonon-Framework",
+      "url": "https://api.github.com/repos/quark-dev/Phonon-Framework"
+    },
+    "payload": {
+      "action": "closed",
+      "issue": {
+        "url": "https://api.github.com/repos/quark-dev/Phonon-Framework/issues/4",
+        "labels_url": "https://api.github.com/repos/quark-dev/Phonon-Framework/issues/4/labels{/name}",
+        "comments_url": "https://api.github.com/repos/quark-dev/Phonon-Framework/issues/4/comments",
+        "events_url": "https://api.github.com/repos/quark-dev/Phonon-Framework/issues/4/events",
+        "html_url": "https://github.com/quark-dev/Phonon-Framework/issues/4",
+        "id": 100573825,
+        "number": 4,
+        "title": "Cancel Page Change",
+        "user": {
+          "login": "randdusing",
+          "id": 6188656,
+          "avatar_url": "https://avatars.githubusercontent.com/u/6188656?v=3",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/randdusing",
+          "html_url": "https://github.com/randdusing",
+          "followers_url": "https://api.github.com/users/randdusing/followers",
+          "following_url": "https://api.github.com/users/randdusing/following{/other_user}",
+          "gists_url": "https://api.github.com/users/randdusing/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/randdusing/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/randdusing/subscriptions",
+          "organizations_url": "https://api.github.com/users/randdusing/orgs",
+          "repos_url": "https://api.github.com/users/randdusing/repos",
+          "events_url": "https://api.github.com/users/randdusing/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/randdusing/received_events",
+          "type": "User",
+          "site_admin": false
+        },
+        "labels": [
+
+        ],
+        "state": "closed",
+        "locked": false,
+        "assignee": null,
+        "milestone": null,
+        "comments": 1,
+        "created_at": "2015-08-12T15:45:32Z",
+        "updated_at": "2015-09-06T14:15:03Z",
+        "closed_at": "2015-09-06T14:15:03Z",
+        "body": "Is it possible to cancel a page change within the target page's onReady event?"
+      }
+    },
+    "public": true,
+    "created_at": "2015-09-06T14:15:03Z",
+    "org": {
+      "id": 7924140,
+      "login": "quark-dev",
+      "gravatar_id": "",
+      "url": "https://api.github.com/orgs/quark-dev",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7924140?"
+    }
+  },
+  {
+    "id": "3122397067",
+    "type": "IssueCommentEvent",
+    "actor": {
+      "id": 5703536,
+      "login": "Qathom",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Qathom",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5703536?"
+    },
+    "repo": {
+      "id": 25199193,
+      "name": "quark-dev/Phonon-Framework",
+      "url": "https://api.github.com/repos/quark-dev/Phonon-Framework"
+    },
+    "payload": {
+      "action": "created",
+      "issue": {
+        "url": "https://api.github.com/repos/quark-dev/Phonon-Framework/issues/7",
+        "labels_url": "https://api.github.com/repos/quark-dev/Phonon-Framework/issues/7/labels{/name}",
+        "comments_url": "https://api.github.com/repos/quark-dev/Phonon-Framework/issues/7/comments",
+        "events_url": "https://api.github.com/repos/quark-dev/Phonon-Framework/issues/7/events",
+        "html_url": "https://github.com/quark-dev/Phonon-Framework/issues/7",
+        "id": 105077412,
+        "number": 7,
+        "title": "Input floating label is not cleared",
+        "user": {
+          "login": "prijindal",
+          "id": 10034872,
+          "avatar_url": "https://avatars.githubusercontent.com/u/10034872?v=3",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/prijindal",
+          "html_url": "https://github.com/prijindal",
+          "followers_url": "https://api.github.com/users/prijindal/followers",
+          "following_url": "https://api.github.com/users/prijindal/following{/other_user}",
+          "gists_url": "https://api.github.com/users/prijindal/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/prijindal/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/prijindal/subscriptions",
+          "organizations_url": "https://api.github.com/users/prijindal/orgs",
+          "repos_url": "https://api.github.com/users/prijindal/repos",
+          "events_url": "https://api.github.com/users/prijindal/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/prijindal/received_events",
+          "type": "User",
+          "site_admin": false
+        },
+        "labels": [
+
+        ],
+        "state": "open",
+        "locked": false,
+        "assignee": null,
+        "milestone": null,
+        "comments": 1,
+        "created_at": "2015-09-06T07:42:13Z",
+        "updated_at": "2015-09-06T14:06:34Z",
+        "closed_at": null,
+        "body": "After entering an input in an input with floating label\r\nfloating label is coming on top of the input text\r\n![errorphoneon](https://cloud.githubusercontent.com/assets/10034872/9703190/dfa4c88e-5498-11e5-89b3-3d228941f820.PNG)\r\n"
+      },
+      "comment": {
+        "url": "https://api.github.com/repos/quark-dev/Phonon-Framework/issues/comments/138088009",
+        "html_url": "https://github.com/quark-dev/Phonon-Framework/issues/7#issuecomment-138088009",
+        "issue_url": "https://api.github.com/repos/quark-dev/Phonon-Framework/issues/7",
+        "id": 138088009,
+        "user": {
+          "login": "Qathom",
+          "id": 5703536,
+          "avatar_url": "https://avatars.githubusercontent.com/u/5703536?v=3",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/Qathom",
+          "html_url": "https://github.com/Qathom",
+          "followers_url": "https://api.github.com/users/Qathom/followers",
+          "following_url": "https://api.github.com/users/Qathom/following{/other_user}",
+          "gists_url": "https://api.github.com/users/Qathom/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/Qathom/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/Qathom/subscriptions",
+          "organizations_url": "https://api.github.com/users/Qathom/orgs",
+          "repos_url": "https://api.github.com/users/Qathom/repos",
+          "events_url": "https://api.github.com/users/Qathom/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/Qathom/received_events",
+          "type": "User",
+          "site_admin": false
+        },
+        "created_at": "2015-09-06T14:06:34Z",
+        "updated_at": "2015-09-06T14:06:34Z",
+        "body": "This issue has been fixed!\r\nThanks."
+      }
+    },
+    "public": true,
+    "created_at": "2015-09-06T14:06:34Z",
+    "org": {
+      "id": 7924140,
+      "login": "quark-dev",
+      "gravatar_id": "",
+      "url": "https://api.github.com/orgs/quark-dev",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7924140?"
+    }
+  },
+  {
+    "id": "3122396369",
+    "type": "PushEvent",
+    "actor": {
+      "id": 5703536,
+      "login": "Qathom",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Qathom",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5703536?"
+    },
+    "repo": {
+      "id": 25199193,
+      "name": "quark-dev/Phonon-Framework",
+      "url": "https://api.github.com/repos/quark-dev/Phonon-Framework"
+    },
+    "payload": {
+      "push_id": 782645635,
+      "size": 2,
+      "distinct_size": 2,
+      "ref": "refs/heads/master",
+      "head": "6280c1c9cad29955cfdfaf519306f7db7c1ab0c4",
+      "before": "50383c45612254128c83d9501c005abffae7ce33",
+      "commits": [
+        {
+          "sha": "f5b6f62394900dbfcae4d0ac6704362dd6d5551b",
+          "author": {
+            "email": "tony9295@gmail.com",
+            "name": "Qathom"
+          },
+          "message": "fix issue: floating label is not cleared #7",
+          "distinct": true,
+          "url": "https://api.github.com/repos/quark-dev/Phonon-Framework/commits/f5b6f62394900dbfcae4d0ac6704362dd6d5551b"
+        },
+        {
+          "sha": "6280c1c9cad29955cfdfaf519306f7db7c1ab0c4",
+          "author": {
+            "email": "tony9295@gmail.com",
+            "name": "Qathom"
+          },
+          "message": "fix issue: floating label is not cleared #7",
+          "distinct": true,
+          "url": "https://api.github.com/repos/quark-dev/Phonon-Framework/commits/6280c1c9cad29955cfdfaf519306f7db7c1ab0c4"
+        }
+      ]
+    },
+    "public": true,
+    "created_at": "2015-09-06T14:05:47Z",
+    "org": {
+      "id": 7924140,
+      "login": "quark-dev",
+      "gravatar_id": "",
+      "url": "https://api.github.com/orgs/quark-dev",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7924140?"
+    }
+  },
+  {
+    "id": "3122394842",
+    "type": "PushEvent",
+    "actor": {
+      "id": 5703536,
+      "login": "Qathom",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Qathom",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5703536?"
+    },
+    "repo": {
+      "id": 25199193,
+      "name": "quark-dev/Phonon-Framework",
+      "url": "https://api.github.com/repos/quark-dev/Phonon-Framework"
+    },
+    "payload": {
+      "push_id": 782644960,
+      "size": 1,
+      "distinct_size": 1,
+      "ref": "refs/heads/master",
+      "head": "50383c45612254128c83d9501c005abffae7ce33",
+      "before": "810367d39106159e2995cbeda4d004f13351e2fe",
+      "commits": [
+        {
+          "sha": "50383c45612254128c83d9501c005abffae7ce33",
+          "author": {
+            "email": "tony9295@gmail.com",
+            "name": "Qathom"
+          },
+          "message": "fix hash-type when hashevent is passed instead",
+          "distinct": true,
+          "url": "https://api.github.com/repos/quark-dev/Phonon-Framework/commits/50383c45612254128c83d9501c005abffae7ce33"
+        }
+      ]
+    },
+    "public": true,
+    "created_at": "2015-09-06T14:04:02Z",
+    "org": {
+      "id": 7924140,
+      "login": "quark-dev",
+      "gravatar_id": "",
+      "url": "https://api.github.com/orgs/quark-dev",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7924140?"
+    }
+  },
+  {
+    "id": "3121142116",
+    "type": "WatchEvent",
+    "actor": {
+      "id": 6490972,
+      "login": "kishore-narendran",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/kishore-narendran",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6490972?"
+    },
+    "repo": {
+      "id": 39021214,
+      "name": "prijindal/vitacademics-web",
+      "url": "https://api.github.com/repos/prijindal/vitacademics-web"
+    },
+    "payload": {
+      "action": "started"
+    },
+    "public": true,
+    "created_at": "2015-09-05T10:49:39Z"
+  },
+  {
+    "id": "3121012700",
+    "type": "WatchEvent",
+    "actor": {
+      "id": 3104454,
+      "login": "karthikb351",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/karthikb351",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3104454?"
+    },
+    "repo": {
+      "id": 39021214,
+      "name": "prijindal/vitacademics-web",
+      "url": "https://api.github.com/repos/prijindal/vitacademics-web"
+    },
+    "payload": {
+      "action": "started"
+    },
+    "public": true,
+    "created_at": "2015-09-05T07:35:15Z"
+  },
+  {
+    "id": "3114005458",
+    "type": "IssuesEvent",
+    "actor": {
+      "id": 6490972,
+      "login": "kishore-narendran",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/kishore-narendran",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6490972?"
+    },
+    "repo": {
+      "id": 39021214,
+      "name": "prijindal/vitacademics-web",
+      "url": "https://api.github.com/repos/prijindal/vitacademics-web"
+    },
+    "payload": {
+      "action": "opened",
+      "issue": {
+        "url": "https://api.github.com/repos/prijindal/vitacademics-web/issues/5",
+        "labels_url": "https://api.github.com/repos/prijindal/vitacademics-web/issues/5/labels{/name}",
+        "comments_url": "https://api.github.com/repos/prijindal/vitacademics-web/issues/5/comments",
+        "events_url": "https://api.github.com/repos/prijindal/vitacademics-web/issues/5/events",
+        "html_url": "https://github.com/prijindal/vitacademics-web/issues/5",
+        "id": 104622285,
+        "number": 5,
+        "title": "[UI Enhancement] - Smaller Cards",
+        "user": {
+          "login": "kishore-narendran",
+          "id": 6490972,
+          "avatar_url": "https://avatars.githubusercontent.com/u/6490972?v=3",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/kishore-narendran",
+          "html_url": "https://github.com/kishore-narendran",
+          "followers_url": "https://api.github.com/users/kishore-narendran/followers",
+          "following_url": "https://api.github.com/users/kishore-narendran/following{/other_user}",
+          "gists_url": "https://api.github.com/users/kishore-narendran/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/kishore-narendran/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/kishore-narendran/subscriptions",
+          "organizations_url": "https://api.github.com/users/kishore-narendran/orgs",
+          "repos_url": "https://api.github.com/users/kishore-narendran/repos",
+          "events_url": "https://api.github.com/users/kishore-narendran/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/kishore-narendran/received_events",
+          "type": "User",
+          "site_admin": false
+        },
+        "labels": [
+
+        ],
+        "state": "open",
+        "locked": false,
+        "assignee": null,
+        "milestone": null,
+        "comments": 0,
+        "created_at": "2015-09-03T05:03:36Z",
+        "updated_at": "2015-09-03T05:03:36Z",
+        "closed_at": null,
+        "body": "Consider, making each card for the subjects smaller, and obviously reduce the information on every card. This will allow you to put two/three cards next to each other. And on click of the card, you can go to another view where you can show more details - such as attendance details, marks, name of the teacher and anything else you think can be shifted. \r\n\r\n![image](https://cloud.githubusercontent.com/assets/6490972/9650908/a09dccba-5233-11e5-828c-690f5e13de25.png)\r\n\r\nThere seems to be a lot of waste of space in your current arrangement. And people with 7-8 courses will have to laboriously keep scrolling to get to their courses.\r\n"
+      }
+    },
+    "public": true,
+    "created_at": "2015-09-03T05:03:36Z"
+  },
+  {
+    "id": "3113999009",
+    "type": "IssuesEvent",
+    "actor": {
+      "id": 6490972,
+      "login": "kishore-narendran",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/kishore-narendran",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6490972?"
+    },
+    "repo": {
+      "id": 39021214,
+      "name": "prijindal/vitacademics-web",
+      "url": "https://api.github.com/repos/prijindal/vitacademics-web"
+    },
+    "payload": {
+      "action": "opened",
+      "issue": {
+        "url": "https://api.github.com/repos/prijindal/vitacademics-web/issues/4",
+        "labels_url": "https://api.github.com/repos/prijindal/vitacademics-web/issues/4/labels{/name}",
+        "comments_url": "https://api.github.com/repos/prijindal/vitacademics-web/issues/4/comments",
+        "events_url": "https://api.github.com/repos/prijindal/vitacademics-web/issues/4/events",
+        "html_url": "https://github.com/prijindal/vitacademics-web/issues/4",
+        "id": 104621916,
+        "number": 4,
+        "title": "[UI Enhancement] - Simplify Attendance Details Look",
+        "user": {
+          "login": "kishore-narendran",
+          "id": 6490972,
+          "avatar_url": "https://avatars.githubusercontent.com/u/6490972?v=3",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/kishore-narendran",
+          "html_url": "https://github.com/kishore-narendran",
+          "followers_url": "https://api.github.com/users/kishore-narendran/followers",
+          "following_url": "https://api.github.com/users/kishore-narendran/following{/other_user}",
+          "gists_url": "https://api.github.com/users/kishore-narendran/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/kishore-narendran/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/kishore-narendran/subscriptions",
+          "organizations_url": "https://api.github.com/users/kishore-narendran/orgs",
+          "repos_url": "https://api.github.com/users/kishore-narendran/repos",
+          "events_url": "https://api.github.com/users/kishore-narendran/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/kishore-narendran/received_events",
+          "type": "User",
+          "site_admin": false
+        },
+        "labels": [
+
+        ],
+        "state": "open",
+        "locked": false,
+        "assignee": null,
+        "milestone": null,
+        "comments": 0,
+        "created_at": "2015-09-03T04:58:38Z",
+        "updated_at": "2015-09-03T04:58:38Z",
+        "closed_at": null,
+        "body": "The details of attendance for every date needn't be these big cards like this. It can be a simple list of dates, with green for present and red for absent. \r\n\r\n<img width=\"683\" alt=\"screen shot 2015-09-03 at 11 56 40 am\" src=\"https://cloud.githubusercontent.com/assets/6490972/9650854/f11ef430-5232-11e5-83ea-ff5ff5fe762d.png\">\r\n\r\nHowever, I do like the fact that you grouped them by date, do that, but you could lose the flashy colours and big boxes\r\n"
+      }
+    },
+    "public": true,
+    "created_at": "2015-09-03T04:58:38Z"
+  },
+  {
+    "id": "3113987826",
+    "type": "IssuesEvent",
+    "actor": {
+      "id": 6490972,
+      "login": "kishore-narendran",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/kishore-narendran",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6490972?"
+    },
+    "repo": {
+      "id": 39021214,
+      "name": "prijindal/vitacademics-web",
+      "url": "https://api.github.com/repos/prijindal/vitacademics-web"
+    },
+    "payload": {
+      "action": "opened",
+      "issue": {
+        "url": "https://api.github.com/repos/prijindal/vitacademics-web/issues/3",
+        "labels_url": "https://api.github.com/repos/prijindal/vitacademics-web/issues/3/labels{/name}",
+        "comments_url": "https://api.github.com/repos/prijindal/vitacademics-web/issues/3/comments",
+        "events_url": "https://api.github.com/repos/prijindal/vitacademics-web/issues/3/events",
+        "html_url": "https://github.com/prijindal/vitacademics-web/issues/3",
+        "id": 104621365,
+        "number": 3,
+        "title": "[UX Enhancement] - Confirm before logging out. ",
+        "user": {
+          "login": "kishore-narendran",
+          "id": 6490972,
+          "avatar_url": "https://avatars.githubusercontent.com/u/6490972?v=3",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/kishore-narendran",
+          "html_url": "https://github.com/kishore-narendran",
+          "followers_url": "https://api.github.com/users/kishore-narendran/followers",
+          "following_url": "https://api.github.com/users/kishore-narendran/following{/other_user}",
+          "gists_url": "https://api.github.com/users/kishore-narendran/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/kishore-narendran/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/kishore-narendran/subscriptions",
+          "organizations_url": "https://api.github.com/users/kishore-narendran/orgs",
+          "repos_url": "https://api.github.com/users/kishore-narendran/repos",
+          "events_url": "https://api.github.com/users/kishore-narendran/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/kishore-narendran/received_events",
+          "type": "User",
+          "site_admin": false
+        },
+        "labels": [
+
+        ],
+        "state": "open",
+        "locked": false,
+        "assignee": null,
+        "milestone": null,
+        "comments": 0,
+        "created_at": "2015-09-03T04:50:03Z",
+        "updated_at": "2015-09-03T04:50:03Z",
+        "closed_at": null,
+        "body": "I noticed that upon click of logout, it immediately logs out. It is preferred if you confirm a logout action to prevent any accidental clicks. "
+      }
+    },
+    "public": true,
+    "created_at": "2015-09-03T04:50:03Z"
+  },
+  {
+    "id": "3104908251",
+    "type": "IssueCommentEvent",
+    "actor": {
+      "id": 8017312,
+      "login": "ayushagarwal95",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/ayushagarwal95",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8017312?"
+    },
+    "repo": {
+      "id": 16979018,
+      "name": "aneesh-neelam/VITacademics",
+      "url": "https://api.github.com/repos/aneesh-neelam/VITacademics"
+    },
+    "payload": {
+      "action": "created",
+      "issue": {
+        "url": "https://api.github.com/repos/aneesh-neelam/VITacademics/issues/98",
+        "labels_url": "https://api.github.com/repos/aneesh-neelam/VITacademics/issues/98/labels{/name}",
+        "comments_url": "https://api.github.com/repos/aneesh-neelam/VITacademics/issues/98/comments",
+        "events_url": "https://api.github.com/repos/aneesh-neelam/VITacademics/issues/98/events",
+        "html_url": "https://github.com/aneesh-neelam/VITacademics/issues/98",
+        "id": 94468886,
+        "number": 98,
+        "title": "New Favicon",
+        "user": {
+          "login": "aneesh-neelam",
+          "id": 2957955,
+          "avatar_url": "https://avatars.githubusercontent.com/u/2957955?v=3",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/aneesh-neelam",
+          "html_url": "https://github.com/aneesh-neelam",
+          "followers_url": "https://api.github.com/users/aneesh-neelam/followers",
+          "following_url": "https://api.github.com/users/aneesh-neelam/following{/other_user}",
+          "gists_url": "https://api.github.com/users/aneesh-neelam/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/aneesh-neelam/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/aneesh-neelam/subscriptions",
+          "organizations_url": "https://api.github.com/users/aneesh-neelam/orgs",
+          "repos_url": "https://api.github.com/users/aneesh-neelam/repos",
+          "events_url": "https://api.github.com/users/aneesh-neelam/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/aneesh-neelam/received_events",
+          "type": "User",
+          "site_admin": false
+        },
+        "labels": [
+          {
+            "url": "https://api.github.com/repos/aneesh-neelam/VITacademics/labels/enhancement",
+            "name": "enhancement",
+            "color": "84b6eb"
+          },
+          {
+            "url": "https://api.github.com/repos/aneesh-neelam/VITacademics/labels/in%20progress",
+            "name": "in progress",
+            "color": "ededed"
+          }
+        ],
+        "state": "closed",
+        "locked": false,
+        "assignee": {
+          "login": "ayushagarwal95",
+          "id": 8017312,
+          "avatar_url": "https://avatars.githubusercontent.com/u/8017312?v=3",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/ayushagarwal95",
+          "html_url": "https://github.com/ayushagarwal95",
+          "followers_url": "https://api.github.com/users/ayushagarwal95/followers",
+          "following_url": "https://api.github.com/users/ayushagarwal95/following{/other_user}",
+          "gists_url": "https://api.github.com/users/ayushagarwal95/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/ayushagarwal95/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/ayushagarwal95/subscriptions",
+          "organizations_url": "https://api.github.com/users/ayushagarwal95/orgs",
+          "repos_url": "https://api.github.com/users/ayushagarwal95/repos",
+          "events_url": "https://api.github.com/users/ayushagarwal95/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/ayushagarwal95/received_events",
+          "type": "User",
+          "site_admin": false
+        },
+        "milestone": {
+          "url": "https://api.github.com/repos/aneesh-neelam/VITacademics/milestones/9",
+          "html_url": "https://github.com/aneesh-neelam/VITacademics/milestones/Improvements",
+          "labels_url": "https://api.github.com/repos/aneesh-neelam/VITacademics/milestones/9/labels",
+          "id": 965487,
+          "number": 9,
+          "title": "Improvements",
+          "description": "",
+          "creator": {
+            "login": "aneesh-neelam",
+            "id": 2957955,
+            "avatar_url": "https://avatars.githubusercontent.com/u/2957955?v=3",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/aneesh-neelam",
+            "html_url": "https://github.com/aneesh-neelam",
+            "followers_url": "https://api.github.com/users/aneesh-neelam/followers",
+            "following_url": "https://api.github.com/users/aneesh-neelam/following{/other_user}",
+            "gists_url": "https://api.github.com/users/aneesh-neelam/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/aneesh-neelam/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/aneesh-neelam/subscriptions",
+            "organizations_url": "https://api.github.com/users/aneesh-neelam/orgs",
+            "repos_url": "https://api.github.com/users/aneesh-neelam/repos",
+            "events_url": "https://api.github.com/users/aneesh-neelam/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/aneesh-neelam/received_events",
+            "type": "User",
+            "site_admin": false
+          },
+          "open_issues": 5,
+          "closed_issues": 36,
+          "state": "open",
+          "created_at": "2015-02-04T14:28:38Z",
+          "updated_at": "2015-08-31T18:16:30Z",
+          "due_on": "2015-08-19T18:30:00Z",
+          "closed_at": null
+        },
+        "comments": 1,
+        "created_at": "2015-07-11T12:24:03Z",
+        "updated_at": "2015-08-31T18:16:30Z",
+        "closed_at": "2015-08-31T18:16:30Z",
+        "body": "Create a new favicon out of the new logo. Take the logo from [this](https://github.com/CollegeCODE/CreativeContent) repository. \r\n\r\nMake sure it is a perfect square, around 300 * 300 and in PNG format, similar to the existing one. "
+      },
+      "comment": {
+        "url": "https://api.github.com/repos/aneesh-neelam/VITacademics/issues/comments/136451101",
+        "html_url": "https://github.com/aneesh-neelam/VITacademics/issues/98#issuecomment-136451101",
+        "issue_url": "https://api.github.com/repos/aneesh-neelam/VITacademics/issues/98",
+        "id": 136451101,
+        "user": {
+          "login": "ayushagarwal95",
+          "id": 8017312,
+          "avatar_url": "https://avatars.githubusercontent.com/u/8017312?v=3",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/ayushagarwal95",
+          "html_url": "https://github.com/ayushagarwal95",
+          "followers_url": "https://api.github.com/users/ayushagarwal95/followers",
+          "following_url": "https://api.github.com/users/ayushagarwal95/following{/other_user}",
+          "gists_url": "https://api.github.com/users/ayushagarwal95/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/ayushagarwal95/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/ayushagarwal95/subscriptions",
+          "organizations_url": "https://api.github.com/users/ayushagarwal95/orgs",
+          "repos_url": "https://api.github.com/users/ayushagarwal95/repos",
+          "events_url": "https://api.github.com/users/ayushagarwal95/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/ayushagarwal95/received_events",
+          "type": "User",
+          "site_admin": false
+        },
+        "created_at": "2015-08-31T18:16:30Z",
+        "updated_at": "2015-08-31T18:16:30Z",
+        "body": "Done."
+      }
+    },
+    "public": true,
+    "created_at": "2015-08-31T18:16:31Z"
+  },
+  {
+    "id": "3104908250",
+    "type": "IssuesEvent",
+    "actor": {
+      "id": 8017312,
+      "login": "ayushagarwal95",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/ayushagarwal95",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8017312?"
+    },
+    "repo": {
+      "id": 16979018,
+      "name": "aneesh-neelam/VITacademics",
+      "url": "https://api.github.com/repos/aneesh-neelam/VITacademics"
+    },
+    "payload": {
+      "action": "closed",
+      "issue": {
+        "url": "https://api.github.com/repos/aneesh-neelam/VITacademics/issues/98",
+        "labels_url": "https://api.github.com/repos/aneesh-neelam/VITacademics/issues/98/labels{/name}",
+        "comments_url": "https://api.github.com/repos/aneesh-neelam/VITacademics/issues/98/comments",
+        "events_url": "https://api.github.com/repos/aneesh-neelam/VITacademics/issues/98/events",
+        "html_url": "https://github.com/aneesh-neelam/VITacademics/issues/98",
+        "id": 94468886,
+        "number": 98,
+        "title": "New Favicon",
+        "user": {
+          "login": "aneesh-neelam",
+          "id": 2957955,
+          "avatar_url": "https://avatars.githubusercontent.com/u/2957955?v=3",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/aneesh-neelam",
+          "html_url": "https://github.com/aneesh-neelam",
+          "followers_url": "https://api.github.com/users/aneesh-neelam/followers",
+          "following_url": "https://api.github.com/users/aneesh-neelam/following{/other_user}",
+          "gists_url": "https://api.github.com/users/aneesh-neelam/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/aneesh-neelam/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/aneesh-neelam/subscriptions",
+          "organizations_url": "https://api.github.com/users/aneesh-neelam/orgs",
+          "repos_url": "https://api.github.com/users/aneesh-neelam/repos",
+          "events_url": "https://api.github.com/users/aneesh-neelam/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/aneesh-neelam/received_events",
+          "type": "User",
+          "site_admin": false
+        },
+        "labels": [
+          {
+            "url": "https://api.github.com/repos/aneesh-neelam/VITacademics/labels/enhancement",
+            "name": "enhancement",
+            "color": "84b6eb"
+          },
+          {
+            "url": "https://api.github.com/repos/aneesh-neelam/VITacademics/labels/in%20progress",
+            "name": "in progress",
+            "color": "ededed"
+          }
+        ],
+        "state": "closed",
+        "locked": false,
+        "assignee": {
+          "login": "ayushagarwal95",
+          "id": 8017312,
+          "avatar_url": "https://avatars.githubusercontent.com/u/8017312?v=3",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/ayushagarwal95",
+          "html_url": "https://github.com/ayushagarwal95",
+          "followers_url": "https://api.github.com/users/ayushagarwal95/followers",
+          "following_url": "https://api.github.com/users/ayushagarwal95/following{/other_user}",
+          "gists_url": "https://api.github.com/users/ayushagarwal95/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/ayushagarwal95/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/ayushagarwal95/subscriptions",
+          "organizations_url": "https://api.github.com/users/ayushagarwal95/orgs",
+          "repos_url": "https://api.github.com/users/ayushagarwal95/repos",
+          "events_url": "https://api.github.com/users/ayushagarwal95/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/ayushagarwal95/received_events",
+          "type": "User",
+          "site_admin": false
+        },
+        "milestone": {
+          "url": "https://api.github.com/repos/aneesh-neelam/VITacademics/milestones/9",
+          "html_url": "https://github.com/aneesh-neelam/VITacademics/milestones/Improvements",
+          "labels_url": "https://api.github.com/repos/aneesh-neelam/VITacademics/milestones/9/labels",
+          "id": 965487,
+          "number": 9,
+          "title": "Improvements",
+          "description": "",
+          "creator": {
+            "login": "aneesh-neelam",
+            "id": 2957955,
+            "avatar_url": "https://avatars.githubusercontent.com/u/2957955?v=3",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/aneesh-neelam",
+            "html_url": "https://github.com/aneesh-neelam",
+            "followers_url": "https://api.github.com/users/aneesh-neelam/followers",
+            "following_url": "https://api.github.com/users/aneesh-neelam/following{/other_user}",
+            "gists_url": "https://api.github.com/users/aneesh-neelam/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/aneesh-neelam/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/aneesh-neelam/subscriptions",
+            "organizations_url": "https://api.github.com/users/aneesh-neelam/orgs",
+            "repos_url": "https://api.github.com/users/aneesh-neelam/repos",
+            "events_url": "https://api.github.com/users/aneesh-neelam/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/aneesh-neelam/received_events",
+            "type": "User",
+            "site_admin": false
+          },
+          "open_issues": 5,
+          "closed_issues": 36,
+          "state": "open",
+          "created_at": "2015-02-04T14:28:38Z",
+          "updated_at": "2015-08-31T18:16:30Z",
+          "due_on": "2015-08-19T18:30:00Z",
+          "closed_at": null
+        },
+        "comments": 1,
+        "created_at": "2015-07-11T12:24:03Z",
+        "updated_at": "2015-08-31T18:16:30Z",
+        "closed_at": "2015-08-31T18:16:30Z",
+        "body": "Create a new favicon out of the new logo. Take the logo from [this](https://github.com/CollegeCODE/CreativeContent) repository. \r\n\r\nMake sure it is a perfect square, around 300 * 300 and in PNG format, similar to the existing one. "
+      }
+    },
+    "public": true,
+    "created_at": "2015-08-31T18:16:31Z"
+  },
+  {
+    "id": "3104907386",
+    "type": "PushEvent",
+    "actor": {
+      "id": 8017312,
+      "login": "ayushagarwal95",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/ayushagarwal95",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8017312?"
+    },
+    "repo": {
+      "id": 16979018,
+      "name": "aneesh-neelam/VITacademics",
+      "url": "https://api.github.com/repos/aneesh-neelam/VITacademics"
+    },
+    "payload": {
+      "push_id": 776037418,
+      "size": 1,
+      "distinct_size": 1,
+      "ref": "refs/heads/development",
+      "head": "c0d4dc70a95471e8f1ce4d53983deb12fea74666",
+      "before": "1295ca89d19f7f6e0642dc093a818aadcd1776dc",
+      "commits": [
+        {
+          "sha": "c0d4dc70a95471e8f1ce4d53983deb12fea74666",
+          "author": {
+            "email": "agarwalayush161@gmail.com",
+            "name": "ayushagarwal95"
+          },
+          "message": "Spotlight Scraper.\n\n* #108 in progress.\n* text formatting left.",
+          "distinct": true,
+          "url": "https://api.github.com/repos/aneesh-neelam/VITacademics/commits/c0d4dc70a95471e8f1ce4d53983deb12fea74666"
+        }
+      ]
+    },
+    "public": true,
+    "created_at": "2015-08-31T18:16:15Z"
+  },
+  {
+    "id": "3101621895",
+    "type": "WatchEvent",
+    "actor": {
+      "id": 2957955,
+      "login": "aneesh-neelam",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/aneesh-neelam",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2957955?"
+    },
+    "repo": {
+      "id": 29439879,
+      "name": "hellerve/programming-talks",
+      "url": "https://api.github.com/repos/hellerve/programming-talks"
+    },
+    "payload": {
+      "action": "started"
+    },
+    "public": true,
+    "created_at": "2015-08-30T01:30:29Z"
+  },
+  {
+    "id": "3100814496",
+    "type": "PushEvent",
+    "actor": {
+      "id": 8017312,
+      "login": "ayushagarwal95",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/ayushagarwal95",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8017312?"
+    },
+    "repo": {
+      "id": 16979018,
+      "name": "aneesh-neelam/VITacademics",
+      "url": "https://api.github.com/repos/aneesh-neelam/VITacademics"
+    },
+    "payload": {
+      "push_id": 774350044,
+      "size": 3,
+      "distinct_size": 3,
+      "ref": "refs/heads/development",
+      "head": "1295ca89d19f7f6e0642dc093a818aadcd1776dc",
+      "before": "744086cf3683734e0c59c74825d084933b50bc47",
+      "commits": [
+        {
+          "sha": "2b91ce3910905db63935a0affd17d622d249b0f1",
+          "author": {
+            "email": "agarwalayush161@gmail.com",
+            "name": "ayushagarwal95"
+          },
+          "message": "Favicon Changed.",
+          "distinct": true,
+          "url": "https://api.github.com/repos/aneesh-neelam/VITacademics/commits/2b91ce3910905db63935a0affd17d622d249b0f1"
+        },
+        {
+          "sha": "aa49795aaa51324a54e4f697a5ba568aee3e07c8",
+          "author": {
+            "email": "agarwalayush161@gmail.com",
+            "name": "ayushagarwal95"
+          },
+          "message": "Updated Marks Scraper.\n\n* Incorporated first year marks page format changes.",
+          "distinct": true,
+          "url": "https://api.github.com/repos/aneesh-neelam/VITacademics/commits/aa49795aaa51324a54e4f697a5ba568aee3e07c8"
+        },
+        {
+          "sha": "1295ca89d19f7f6e0642dc093a818aadcd1776dc",
+          "author": {
+            "email": "agarwalayush161@gmail.com",
+            "name": "ayushagarwal95"
+          },
+          "message": "Merge branch 'development' of github.com:aneesh-neelam/VITacademics into development",
+          "distinct": true,
+          "url": "https://api.github.com/repos/aneesh-neelam/VITacademics/commits/1295ca89d19f7f6e0642dc093a818aadcd1776dc"
+        }
+      ]
+    },
+    "public": true,
+    "created_at": "2015-08-29T05:50:45Z"
+  },
+  {
+    "id": "3094114391",
+    "type": "IssuesEvent",
+    "actor": {
+      "id": 8017312,
+      "login": "ayushagarwal95",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/ayushagarwal95",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8017312?"
+    },
+    "repo": {
+      "id": 16979018,
+      "name": "aneesh-neelam/VITacademics",
+      "url": "https://api.github.com/repos/aneesh-neelam/VITacademics"
+    },
+    "payload": {
+      "action": "opened",
+      "issue": {
+        "url": "https://api.github.com/repos/aneesh-neelam/VITacademics/issues/108",
+        "labels_url": "https://api.github.com/repos/aneesh-neelam/VITacademics/issues/108/labels{/name}",
+        "comments_url": "https://api.github.com/repos/aneesh-neelam/VITacademics/issues/108/comments",
+        "events_url": "https://api.github.com/repos/aneesh-neelam/VITacademics/issues/108/events",
+        "html_url": "https://github.com/aneesh-neelam/VITacademics/issues/108",
+        "id": 103436463,
+        "number": 108,
+        "title": "Spotlight",
+        "user": {
+          "login": "ayushagarwal95",
+          "id": 8017312,
+          "avatar_url": "https://avatars.githubusercontent.com/u/8017312?v=3",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/ayushagarwal95",
+          "html_url": "https://github.com/ayushagarwal95",
+          "followers_url": "https://api.github.com/users/ayushagarwal95/followers",
+          "following_url": "https://api.github.com/users/ayushagarwal95/following{/other_user}",
+          "gists_url": "https://api.github.com/users/ayushagarwal95/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/ayushagarwal95/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/ayushagarwal95/subscriptions",
+          "organizations_url": "https://api.github.com/users/ayushagarwal95/orgs",
+          "repos_url": "https://api.github.com/users/ayushagarwal95/repos",
+          "events_url": "https://api.github.com/users/ayushagarwal95/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/ayushagarwal95/received_events",
+          "type": "User",
+          "site_admin": false
+        },
+        "labels": [
+          {
+            "url": "https://api.github.com/repos/aneesh-neelam/VITacademics/labels/enhancement",
+            "name": "enhancement",
+            "color": "84b6eb"
+          },
+          {
+            "url": "https://api.github.com/repos/aneesh-neelam/VITacademics/labels/in%20progress",
+            "name": "in progress",
+            "color": "ededed"
+          }
+        ],
+        "state": "open",
+        "locked": false,
+        "assignee": {
+          "login": "ayushagarwal95",
+          "id": 8017312,
+          "avatar_url": "https://avatars.githubusercontent.com/u/8017312?v=3",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/ayushagarwal95",
+          "html_url": "https://github.com/ayushagarwal95",
+          "followers_url": "https://api.github.com/users/ayushagarwal95/followers",
+          "following_url": "https://api.github.com/users/ayushagarwal95/following{/other_user}",
+          "gists_url": "https://api.github.com/users/ayushagarwal95/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/ayushagarwal95/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/ayushagarwal95/subscriptions",
+          "organizations_url": "https://api.github.com/users/ayushagarwal95/orgs",
+          "repos_url": "https://api.github.com/users/ayushagarwal95/repos",
+          "events_url": "https://api.github.com/users/ayushagarwal95/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/ayushagarwal95/received_events",
+          "type": "User",
+          "site_admin": false
+        },
+        "milestone": null,
+        "comments": 0,
+        "created_at": "2015-08-27T06:11:17Z",
+        "updated_at": "2015-08-27T06:11:17Z",
+        "closed_at": null,
+        "body": "The client apps could display the spotlight."
+      }
+    },
+    "public": true,
+    "created_at": "2015-08-27T06:11:17Z"
+  },
+  {
+    "id": "3084452726",
+    "type": "WatchEvent",
+    "actor": {
+      "id": 2957955,
+      "login": "aneesh-neelam",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/aneesh-neelam",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2957955?"
+    },
+    "repo": {
+      "id": 37358745,
+      "name": "sacot41/SCViewPager",
+      "url": "https://api.github.com/repos/sacot41/SCViewPager"
+    },
+    "payload": {
+      "action": "started"
+    },
+    "public": true,
+    "created_at": "2015-08-24T15:02:42Z"
+  },
+  {
+    "id": "3084444746",
+    "type": "WatchEvent",
+    "actor": {
+      "id": 2957955,
+      "login": "aneesh-neelam",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/aneesh-neelam",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2957955?"
+    },
+    "repo": {
+      "id": 37202672,
+      "name": "satorufujiwara/recyclerview-binder",
+      "url": "https://api.github.com/repos/satorufujiwara/recyclerview-binder"
+    },
+    "payload": {
+      "action": "started"
+    },
+    "public": true,
+    "created_at": "2015-08-24T15:00:41Z"
+  },
+  {
+    "id": "3080637677",
+    "type": "IssueCommentEvent",
+    "actor": {
+      "id": 4420103,
+      "login": "nathanmarks",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/nathanmarks",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4420103?"
+    },
+    "repo": {
+      "id": 21399598,
+      "name": "angular/material",
+      "url": "https://api.github.com/repos/angular/material"
+    },
+    "payload": {
+      "action": "created",
+      "issue": {
+        "url": "https://api.github.com/repos/angular/material/issues/4258",
+        "labels_url": "https://api.github.com/repos/angular/material/issues/4258/labels{/name}",
+        "comments_url": "https://api.github.com/repos/angular/material/issues/4258/comments",
+        "events_url": "https://api.github.com/repos/angular/material/issues/4258/events",
+        "html_url": "https://github.com/angular/material/issues/4258",
+        "id": 102137811,
+        "number": 4258,
+        "title": "mdInput + mdInputContainer: Floating labels \"zooming\" on page load",
+        "user": {
+          "login": "nathanmarks",
+          "id": 4420103,
+          "avatar_url": "https://avatars.githubusercontent.com/u/4420103?v=3",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/nathanmarks",
+          "html_url": "https://github.com/nathanmarks",
+          "followers_url": "https://api.github.com/users/nathanmarks/followers",
+          "following_url": "https://api.github.com/users/nathanmarks/following{/other_user}",
+          "gists_url": "https://api.github.com/users/nathanmarks/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/nathanmarks/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/nathanmarks/subscriptions",
+          "organizations_url": "https://api.github.com/users/nathanmarks/orgs",
+          "repos_url": "https://api.github.com/users/nathanmarks/repos",
+          "events_url": "https://api.github.com/users/nathanmarks/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/nathanmarks/received_events",
+          "type": "User",
+          "site_admin": false
+        },
+        "labels": [
+
+        ],
+        "state": "open",
+        "locked": false,
+        "assignee": null,
+        "milestone": null,
+        "comments": 1,
+        "created_at": "2015-08-20T13:24:39Z",
+        "updated_at": "2015-08-22T00:00:39Z",
+        "closed_at": null,
+        "body": "Having an issue where labels are zooming when the form input components are initialized.\r\n\r\nThe form is not being rendered until the object containing the model is available, so the ng-model values are available immediately.\r\n\r\nFor eg:\r\n```\r\n<md-input-container flex>\r\n  <label>Length (months)</label>\r\n  <input\r\n  type=\"number\"\r\n  name=\"length\"\r\n  ng-model=\"vm.plan.length\"\r\n  >\r\n</md-input-container>\r\n```\r\n\r\nIs resulting in the label \"zooming\" out to it's floating position when the component is created.\r\n"
+      },
+      "comment": {
+        "url": "https://api.github.com/repos/angular/material/issues/comments/133592853",
+        "html_url": "https://github.com/angular/material/issues/4258#issuecomment-133592853",
+        "issue_url": "https://api.github.com/repos/angular/material/issues/4258",
+        "id": 133592853,
+        "user": {
+          "login": "nathanmarks",
+          "id": 4420103,
+          "avatar_url": "https://avatars.githubusercontent.com/u/4420103?v=3",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/nathanmarks",
+          "html_url": "https://github.com/nathanmarks",
+          "followers_url": "https://api.github.com/users/nathanmarks/followers",
+          "following_url": "https://api.github.com/users/nathanmarks/following{/other_user}",
+          "gists_url": "https://api.github.com/users/nathanmarks/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/nathanmarks/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/nathanmarks/subscriptions",
+          "organizations_url": "https://api.github.com/users/nathanmarks/orgs",
+          "repos_url": "https://api.github.com/users/nathanmarks/repos",
+          "events_url": "https://api.github.com/users/nathanmarks/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/nathanmarks/received_events",
+          "type": "User",
+          "site_admin": false
+        },
+        "created_at": "2015-08-22T00:00:39Z",
+        "updated_at": "2015-08-22T00:00:39Z",
+        "body": "Observation: Happens in master docs but not 0.10.1 docs."
+      }
+    },
+    "public": true,
+    "created_at": "2015-08-22T00:00:40Z",
+    "org": {
+      "id": 139426,
+      "login": "angular",
+      "gravatar_id": "",
+      "url": "https://api.github.com/orgs/angular",
+      "avatar_url": "https://avatars.githubusercontent.com/u/139426?"
+    }
+  },
+  {
+    "id": "3080611503",
+    "type": "IssueCommentEvent",
+    "actor": {
+      "id": 2660421,
+      "login": "erinkidd01",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/erinkidd01",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2660421?"
+    },
+    "repo": {
+      "id": 21399598,
+      "name": "angular/material",
+      "url": "https://api.github.com/repos/angular/material"
+    },
+    "payload": {
+      "action": "created",
+      "issue": {
+        "url": "https://api.github.com/repos/angular/material/issues/4037",
+        "labels_url": "https://api.github.com/repos/angular/material/issues/4037/labels{/name}",
+        "comments_url": "https://api.github.com/repos/angular/material/issues/4037/comments",
+        "events_url": "https://api.github.com/repos/angular/material/issues/4037/events",
+        "html_url": "https://github.com/angular/material/issues/4037",
+        "id": 99285003,
+        "number": 4037,
+        "title": "Configurable position for mdDialog",
+        "user": {
+          "login": "erinkidd01",
+          "id": 2660421,
+          "avatar_url": "https://avatars.githubusercontent.com/u/2660421?v=3",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/erinkidd01",
+          "html_url": "https://github.com/erinkidd01",
+          "followers_url": "https://api.github.com/users/erinkidd01/followers",
+          "following_url": "https://api.github.com/users/erinkidd01/following{/other_user}",
+          "gists_url": "https://api.github.com/users/erinkidd01/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/erinkidd01/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/erinkidd01/subscriptions",
+          "organizations_url": "https://api.github.com/users/erinkidd01/orgs",
+          "repos_url": "https://api.github.com/users/erinkidd01/repos",
+          "events_url": "https://api.github.com/users/erinkidd01/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/erinkidd01/received_events",
+          "type": "User",
+          "site_admin": false
+        },
+        "labels": [
+          {
+            "url": "https://api.github.com/repos/angular/material/labels/needs:%20UX%20team%20review",
+            "name": "needs: UX team review",
+            "color": "cc317c"
+          },
+          {
+            "url": "https://api.github.com/repos/angular/material/labels/reported%20by%20Googler",
+            "name": "reported by Googler",
+            "color": "207de5"
+          }
+        ],
+        "state": "open",
+        "locked": false,
+        "assignee": null,
+        "milestone": {
+          "url": "https://api.github.com/repos/angular/material/milestones/13",
+          "html_url": "https://github.com/angular/material/milestones/post-1.0%20",
+          "labels_url": "https://api.github.com/repos/angular/material/milestones/13/labels",
+          "id": 951907,
+          "number": 13,
+          "title": "post-1.0 ",
+          "description": "Issues and enhancements to be addressed after the public 1.0 release",
+          "creator": {
+            "login": "ThomasBurleson",
+            "id": 210413,
+            "avatar_url": "https://avatars.githubusercontent.com/u/210413?v=3",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/ThomasBurleson",
+            "html_url": "https://github.com/ThomasBurleson",
+            "followers_url": "https://api.github.com/users/ThomasBurleson/followers",
+            "following_url": "https://api.github.com/users/ThomasBurleson/following{/other_user}",
+            "gists_url": "https://api.github.com/users/ThomasBurleson/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/ThomasBurleson/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/ThomasBurleson/subscriptions",
+            "organizations_url": "https://api.github.com/users/ThomasBurleson/orgs",
+            "repos_url": "https://api.github.com/users/ThomasBurleson/repos",
+            "events_url": "https://api.github.com/users/ThomasBurleson/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/ThomasBurleson/received_events",
+            "type": "User",
+            "site_admin": false
+          },
+          "open_issues": 167,
+          "closed_issues": 6,
+          "state": "open",
+          "created_at": "2015-01-26T19:03:02Z",
+          "updated_at": "2015-08-18T15:13:19Z",
+          "due_on": null,
+          "closed_at": null
+        },
+        "comments": 5,
+        "created_at": "2015-08-05T19:51:01Z",
+        "updated_at": "2015-08-21T23:43:39Z",
+        "closed_at": null,
+        "body": "I'm trying to create a custom dialog using mdDialog, but the position is always set to the middle of the screen. I would like to be able to configure it to be above the button that opens the dialog, the same way that mdMenu does."
+      },
+      "comment": {
+        "url": "https://api.github.com/repos/angular/material/issues/comments/133591521",
+        "html_url": "https://github.com/angular/material/issues/4037#issuecomment-133591521",
+        "issue_url": "https://api.github.com/repos/angular/material/issues/4037",
+        "id": 133591521,
+        "user": {
+          "login": "erinkidd01",
+          "id": 2660421,
+          "avatar_url": "https://avatars.githubusercontent.com/u/2660421?v=3",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/erinkidd01",
+          "html_url": "https://github.com/erinkidd01",
+          "followers_url": "https://api.github.com/users/erinkidd01/followers",
+          "following_url": "https://api.github.com/users/erinkidd01/following{/other_user}",
+          "gists_url": "https://api.github.com/users/erinkidd01/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/erinkidd01/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/erinkidd01/subscriptions",
+          "organizations_url": "https://api.github.com/users/erinkidd01/orgs",
+          "repos_url": "https://api.github.com/users/erinkidd01/repos",
+          "events_url": "https://api.github.com/users/erinkidd01/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/erinkidd01/received_events",
+          "type": "User",
+          "site_admin": false
+        },
+        "created_at": "2015-08-21T23:43:39Z",
+        "updated_at": "2015-08-21T23:43:39Z",
+        "body": "I would also like to be able to specify whether the dialog animates in from the left or right corner. Currently, the dialog always animates from the left side regardless of position. This only happens the first time the dialog is opened. All other times, it correctly opens and closes from the clicked icon.\r\n\r\nWe are using dialog to create complicated custom menus. md-menu does not allow enough flexibility to design the popups the way we want. md-dialog has everything we need except for the positioning control."
+      }
+    },
+    "public": true,
+    "created_at": "2015-08-21T23:43:39Z",
+    "org": {
+      "id": 139426,
+      "login": "angular",
+      "gravatar_id": "",
+      "url": "https://api.github.com/orgs/angular",
+      "avatar_url": "https://avatars.githubusercontent.com/u/139426?"
+    }
+  },
+  {
+    "id": "3080610926",
+    "type": "IssueCommentEvent",
+    "actor": {
+      "id": 158351,
+      "login": "timnix",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/timnix",
+      "avatar_url": "https://avatars.githubusercontent.com/u/158351?"
+    },
+    "repo": {
+      "id": 21399598,
+      "name": "angular/material",
+      "url": "https://api.github.com/repos/angular/material"
+    },
+    "payload": {
+      "action": "created",
+      "issue": {
+        "url": "https://api.github.com/repos/angular/material/issues/1771",
+        "labels_url": "https://api.github.com/repos/angular/material/issues/1771/labels{/name}",
+        "comments_url": "https://api.github.com/repos/angular/material/issues/1771/comments",
+        "events_url": "https://api.github.com/repos/angular/material/issues/1771/events",
+        "html_url": "https://github.com/angular/material/issues/1771",
+        "id": 59723821,
+        "number": 1771,
+        "title": "ie11: Terrible performance, but not with LumX",
+        "user": {
+          "login": "ross-nordstrom",
+          "id": 3299155,
+          "avatar_url": "https://avatars.githubusercontent.com/u/3299155?v=3",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/ross-nordstrom",
+          "html_url": "https://github.com/ross-nordstrom",
+          "followers_url": "https://api.github.com/users/ross-nordstrom/followers",
+          "following_url": "https://api.github.com/users/ross-nordstrom/following{/other_user}",
+          "gists_url": "https://api.github.com/users/ross-nordstrom/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/ross-nordstrom/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/ross-nordstrom/subscriptions",
+          "organizations_url": "https://api.github.com/users/ross-nordstrom/orgs",
+          "repos_url": "https://api.github.com/users/ross-nordstrom/repos",
+          "events_url": "https://api.github.com/users/ross-nordstrom/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/ross-nordstrom/received_events",
+          "type": "User",
+          "site_admin": false
+        },
+        "labels": [
+          {
+            "url": "https://api.github.com/repos/angular/material/labels/browser:%20IE",
+            "name": "browser: IE",
+            "color": "fbca04"
+          },
+          {
+            "url": "https://api.github.com/repos/angular/material/labels/needs:%20tests",
+            "name": "needs: tests",
+            "color": "e11d21"
+          },
+          {
+            "url": "https://api.github.com/repos/angular/material/labels/type:%20performance",
+            "name": "type: performance",
+            "color": "207de5"
+          }
+        ],
+        "state": "open",
+        "locked": false,
+        "assignee": {
+          "login": "rschmukler",
+          "id": 651740,
+          "avatar_url": "https://avatars.githubusercontent.com/u/651740?v=3",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/rschmukler",
+          "html_url": "https://github.com/rschmukler",
+          "followers_url": "https://api.github.com/users/rschmukler/followers",
+          "following_url": "https://api.github.com/users/rschmukler/following{/other_user}",
+          "gists_url": "https://api.github.com/users/rschmukler/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/rschmukler/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/rschmukler/subscriptions",
+          "organizations_url": "https://api.github.com/users/rschmukler/orgs",
+          "repos_url": "https://api.github.com/users/rschmukler/repos",
+          "events_url": "https://api.github.com/users/rschmukler/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/rschmukler/received_events",
+          "type": "User",
+          "site_admin": false
+        },
+        "milestone": {
+          "url": "https://api.github.com/repos/angular/material/milestones/17",
+          "html_url": "https://github.com/angular/material/milestones/0.12.0",
+          "labels_url": "https://api.github.com/repos/angular/material/milestones/17/labels",
+          "id": 1166984,
+          "number": 17,
+          "title": "0.12.0",
+          "description": "Polish and Bugfixes leading up to 1.0\r\n",
+          "creator": {
+            "login": "robertmesserle",
+            "id": 571363,
+            "avatar_url": "https://avatars.githubusercontent.com/u/571363?v=3",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/robertmesserle",
+            "html_url": "https://github.com/robertmesserle",
+            "followers_url": "https://api.github.com/users/robertmesserle/followers",
+            "following_url": "https://api.github.com/users/robertmesserle/following{/other_user}",
+            "gists_url": "https://api.github.com/users/robertmesserle/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/robertmesserle/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/robertmesserle/subscriptions",
+            "organizations_url": "https://api.github.com/users/robertmesserle/orgs",
+            "repos_url": "https://api.github.com/users/robertmesserle/repos",
+            "events_url": "https://api.github.com/users/robertmesserle/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/robertmesserle/received_events",
+            "type": "User",
+            "site_admin": false
+          },
+          "open_issues": 233,
+          "closed_issues": 207,
+          "state": "open",
+          "created_at": "2015-06-16T15:48:24Z",
+          "updated_at": "2015-08-21T22:30:18Z",
+          "due_on": "2015-09-14T07:00:00Z",
+          "closed_at": null
+        },
+        "comments": 51,
+        "created_at": "2015-03-03T23:18:12Z",
+        "updated_at": "2015-08-21T23:43:18Z",
+        "closed_at": null,
+        "body": "## Overview\r\nWe have an application we're trying to release to production using Angular Material, but cannot get it to perform in IE10/11. After a lot of struggling (is Angular the problem? Is this, that, or the other dependecy a problem?), we've found that Angular Material framework is simply slow in IE. In comparison, [LumX](http://ui.lumapps.com/) (a different Material Design + Angular framework) works fine in IE10/11.\r\n\r\n## Plnkr Demo of the Problem\r\nTo demonstrate the problem, I implemented a simple page with a Toolbar and list of Items in both Angular Material and LumX. They both perform equally well in Chrome, but ng-material is **much** slower in IE.\r\n\r\n### Performance Comparison\r\nTo test performance, I did the following:\r\n * Entered `900` in input box and submit (click `Add People` or hit Enter key)\r\n * Visually stop-watch the time from submission to the `(xxxx)` number updating\r\n\r\nPlnkr | Chrome | IE11\r\n---|---:|---:\r\n[ng-material demo](http://embed.plnkr.co/HtOJPtzfZFlvWAlCt58n/preview) | ~1s | ~8s\r\n[lumx demo](http://embed.plnkr.co/MGDRYEtyQWmULckRVh8y/preview) | <1s | ~1s\r\n\r\n### Versions Used\r\nLaptop: `Win7 64-bit, 16gb RAM, Core i7`\r\nChrome version: `Version 40.0.2214.115 m`\r\nIE11 version: `11.0.9600.17633`\r\n\r\nWhile I'd prefer to use Angular Material going forward, this performance difference in IE10/11 is a deal breaker for our product. Any help or insight into this issue is much appreciated!\r\n\r\n**PS:** I've also noticed in IE that when the ng-material demo page regains focus (e.g. click a different window then click back in), the page seems stuck and it often takes a while to scroll."
+      },
+      "comment": {
+        "url": "https://api.github.com/repos/angular/material/issues/comments/133591493",
+        "html_url": "https://github.com/angular/material/issues/1771#issuecomment-133591493",
+        "issue_url": "https://api.github.com/repos/angular/material/issues/1771",
+        "id": 133591493,
+        "user": {
+          "login": "timnix",
+          "id": 158351,
+          "avatar_url": "https://avatars.githubusercontent.com/u/158351?v=3",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/timnix",
+          "html_url": "https://github.com/timnix",
+          "followers_url": "https://api.github.com/users/timnix/followers",
+          "following_url": "https://api.github.com/users/timnix/following{/other_user}",
+          "gists_url": "https://api.github.com/users/timnix/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/timnix/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/timnix/subscriptions",
+          "organizations_url": "https://api.github.com/users/timnix/orgs",
+          "repos_url": "https://api.github.com/users/timnix/repos",
+          "events_url": "https://api.github.com/users/timnix/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/timnix/received_events",
+          "type": "User",
+          "site_admin": false
+        },
+        "created_at": "2015-08-21T23:43:18Z",
+        "updated_at": "2015-08-21T23:43:18Z",
+        "body": "@ThomasBurleson Here is the updated [Gist](https://gist.github.com/timnix/68cfbd6a170e484e6dea) and thanks for the RegEx tip."
+      }
+    },
+    "public": true,
+    "created_at": "2015-08-21T23:43:19Z",
+    "org": {
+      "id": 139426,
+      "login": "angular",
+      "gravatar_id": "",
+      "url": "https://api.github.com/orgs/angular",
+      "avatar_url": "https://avatars.githubusercontent.com/u/139426?"
+    }
+  },
+  {
+    "id": "3080590856",
+    "type": "IssueCommentEvent",
+    "actor": {
+      "id": 210413,
+      "login": "ThomasBurleson",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/ThomasBurleson",
+      "avatar_url": "https://avatars.githubusercontent.com/u/210413?"
+    },
+    "repo": {
+      "id": 21399598,
+      "name": "angular/material",
+      "url": "https://api.github.com/repos/angular/material"
+    },
+    "payload": {
+      "action": "created",
+      "issue": {
+        "url": "https://api.github.com/repos/angular/material/issues/1771",
+        "labels_url": "https://api.github.com/repos/angular/material/issues/1771/labels{/name}",
+        "comments_url": "https://api.github.com/repos/angular/material/issues/1771/comments",
+        "events_url": "https://api.github.com/repos/angular/material/issues/1771/events",
+        "html_url": "https://github.com/angular/material/issues/1771",
+        "id": 59723821,
+        "number": 1771,
+        "title": "ie11: Terrible performance, but not with LumX",
+        "user": {
+          "login": "ross-nordstrom",
+          "id": 3299155,
+          "avatar_url": "https://avatars.githubusercontent.com/u/3299155?v=3",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/ross-nordstrom",
+          "html_url": "https://github.com/ross-nordstrom",
+          "followers_url": "https://api.github.com/users/ross-nordstrom/followers",
+          "following_url": "https://api.github.com/users/ross-nordstrom/following{/other_user}",
+          "gists_url": "https://api.github.com/users/ross-nordstrom/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/ross-nordstrom/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/ross-nordstrom/subscriptions",
+          "organizations_url": "https://api.github.com/users/ross-nordstrom/orgs",
+          "repos_url": "https://api.github.com/users/ross-nordstrom/repos",
+          "events_url": "https://api.github.com/users/ross-nordstrom/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/ross-nordstrom/received_events",
+          "type": "User",
+          "site_admin": false
+        },
+        "labels": [
+          {
+            "url": "https://api.github.com/repos/angular/material/labels/browser:%20IE",
+            "name": "browser: IE",
+            "color": "fbca04"
+          },
+          {
+            "url": "https://api.github.com/repos/angular/material/labels/needs:%20tests",
+            "name": "needs: tests",
+            "color": "e11d21"
+          },
+          {
+            "url": "https://api.github.com/repos/angular/material/labels/type:%20performance",
+            "name": "type: performance",
+            "color": "207de5"
+          }
+        ],
+        "state": "open",
+        "locked": false,
+        "assignee": {
+          "login": "rschmukler",
+          "id": 651740,
+          "avatar_url": "https://avatars.githubusercontent.com/u/651740?v=3",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/rschmukler",
+          "html_url": "https://github.com/rschmukler",
+          "followers_url": "https://api.github.com/users/rschmukler/followers",
+          "following_url": "https://api.github.com/users/rschmukler/following{/other_user}",
+          "gists_url": "https://api.github.com/users/rschmukler/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/rschmukler/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/rschmukler/subscriptions",
+          "organizations_url": "https://api.github.com/users/rschmukler/orgs",
+          "repos_url": "https://api.github.com/users/rschmukler/repos",
+          "events_url": "https://api.github.com/users/rschmukler/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/rschmukler/received_events",
+          "type": "User",
+          "site_admin": false
+        },
+        "milestone": {
+          "url": "https://api.github.com/repos/angular/material/milestones/17",
+          "html_url": "https://github.com/angular/material/milestones/0.12.0",
+          "labels_url": "https://api.github.com/repos/angular/material/milestones/17/labels",
+          "id": 1166984,
+          "number": 17,
+          "title": "0.12.0",
+          "description": "Polish and Bugfixes leading up to 1.0\r\n",
+          "creator": {
+            "login": "robertmesserle",
+            "id": 571363,
+            "avatar_url": "https://avatars.githubusercontent.com/u/571363?v=3",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/robertmesserle",
+            "html_url": "https://github.com/robertmesserle",
+            "followers_url": "https://api.github.com/users/robertmesserle/followers",
+            "following_url": "https://api.github.com/users/robertmesserle/following{/other_user}",
+            "gists_url": "https://api.github.com/users/robertmesserle/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/robertmesserle/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/robertmesserle/subscriptions",
+            "organizations_url": "https://api.github.com/users/robertmesserle/orgs",
+            "repos_url": "https://api.github.com/users/robertmesserle/repos",
+            "events_url": "https://api.github.com/users/robertmesserle/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/robertmesserle/received_events",
+            "type": "User",
+            "site_admin": false
+          },
+          "open_issues": 233,
+          "closed_issues": 207,
+          "state": "open",
+          "created_at": "2015-06-16T15:48:24Z",
+          "updated_at": "2015-08-21T22:30:18Z",
+          "due_on": "2015-09-14T07:00:00Z",
+          "closed_at": null
+        },
+        "comments": 50,
+        "created_at": "2015-03-03T23:18:12Z",
+        "updated_at": "2015-08-21T23:30:40Z",
+        "closed_at": null,
+        "body": "## Overview\r\nWe have an application we're trying to release to production using Angular Material, but cannot get it to perform in IE10/11. After a lot of struggling (is Angular the problem? Is this, that, or the other dependecy a problem?), we've found that Angular Material framework is simply slow in IE. In comparison, [LumX](http://ui.lumapps.com/) (a different Material Design + Angular framework) works fine in IE10/11.\r\n\r\n## Plnkr Demo of the Problem\r\nTo demonstrate the problem, I implemented a simple page with a Toolbar and list of Items in both Angular Material and LumX. They both perform equally well in Chrome, but ng-material is **much** slower in IE.\r\n\r\n### Performance Comparison\r\nTo test performance, I did the following:\r\n * Entered `900` in input box and submit (click `Add People` or hit Enter key)\r\n * Visually stop-watch the time from submission to the `(xxxx)` number updating\r\n\r\nPlnkr | Chrome | IE11\r\n---|---:|---:\r\n[ng-material demo](http://embed.plnkr.co/HtOJPtzfZFlvWAlCt58n/preview) | ~1s | ~8s\r\n[lumx demo](http://embed.plnkr.co/MGDRYEtyQWmULckRVh8y/preview) | <1s | ~1s\r\n\r\n### Versions Used\r\nLaptop: `Win7 64-bit, 16gb RAM, Core i7`\r\nChrome version: `Version 40.0.2214.115 m`\r\nIE11 version: `11.0.9600.17633`\r\n\r\nWhile I'd prefer to use Angular Material going forward, this performance difference in IE10/11 is a deal breaker for our product. Any help or insight into this issue is much appreciated!\r\n\r\n**PS:** I've also noticed in IE that when the ng-material demo page regains focus (e.g. click a different window then click back in), the page seems stuck and it often takes a while to scroll."
+      },
+      "comment": {
+        "url": "https://api.github.com/repos/angular/material/issues/comments/133588984",
+        "html_url": "https://github.com/angular/material/issues/1771#issuecomment-133588984",
+        "issue_url": "https://api.github.com/repos/angular/material/issues/1771",
+        "id": 133588984,
+        "user": {
+          "login": "ThomasBurleson",
+          "id": 210413,
+          "avatar_url": "https://avatars.githubusercontent.com/u/210413?v=3",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/ThomasBurleson",
+          "html_url": "https://github.com/ThomasBurleson",
+          "followers_url": "https://api.github.com/users/ThomasBurleson/followers",
+          "following_url": "https://api.github.com/users/ThomasBurleson/following{/other_user}",
+          "gists_url": "https://api.github.com/users/ThomasBurleson/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/ThomasBurleson/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/ThomasBurleson/subscriptions",
+          "organizations_url": "https://api.github.com/users/ThomasBurleson/orgs",
+          "repos_url": "https://api.github.com/users/ThomasBurleson/repos",
+          "events_url": "https://api.github.com/users/ThomasBurleson/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/ThomasBurleson/received_events",
+          "type": "User",
+          "site_admin": false
+        },
+        "created_at": "2015-08-21T23:30:40Z",
+        "updated_at": "2015-08-21T23:30:40Z",
+        "body": "@timnix  - let's see what you propose... in a GIST?"
+      }
+    },
+    "public": true,
+    "created_at": "2015-08-21T23:30:41Z",
+    "org": {
+      "id": 139426,
+      "login": "angular",
+      "gravatar_id": "",
+      "url": "https://api.github.com/orgs/angular",
+      "avatar_url": "https://avatars.githubusercontent.com/u/139426?"
+    }
+  },
+  {
+    "id": "3080584294",
+    "type": "IssueCommentEvent",
+    "actor": {
+      "id": 158351,
+      "login": "timnix",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/timnix",
+      "avatar_url": "https://avatars.githubusercontent.com/u/158351?"
+    },
+    "repo": {
+      "id": 21399598,
+      "name": "angular/material",
+      "url": "https://api.github.com/repos/angular/material"
+    },
+    "payload": {
+      "action": "created",
+      "issue": {
+        "url": "https://api.github.com/repos/angular/material/issues/1771",
+        "labels_url": "https://api.github.com/repos/angular/material/issues/1771/labels{/name}",
+        "comments_url": "https://api.github.com/repos/angular/material/issues/1771/comments",
+        "events_url": "https://api.github.com/repos/angular/material/issues/1771/events",
+        "html_url": "https://github.com/angular/material/issues/1771",
+        "id": 59723821,
+        "number": 1771,
+        "title": "ie11: Terrible performance, but not with LumX",
+        "user": {
+          "login": "ross-nordstrom",
+          "id": 3299155,
+          "avatar_url": "https://avatars.githubusercontent.com/u/3299155?v=3",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/ross-nordstrom",
+          "html_url": "https://github.com/ross-nordstrom",
+          "followers_url": "https://api.github.com/users/ross-nordstrom/followers",
+          "following_url": "https://api.github.com/users/ross-nordstrom/following{/other_user}",
+          "gists_url": "https://api.github.com/users/ross-nordstrom/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/ross-nordstrom/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/ross-nordstrom/subscriptions",
+          "organizations_url": "https://api.github.com/users/ross-nordstrom/orgs",
+          "repos_url": "https://api.github.com/users/ross-nordstrom/repos",
+          "events_url": "https://api.github.com/users/ross-nordstrom/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/ross-nordstrom/received_events",
+          "type": "User",
+          "site_admin": false
+        },
+        "labels": [
+          {
+            "url": "https://api.github.com/repos/angular/material/labels/browser:%20IE",
+            "name": "browser: IE",
+            "color": "fbca04"
+          },
+          {
+            "url": "https://api.github.com/repos/angular/material/labels/needs:%20tests",
+            "name": "needs: tests",
+            "color": "e11d21"
+          },
+          {
+            "url": "https://api.github.com/repos/angular/material/labels/type:%20performance",
+            "name": "type: performance",
+            "color": "207de5"
+          }
+        ],
+        "state": "open",
+        "locked": false,
+        "assignee": {
+          "login": "rschmukler",
+          "id": 651740,
+          "avatar_url": "https://avatars.githubusercontent.com/u/651740?v=3",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/rschmukler",
+          "html_url": "https://github.com/rschmukler",
+          "followers_url": "https://api.github.com/users/rschmukler/followers",
+          "following_url": "https://api.github.com/users/rschmukler/following{/other_user}",
+          "gists_url": "https://api.github.com/users/rschmukler/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/rschmukler/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/rschmukler/subscriptions",
+          "organizations_url": "https://api.github.com/users/rschmukler/orgs",
+          "repos_url": "https://api.github.com/users/rschmukler/repos",
+          "events_url": "https://api.github.com/users/rschmukler/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/rschmukler/received_events",
+          "type": "User",
+          "site_admin": false
+        },
+        "milestone": {
+          "url": "https://api.github.com/repos/angular/material/milestones/17",
+          "html_url": "https://github.com/angular/material/milestones/0.12.0",
+          "labels_url": "https://api.github.com/repos/angular/material/milestones/17/labels",
+          "id": 1166984,
+          "number": 17,
+          "title": "0.12.0",
+          "description": "Polish and Bugfixes leading up to 1.0\r\n",
+          "creator": {
+            "login": "robertmesserle",
+            "id": 571363,
+            "avatar_url": "https://avatars.githubusercontent.com/u/571363?v=3",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/robertmesserle",
+            "html_url": "https://github.com/robertmesserle",
+            "followers_url": "https://api.github.com/users/robertmesserle/followers",
+            "following_url": "https://api.github.com/users/robertmesserle/following{/other_user}",
+            "gists_url": "https://api.github.com/users/robertmesserle/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/robertmesserle/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/robertmesserle/subscriptions",
+            "organizations_url": "https://api.github.com/users/robertmesserle/orgs",
+            "repos_url": "https://api.github.com/users/robertmesserle/repos",
+            "events_url": "https://api.github.com/users/robertmesserle/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/robertmesserle/received_events",
+            "type": "User",
+            "site_admin": false
+          },
+          "open_issues": 233,
+          "closed_issues": 207,
+          "state": "open",
+          "created_at": "2015-06-16T15:48:24Z",
+          "updated_at": "2015-08-21T22:30:18Z",
+          "due_on": "2015-09-14T07:00:00Z",
+          "closed_at": null
+        },
+        "comments": 49,
+        "created_at": "2015-03-03T23:18:12Z",
+        "updated_at": "2015-08-21T23:27:01Z",
+        "closed_at": null,
+        "body": "## Overview\r\nWe have an application we're trying to release to production using Angular Material, but cannot get it to perform in IE10/11. After a lot of struggling (is Angular the problem? Is this, that, or the other dependecy a problem?), we've found that Angular Material framework is simply slow in IE. In comparison, [LumX](http://ui.lumapps.com/) (a different Material Design + Angular framework) works fine in IE10/11.\r\n\r\n## Plnkr Demo of the Problem\r\nTo demonstrate the problem, I implemented a simple page with a Toolbar and list of Items in both Angular Material and LumX. They both perform equally well in Chrome, but ng-material is **much** slower in IE.\r\n\r\n### Performance Comparison\r\nTo test performance, I did the following:\r\n * Entered `900` in input box and submit (click `Add People` or hit Enter key)\r\n * Visually stop-watch the time from submission to the `(xxxx)` number updating\r\n\r\nPlnkr | Chrome | IE11\r\n---|---:|---:\r\n[ng-material demo](http://embed.plnkr.co/HtOJPtzfZFlvWAlCt58n/preview) | ~1s | ~8s\r\n[lumx demo](http://embed.plnkr.co/MGDRYEtyQWmULckRVh8y/preview) | <1s | ~1s\r\n\r\n### Versions Used\r\nLaptop: `Win7 64-bit, 16gb RAM, Core i7`\r\nChrome version: `Version 40.0.2214.115 m`\r\nIE11 version: `11.0.9600.17633`\r\n\r\nWhile I'd prefer to use Angular Material going forward, this performance difference in IE10/11 is a deal breaker for our product. Any help or insight into this issue is much appreciated!\r\n\r\n**PS:** I've also noticed in IE that when the ng-material demo page regains focus (e.g. click a different window then click back in), the page seems stuck and it often takes a while to scroll."
+      },
+      "comment": {
+        "url": "https://api.github.com/repos/angular/material/issues/comments/133588568",
+        "html_url": "https://github.com/angular/material/issues/1771#issuecomment-133588568",
+        "issue_url": "https://api.github.com/repos/angular/material/issues/1771",
+        "id": 133588568,
+        "user": {
+          "login": "timnix",
+          "id": 158351,
+          "avatar_url": "https://avatars.githubusercontent.com/u/158351?v=3",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/timnix",
+          "html_url": "https://github.com/timnix",
+          "followers_url": "https://api.github.com/users/timnix/followers",
+          "following_url": "https://api.github.com/users/timnix/following{/other_user}",
+          "gists_url": "https://api.github.com/users/timnix/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/timnix/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/timnix/subscriptions",
+          "organizations_url": "https://api.github.com/users/timnix/orgs",
+          "repos_url": "https://api.github.com/users/timnix/repos",
+          "events_url": "https://api.github.com/users/timnix/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/timnix/received_events",
+          "type": "User",
+          "site_admin": false
+        },
+        "created_at": "2015-08-21T23:27:01Z",
+        "updated_at": "2015-08-21T23:27:01Z",
+        "body": "@ThomasBurleson thanks! I was doing a little more tinkering, what are your thoughts on adding the hide and show attributes to this?"
+      }
+    },
+    "public": true,
+    "created_at": "2015-08-21T23:27:01Z",
+    "org": {
+      "id": 139426,
+      "login": "angular",
+      "gravatar_id": "",
+      "url": "https://api.github.com/orgs/angular",
+      "avatar_url": "https://avatars.githubusercontent.com/u/139426?"
+    }
+  },
+  {
+    "id": "3080573448",
+    "type": "IssueCommentEvent",
+    "actor": {
+      "id": 210413,
+      "login": "ThomasBurleson",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/ThomasBurleson",
+      "avatar_url": "https://avatars.githubusercontent.com/u/210413?"
+    },
+    "repo": {
+      "id": 21399598,
+      "name": "angular/material",
+      "url": "https://api.github.com/repos/angular/material"
+    },
+    "payload": {
+      "action": "created",
+      "issue": {
+        "url": "https://api.github.com/repos/angular/material/issues/1771",
+        "labels_url": "https://api.github.com/repos/angular/material/issues/1771/labels{/name}",
+        "comments_url": "https://api.github.com/repos/angular/material/issues/1771/comments",
+        "events_url": "https://api.github.com/repos/angular/material/issues/1771/events",
+        "html_url": "https://github.com/angular/material/issues/1771",
+        "id": 59723821,
+        "number": 1771,
+        "title": "ie11: Terrible performance, but not with LumX",
+        "user": {
+          "login": "ross-nordstrom",
+          "id": 3299155,
+          "avatar_url": "https://avatars.githubusercontent.com/u/3299155?v=3",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/ross-nordstrom",
+          "html_url": "https://github.com/ross-nordstrom",
+          "followers_url": "https://api.github.com/users/ross-nordstrom/followers",
+          "following_url": "https://api.github.com/users/ross-nordstrom/following{/other_user}",
+          "gists_url": "https://api.github.com/users/ross-nordstrom/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/ross-nordstrom/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/ross-nordstrom/subscriptions",
+          "organizations_url": "https://api.github.com/users/ross-nordstrom/orgs",
+          "repos_url": "https://api.github.com/users/ross-nordstrom/repos",
+          "events_url": "https://api.github.com/users/ross-nordstrom/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/ross-nordstrom/received_events",
+          "type": "User",
+          "site_admin": false
+        },
+        "labels": [
+          {
+            "url": "https://api.github.com/repos/angular/material/labels/browser:%20IE",
+            "name": "browser: IE",
+            "color": "fbca04"
+          },
+          {
+            "url": "https://api.github.com/repos/angular/material/labels/needs:%20tests",
+            "name": "needs: tests",
+            "color": "e11d21"
+          },
+          {
+            "url": "https://api.github.com/repos/angular/material/labels/type:%20performance",
+            "name": "type: performance",
+            "color": "207de5"
+          }
+        ],
+        "state": "open",
+        "locked": false,
+        "assignee": {
+          "login": "rschmukler",
+          "id": 651740,
+          "avatar_url": "https://avatars.githubusercontent.com/u/651740?v=3",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/rschmukler",
+          "html_url": "https://github.com/rschmukler",
+          "followers_url": "https://api.github.com/users/rschmukler/followers",
+          "following_url": "https://api.github.com/users/rschmukler/following{/other_user}",
+          "gists_url": "https://api.github.com/users/rschmukler/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/rschmukler/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/rschmukler/subscriptions",
+          "organizations_url": "https://api.github.com/users/rschmukler/orgs",
+          "repos_url": "https://api.github.com/users/rschmukler/repos",
+          "events_url": "https://api.github.com/users/rschmukler/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/rschmukler/received_events",
+          "type": "User",
+          "site_admin": false
+        },
+        "milestone": {
+          "url": "https://api.github.com/repos/angular/material/milestones/17",
+          "html_url": "https://github.com/angular/material/milestones/0.12.0",
+          "labels_url": "https://api.github.com/repos/angular/material/milestones/17/labels",
+          "id": 1166984,
+          "number": 17,
+          "title": "0.12.0",
+          "description": "Polish and Bugfixes leading up to 1.0\r\n",
+          "creator": {
+            "login": "robertmesserle",
+            "id": 571363,
+            "avatar_url": "https://avatars.githubusercontent.com/u/571363?v=3",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/robertmesserle",
+            "html_url": "https://github.com/robertmesserle",
+            "followers_url": "https://api.github.com/users/robertmesserle/followers",
+            "following_url": "https://api.github.com/users/robertmesserle/following{/other_user}",
+            "gists_url": "https://api.github.com/users/robertmesserle/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/robertmesserle/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/robertmesserle/subscriptions",
+            "organizations_url": "https://api.github.com/users/robertmesserle/orgs",
+            "repos_url": "https://api.github.com/users/robertmesserle/repos",
+            "events_url": "https://api.github.com/users/robertmesserle/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/robertmesserle/received_events",
+            "type": "User",
+            "site_admin": false
+          },
+          "open_issues": 233,
+          "closed_issues": 207,
+          "state": "open",
+          "created_at": "2015-06-16T15:48:24Z",
+          "updated_at": "2015-08-21T22:30:18Z",
+          "due_on": "2015-09-14T07:00:00Z",
+          "closed_at": null
+        },
+        "comments": 48,
+        "created_at": "2015-03-03T23:18:12Z",
+        "updated_at": "2015-08-21T23:20:24Z",
+        "closed_at": null,
+        "body": "## Overview\r\nWe have an application we're trying to release to production using Angular Material, but cannot get it to perform in IE10/11. After a lot of struggling (is Angular the problem? Is this, that, or the other dependecy a problem?), we've found that Angular Material framework is simply slow in IE. In comparison, [LumX](http://ui.lumapps.com/) (a different Material Design + Angular framework) works fine in IE10/11.\r\n\r\n## Plnkr Demo of the Problem\r\nTo demonstrate the problem, I implemented a simple page with a Toolbar and list of Items in both Angular Material and LumX. They both perform equally well in Chrome, but ng-material is **much** slower in IE.\r\n\r\n### Performance Comparison\r\nTo test performance, I did the following:\r\n * Entered `900` in input box and submit (click `Add People` or hit Enter key)\r\n * Visually stop-watch the time from submission to the `(xxxx)` number updating\r\n\r\nPlnkr | Chrome | IE11\r\n---|---:|---:\r\n[ng-material demo](http://embed.plnkr.co/HtOJPtzfZFlvWAlCt58n/preview) | ~1s | ~8s\r\n[lumx demo](http://embed.plnkr.co/MGDRYEtyQWmULckRVh8y/preview) | <1s | ~1s\r\n\r\n### Versions Used\r\nLaptop: `Win7 64-bit, 16gb RAM, Core i7`\r\nChrome version: `Version 40.0.2214.115 m`\r\nIE11 version: `11.0.9600.17633`\r\n\r\nWhile I'd prefer to use Angular Material going forward, this performance difference in IE10/11 is a deal breaker for our product. Any help or insight into this issue is much appreciated!\r\n\r\n**PS:** I've also noticed in IE that when the ng-material demo page regains focus (e.g. click a different window then click back in), the page seems stuck and it often takes a while to scroll."
+      },
+      "comment": {
+        "url": "https://api.github.com/repos/angular/material/issues/comments/133587994",
+        "html_url": "https://github.com/angular/material/issues/1771#issuecomment-133587994",
+        "issue_url": "https://api.github.com/repos/angular/material/issues/1771",
+        "id": 133587994,
+        "user": {
+          "login": "ThomasBurleson",
+          "id": 210413,
+          "avatar_url": "https://avatars.githubusercontent.com/u/210413?v=3",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/ThomasBurleson",
+          "html_url": "https://github.com/ThomasBurleson",
+          "followers_url": "https://api.github.com/users/ThomasBurleson/followers",
+          "following_url": "https://api.github.com/users/ThomasBurleson/following{/other_user}",
+          "gists_url": "https://api.github.com/users/ThomasBurleson/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/ThomasBurleson/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/ThomasBurleson/subscriptions",
+          "organizations_url": "https://api.github.com/users/ThomasBurleson/orgs",
+          "repos_url": "https://api.github.com/users/ThomasBurleson/repos",
+          "events_url": "https://api.github.com/users/ThomasBurleson/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/ThomasBurleson/received_events",
+          "type": "User",
+          "site_admin": false
+        },
+        "created_at": "2015-08-21T23:20:24Z",
+        "updated_at": "2015-08-21T23:20:24Z",
+        "body": "@timnix - I liked your changes so much, I updated my PR to @paulflo150 "
+      }
+    },
+    "public": true,
+    "created_at": "2015-08-21T23:20:25Z",
+    "org": {
+      "id": 139426,
+      "login": "angular",
+      "gravatar_id": "",
+      "url": "https://api.github.com/orgs/angular",
+      "avatar_url": "https://avatars.githubusercontent.com/u/139426?"
+    }
+  },
+  {
+    "id": "3080538545",
+    "type": "PushEvent",
+    "actor": {
+      "id": 651740,
+      "login": "rschmukler",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/rschmukler",
+      "avatar_url": "https://avatars.githubusercontent.com/u/651740?"
+    },
+    "repo": {
+      "id": 21399598,
+      "name": "angular/material",
+      "url": "https://api.github.com/repos/angular/material"
+    },
+    "payload": {
+      "push_id": 766587887,
+      "size": 1,
+      "distinct_size": 1,
+      "ref": "refs/heads/master",
+      "head": "90efac6ba0e8ce9d6b13124fb4a1c67024620947",
+      "before": "af3ef52228155b83b196ebd6376a8a868863d29f",
+      "commits": [
+        {
+          "sha": "90efac6ba0e8ce9d6b13124fb4a1c67024620947",
+          "author": {
+            "email": "rschmukler@gmail.com",
+            "name": "Ryan Schmukler"
+          },
+          "message": "amend(menuBar): demo fixes, bug fixes",
+          "distinct": true,
+          "url": "https://api.github.com/repos/angular/material/commits/90efac6ba0e8ce9d6b13124fb4a1c67024620947"
+        }
+      ]
+    },
+    "public": true,
+    "created_at": "2015-08-21T23:00:43Z",
+    "org": {
+      "id": 139426,
+      "login": "angular",
+      "gravatar_id": "",
+      "url": "https://api.github.com/orgs/angular",
+      "avatar_url": "https://avatars.githubusercontent.com/u/139426?"
+    }
+  }
+]
