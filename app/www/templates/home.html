@@ -5,17 +5,20 @@
 </header>
 
 <div class="content">
+  <div ng-class="{active: self.loadingNew}" class="reload-progress circle-progress">
+    <div class="spinner"></div>
+  </div>
   <ul class="list">
     <li class="divider">News Feed</li>
-    <li class="item-expanded">
-        <a href="" class="pull-left icon"><img src="lib/icons/ic_search_black_24px.svg"></a>
+    <li ng-repeat="newsitem in home.newsfeed" class="item-expanded">
+        <a href="" class="pull-left icon"><img ng-src="{{newsitem.actor.avatar_url}}"></a>
         <a href="">
             <div class="item-content">
                 <span class="title">
-                  {{'joni2back added mdo to joni2back/angular-filemanager' | limitTo:25}}
-                  <span ng-show="'joni2back added mdo to joni2back/angular-filemanager'.length>25" class="ellipsis"></span>
+                  {{newsitem.string | limitTo:50}}
+                  <span ng-show="newsitem.string.length>50" class="ellipsis"></span>
                 </span>
-                <span class="body">an hour ago</span>
+                <span class="body">{{newsitem.created_at | timeAgo}}</span>
             </div>
         </a>
     </li>

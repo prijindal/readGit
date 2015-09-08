@@ -5,10 +5,9 @@
           <input class="with-label" type="text" id="username" ng-model="login.user.username">
           <label class="floating-label" for="username">Username</label>
       </div>
-      <div class="input-wrapper">
-          <input class="with-label" type="password" id="password" ng-model="login.user.password">
-          <label class="floating-label" for="password">Password</label>
+      <button ng-class="{primary : !login.state}" class="btn fit-parent padded-top padded-bottom">Login</button>
+      <div ng-class="{active : login.state}" class="circle-progress">
+        <div class="spinner"></div>
       </div>
-      <button class="btn fit-parent primary padded-top">Login</button>
     </form>
   </div>
