@@ -1,13 +1,12 @@
 
   <div class="content padded-full">
     <form ng-submit="login.submit()">
-      <div class="input-wrapper">
-          <input class="with-label" type="text" id="username" ng-model="login.user.username">
-          <label class="floating-label" for="username">Username</label>
-      </div>
-      <button ng-class="{primary : !login.state}" class="btn fit-parent padded-top padded-bottom">Login</button>
-      <div ng-class="{active : login.state}" class="circle-progress">
-        <div class="spinner"></div>
-      </div>
+      <label class="item item-input item-floating-label">
+        <span class="input-label">Username</span>
+        <input type="text" id="username" ng-model="login.user.username" placeholder="Username">
+      </label>
+      <button ng-class="{'button-positive' : !login.state}" class="button button-block">
+        Login
+      </button>
     </form>
   </div>
