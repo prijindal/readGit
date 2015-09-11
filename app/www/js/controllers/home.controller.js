@@ -2,10 +2,8 @@ angular.module('readGit').controller('homeController',['$location', 'newsFeed','
     var self = this;
     var getNewData = function() {
         console.log('Getting new data')
-        self.loadingNew = true
         newsFeed.saveData(credentials.get().username, function(data) {
             self.newsfeed = data
-            self.loadingNew = false
             console.log('new data loaded')
         })
     }
