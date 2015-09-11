@@ -18,6 +18,7 @@ angular.module('readGit')
             var logout = function() {
                 $localStorage.$reset()
                 details = {}
+                window.location.reload();
             }
             return {
                 save:save,

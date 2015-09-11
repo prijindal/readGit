@@ -20,6 +20,5 @@ angular.module('readGit')
 
             self.logout = function() {
               credentials.logout()
-              $location.path('/login')
             }
         }])
