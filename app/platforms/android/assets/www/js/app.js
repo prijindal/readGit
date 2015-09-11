@@ -3,8 +3,7 @@ angular.module('readGit', [
         'ngRoute',
         'ngAnimate',
         'ngStorage',
-        'yaru22.angular-timeago',
-        'mgcrea.pullToRefresh'
+        'yaru22.angular-timeago'
     ])
         .config(["$routeProvider", function($routeProvider) {
             $routeProvider
@@ -82,14 +81,5 @@ angular.module('readGit').controller('homeController',['$location', 'newsFeed','
     else {
         $location.path('/login')
     }
-
-    self.onReload = function() {
-      console.warn('reload');
-      var deferred = $q.defer();
-      setTimeout(function() {
-        deferred.resolve(true);
-      }, 1000);
-      return deferred.promise;
-    };
 
 }])

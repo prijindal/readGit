@@ -62,7 +62,9 @@ angular.module('readGit').controller('loginController',['$location','newsFeed','
 
 angular.module('readGit').controller('homeController',['$location', 'newsFeed','credentials', function($location, newsFeed, credentials) {
     var self = this;
+    phonon.navigator({
 
+    })
     var getNewData = function() {
         console.log('Getting new data')
         self.loadingNew = true
