@@ -1,0 +1,7 @@
+/* Empty. Add your own CSS if you like */
+html {
+    overflow-y: scroll;
+}
+.item h2 {
+  white-space: normal;
+}
