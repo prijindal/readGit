@@ -1,0 +1,10 @@
+<div class="content newsfeed home">
+  <div class="list">
+    <div class="item item-divider">News Feed</div>
+    <a ng-repeat="newsitem in news.newsfeed" class="item item-thumbnail-left">
+        <img ng-src="{{newsitem.actor.avatar_url}}">
+        <h2>{{newsitem.string}}</h2>
+        <p>{{newsitem.created_at | timeAgo}}</p>
+    </a>
+  </div>
+</div>

@@ -1,7 +1,32 @@
 /* Empty. Add your own CSS if you like */
-html {
-    overflow-y: scroll;
-}
 .item h2 {
   white-space: normal;
+}
+.content.home {
+  padding-top: 93px;
+}
+.search.bar {
+  position: absolute;
+}
+.card-info {
+  color: #333;
+  text-decoration: none;
+}
+.card-info:hover {
+  color:#f00;
+}
+.card-info strong {
+  text-align: center;
+  display: block;
+  font-size: 28px;
+  line-height: 1;
+}
+.card-info span {
+  display: block;
+  width: 100%;
+  font-size: 11px;
+  text-align: center;
+}
+.tab-item.no-display {
+  display: none;
 }

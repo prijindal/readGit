@@ -1,4 +1,5 @@
-angular.module('readGit').controller('homeController',['$location', 'newsFeed','credentials', function($location, newsFeed, credentials) {
+angular.module('readGit')
+.controller('newsController',['$location', 'newsFeed','credentials', function($location, newsFeed, credentials) {
     var self = this;
     var getNewData = function() {
         console.log('Getting new data')
@@ -16,5 +17,4 @@ angular.module('readGit').controller('homeController',['$location', 'newsFeed','
     else {
         $location.path('/login')
     }
-
 }])

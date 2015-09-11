@@ -1,5 +1,7 @@
 angular.module('readGit')
-       .factory('newsFeed',['$http','eventString','$localStorage', function($http, eventString, $localStorage) {
+       .factory('newsFeed',
+        ['$http','eventString','$localStorage',
+        function($http, eventString, $localStorage) {
            var details = {}
            var saveData = function(username, cb) {
                var url = 'https://api.github.com/users/'+username+'/received_events'
@@ -11,7 +13,9 @@ angular.module('readGit')
                         //console.log(data)
                         details = data
                         $localStorage.newsFeed = details
-                        cb(data)
+                        if (typeof cb=='function') {
+                            cb(data)
+                        };
                     })
            }
            var getData = function() {

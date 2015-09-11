@@ -15,9 +15,14 @@ angular.module('readGit')
                 return details.username != undefined
             }
 
+            var logout = function() {
+                $localStorage.$reset()
+                details = {}
+            }
             return {
                 save:save,
                 get:get,
-                isLoggedIn:isLoggedIn
+                isLoggedIn:isLoggedIn,
+                logout:logout
             }
         }])

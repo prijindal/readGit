@@ -1,0 +1,9 @@
+<div class="content home">
+   <div class="list">
+      <div class="item item-divider">Starred</div>
+      <a ng-repeat="repo in starred.starred" class="item">
+         <h2>{{repo.full_name}}</h2>
+         <p>{{repo.description}}</p>
+       </a>
+   </div>
+</div>
