@@ -1,0 +1,13 @@
+
+  <div class="search bar bar-header item-input-inset">
+    <label class="item-input-wrapper">
+      <i class="icon ion-ios-search placeholder-icon"></i>
+      <input type="search" placeholder="Search" ng-keyup="app.search($event)" ng-model="app.query">
+    </label>
+    <button class="button button-clear" ng-click="app.query = ''">
+      Cancel
+    </button>
+  </div>
+<div ui-view>
+  
+</div>

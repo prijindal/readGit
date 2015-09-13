@@ -1,7 +1,7 @@
 <div class="content home">
    <div class="list">
       <div class="item item-divider">Followers</div>
-      <a ng-repeat="follower in followers.userFollowers" class="item item-avatar">
+      <a ng-repeat="follower in followers.userFollowers" class="item item-avatar" ui-sref="app.user.profile({username:follower.login})">
          <img ng-src="{{follower.avatar_url}}">
          <h2>{{follower.login}}</h2>
        </a>

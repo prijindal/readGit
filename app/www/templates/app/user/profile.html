@@ -1,0 +1,32 @@
+<div ui-view>
+  <div class="content search">
+    <div class="item item-body">
+      <div class="row">
+        <div class="col col-20"></div>
+        <div class="col col-60">
+          <img class="full-image" ng-src="{{profile.profileInfo.avatar_url}}">
+        </div>
+        <div class="col col-20"></div>
+      </div>
+      <h2>{{profile.profileInfo.name}}</h2>
+    </div>
+    <div class="row">
+      <a class="col card-info" ui-sref="app.user.profile.followers">
+        <strong>{{profile.profileInfo.followers}}</strong>
+        <span>Followers</span>
+      </a>
+      <a class="col card-info" ui-sref="app.user.profile.starred">
+        <strong>{{profile.profileInfo.starred}}</strong>
+        <span>Starred</span>
+      </a>
+      <a class="col card-info" ui-sref="app.user.profile.following">
+        <strong>{{profile.profileInfo.following}}</strong>
+        <span>Following</span>
+      </a>
+      <a class="col card-info" ui-sref="app.user.profile.repos">
+        <strong>{{profile.profileInfo.public_repos}}</strong>
+        <span>Repositories</span>
+      </a>
+    </div>
+  </div>
+</div>

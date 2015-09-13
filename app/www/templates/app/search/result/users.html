@@ -1,0 +1,8 @@
+<div class="content search">
+   <div class="list">
+      <a class="item item-divider">Users</a>
+      <a class="item" ng-repeat="user in search.result.users.items | limitTo:20" ui-sref="app.user.profile({username:user.login})">
+         {{user.login}}
+      </a>
+   </div>
+</div>

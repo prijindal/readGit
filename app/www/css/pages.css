@@ -1,6 +1,11 @@
 html, body, .page {
     height: 100%;
 }
-.content.home {
+.view-container {
     overflow-y:scroll;
+    overflow-x:hidden;
+}
+.page {
+  overflow-y: auto;
+  overflow-x: hidden;
 }

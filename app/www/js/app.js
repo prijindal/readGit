@@ -12,73 +12,113 @@ angular.module('readGit', [
                 controller:'loginController',
                 controllerAs:'login'
             })
-            .state('home', {
+            .state('app', {
+                url:'/app',
+                abstract:true,
+                templateUrl:'templates/app.html',
+                controller:'appController as app'
+                
+            })
+
+            .state('app.search', {
+                url:'/search',
+                templateUrl:'templates/app/search.html'
+            })
+
+            .state('app.search.result', {
+                url:'/:query',
+                templateUrl:'templates/app/search/result.html',
+                controller:'searchController as search'
+            })
+
+            .state('app.search.result.users', {
+                url:'/users',
+                templateUrl:'templates/app/search/result/users.html',
+                controller:'searchController as search'
+            })
+
+            .state('app.search.result.repos', {
+                url:'/repos',
+                templateUrl:'templates/app/search/result/repos.html',
+                controller:'searchController as search'
+            })
+
+            .state('app.home', {
                 url:'/home',
                 abstract: true,
-                templateUrl:'templates/home.html'
+                templateUrl:'templates/app/home.html'
             })
-            .state('home.news', {
+            .state('app.home.news', {
                 url:'/news',
-                views:{
-                    'news-feed':{
-                        templateUrl:'templates/news.html',
-                        controller:'newsController as news'
-                    }
-                }
+                templateUrl:'templates/app/home/news.html',
+                controller:'newsController as news'
+                    
             })
 
-            .state('home.profile', {
+            .state('app.home.profile', {
                 url:'/profile',
-                views:{
-                    'user-profile':{
-                        templateUrl:'templates/profile.html',
-                        controller:'profileController as profile'
-                    }
-                }
+                templateUrl:'templates/app/home/profile.html',
+                controller:'profileController as profile'
             })
 
-            .state('home.repos', {
+            .state('app.home.repos', {
                 url:'/repos',
-                views:{
-                    'user-repos':{
-                        templateUrl:'templates/repos.html',
-                        controller:'reposController as repos'
-                    }
-                }
+                templateUrl:'templates/app/home/repos.html',
+                controller:'reposController as repos'
             })
 
-            .state('home.followers', {
+            .state('app.home.followers', {
                 url:'/followers',
-                views:{
-                    'user-followers':{
-                        templateUrl:'templates/followers.html',
-                        controller:'followersController as followers'
-                    }
-                }
+                templateUrl:'templates/app/home/followers.html',
+                controller:'followersController as followers'
             })
 
-            .state('home.following', {
+            .state('app.home.following', {
                 url:'/following',
-                views:{
-                    'user-following':{
-                        templateUrl:'templates/following.html',
-                        controller:'followingController as following'
-                    }
-                }
+                templateUrl:'templates/app/home/following.html',
+                controller:'followingController as following'
             })
 
-            .state('home.starred', {
+            .state('app.home.starred', {
                 url:'/starred',
-                views:{
-                    'user-starred':{
-                        templateUrl:'templates/starred.html',
-                        controller:'starredController as starred'
-                    }
-                }
+                templateUrl:'templates/app/home/starred.html',
+                controller:'starredController as starred'
+            })
+
+            .state('app.user', {
+                url:'/user',
+                abstract:true,
+                templateUrl:'templates/app/user.html'
+            })
+
+            .state('app.user.profile', {
+                url:'/:username',
+                templateUrl:'templates/app/user/profile.html',
+                controller:'userProfileCtrl as profile'
+            })
+
+            .state('app.user.profile.followers', {
+                url:'/followers',
+                templateUrl:'templates/app/user/followers.html'
+            })
+
+            .state('app.user.profile.starred', {
+                url:'/starred',
+                templateUrl:'templates/app/user/starred.html'
+            })
+
+            .state('app.user.profile.following', {
+                url:'/following',
+                templateUrl:'templates/app/user/following.html'
+            })
+
+            .state('app.user.profile.repos', {
+                url:'/repos',
+                templateUrl:'templates/app/user/repos.html'
             })
 
 
-            $urlRouterProvider.otherwise('/home/news')
+            $urlRouterProvider.otherwise('/app/home/news')
         }])
         .run(['$rootScope', '$location', 'credentials', function ($rootScope, $location, credentials) {
             $rootScope.$on('$routeChangeStart', function (event) {
@@ -90,7 +130,7 @@ angular.module('readGit', [
                 else {
                     if($location.path() == '/login') {
                         $location.replace();
-                      $location.path('/home/news');
+                      $location.path('/app/home/news');
                     }
                 }
             });

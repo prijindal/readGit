@@ -1,0 +1,9 @@
+<div class="content search">
+   <div class="list">
+      <div class="item item-divider">Repositories</div>
+      <a ng-repeat="repo in profile.profileInfo.repoDetails" class="item item-icon-left">
+         <i ng-class="{'ion-folder': !repo.fork, 'ion-fork-repo': repo.fork}" class="icon"></i>
+         {{repo.name}}
+      </a>
+   </div>
+</div>

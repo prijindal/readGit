@@ -1,0 +1,9 @@
+<div class="content home">
+   <div class="list">
+      <div class="item item-divider">Following</div>
+      <a ng-repeat="user in following.userFollowing" class="item item-avatar" ui-sref="app.user.profile({username:user.login})">
+         <img ng-src="{{user.avatar_url}}">
+         <h2>{{user.login}}</h2>
+       </a>
+   </div>
+</div>

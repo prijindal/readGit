@@ -5,6 +5,9 @@
 .content.home {
   padding-top: 93px;
 }
+.content.search {
+  padding-top: 44px;
+}
 .search.bar {
   position: absolute;
 }

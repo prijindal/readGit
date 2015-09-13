@@ -10,19 +10,19 @@
     <h2>{{profile.profileInfo.name}}</h2>
   </div>
     <div class="row">
-      <a class="col card-info" ng-href="#/home/followers">
+      <a class="col card-info" ui-sref="app.home.followers">
         <strong>{{profile.profileInfo.followers}}</strong>
         <span>Followers</span>
       </a>
-      <a class="col card-info" ng-href="#/home/starred">
+      <a class="col card-info" ui-sref="app.home.starred">
         <strong>{{profile.profileInfo.starred}}</strong>
         <span>Starred</span>
       </a>
-      <a class="col card-info" ng-href="#/home/following">
+      <a class="col card-info" ui-sref="app.home.following">
         <strong>{{profile.profileInfo.following}}</strong>
         <span>Following</span>
       </a>
-      <a class="col card-info" ng-href="#/home/repos">
+      <a class="col card-info" ui-sref="app.home.repos">
         <strong>{{profile.profileInfo.public_repos}}</strong>
         <span>Repositories</span>
       </a>

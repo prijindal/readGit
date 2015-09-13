@@ -1,0 +1,14 @@
+<div ui-view>
+   <div class="content search">
+      <div class="list">
+         <a class="item item-divider" ui-sref="app.search.result.repos">Repositories</a>
+         <a class="item" ng-repeat="repo in search.result.repos.items | limitTo:2">
+            {{repo.full_name}}
+         </a>
+         <a class="item item-divider" ui-sref="app.search.result.users">Users</a>
+         <a class="item" ng-repeat="user in search.result.users.items | limitTo:2"ui-sref="app.user.profile({username:user.login})">
+            {{user.login}}
+         </a>
+      </div>
+   </div>
+</div>
