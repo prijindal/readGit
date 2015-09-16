@@ -2,7 +2,7 @@
    <div class="content search">
       <div class="list">
          <a class="item item-divider" ui-sref="app.search.result.repos">Repositories</a>
-         <a class="item" ng-repeat="repo in search.result.repos.items | limitTo:2">
+         <a class="item" ng-repeat="repo in search.result.repos.items | limitTo:2" ui-sref="app.repo.user.repo({username:repo.owner.login, reponame:repo.name})">
             {{repo.full_name}}
          </a>
          <a class="item item-divider" ui-sref="app.search.result.users">Users</a>

@@ -1,0 +1,11 @@
+<div ui-view>
+  <div class="content search">
+     <div class="list">
+        <div class="item item-divider">{{repo.username}}</div>
+        <a ui-sref="app.repo.user.repo({reponame:repo.name})" ng-repeat="repo in repo.repoDetails" class="item item-icon-left">
+           <i ng-class="{'ion-folder': !repo.fork, 'ion-fork-repo': repo.fork}" class="icon"></i>
+           {{repo.name}}
+        </a>
+     </div>
+  </div>
+</div>

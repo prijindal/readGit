@@ -1,0 +1,17 @@
+<div class="content repo">
+  <div class="list">
+    <div class="item item-divider"><a ui-sref="app.user.profile.repos">{{repo.username}}</a>/{{repo.reponame}}</div>
+  </div>
+  <ion-tabs class="tabs-striped tabs-top">
+    <ion-tab title="News" icon-off="ion-ios-home-outline" icon-on="ion-ios-home" ui-sref="app.repo.user.repo.description">
+
+    </ion-tab>
+
+    <ion-tab title="Code" icon-off="ion-code" icon-on="ion-code-working" ui-sref="app.repo.user.repo.code">
+
+    </ion-tab>
+
+  </ion-tabs>
+
+  <div ui-view></div>
+</div>

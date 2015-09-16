@@ -1,16 +1,16 @@
 angular.module('readGit')
-.controller('appController', 
-[ '$location',
-function($location){
+.controller('appController',
+[ '$location','$window',
+function($location, $window){
     var self = this;
     self.query = ''
 
     self.search = function(e) {
         var query = self.query
         var inputKey = e.keyCode
-        
+
         if (
-            (inputKey > 47 && inputKey < 91) || 
+            (inputKey > 47 && inputKey < 91) ||
             (inputKey > 95 && inputKey < 112) ||
             (inputKey > 185 && inputKey < 222)
             ) {
@@ -18,10 +18,13 @@ function($location){
             }
         else if(inputKey == 13){
             // Redirect to search Page
-            $location.path('/app/search/'+query)  
+            $location.path('/app/search/'+query)
         };
         console.log(query)
     }
 
+    self.goBack = function() {
+        $window.history.back();
+    }
 
 }])

@@ -1,0 +1,37 @@
+<div class="content search">
+  <div class="list card">
+    <div class="item item-title">
+      <h2>{{repo.repoInfo.description}}</h2>
+    </div>
+    <div class="item item-body">
+      <div class="row">
+        <a class="col card-info">
+          <strong>{{repo.repoInfo.watchers_count}}</strong>
+          <span>Watching</span>
+        </a>
+        <a class="col card-info">
+          <strong>{{repo.repoInfo.stargazers_count}}</strong>
+          <span>Stargazers</span>
+        </a>
+        <a class="col card-info">
+          <strong>{{repo.repoInfo.forks_count}}</strong>
+          <span>Forks Count</span>
+        </a>
+      </div>
+      <div class="row">
+        <a class="col card-info">
+          <strong>{{repo.repoInfo.open_issues_count}}</strong>
+          <span>Issues</span>
+        </a>
+        <a class="col card-info">
+          <strong>{{repo.repoInfo.pulls_count || 0}}</strong>
+          <span>Pull Request</span>
+        </a>
+        <a class="col card-info">
+          <strong>{{repo.repoInfo.contributors_count || 0}}</strong>
+          <span>Contributors</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

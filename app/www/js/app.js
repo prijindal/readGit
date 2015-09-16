@@ -17,7 +17,7 @@ angular.module('readGit', [
                 abstract:true,
                 templateUrl:'templates/app.html',
                 controller:'appController as app'
-                
+
             })
 
             .state('app.search', {
@@ -52,7 +52,7 @@ angular.module('readGit', [
                 url:'/news',
                 templateUrl:'templates/app/home/news.html',
                 controller:'newsController as news'
-                    
+
             })
 
             .state('app.home.profile', {
@@ -117,10 +117,32 @@ angular.module('readGit', [
                 templateUrl:'templates/app/user/repos.html'
             })
 
+            .state('app.repo', {
+                url:'/repo',
+                abstract:true,
+                templateUrl:'templates/app/repo.html'
+            })
+
+            .state('app.repo.user', {
+                url:'/:username',
+                templateUrl:'templates/app/repo/user.html',
+                controller:'userRepoController as repo'
+            })
+
+            .state('app.repo.user.repo', {
+                url:'/:reponame',
+                templateUrl:'templates/app/repo/repo.html',
+                controller:'repoInfoController as repo'
+            })
+
+            .state('app.repo.user.repo.description', {
+                url:'/desc',
+                templateUrl:'templates/app/repo/desc.html'
+            })
 
             $urlRouterProvider.otherwise('/app/home/news')
         }])
-        .run(['$rootScope', '$location', 'credentials', function ($rootScope, $location, credentials) {
+        .run(['$rootScope', '$location','$ionicPlatform','$window', 'credentials', function ($rootScope, $location,$ionicPlatform,$window, credentials) {
             $rootScope.$on('$routeChangeStart', function (event) {
                 if (!credentials.isLoggedIn()) {
                     console.log('DENY');
@@ -134,9 +156,7 @@ angular.module('readGit', [
                     }
                 }
             });
-        }]);
-
-
-
-
-
+            $ionicPlatform.registerBackButtonAction(function (event) {
+                  $window.history.back();
+              }, 100);
+        }])
