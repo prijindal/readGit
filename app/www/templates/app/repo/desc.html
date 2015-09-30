@@ -5,30 +5,30 @@
     </div>
     <div class="item item-body">
       <div class="row">
-        <a class="col card-info">
+        <a ui-sref="app.repo.user.repo.watchers" class="col card-info">
           <strong>{{repo.repoInfo.watchers_count}}</strong>
           <span>Watching</span>
         </a>
-        <a class="col card-info">
+        <a ui-sref="app.repo.user.repo.stargazers" class="col card-info">
           <strong>{{repo.repoInfo.stargazers_count}}</strong>
           <span>Stargazers</span>
         </a>
-        <a class="col card-info">
+        <a ui-sref="app.repo.user.repo.forks" class="col card-info">
           <strong>{{repo.repoInfo.forks_count}}</strong>
           <span>Forks Count</span>
         </a>
       </div>
       <div class="row">
-        <a class="col card-info">
+        <a ui-sref="app.repo.user.repo.issues" class="col card-info">
           <strong>{{repo.repoInfo.open_issues_count}}</strong>
           <span>Issues</span>
         </a>
-        <a class="col card-info">
-          <strong>{{repo.repoInfo.pulls_count || 0}}</strong>
+        <a ui-sref="app.repo.user.repo.pulls" class="col card-info">
+          <strong>{{repo.repoInfo.pulls.length}}</strong>
           <span>Pull Request</span>
         </a>
-        <a class="col card-info">
-          <strong>{{repo.repoInfo.contributors_count || 0}}</strong>
+        <a ui-sref="app.repo.user.repo.contributors" class="col card-info">
+          <strong>{{repo.repoInfo.contributors.length}}</strong>
           <span>Contributors</span>
         </a>
       </div>

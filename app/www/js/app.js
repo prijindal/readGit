@@ -140,6 +140,38 @@ angular.module('readGit', [
                 templateUrl:'templates/app/repo/desc.html'
             })
 
+            .state('app.repo.user.repo.watchers', {
+                url:'/watchers',
+                templateUrl:'templates/app/repo/watchers.html'
+            })
+
+            .state('app.repo.user.repo.stargazers', {
+                url:'/stargazers',
+                templateUrl:'templates/app/repo/stargazers.html'
+            })
+
+            .state('app.repo.user.repo.forks', {
+                url:'/forks',
+                templateUrl:'templates/app/repo/forks.html'
+            })
+
+            .state('app.repo.user.repo.issues', {
+                url:'/issues',
+                templateUrl:'templates/app/repo/issues.html'
+            })
+
+            .state('app.repo.user.repo.pulls', {
+                url:'/pulls',
+                templateUrl:'templates/app/repo/pulls.html'
+            })
+
+            .state('app.repo.user.repo.contributors', {
+                url:'/contributors',
+                templateUrl:'templates/app/repo/contributors.html'
+            })
+
+
+
             $urlRouterProvider.otherwise('/app/home/news')
         }])
         .run(['$rootScope', '$location','$ionicPlatform','$window', 'credentials', function ($rootScope, $location,$ionicPlatform,$window, credentials) {
@@ -160,3 +192,16 @@ angular.module('readGit', [
                   $window.history.back();
               }, 100);
         }])
+
+
+        .factory('httpRequestInterceptor', function () {
+          return {
+            request: function (config) {
+                config.url =  URI(config.url).addSearch({'access_token':'1def2060e6e2e51f478f466309e04dfaf4dd3927'}).toString();
+                return config;
+            }
+          };
+        })
+        .config(function ($httpProvider) {
+          $httpProvider.interceptors.push('httpRequestInterceptor');
+        })

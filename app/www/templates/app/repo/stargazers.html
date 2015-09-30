@@ -1,0 +1,9 @@
+<div class="content search">
+   <div class="list">
+      <div class="item item-divider">Stargazers</div>
+      <a ng-repeat="stargazer in repo.repoInfo.stargazers" class="item item-avatar" ui-sref="app.user.profile({username:stargazer.login})">
+         <img ng-src="{{stargazer.avatar_url}}">
+         <h2>{{stargazer.login}}</h2>
+       </a>
+   </div>
+</div>

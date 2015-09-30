@@ -1,0 +1,9 @@
+<div class="content search">
+   <div class="list">
+      <div class="item item-divider">Watchers</div>
+      <a ng-repeat="watcher in repo.repoInfo.watchers" class="item item-avatar" ui-sref="app.user.profile({username:watcher.login})">
+         <img ng-src="{{watcher.avatar_url}}">
+         <h2>{{watcher.login}}</h2>
+       </a>
+   </div>
+</div>

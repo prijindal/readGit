@@ -1,6 +1,6 @@
 <div class="content repo">
   <div class="list">
-    <div class="item item-divider"><a ui-sref="app.user.profile.repos">{{repo.username}}</a>/{{repo.reponame}}</div>
+    <div class="item item-divider"><a ui-sref="app.user.profile.repos({username:repo.username})">{{repo.username}}</a>/{{repo.reponame}}</div>
   </div>
   <ion-tabs class="tabs-striped tabs-top">
     <ion-tab title="News" icon-off="ion-ios-home-outline" icon-on="ion-ios-home" ui-sref="app.repo.user.repo.description">
