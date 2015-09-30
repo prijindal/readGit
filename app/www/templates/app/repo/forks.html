@@ -1,0 +1,9 @@
+<div class="content repo-content">
+   <div class="list">
+      <div class="item item-divider">Forks</div>
+      <a ng-repeat="repo in repo.repoInfo.forks" class="item item-icon-left" ui-sref="app.repo.user.repo({username:repo.owner.login, reponame:repo.name})">
+         <i class="ion-fork-repo icon"></i>
+         {{repo.full_name}}
+      </a>
+   </div>
+</div>

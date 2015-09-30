@@ -1,0 +1,10 @@
+<div class="content repo-content">
+   <div class="list">
+      <div class="item item-divider">Issues</div>
+      <a ng-repeat="issue in repo.repoInfo.pulls" class="item item-icon-left">
+         <i class="ion-pull-request icon"></i>
+         <h2>{{issue.title}}</h2>
+         <p>#{{issue.number}} opened {{issue.created_at | timeAgo}} by {{issue.user.login}} </p>
+       </a>
+   </div>
+</div>

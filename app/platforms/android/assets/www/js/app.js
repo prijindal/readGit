@@ -155,11 +155,6 @@ angular.module('readGit', [
                 templateUrl:'templates/app/repo/forks.html'
             })
 
-            .state('app.repo.user.repo.issues', {
-                url:'/issues',
-                templateUrl:'templates/app/repo/issues.html'
-            })
-
             .state('app.repo.user.repo.pulls', {
                 url:'/pulls',
                 templateUrl:'templates/app/repo/pulls.html'
@@ -170,6 +165,17 @@ angular.module('readGit', [
                 templateUrl:'templates/app/repo/contributors.html'
             })
 
+            .state('app.repo.user.repo.issues', {
+                url:'/issues',
+                templateUrl:'templates/app/repo/issues.html'
+            })
+
+
+            .state('app.repo.user.repo.issues.number', {
+                url:'/:number',
+                templateUrl:'templates/app/repo/issues/comments.html',
+                controller:'issueController as issue'
+            })
 
 
             $urlRouterProvider.otherwise('/app/home/news')

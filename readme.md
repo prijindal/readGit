@@ -19,3 +19,7 @@ cordova platform add android
 cordova build
 cordova run android
 ```
+
+### Todo
+- Code in Repo
+- Issues and comments

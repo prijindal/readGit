@@ -3,15 +3,53 @@
     <div class="item item-divider"><a ui-sref="app.user.profile.repos({username:repo.username})">{{repo.username}}</a>/{{repo.reponame}}</div>
   </div>
   <ion-tabs class="tabs-striped tabs-top">
-    <ion-tab title="News" icon-off="ion-ios-home-outline" icon-on="ion-ios-home" ui-sref="app.repo.user.repo.description">
+    <a class="tab-item tab-item-active" ui-sref="app.repo.user.repo">
+      <i class="ion-ios-home-outline icon"></i>
+    </a>
 
-    </ion-tab>
-
-    <ion-tab title="Code" icon-off="ion-code" icon-on="ion-code-working" ui-sref="app.repo.user.repo.code">
-
-    </ion-tab>
+    <a class="tab-item" ui-sref="app.repo.user.repo.code">
+      <i class="ion-code icon"></i>
+    </a>
 
   </ion-tabs>
 
-  <div ui-view></div>
+  <div ui-view>
+    <div class="content repo-content">
+      <div class="list card">
+        <div class="item item-title">
+          <h2>{{repo.repoInfo.description}}</h2>
+        </div>
+        <div class="item item-body">
+          <div class="row">
+            <a ui-sref="app.repo.user.repo.watchers" class="col card-info">
+              <strong>{{repo.repoInfo.watchers_count}}</strong>
+              <span>Watching</span>
+            </a>
+            <a ui-sref="app.repo.user.repo.stargazers" class="col card-info">
+              <strong>{{repo.repoInfo.stargazers_count}}</strong>
+              <span>Stargazers</span>
+            </a>
+            <a ui-sref="app.repo.user.repo.forks" class="col card-info">
+              <strong>{{repo.repoInfo.forks_count}}</strong>
+              <span>Forks Count</span>
+            </a>
+          </div>
+          <div class="row">
+            <a ui-sref="app.repo.user.repo.issues" class="col card-info">
+              <strong>{{repo.repoInfo.open_issues_count}}</strong>
+              <span>Issues</span>
+            </a>
+            <a ui-sref="app.repo.user.repo.pulls" class="col card-info">
+              <strong>{{repo.repoInfo.pulls.length}}</strong>
+              <span>Pull Request</span>
+            </a>
+            <a ui-sref="app.repo.user.repo.contributors" class="col card-info">
+              <strong>{{repo.repoInfo.contributors.length}}</strong>
+              <span>Contributors</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -8,6 +8,9 @@
 .content.search {
   padding-top: 44px;
 }
+.content.repo-content {
+  padding-top: 34px;
+}
 .search.bar {
   position: absolute;
 }
