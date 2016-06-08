@@ -1,26 +1,40 @@
+import 'es6-shim';
+import 'rxjs/Rx';
 import {Component, ViewChild} from '@angular/core';
-import {App, ionicBootstrap, Platform, Nav} from 'ionic-angular';
+import {App, ionicBootstrap, Platform, NavController} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
-import {GettingStartedPage} from './pages/getting-started/getting-started';
-import {ListPage} from './pages/list/list';
 
+import {LoginPage} from './pages/login-page/login-page';
+import {HomePage} from './pages/home-page/home-page';
+
+import {GithubLogin} from './services/githublogin'
+import {GithubHttp} from './services/githubhttp'
+import {UserService} from './services/user'
+import {LocalStorage} from './services/localstorage'
 
 @Component({
-  templateUrl: 'build/app.html'
+  templateUrl: 'build/app.html',
+  providers:[
+    UserService,
+    GithubLogin,
+    GithubHttp,
+    LocalStorage
+  ]
 })
 class MyApp {
-  @ViewChild(Nav) nav: Nav;
-
-  rootPage: any = GettingStartedPage;
+  rootPage: any = HomePage;
   pages: Array<{title: string, component: any}>
 
-  constructor(private platform: Platform) {
+  constructor(
+    private app: App,
+    private githubLogin:GithubLogin,
+    private platform: Platform
+  ) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Getting Started', component: GettingStartedPage },
-      { title: 'List', component: ListPage }
+      { title: 'Home', component: HomePage }
     ];
 
   }
@@ -30,13 +44,15 @@ class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
+      // this.checkNetwork()
     });
   }
 
   openPage(page) {
+    let nav = this.app.getActiveNav()
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+    nav.setRoot(page.component);
   }
 }
 
