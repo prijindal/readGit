@@ -1,5 +1,5 @@
 import {Component, ChangeDetectorRef} from '@angular/core';
-import {NavController} from 'ionic-angular';
+import {NavController, Events} from 'ionic-angular';
 
 import GithubLogin from '../../services/githublogin';
 import OctokatService from '../../services/octokat';
@@ -16,6 +16,7 @@ export class LoginPage {
   constructor(
     private ref: ChangeDetectorRef,
     private nav: NavController,
+    private events: Events,
     private githubLogin: GithubLogin,
     private octokat: OctokatService
   ) { }
@@ -43,6 +44,7 @@ export class LoginPage {
       this.octokat.octo.me.fetch()
       .then(res => {
         this.message = 'Logged In';
+        this.events.publish('login', true);
         this.nav.setRoot(HomePage, {user: res});
       })
       .catch(err => {
