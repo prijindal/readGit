@@ -13,10 +13,14 @@ export class GithubLogin {
   token: string = localStorage['token'];
   private clientId = 'c6afa760610b0177b86b';
   private clientSecret = 'b40dc4d20753cb9ac2a9e8741ecf04574516f422';
+  private OAuth_KEY = 'Leugpi8n-IkOgK47YTI8Y_uzUc4';
   private redirect_uri = 'http://localhost/callback';
   private requestToken: string;
+  private loggingIn: Boolean = false;
 
   login() {
+    if (this.loggingIn) return ;
+    this.loggingIn = true;
     return new Promise((resolve, reject) => {
       if (typeof cordova !== 'undefined') {
         if (cordova.InAppBrowser) {
@@ -24,7 +28,14 @@ export class GithubLogin {
           browserRef.addEventListener('loadstart', (event: any) => {
             if ((event.url).indexOf(this.redirect_uri) === 0) {
               this.requestToken = (event.url).split('code=')[1];
-              resolve();
+              this.authenticate()
+              .catch((err) => {
+                reject(err);
+                return Observable.throw(err);
+              })
+              .subscribe(() => {
+                resolve();
+              });
               browserRef.close();
             }
           });
@@ -32,12 +43,35 @@ export class GithubLogin {
             reject('The sign in flow was canceled');
           });
         } else {
-          reject('Could not find InAppBrowser plugin');
+          return this.loginWithOauth(resolve, reject);
         }
       } else {
-        reject('Cannot authenticate via a web browser');
+        return this.loginWithOauth(resolve, reject);
       }
     });
+  }
+
+  loginWithOauth(resolve, reject) {
+    var script = document.createElement( 'script' );
+    script.type = 'text/javascript';
+    script.onload = () => {
+      console.log('Script Loaded');
+      let OAuth = window['OAuth'];
+      OAuth.initialize(this.OAuth_KEY);
+      OAuth.popup('github')
+      .done(result => {
+        console.dir(result);
+        this.token = result.access_token;
+        this.updateLocalStorage();
+        resolve();
+      })
+      .fail(err => {
+        console.error(err);
+        reject('The sign in flow was canceled');
+      });
+    };
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/oauth-io/0.5.2/oauth.js';
+    document.getElementsByTagName('html')[0]['append'](script);
   }
 
   authenticate() {
