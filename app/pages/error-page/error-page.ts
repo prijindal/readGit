@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavParams} from 'ionic-angular';
+import {NavParams, Platform} from 'ionic-angular';
 
 @Component({
   templateUrl: 'build/pages/error-page/error-page.html'
@@ -7,12 +7,17 @@ import {NavParams} from 'ionic-angular';
 export class ErrorPage {
   public message: string;
   private error: any;
+  private sub: any;
 
   constructor(
-    private params: NavParams
+    private params: NavParams,
+    private platform: Platform
   ) { }
 
   ionViewWillEnter() {
+    this.sub = this.platform.registerBackButtonAction(() => {
+      navigator['app'].exitApp();
+    });
     let error = this.params.get('error');
     if (error) {
       this.error = error;
@@ -27,5 +32,9 @@ export class ErrorPage {
       }
     }
     // Check If It is a network problem
+  }
+
+  ngOnDestroy() {
+    this.sub();
   }
 }

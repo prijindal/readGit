@@ -36,4 +36,5 @@
     <plugin name="com.oauthio.plugins.oauthio" spec="https://github.com/oauth-io/oauth-phonegap" />
     <engine name="android" spec="~5.2.2" />
     <plugin name="cordova-plugin-inappbrowser" spec="~1.5.0" />
+    <plugin name="org.apache.cordova.home" spec="https://github.com/ZhichengChen/cordova-plugin-android-home" />
 </widget>

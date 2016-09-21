@@ -1,7 +1,7 @@
 import 'es6-shim';
 import 'rxjs/Rx';
-import {Component} from '@angular/core';
-import {App, ionicBootstrap, Platform} from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import {App, ionicBootstrap, Platform, MenuController, Nav} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 
 import {LoginPage} from './pages/login-page/login-page';
@@ -14,12 +14,13 @@ import OctokatService from './services/octokat';
   templateUrl: 'build/app.html'
 })
 class MyApp {
+  @ViewChild(Nav) nav: Nav;
   rootPage: any = LoginPage;
   pages: Array<{title: string, component: any}>;
 
   constructor(
     private app: App,
-    private githubLogin: GithubLogin,
+    private menu: MenuController,
     private platform: Platform
   ) {
     this.initializeApp();
@@ -36,7 +37,7 @@ class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
-      // this.checkNetwork()
+      this.registerBackButtonListener();
     });
   }
 
@@ -45,6 +46,30 @@ class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     nav.setRoot(page.component);
+  }
+
+  private registerBackButtonListener() {
+    this.platform.registerBackButtonAction(() => {
+      if (this.menu.isOpen()) {
+        this.menu.close();
+      } else {
+        if (this.nav.canGoBack()) {
+          this.nav.pop();
+        } else {
+          this.confirmExitApp();
+        }
+      }
+    });
+  }
+
+  private confirmExitApp() {
+    let homeIntent = navigator['home'];
+    if (homeIntent) {
+      homeIntent.home();
+    } else if (navigator['app']) {
+      navigator['app'].exitApp();
+    }
+    return true;
   }
 }
 
