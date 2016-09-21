@@ -1,0 +1,12 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title *ngIf="user">Hi, {{user.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding class="home-page">
+  <pre *ngIf="user">
+    {{user | json}}
+  </pre>
+</ion-content>

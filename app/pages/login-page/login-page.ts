@@ -4,6 +4,9 @@ import {NavController} from 'ionic-angular';
 import GithubLogin from '../../services/githublogin';
 import OctokatService from '../../services/octokat';
 
+import {HomePage} from '../home-page/home-page';
+import {ErrorPage} from '../error-page/error-page';
+
 @Component({
   templateUrl: 'build/pages/login-page/login-page.html'
 })
@@ -19,10 +22,7 @@ export class LoginPage {
 
   ionViewWillEnter() {
     this.message = 'Waiting';
-    this.octokat.checkLogin()
-    .then(res => {
-      this.verifyLogin();
-    })
+    this.verifyLogin()
     .catch(res => {
       this.message = 'Waiting For User To be Authenticated';
       this.githubLogin.login()
@@ -30,19 +30,27 @@ export class LoginPage {
         this.message = 'Successfully Authenticated';
         this.verifyLogin();
       })
-      .catch(msg => {
-        this.message = msg;
+      .catch(err => {
+        this.nav.push(ErrorPage, {error: err});
       });
     });
   }
 
   verifyLogin() {
-    this.message = 'Verifying You...';
-    return this.octokat.octo.me.read()
+    return this.octokat.checkLogin()
     .then(res => {
-      this.message = 'Logged In';
-      this.ref.detectChanges();
-      console.dir(JSON.parse(res));
+      this.message = 'Verifying You...';
+      this.octokat.octo.me.fetch()
+      .then(res => {
+        this.message = 'Logged In';
+        this.nav.setRoot(HomePage, {user: res});
+      })
+      .catch(err => {
+        this.nav.push(ErrorPage, {error: err});
+      });
+    })
+    .catch(err => {
+      this.nav.push(ErrorPage, {error: err});
     });
   }
 }
