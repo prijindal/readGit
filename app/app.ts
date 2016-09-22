@@ -13,6 +13,7 @@ import {NotificationsPage} from './pages/notifications-page/notifications-page';
 import GithubLogin from './services/githublogin';
 import LocalService from './services/local';
 import OctokatService from './services/octokat';
+import EventParser from './services/eventparser';
 
 @Component({
   templateUrl: 'build/app.html'
@@ -46,6 +47,10 @@ class MyApp {
       StatusBar.styleDefault();
       this.registerBackButtonListener();
       this.eventsInit();
+
+      if (window['nativeclick']) {
+        window['nativeclick'].watch(['sound-click', 'button']);
+      }
     });
   }
 
@@ -94,5 +99,6 @@ class MyApp {
 ionicBootstrap(MyApp, [
   LocalService,
   OctokatService,
-  GithubLogin
+  GithubLogin,
+  EventParser
 ]);

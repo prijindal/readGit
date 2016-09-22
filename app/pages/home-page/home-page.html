@@ -26,10 +26,12 @@
     </div>
   </div>
   <ion-list *ngIf="events.length > 0">
-    <ion-card *ngFor="let event of events">
+    <ion-card class="event" *ngFor="let event of events">
       <ion-card-header>
-        {{event.type}}
+        {{event.text}}
       </ion-card-header>
+      <ion-card-content>
+      </ion-card-content>
     </ion-card>
   </ion-list>
 </ion-content>

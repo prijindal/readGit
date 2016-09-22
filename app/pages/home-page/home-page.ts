@@ -2,6 +2,7 @@ import {Component, ChangeDetectorRef} from '@angular/core';
 import {NavController, NavParams, PopoverController} from 'ionic-angular';
 
 import OctokatService from '../../services/octokat';
+import EventParser from '../../services/eventparser';
 
 import { ErrorPage } from '../error-page/error-page';
 
@@ -20,7 +21,8 @@ export class HomePage {
     private nav: NavController,
     private params: NavParams,
     private popoverCtrl: PopoverController,
-    private octokat: OctokatService
+    private octokat: OctokatService,
+    private eventParser: EventParser
   ) { }
 
   ionViewWillEnter() {
@@ -40,7 +42,12 @@ export class HomePage {
     this.octokat.octo.fromUrl(this.eventsUrl).read()
     .then(res => {
       this.loading = false;
-      this.events = JSON.parse(res);
+      res = JSON.parse(res);
+      let events = [];
+      res.forEach((event) => {
+        events.push(this.eventParser.parseEvent(event));
+      });
+      this.events = events;
       this.ref.detectChanges();
     })
     .catch(err => {
