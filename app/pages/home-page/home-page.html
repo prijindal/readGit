@@ -26,7 +26,7 @@
     </div>
   </div>
   <ion-list *ngIf="events.length > 0">
-    <ion-card class="event" *ngFor="let event of events">
+    <ion-card class="event" *ngFor="let event of events" (click)="openEvent(event)">
       <ion-card-header>
         {{event.text}}
       </ion-card-header>

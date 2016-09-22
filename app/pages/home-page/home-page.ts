@@ -55,6 +55,10 @@ export class HomePage {
     });
   }
 
+  openEvent(event) {
+    window.open(event.html_url, '_system');
+  }
+
   presentPopover(event) {
     let popover = this.popoverCtrl.create(Popover);
     popover.present({

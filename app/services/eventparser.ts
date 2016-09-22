@@ -11,11 +11,15 @@ export class EventParser {
   constructor() {}
 
   parseEvent(event) {
-    let parsedText = this.compile(event);
+    let object = this.parse(event);
+    let parsedText = this.compileHelper(event, object);
     event.text = parsedText;
+    event.html_url = object.html_url;
     return event;
   }
 
+
+  // Copyright (c) 2014 azu
   private parse(event): ParsedEvent  {
     var GITHUB_DOMAIN = 'https://github.com';
     var repo = event.repo.name;
@@ -271,6 +275,10 @@ export class EventParser {
 
   private compile(event) {
     var object = this.parse(event);
+    return this.compileHelper(event, object);
+  }
+
+  private compileHelper(event, object) {
     var userName = event.actor.login;
     var keys = Object.keys(object.data);
     var result = object.text;
