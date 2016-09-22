@@ -11,6 +11,7 @@ import {ErrorPage} from '../error-page/error-page';
   templateUrl: 'build/pages/login-page/login-page.html'
 })
 export class LoginPage {
+  private loading: Boolean = true;
   public message: string;
 
   constructor(
@@ -21,38 +22,41 @@ export class LoginPage {
     private octokat: OctokatService
   ) { }
 
-  ionViewWillEnter() {
-    this.message = 'Waiting';
-    this.verifyLogin()
-    .catch(res => {
-      this.message = 'Waiting For User To be Authenticated';
-      this.githubLogin.login()
-      .then(() => {
-        this.message = 'Successfully Authenticated';
-        this.verifyLogin();
-      })
-      .catch(err => {
-        this.nav.push(ErrorPage, {error: err});
-      });
+  login() {
+    this.message = 'Waiting For User To be Authenticated';
+    this.githubLogin.login()
+    .then(() => {
+      this.message = 'Successfully Authenticated';
+      this.verifyLogin();
+    })
+    .catch(err => {
+      this.nav.push(ErrorPage, {error: err});
     });
   }
 
+  ionViewWillEnter() {
+    this.message = 'Waiting';
+    this.verifyLogin();
+  }
+
   verifyLogin() {
+    this.loading = true;
     return this.octokat.checkLogin()
     .then(res => {
       this.message = 'Verifying You...';
-      this.octokat.octo.me.fetch()
+      this.octokat.octo.me.read()
       .then(res => {
         this.message = 'Logged In';
         this.events.publish('login', true);
-        this.nav.setRoot(HomePage, {user: res});
+        this.nav.setRoot(HomePage, {user: JSON.parse(res)});
       })
       .catch(err => {
         this.nav.push(ErrorPage, {error: err});
       });
     })
-    .catch(err => {
-      this.nav.push(ErrorPage, {error: err});
+    .catch(res => {
+      this.loading = false;
+      this.message = '';
     });
   }
 }

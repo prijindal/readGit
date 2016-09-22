@@ -6,6 +6,10 @@ import {StatusBar} from 'ionic-native';
 
 import {LoginPage} from './pages/login-page/login-page';
 
+import {HomePage} from './pages/home-page/home-page';
+import {NotificationsPage} from './pages/notifications-page/notifications-page';
+
+
 import GithubLogin from './services/githublogin';
 import LocalService from './services/local';
 import OctokatService from './services/octokat';
@@ -29,7 +33,8 @@ class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-
+      {title: 'Home', component: HomePage},
+      {title: 'Notifications', component: NotificationsPage}
     ];
 
   }
@@ -48,7 +53,11 @@ class MyApp {
     let nav = this.app.getActiveNav();
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    nav.setRoot(page.component);
+    if (page.component === HomePage) {
+      nav.popToRoot();
+    } else {
+      nav.push(page.component);
+    }
   }
 
   private eventsInit() {

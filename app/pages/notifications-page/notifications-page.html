@@ -3,9 +3,9 @@
     <button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>News Feed</ion-title>
+    <ion-title>Notifications</ion-title>
     <ion-buttons end>
-      <button [disabled]="loading" (click)="getEvents($event)">
+      <button [disabled]="loading" (click)="getNotifications($event)">
         <ion-icon name="refresh"></ion-icon>
       </button>
       <button (click)="presentPopover($event)">
@@ -16,20 +16,16 @@
 </ion-header>
 
 
-<ion-content class="home-page">
-  <div text-center margin-top *ngIf="events.length <= 0">
+<ion-content class="notifications-page">
+  <div text-center margin-top *ngIf="notifications.length <= 0">
     <div *ngIf="loading">
       Loading...
     </div>
     <div *ngIf="!loading">
-      No Events
+      No Notifications
     </div>
   </div>
-  <ion-list *ngIf="events.length > 0">
-    <ion-card *ngFor="let event of events">
-      <ion-card-header>
-        {{event.type}}
-      </ion-card-header>
-    </ion-card>
-  </ion-list>
+  <pre *ngIf="notifications.length > 0">
+    {{notifications | json}}
+  </pre>
 </ion-content>

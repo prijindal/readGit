@@ -1,3 +1,10 @@
 <ion-content padding text-center class="login-page">
-  {{message}}
+  <div *ngIf="loading">
+    <ion-icon name="github"></ion-icon>
+    <span *ngIf="message">{{message}}</span>
+  </div>
+  <div *ngIf="!loading">
+    <span *ngIf="message">{{message}}</span>
+    <button ion-button (click)="login()">Login</button>
+  </div>
 </ion-content>

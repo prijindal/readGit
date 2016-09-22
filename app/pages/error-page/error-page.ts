@@ -22,14 +22,12 @@ export class ErrorPage {
     if (error) {
       this.error = error;
     }
-    if (typeof this.error.status === 'number') {
-      switch (this.error.status) {
-        case 0:
-          this.message = 'No Network Connection';
-          break;
-        default:
-          this.message = 'Unexpected Error';
-      }
+    switch (this.error.status) {
+      case 0:
+        this.message = 'No Network Connection';
+        break;
+      default:
+        this.message = 'Unexpected Error';
     }
     // Check If It is a network problem
   }

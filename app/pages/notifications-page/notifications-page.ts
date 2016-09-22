@@ -8,12 +8,11 @@ import { ErrorPage } from '../error-page/error-page';
 import { Popover } from './popover/popover';
 
 @Component({
-  templateUrl: 'build/pages/home-page/home-page.html'
+  templateUrl: 'build/pages/notifications-page/notifications-page.html'
 })
-export class HomePage {
+export class NotificationsPage {
   public loading: Boolean = true;
-  public events: any = [];
-  private eventsUrl: string;
+  public notifications: any = [];
 
   constructor(
     private ref: ChangeDetectorRef,
@@ -24,23 +23,15 @@ export class HomePage {
   ) { }
 
   ionViewWillEnter() {
-    let user = this.params.get('user');
-    if (user) {
-      this.eventsUrl = user.received_events_url.replace('{/privacy}', '');
-      if (this.events.length === 0) {
-        this.getEvents();
-      }
-    } else {
-      this.nav.push(ErrorPage, {error: {message: 'Problem with Authentication'}});
-    }
+    this.getNotifications();
   }
 
-  getEvents() {
+  getNotifications() {
     this.loading = true;
-    this.octokat.octo.fromUrl(this.eventsUrl).read()
+    this.octokat.octo.notifications.read()
     .then(res => {
       this.loading = false;
-      this.events = JSON.parse(res);
+      this.notifications = JSON.parse(res);
       this.ref.detectChanges();
     })
     .catch(err => {

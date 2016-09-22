@@ -19,7 +19,8 @@ export class OctokatService {
     .then(token => {
       if (token) {
         this.octo = new this.Octokat({
-          token: token
+          token: token,
+          acceptHeader: 'application/vnd.github.cannonball-preview+json'
         });
         return token;
       } else {
