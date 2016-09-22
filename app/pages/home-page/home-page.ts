@@ -8,6 +8,9 @@ import { ErrorPage } from '../error-page/error-page';
 
 import { Popover } from './popover/popover';
 
+const PER_PAGE: number = 10;
+const LIMIT: number = 300;
+
 @Component({
   templateUrl: 'build/pages/home-page/home-page.html'
 })
@@ -40,7 +43,7 @@ export class HomePage {
 
   getEvents() {
     this.loading = true;
-    return this.octokat.octo.fromUrl(this.eventsUrl + '?page=' + this.page).read()
+    return this.octokat.octo.fromUrl(this.eventsUrl + '?page=' + this.page + '&per_page=' + PER_PAGE).read()
     .then(res => {
       this.loading = false;
       res = JSON.parse(res);
@@ -57,10 +60,14 @@ export class HomePage {
 
   doInfinite(infiniteScroll) {
     this.page += 1;
-    this.getEvents()
-    .then(() => {
-      infiniteScroll.complete();
-    });
+    if (this.page <= LIMIT / PER_PAGE) {
+      this.getEvents()
+      .then(() => {
+        infiniteScroll.complete();
+      });
+    } else {
+      infiniteScroll.enable(false);
+    }
   }
 
   openEvent(event) {
