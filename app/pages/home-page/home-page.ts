@@ -14,6 +14,7 @@ import { Popover } from './popover/popover';
 export class HomePage {
   public loading: Boolean = true;
   public events: any = [];
+  private page: number = 1;
   private eventsUrl: string;
 
   constructor(
@@ -39,19 +40,26 @@ export class HomePage {
 
   getEvents() {
     this.loading = true;
-    this.octokat.octo.fromUrl(this.eventsUrl).read()
+    return this.octokat.octo.fromUrl(this.eventsUrl + '?page=' + this.page).read()
     .then(res => {
       this.loading = false;
       res = JSON.parse(res);
-      let events = [];
       res.forEach((event) => {
-        events.push(this.eventParser.parseEvent(event));
+        this.events.push(this.eventParser.parseEvent(event));
       });
-      this.events = events;
       this.ref.detectChanges();
+      return res;
     })
     .catch(err => {
       this.nav.push(ErrorPage, {error: err});
+    });
+  }
+
+  doInfinite(infiniteScroll) {
+    this.page += 1;
+    this.getEvents()
+    .then(() => {
+      infiniteScroll.complete();
     });
   }
 

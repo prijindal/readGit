@@ -55,6 +55,7 @@ class MyApp {
   }
 
   openPage(page) {
+    window['nativeclick'].trigger();
     let nav = this.app.getActiveNav();
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario

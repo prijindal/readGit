@@ -5,8 +5,8 @@
   </ion-toolbar>
 
   <ion-content>
-    <ion-list>
-      <button class="sound-click" menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+    <ion-list class="sound-click">
+      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
         {{p.title}}
       </button>
     </ion-list>
