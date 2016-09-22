@@ -39,6 +39,19 @@ export class NotificationsPage {
     });
   }
 
+  openRepository(notification) {
+    window.open(notification.repository.html_url, '_system');
+  }
+
+  openNotification(notification) {
+    this.octokat.octo.fromUrl(notification.subject.url)
+    .fetch()
+    .then(res => {
+      console.dir(res);
+      window.open(res.htmlUrl, '_system');
+    });
+  }
+
   presentPopover(event) {
     let popover = this.popoverCtrl.create(Popover);
     popover.present({

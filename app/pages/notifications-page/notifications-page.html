@@ -25,7 +25,14 @@
       No Notifications
     </div>
   </div>
-  <pre *ngIf="notifications.length > 0">
-    {{notifications | json}}
-  </pre>
+  <ion-list *ngIf="notifications.length > 0">
+    <ion-card class="notification" *ngFor="let notification of notifications">
+      <ion-card-header (click)="openRepository(notification)">
+        {{notification.repository.full_name}}
+      </ion-card-header>
+      <ion-card-content (click)="openNotification(notification)">
+        {{notification.subject.title}}
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
 </ion-content>
