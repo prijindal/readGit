@@ -8,6 +8,7 @@ import {LoginPage} from './pages/login-page/login-page';
 
 import {HomePage} from './pages/home-page/home-page';
 import {NotificationsPage} from './pages/notifications-page/notifications-page';
+import {StarredPage} from './pages/starred-page/starred-page';
 
 
 import GithubLogin from './services/githublogin';
@@ -35,7 +36,8 @@ class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       {title: 'Home', component: HomePage},
-      {title: 'Notifications', component: NotificationsPage}
+      {title: 'Notifications', component: NotificationsPage},
+      {title: 'Starred Repositories', component: StarredPage}
     ];
 
   }
