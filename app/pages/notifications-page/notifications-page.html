@@ -5,7 +5,7 @@
     </button>
     <ion-title>Notifications</ion-title>
     <ion-buttons end>
-      <button [disabled]="loading" (click)="getNotifications($event)">
+      <button [disabled]="loading" (click)="refreshNotifications($event)">
         <ion-icon name="refresh"></ion-icon>
       </button>
       <button (click)="presentPopover($event)">
@@ -16,7 +16,7 @@
 </ion-header>
 
 
-<ion-content class="notifications-page">
+<ion-content #notificationsContent class="notifications-page">
   <div text-center margin-top *ngIf="notifications.length <= 0">
     <div *ngIf="loading">
       Loading...
@@ -35,4 +35,8 @@
       </ion-card-content>
     </ion-card>
   </ion-list>
+
+ <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="20%">
+   <ion-infinite-scroll-content></ion-infinite-scroll-content>
+ </ion-infinite-scroll>
 </ion-content>
