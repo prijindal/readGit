@@ -9,6 +9,7 @@ import {LoginPage} from './pages/login-page/login-page';
 import {HomePage} from './pages/home-page/home-page';
 import {NotificationsPage} from './pages/notifications-page/notifications-page';
 import {StarredPage} from './pages/starred-page/starred-page';
+import {WatchedPage} from './pages/watched-page/watched-page';
 
 
 import GithubLogin from './services/githublogin';
@@ -37,7 +38,8 @@ class MyApp {
     this.pages = [
       {title: 'Home', component: HomePage},
       {title: 'Notifications', component: NotificationsPage},
-      {title: 'Starred Repositories', component: StarredPage}
+      {title: 'Stars', component: StarredPage},
+      {title: 'Watching', component: WatchedPage}
     ];
 
   }

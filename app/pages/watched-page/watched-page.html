@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Watched</ion-title>
+    <ion-buttons end>
+      <button [disabled]="loading" (click)="refreshWatched($event)">
+        <ion-icon name="refresh"></ion-icon>
+      </button>
+      <button (click)="presentPopover($event)">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content #subscriptionsContent class="subscriptions-page">
+  <div text-center margin-top *ngIf="subscriptions.length <= 0">
+    <div *ngIf="loading">
+      Loading...
+    </div>
+    <div *ngIf="!loading">
+      No Subscriptions
+    </div>
+  </div>
+  <ion-list *ngIf="subscriptions.length > 0">
+    <ion-card class="notification" *ngFor="let watch of subscriptions">
+      <ion-card-header class="sound-click" (click)="openRepository(watch)">
+        {{watch.full_name}}
+      </ion-card-header>
+      <ion-card-content class="sound-click">
+        {{watch.description}}
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+ <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="20%">
+   <ion-infinite-scroll-content></ion-infinite-scroll-content>
+ </ion-infinite-scroll>
+</ion-content>
