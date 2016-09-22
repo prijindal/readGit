@@ -57,6 +57,7 @@ export class LoginPage {
     .catch(res => {
       this.loading = false;
       this.message = '';
+      this.ref.detectChanges();
     });
   }
 }

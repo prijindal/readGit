@@ -28,6 +28,13 @@ export class OctokatService {
       }
     });
   }
+
+  logout() {
+    return this.local.storage.clear()
+    .then(res => {
+      this.octo = new this.Octokat();
+    });
+  }
 }
 
 export default OctokatService;

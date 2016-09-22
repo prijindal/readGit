@@ -1,0 +1,78 @@
+.toolbar {
+  padding: 0;
+}
+
+$proflie-image-background: #005ca1;
+$proflie-color: #fff;
+
+profile-info {
+  display: flex;
+  flex-direction: column;
+  padding: 25px 20px 25px 10px;
+
+  $login-button-size: 24px;
+
+  .logout-button {
+    color: $proflie-color;
+    font-size: $login-button-size;
+    height: $login-button-size;
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    width: $login-button-size;
+  }
+}
+
+.profile-title {
+  margin-top: 20px;
+
+  .toolbar-title {
+    color: $proflie-color;
+    text-align: center;
+  }
+}
+
+.profile-info {
+  margin: 25px 0 25px 10px;
+
+  .profile-image-wrapper {
+    margin-right: 20px;
+
+    .profile-image-background {
+      background-color: $proflie-image-background;
+      background-size: contain;
+      border: 3px $proflie-color solid;
+      border-radius: 50%;
+      height: 50px;
+      position: relative;
+      text-align: center;
+      width: 50px;
+
+      ion-icon {
+        color: $proflie-color;
+        font-size: 32px;
+      }
+     }
+   }
+
+  .profile-info-text {
+    color: $proflie-color;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: normal;
+
+    .profile-name {
+      font-size: 1.6rem;
+      font-weight: 500;
+    }
+
+    .profile-karma {
+      font-size: 1.3rem;
+      letter-spacing: -.2px;
+    }
+
+    > div {
+      margin: 3px 0;
+    }
+  }
+}

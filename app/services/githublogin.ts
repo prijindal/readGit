@@ -55,6 +55,10 @@ export class GithubLogin {
   updateLocalStorage(token) {
     this.local.storage.set('TOKEN', token);
   }
+
+  logout() {
+    this.loggingIn = false;
+  }
 }
 
 export default GithubLogin;

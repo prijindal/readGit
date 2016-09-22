@@ -11,6 +11,7 @@ import {NotificationsPage} from './pages/notifications-page/notifications-page';
 import {StarredPage} from './pages/starred-page/starred-page';
 import {WatchedPage} from './pages/watched-page/watched-page';
 
+import { ProfileInfo } from './profile-info/profile-info';
 
 import GithubLogin from './services/githublogin';
 import LocalService from './services/local';
@@ -18,7 +19,8 @@ import OctokatService from './services/octokat';
 import EventParser from './services/eventparser';
 
 @Component({
-  templateUrl: 'build/app.html'
+  templateUrl: 'build/app.html',
+  directives: [ProfileInfo]
 })
 class MyApp {
   @ViewChild(Nav) nav: Nav;
@@ -36,7 +38,7 @@ class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      {title: 'Home', component: HomePage},
+      {title: 'News Feed', component: HomePage},
       {title: 'Notifications', component: NotificationsPage},
       {title: 'Stars', component: StarredPage},
       {title: 'Watching', component: WatchedPage}
