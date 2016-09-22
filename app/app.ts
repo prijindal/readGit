@@ -110,4 +110,6 @@ ionicBootstrap(MyApp, [
   OctokatService,
   GithubLogin,
   EventParser
-]);
+], {
+  pageTransition: 'ios'
+});

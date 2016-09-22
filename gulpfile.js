@@ -1,6 +1,9 @@
 var gulp = require('gulp'),
     gulpWatch = require('gulp-watch'),
     del = require('del'),
+    fs = require('fs'),
+    glob = require('glob'),
+    async = require('async'),
     runSequence = require('run-sequence'),
     argv = process.argv;
 
@@ -14,6 +17,7 @@ gulp.task('serve:before', ['watch']);
 gulp.task('emulate:before', ['build']);
 gulp.task('deploy:before', ['build']);
 gulp.task('build:before', ['build']);
+gulp.task('upload:before', ['build']);
 
 // we want to 'watch' when livereloading
 var shouldWatch = argv.indexOf('-l') > -1 || argv.indexOf('--livereload') > -1;
@@ -36,6 +40,9 @@ var tslint = require('ionic-gulp-tslint');
 
 var isRelease = argv.indexOf('--release') > -1;
 
+var shouldSkipBuild = argv.indexOf('--skip-build') > 1;
+var shouldChangeHost = argv.indexOf('--change-host') > 1;
+
 gulp.task('watch', ['clean'], function(done){
   runSequence(
     ['sass', 'html', 'fonts', 'scripts'],
@@ -47,24 +54,70 @@ gulp.task('watch', ['clean'], function(done){
   );
 });
 
-gulp.task('build', ['clean'], function(done){
-  runSequence(
-    ['sass', 'html', 'fonts', 'scripts'],
-    function(){
-      buildBrowserify({
-        minify: isRelease,
-        browserifyOptions: {
-          debug: !isRelease
-        },
-        uglifyOptions: {
-          mangle: false
-        }
-      }).on('end', done);
-    }
-  );
-});
+if (shouldSkipBuild) {
+  gulp.task('build:prequel', function(done) {
+    done();
+  });
+}
+else {
+  gulp.task('build:prequel', ['clean'], function(done){
+    runSequence(
+      ['sass', 'html', 'fonts', 'scripts'],
+      function(){
+        buildBrowserify({
+          minify: isRelease,
+          browserifyOptions: {
+            debug: !isRelease
+          },
+          uglifyOptions: {
+            mangle: false
+          }
+        }).on('end', done);
+      }
+    );
+  });
+}
 
-gulp.task('sass', buildSass);
+gulp.task('inline', function(done) {
+  var rootPath = './www/build'
+  glob(rootPath + '/**/*.html', function(e,files) {
+    var indexPath = rootPath + '/js/app.bundle.js'
+    var js = fs.readFileSync(indexPath, 'utf8');
+
+    async.eachSeries(files, function(file, callback) {
+      filename = file.substr(6)
+      var html = fs.readFileSync(file, 'utf8');
+      html = html.replace('\n','');
+      js = js.replace('templateUrl:"' + filename + '"', "template: `" + html +"`")
+      callback()
+    }, function() {
+      if (shouldChangeHost) {
+        js = js.replace('{{apikey}}','web')
+        js = js.replace('http://localhost:5000/api','https://alakart-api-dev.herokuapp.com/api')
+      }
+      fs.writeFile(indexPath, js, 'utf8', function(err, data) {
+        done()
+      });
+    })
+  })
+})
+
+gulp.task('build', ['build:prequel'], function(done) {
+  runSequence(
+    ['inline']
+  )
+})
+
+gulp.task('sass', function() {
+  return buildSass({
+    includePaths: [
+      'node_modules/ionic-angular',
+      'node_modules/ionicons/dist/scss',
+      'node_modules/semantic-ui-label',
+      'node_modules/material-design-lite/src'
+    ]
+  })
+});
 gulp.task('html', copyHTML);
 gulp.task('fonts', copyFonts);
 gulp.task('scripts', copyScripts);
