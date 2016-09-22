@@ -27,10 +27,10 @@
   </div>
   <ion-list *ngIf="notifications.length > 0">
     <ion-card class="notification" *ngFor="let notification of notifications">
-      <ion-card-header (click)="openRepository(notification)">
+      <ion-card-header class="sound-click" (click)="openRepository(notification)">
         {{notification.repository.full_name}}
       </ion-card-header>
-      <ion-card-content (click)="openNotification(notification)">
+      <ion-card-content class="sound-click" (click)="openNotification(notification)">
         {{notification.subject.title}}
       </ion-card-content>
     </ion-card>
