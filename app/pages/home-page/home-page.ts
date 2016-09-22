@@ -1,4 +1,4 @@
-import {Component, ChangeDetectorRef} from '@angular/core';
+import {Component, ChangeDetectorRef, ViewChild} from '@angular/core';
 import {NavController, NavParams, PopoverController} from 'ionic-angular';
 
 import OctokatService from '../../services/octokat';
@@ -15,6 +15,7 @@ const LIMIT: number = 300;
   templateUrl: 'build/pages/home-page/home-page.html'
 })
 export class HomePage {
+  @ViewChild('homeContent') homeContent;
   public loading: Boolean = true;
   public events: any = [];
   private page: number = 1;
@@ -34,19 +35,30 @@ export class HomePage {
     if (user) {
       this.eventsUrl = user.received_events_url.replace('{/privacy}', '');
       if (this.events.length === 0) {
-        this.getEvents();
+        this.refreshEvents();
       }
     } else {
       this.nav.push(ErrorPage, {error: {message: 'Problem with Authentication'}});
     }
   }
 
-  getEvents() {
+  refreshEvents() {
     this.loading = true;
+    this.page = 1;
+    this.getEvents(true)
+    .then(() => {
+      this.loading = false;
+    });
+  }
+
+  getEvents(shouldRefresh: Boolean = false) {
     return this.octokat.octo.fromUrl(this.eventsUrl + '?page=' + this.page + '&per_page=' + PER_PAGE).read()
     .then(res => {
-      this.loading = false;
       res = JSON.parse(res);
+      if (shouldRefresh) {
+        this.homeContent.scrollTo(0, 0);
+        this.events = [];
+      }
       res.forEach((event) => {
         this.events.push(this.eventParser.parseEvent(event));
       });

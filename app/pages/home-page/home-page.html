@@ -5,7 +5,7 @@
     </button>
     <ion-title>News Feed</ion-title>
     <ion-buttons end>
-      <button [disabled]="loading" (click)="getEvents($event)">
+      <button [disabled]="loading" (click)="refreshEvents($event)">
         <ion-icon name="refresh"></ion-icon>
       </button>
       <button (click)="presentPopover($event)">
@@ -16,7 +16,7 @@
 </ion-header>
 
 
-<ion-content class="home-page">
+<ion-content #homeContent class="home-page">
   <div text-center margin-top *ngIf="events.length <= 0">
     <div *ngIf="loading">
       Loading...
