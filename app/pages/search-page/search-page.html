@@ -17,7 +17,7 @@
   <ion-item-group *ngIf="repos">
     <ion-item-divider light>Repositories</ion-item-divider>
     <ion-item *ngFor="let repo of repos.items" (click)="openRepository(repo)">
-      <h2>{{repo.fullName}}</h2>
+      <h2>{{repo.full_name}}</h2>
       <p>{{repo.description}}</p>
     </ion-item>
   </ion-item-group>

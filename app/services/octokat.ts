@@ -6,7 +6,7 @@ import LocalService from './local';
 export class OctokatService {
   public octo: any;
   private Octokat: any;
-  public user: string; 
+  public user: string;
 
   constructor(
     private local: LocalService
@@ -20,8 +20,7 @@ export class OctokatService {
     .then(token => {
       if (token) {
         this.octo = new this.Octokat({
-          token: token,
-          acceptHeader: 'application/vnd.github.cannonball-preview+json'
+          token: token
         });
         return token;
       } else {

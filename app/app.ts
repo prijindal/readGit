@@ -19,6 +19,7 @@ import LocalService from './services/local';
 import OctokatService from './services/octokat';
 import EventParser from './services/eventparser';
 import BrowserService from './services/browser';
+import FileService from './services/filehttp';
 
 @Component({
   templateUrl: 'build/app.html',
@@ -113,7 +114,8 @@ ionicBootstrap(MyApp, [
   OctokatService,
   GithubLogin,
   EventParser,
-  BrowserService
+  BrowserService,
+  FileService
 ], {
   pageTransition: 'ios'
 });

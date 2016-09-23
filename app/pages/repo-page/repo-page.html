@@ -3,7 +3,7 @@
     <button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title *ngIf="repo">{{repo.fullName || repo.full_name}}</ion-title>
+    <ion-title *ngIf="repo">{{repo.full_name || repo.name}}</ion-title>
     <ion-buttons end>
       <button [disabled]="loading" (click)="getRepoInfo($event)">
         <ion-icon name="refresh"></ion-icon>
@@ -25,7 +25,7 @@
       Error Fetching Repository
     </div>
   </div>
-  <div *ngIf="repo">
-    {{repo | json}}
+  <div padding *ngIf="readme" [innerHTML]="readme">
+
   </div>
 </ion-content>
