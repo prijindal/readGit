@@ -8,6 +8,7 @@ import BrowserService from '../../services/browser';
 import { ErrorPage } from '../error-page/error-page';
 import { RepoPage } from '../repo-page/repo-page';
 import { UserPage } from '../user-page/user-page';
+import { SearchPage } from '../search-page/search-page';
 
 import { Popover } from './popover/popover';
 
@@ -96,6 +97,10 @@ export class HomePage {
 
   openRepo(repo) {
     this.nav.push(RepoPage, {repo: repo});
+  }
+
+  openSearchPage() {
+    this.nav.push(SearchPage);
   }
 
   presentPopover(event) {

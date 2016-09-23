@@ -31,10 +31,10 @@ export class NotificationsPage {
   ) { }
 
   ionViewWillEnter() {
-    this.refreshEvents();
+    this.refreshNotifications();
   }
 
-  refreshEvents() {
+  refreshNotifications() {
     this.loading = true;
     this.page = 1;
     this.getNotifications(true)

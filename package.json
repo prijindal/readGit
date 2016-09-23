@@ -41,7 +41,7 @@
     "octokat": "browserify github.js -o www/build/js/github.js",
     "build": "gulp build --release && npm run octokat",
     "android": "cordova run android --buildConfig=.vscode/build.json",
-    "release" : "npm run build && npm run android"
+    "release" : "npm run build && npm run android -- --release"
   },
   "cordovaPlugins": [
     "cordova-plugin-device",

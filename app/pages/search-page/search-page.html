@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-searchbar
+    showCancelButton="true"
+    (ionCancel)="cancelSearch($event)"
+    debounce="500"
+    autocomplete="off"
+    autocorrect="off"
+    spellcheck="false"
+    (ionInput)="getItems($event)"
+    (ionClear)="clearItems($event)"
+    [(ngModel)]="searchterm"
+  ></ion-searchbar>
+</ion-header>
+
+
+<ion-content class="search-page">
+  <ion-item-group *ngIf="repos">
+    <ion-item-divider light>Repositories</ion-item-divider>
+    <ion-item *ngFor="let repo of repos.items" (click)="openRepository(repo)">
+      <h2>{{repo.fullName}}</h2>
+      <p>{{repo.description}}</p>
+    </ion-item>
+  </ion-item-group>
+  <ion-item-group *ngIf="users">
+    <ion-item-divider light>Users</ion-item-divider>
+    <ion-item *ngFor="let user of users.items" (click)="openUser(user)">
+      <ion-avatar item-left>
+        <img [src]="'https://avatars.githubusercontent.com/u/' + user.id + '?s=50'">
+      </ion-avatar>
+      <h2>{{user.login}}</h2>
+    </ion-item>
+  </ion-item-group>
+  <ion-item-group *ngIf="issues">
+    <ion-item-divider light>Issues</ion-item-divider>
+    <ion-item *ngFor="let issue of issues.items" (click)="openIssue(issue)">
+      <h2>{{issue.title}}</h2>
+      <p>{{issue.body}}</p>
+      <h3>{{issue.repositoryUrl.substr(issue.repositoryUrl.indexOf('repos') + 6)}}</h3>
+    </ion-item>
+  </ion-item-group>
+  <ion-item-group *ngIf="codes">
+    <ion-item-divider light>Codes</ion-item-divider>
+    <ion-item *ngFor="let code of codes.items" (click)="openCode(code)">
+      <h2>{{code.repository.fullName}}</h2>
+      <p>{{code.name}}
+    </ion-item>
+  </ion-item-group>
+</ion-content>
