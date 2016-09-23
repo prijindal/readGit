@@ -41,6 +41,14 @@ export class LoginPage {
     }
   }
 
+  focusTwoFactorInput() {
+    if (this.acceptcode) {
+      let twofactorInput = document.querySelector('ion-input[name="twofactor"] input');
+      twofactorInput['focus']();
+      this.ref.detectChanges();
+    }
+  }
+
   login() {
     this.waiting = true;
     this.errorMessage = '';
@@ -54,6 +62,9 @@ export class LoginPage {
       let errParsed = err.json();
       if (err.headers.get('X-GitHub-OTP') && err.headers.get('X-GitHub-OTP').search('required') === 0) {
         this.acceptcode = true;
+        setTimeout(() => {
+          this.focusTwoFactorInput();
+        }, 100);
       } else if (errParsed.message) {
         console.log(errParsed);
         this.errorMessage = errParsed.message;

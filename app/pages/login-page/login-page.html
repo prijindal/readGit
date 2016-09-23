@@ -4,13 +4,13 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding matgin-top text-center class="login-page">
-  <div *ngIf="loading">
+<ion-content padding text-center class="login-page">
+  <div *ngIf="loading" margin-top>
     <ion-icon name="github"></ion-icon>
     <span *ngIf="message">{{message}}</span>
   </div>
   <div *ngIf="!loading">
-    <div class="error-message" *ngIf="errorMessage">
+    <div margin class="error-message" *ngIf="errorMessage">
       {{errorMessage}}
     </div>
     <div *ngIf="!acceptcode">
