@@ -22,9 +22,9 @@ export class ProfileInfo {
   ) {}
 
   ngOnInit() {
-    this.octokat.octo.me.fetch()
+    this.octokat.octo.me.read()
     .then(res => {
-      this.user = res;
+      this.user = JSON.parse(res);
     });
   }
 

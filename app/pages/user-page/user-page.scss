@@ -1,0 +1,47 @@
+.user-page {
+  .user-image {
+    img {
+      width: 100%;
+
+      &.hidden {
+        width: 0;
+      }
+    }
+  }
+
+  .user-title {
+    margin: 16px 8px;
+
+    h4,p {
+      margin: 0;
+    }
+  }
+
+  .user-tags {
+    .user-tag {
+      margin: 4px 0;
+    }
+    ion-icon {
+      margin: 0 6px;
+      text-align: center;
+      width: 16px;
+    }
+  }
+
+  .user-bio {
+    margin: 16px 24px 16px 8px;
+  }
+
+  .user-icons {
+    margin: 16px;
+    .count {
+      font-size: 32px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .icon-name {
+      text-align: center;
+    }
+  }
+}

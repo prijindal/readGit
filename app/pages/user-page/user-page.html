@@ -25,8 +25,50 @@
       Error Fetching Profile
     </div>
   </div>
-  <div *ngIf="user">
-    <img [src]="'https://avatars.githubusercontent.com/u/' + user.id +'?s=400'"/>
-    {{user | json}}
+  <div margin *ngIf="user">
+    <div class="user-image">
+      <img *ngIf="!imageLoaded" [src]="'https://avatars.githubusercontent.com/u/' + user.id +'?s=50'"/>
+      <img [class.hidden]="!imageLoaded" (load)="imageLoaded = true" [src]="'https://avatars.githubusercontent.com/u/' + user.id +'?s=400'"/>
+    </div>
+    <div class="user-title">
+      <h4>{{user.name}}</h4>
+      <p>{{user.login}}</p>
+    </div>
+    <div class="user-tags">
+      <div *ngIf="user.location" class="user-tag">
+        <ion-icon name="pin"></ion-icon>
+        <span>{{user.location}}</span>
+      </div>
+      <div *ngIf="user.email" class="user-tag">
+        <ion-icon name="mail"></ion-icon>
+        <span>{{user.email}}</span>
+      </div>
+      <div *ngIf="user.blog" class="user-tag">
+        <ion-icon name="link"></ion-icon>
+        <span><a (click)="browser.open(user.blog)">{{user.blog}}</a></span>
+      </div>
+    </div>
+    <div *ngIf="user.bio" class="user-bio">
+      {{user.bio}}
+    </div>
+
+    <div class="user-icons layout flex row between">
+      <div class="user-icon user-followers layout flex column">
+        <div class="count">{{user.followers}}</div>
+        <div class="icon-name">Followers</div>
+      </div>
+      <div class="user-icon user-starred layout flex column">
+        <div class="count">{{user.public_gists + (user.private_gists ? user.private_gists : 0)}}</div>
+        <div class="icon-name">Gists</div>
+      </div>
+      <div class="user-icon user-followers layout flex column">
+        <div class="count">{{user.following}}</div>
+        <div class="icon-name">Following</div>
+      </div>
+      <div class="user-icon user-followers layout flex column">
+        <div class="count">{{user.public_repos + (user.total_private_repos ? user.total_private_repos : 0)}}</div>
+        <div class="icon-name">Repositories</div>
+      </div>
+    </div>
   </div>
 </ion-content>

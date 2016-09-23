@@ -38,21 +38,25 @@ export class SearchPage {
       this.clearItems();
       return ;
     };
-    this.octokat.octo.fromUrl(SEARCH_URL + '/repositories?q=' + this.searchterm + '&per_page=3').fetch()
+    this.octokat.octo.fromUrl(SEARCH_URL + '/repositories?q=' + this.searchterm + '&per_page=3')
+    .read()
     .then(res => {
-      this.repos = res;
+      this.repos = JSON.parse(res);
     });
-    this.octokat.octo.fromUrl(SEARCH_URL + '/users?q=' + this.searchterm + '&per_page=3').fetch()
+    this.octokat.octo.fromUrl(SEARCH_URL + '/users?q=' + this.searchterm + '&per_page=3')
+    .read()
     .then(res => {
-      this.users = res;
+      this.users = JSON.parse(res);
     });
-    this.octokat.octo.fromUrl(SEARCH_URL + '/issues?q=' + this.searchterm + '&per_page=3').fetch()
+    this.octokat.octo.fromUrl(SEARCH_URL + '/issues?q=' + this.searchterm + '&per_page=3')
+    .read()
     .then(res => {
-      this.issues = res;
+      this.issues = JSON.parse(res);
     });
-    this.octokat.octo.fromUrl(SEARCH_URL + '/code?q=' + this.searchterm + '&per_page=3').fetch()
+    this.octokat.octo.fromUrl(SEARCH_URL + '/code?q=' + this.searchterm + '&per_page=3')
+    .read()
     .then(res => {
-      this.codes = res;
+      this.codes = JSON.parse(res);
     });
   }
 

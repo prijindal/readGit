@@ -80,8 +80,9 @@ export class NotificationsPage {
 
   openNotification(notification) {
     this.octokat.octo.fromUrl(notification.subject.url)
-    .fetch()
+    .read()
     .then(res => {
+      res = res.json();
       this.browser.open(res.htmlUrl);
     });
   }

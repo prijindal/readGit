@@ -35,13 +35,13 @@
     <ion-item *ngFor="let issue of issues.items" (click)="openIssue(issue)">
       <h2>{{issue.title}}</h2>
       <p>{{issue.body}}</p>
-      <h3>{{issue.repositoryUrl.substr(issue.repositoryUrl.indexOf('repos') + 6)}}</h3>
+      <h3 *ngIf="issue.repository_url">{{issue.repository_url.substr(issue.repository_url.indexOf('repos') + 6)}}</h3>
     </ion-item>
   </ion-item-group>
   <ion-item-group *ngIf="codes">
     <ion-item-divider light>Codes</ion-item-divider>
     <ion-item *ngFor="let code of codes.items" (click)="openCode(code)">
-      <h2>{{code.repository.fullName}}</h2>
+      <h2>{{code.repository.ful_name}}</h2>
       <p>{{code.name}}
     </ion-item>
   </ion-item-group>

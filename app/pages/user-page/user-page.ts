@@ -2,6 +2,7 @@ import {Component, ChangeDetectorRef} from '@angular/core';
 import {NavController, NavParams, PopoverController} from 'ionic-angular';
 
 import OctokatService from '../../services/octokat';
+import BrowserService from '../../services/browser';
 
 import { ErrorPage } from '../error-page/error-page';
 
@@ -19,7 +20,8 @@ export class UserPage {
     private nav: NavController,
     private params: NavParams,
     private popoverCtrl: PopoverController,
-    private octokat: OctokatService
+    private octokat: OctokatService,
+    private browser: BrowserService
   ) { }
 
   ionViewWillEnter() {
@@ -37,10 +39,10 @@ export class UserPage {
   getUserInfo() {
     this.loading = true;
     this.octokat.octo.fromUrl(this.user.url)
-    .fetch()
+    .read()
     .then(res => {
       this.loading = false;
-      this.user = res;
+      this.user = JSON.parse(res);
     })
     .catch(err => {
       this.loading = false;

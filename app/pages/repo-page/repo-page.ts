@@ -39,10 +39,10 @@ export class RepoPage {
   getRepoInfo() {
     this.loading = true;
     this.octokat.octo.fromUrl(this.repo.url)
-    .fetch()
+    .read()
     .then(res => {
       this.loading = false;
-      this.repo = res;
+      this.repo = JSON.parse(res);
     })
     .catch(err => {
       this.loading = false;
