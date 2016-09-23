@@ -18,6 +18,7 @@ import GithubLogin from './services/githublogin';
 import LocalService from './services/local';
 import OctokatService from './services/octokat';
 import EventParser from './services/eventparser';
+import BrowserService from './services/browser';
 
 @Component({
   templateUrl: 'build/app.html',
@@ -111,7 +112,8 @@ ionicBootstrap(MyApp, [
   LocalService,
   OctokatService,
   GithubLogin,
-  EventParser
+  EventParser,
+  BrowserService
 ], {
   pageTransition: 'ios'
 });

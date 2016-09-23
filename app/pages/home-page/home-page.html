@@ -26,10 +26,17 @@
     </div>
   </div>
   <ion-list *ngIf="events.length > 0">
-    <ion-card class="event" *ngFor="let event of events" (click)="openEvent(event)">
-      <ion-card-header class="sound-click">
+    <ion-card class="event" *ngFor="let event of events">
+      <ion-item *ngIf="event.actor">
+        <ion-avatar item-left (click)="openUser(event.actor)">
+          <img [src]="'https://avatars.githubusercontent.com/u/' + event.actor.id + '?s=50'">
+        </ion-avatar>
+        <h2 (click)="openUser(event.actor)">{{event.actor.login}}</h2>
+        <p (click)="openRepo(event.repo)">{{event.repo.name}}</p>
+      </ion-item>
+      <ion-card-content class="sound-click" (click)="openEvent(event)">
         {{event.text}}
-      </ion-card-header>
+      </ion-card-content>
     </ion-card>
   </ion-list>
 

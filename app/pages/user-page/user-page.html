@@ -3,7 +3,7 @@
     <button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Your Profile</ion-title>
+    <ion-title *ngIf="user">{{user.login}}</ion-title>
     <ion-buttons end>
       <button [disabled]="loading" (click)="getUserInfo($event)">
         <ion-icon name="refresh"></ion-icon>

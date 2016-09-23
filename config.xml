@@ -36,4 +36,5 @@
     <plugin name="org.apache.cordova.home" spec="https://github.com/ZhichengChen/cordova-plugin-android-home" />
     <engine name="android" spec="~5.2.2" />
     <plugin name="cordova-plugin-nativeclicksound" spec="~0.0.3" />
+    <plugin name="cordova-plugin-browsertab" spec="~0.1.0" />
 </widget>

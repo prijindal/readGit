@@ -2,6 +2,7 @@ import {Component, ChangeDetectorRef, ViewChild} from '@angular/core';
 import {NavController, NavParams, PopoverController} from 'ionic-angular';
 
 import OctokatService from '../../services/octokat';
+import BrowserService from '../../services/browser';
 
 import { ErrorPage } from '../error-page/error-page';
 import { RepoPage } from '../repo-page/repo-page';
@@ -25,7 +26,8 @@ export class NotificationsPage {
     private nav: NavController,
     private params: NavParams,
     private popoverCtrl: PopoverController,
-    private octokat: OctokatService
+    private octokat: OctokatService,
+    private browser: BrowserService
   ) { }
 
   ionViewWillEnter() {
@@ -80,8 +82,7 @@ export class NotificationsPage {
     this.octokat.octo.fromUrl(notification.subject.url)
     .fetch()
     .then(res => {
-      console.dir(res);
-      window.open(res.htmlUrl, '_system');
+      this.browser.open(res.htmlUrl);
     });
   }
 

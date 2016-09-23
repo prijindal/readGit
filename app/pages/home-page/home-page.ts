@@ -3,12 +3,15 @@ import {NavController, NavParams, PopoverController} from 'ionic-angular';
 
 import OctokatService from '../../services/octokat';
 import EventParser from '../../services/eventparser';
+import BrowserService from '../../services/browser';
 
 import { ErrorPage } from '../error-page/error-page';
+import { RepoPage } from '../repo-page/repo-page';
+import { UserPage } from '../user-page/user-page';
 
 import { Popover } from './popover/popover';
 
-const PER_PAGE: number = 30;
+const PER_PAGE: number = 10;
 const LIMIT: number = 300;
 
 @Component({
@@ -27,7 +30,8 @@ export class HomePage {
     private params: NavParams,
     private popoverCtrl: PopoverController,
     private octokat: OctokatService,
-    private eventParser: EventParser
+    private eventParser: EventParser,
+    private browser: BrowserService
   ) { }
 
   ionViewWillEnter() {
@@ -83,7 +87,15 @@ export class HomePage {
   }
 
   openEvent(event) {
-    window.open(event.html_url, '_system');
+    this.browser.open(event.html_url);
+  }
+
+  openUser(user) {
+    this.nav.push(UserPage, {user: user});
+  }
+
+  openRepo(repo) {
+    this.nav.push(RepoPage, {repo: repo});
   }
 
   presentPopover(event) {

@@ -38,7 +38,7 @@ export class RepoPage {
 
   getRepoInfo() {
     this.loading = true;
-    this.octokat.octo.repos(this.repo.owner.login, this.repo.name)
+    this.octokat.octo.fromUrl(this.repo.url)
     .fetch()
     .then(res => {
       this.loading = false;

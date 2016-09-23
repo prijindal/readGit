@@ -27,13 +27,17 @@ export class UserPage {
     if (user) {
       this.loading = false;
       this.user = user;
+      this.getUserInfo();
+    } else {
+      this.loading = false;
+      this.nav.push(ErrorPage, {error: {message: 'Problem with Authentication'}});
     }
-    this.getUserInfo();
   }
 
   getUserInfo() {
     this.loading = true;
-    this.octokat.octo.me.fetch()
+    this.octokat.octo.fromUrl(this.user.url)
+    .fetch()
     .then(res => {
       this.loading = false;
       this.user = res;
