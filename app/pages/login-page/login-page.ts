@@ -12,11 +12,13 @@ import {ErrorPage} from '../error-page/error-page';
 })
 export class LoginPage {
   private loading: Boolean = true;
+  private waiting: Boolean = false;
   private acceptcode: Boolean = false;
   private message: string;
   private username: string;
   private password: string;
   private twofactor: string;
+  private errorMessage: string;
 
   constructor(
     private ref: ChangeDetectorRef,
@@ -27,28 +29,24 @@ export class LoginPage {
   ) { }
 
   login() {
-    this.message = 'Waiting For User To be Authenticated';
-    this.githubLogin.login(this.username, this.password)
+    this.waiting = true;
+    this.errorMessage = '';
+    this.githubLogin.login(this.username, this.password, this.twofactor)
     .subscribe(() => {
+      this.waiting = false;
       this.message = 'Successfully Authenticated';
       this.verifyLogin();
     }, (err) => {
+      this.waiting = false;
+      let errParsed = err.json();
       if (err.headers.get('X-GitHub-OTP') && err.headers.get('X-GitHub-OTP').search('required') === 0) {
         this.acceptcode = true;
+      } else if (errParsed.message) {
+        console.log(errParsed);
+        this.errorMessage = errParsed.message;
       } else {
         this.nav.push(ErrorPage, {error: err});
       }
-    });
-  }
-
-  verifyTwoFactor() {
-    console.log(this.twofactor);
-    this.githubLogin.login(this.username, this.password, this.twofactor)
-    .subscribe(() => {
-      this.message = 'Successfully Authenticated';
-      this.verifyLogin();
-    }, (err) => {
-      this.nav.push(ErrorPage, {error: err});
     });
   }
 

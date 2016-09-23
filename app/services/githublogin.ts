@@ -5,6 +5,17 @@ import LocalService from './local';
 
 const CLIENT_ID = 'c6afa760610b0177b86b';
 const CLIENT_SECRET = 'b40dc4d20753cb9ac2a9e8741ecf04574516f422';
+const scopes = [
+  'user',
+  'user:email',
+  'user:follow',
+  'repo:status',
+  'repo',
+  'public_repo',
+  'notifications',
+  'gist',
+  'delete_repo'
+];
 
 @Injectable()
 export class GithubLogin {
@@ -23,9 +34,7 @@ export class GithubLogin {
       headers.append('X-GitHub-OTP', twofactor);
     }
     let body = {
-      'scopes': [
-        'public_repo'
-      ],
+      'scopes': scopes,
       'note': 'Read Git APP',
       'client_id': CLIENT_ID,
       'client_secret': CLIENT_SECRET
