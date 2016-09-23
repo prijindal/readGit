@@ -17,6 +17,8 @@ import { Popover } from './popover/popover';
 export class UserPage {
   public loading: Boolean = true;
   private user: any;
+  public starred: number;
+  public watching: number;
 
   constructor(
     private ref: ChangeDetectorRef,
@@ -46,6 +48,18 @@ export class UserPage {
     .then(res => {
       this.loading = false;
       this.user = JSON.parse(res);
+      this.octokat.octo.fromUrl(this.user.url + '/starred?per_page=10000')
+      .read()
+      .then(res => {
+        res = JSON.parse(res);
+        this.starred = res.length;
+      });
+      this.octokat.octo.fromUrl(this.user.url + '/subscriptions?per_page=10000')
+      .read()
+      .then(res => {
+        res = JSON.parse(res);
+        this.watching = res.length;
+      });
     })
     .catch(err => {
       this.loading = false;
@@ -55,6 +69,14 @@ export class UserPage {
 
   openReposPage() {
     this.nav.push(ReposPage, {user: this.user.login});
+  }
+
+  openStarredPage() {
+    this.nav.push(StarredPage, {user: this.user.login});
+  }
+
+  openWatchingPage() {
+    this.nav.push(WatchedPage, {user: this.user.login});
   }
 
   presentPopover(event) {

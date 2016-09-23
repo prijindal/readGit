@@ -52,7 +52,7 @@
       {{user.bio}}
     </div>
 
-    <div class="user-icons layout flex row between">
+    <div class="user-icons layout flex row center wrap">
       <div class="user-icon user-followers layout flex column">
         <div class="count">{{user.followers}}</div>
         <div class="icon-name">Followers</div>
@@ -68,6 +68,14 @@
       <div class="user-icon user-followers layout flex column" (click)="openReposPage()">
         <div class="count">{{user.public_repos + (user.total_private_repos ? user.total_private_repos : 0)}}</div>
         <div class="icon-name">Repositories</div>
+      </div>
+      <div *ngIf="starred" class="user-icon user-followers layout flex column" (click)="openStarredPage()">
+        <div class="count">{{starred}}</div>
+        <div class="icon-name">Starred</div>
+      </div>
+      <div *ngIf="watching" class="user-icon user-followers layout flex column" (click)="openWatchingPage()">
+        <div class="count">{{watching}}</div>
+        <div class="icon-name">Watching</div>
       </div>
     </div>
   </div>

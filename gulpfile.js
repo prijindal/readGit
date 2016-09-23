@@ -41,7 +41,6 @@ var tslint = require('ionic-gulp-tslint');
 var isRelease = argv.indexOf('--release') > -1;
 
 var shouldSkipBuild = argv.indexOf('--skip-build') > 1;
-var shouldChangeHost = argv.indexOf('--change-host') > 1;
 
 gulp.task('watch', ['clean'], function(done){
   runSequence(
@@ -91,10 +90,6 @@ gulp.task('inline', function(done) {
       js = js.replace('templateUrl:"' + filename + '"', "template: `" + html +"`")
       callback()
     }, function() {
-      if (shouldChangeHost) {
-        js = js.replace('{{apikey}}','web')
-        js = js.replace('http://localhost:5000/api','https://alakart-api-dev.herokuapp.com/api')
-      }
       fs.writeFile(indexPath, js, 'utf8', function(err, data) {
         done()
       });
