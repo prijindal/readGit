@@ -17,6 +17,7 @@
     "zone.js": "0.6.12"
   },
   "devDependencies": {
+    "cordova": "^6.3.1",
     "del": "2.2.0",
     "gulp": "3.9.1",
     "gulp-watch": "4.3.5",
@@ -26,12 +27,16 @@
     "ionic-gulp-sass-build": "^1.0.0",
     "ionic-gulp-scripts-copy": "^2.0.0",
     "ionic-gulp-tslint": "^1.0.0",
+    "node-static": "^0.7.8",
     "tslint-ionic-rules": "0.0.4",
     "run-sequence": "1.1.5"
   },
   "name": "read-git",
   "description": "Read Git: An Ionic project",
   "scripts": {
+    "gulp": "node ./node_modules/gulp/bin/gulp.js",
+    "cordova": "./node_modules/cordova/bin/cordova",
+    "heroku-postbuild": "sh deploy.sh",
     "livereload": "ionic run android --livereload --address 192.168.137.1 --device",
     "octokat": "browserify temp/github.js -o www/build/js/github.js",
     "build": "gulp build --release && npm run octokat",
