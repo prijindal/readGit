@@ -16,23 +16,44 @@
     <div *ngIf="!acceptcode">
       <ion-list>
         <ion-item>
-          <ion-label fixed>Username</ion-label>
-          <ion-input type="text" [(ngModel)]="username"></ion-input>
+          <ion-label floating>Username</ion-label>
+          <ion-input
+            id="username"
+            name="username"
+            type="text"
+            [disabled]="waiting"
+            [(ngModel)]="username"
+            (keypress)="checkEnter($event)"
+          ></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label fixed>Password</ion-label>
-          <ion-input type="password" [(ngModel)]="password"></ion-input>
+          <ion-label floating>Password</ion-label>
+          <ion-input
+            id="password"
+            name="password"
+            type="password"
+            [disabled]="waiting"
+            [(ngModel)]="password"
+            (keypress)="checkEnter($event)"
+          ></ion-input>
         </ion-item>
-        <button ion-button [disabled]="waiting" (click)="login()">Login</button>
+        <button ion-button block margin-vertical [disabled]="waiting" (click)="login()">Login</button>
       </ion-list>
     </div>
     <div *ngIf="acceptcode">
       <ion-list>
         <ion-item>
-          <ion-label fixed>Two Factor Code</ion-label>
-          <ion-input type="text" [(ngModel)]="twofactor"></ion-input>
+          <ion-label floating>Two Factor Code</ion-label>
+          <ion-input
+            id="twofactor"
+            name="twofactor"
+            type="text"
+            [disabled]="waiting"
+            [(ngModel)]="twofactor"
+            (keypress)="checkEnter($event)"
+          ></ion-input>
         </ion-item>
-        <button ion-button [disabled]="waiting" (click)="login()">Verify Code</button>
+        <button ion-button block margin-vertical [disabled]="waiting" (click)="login()">Verify Code</button>
       </ion-list>
     </div>
   </div>

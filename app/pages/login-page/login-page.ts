@@ -28,6 +28,19 @@ export class LoginPage {
     private octokat: OctokatService
   ) { }
 
+  ionViewWillEnter() {
+    this.message = 'Waiting';
+    this.verifyLogin();
+  }
+
+  focusInput() {
+    if (!this.loading) {
+      let usernamInput = document.querySelector('ion-input[name="username"] input');
+      usernamInput['focus']();
+      this.ref.detectChanges();
+    }
+  }
+
   login() {
     this.waiting = true;
     this.errorMessage = '';
@@ -50,9 +63,10 @@ export class LoginPage {
     });
   }
 
-  ionViewWillEnter() {
-    this.message = 'Waiting';
-    this.verifyLogin();
+  checkEnter(event) {
+    if (event.key === 'Enter') {
+      this.login();
+    }
   }
 
   verifyLogin() {
@@ -74,6 +88,9 @@ export class LoginPage {
       this.loading = false;
       this.message = '';
       this.ref.detectChanges();
+      setTimeout(() => {
+        this.focusInput();
+      }, 100);
     });
   }
 }
