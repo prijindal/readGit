@@ -1,0 +1,1 @@
+window.Octokat = require('octokat');
