@@ -38,8 +38,7 @@
     "cordova": "./node_modules/cordova/bin/cordova",
     "heroku-postbuild": "sh deploy.sh",
     "livereload": "ionic run android --livereload --address 192.168.137.1 --device",
-    "octokat": "browserify github.js -o www/build/js/github.js",
-    "build": "gulp build --release && npm run octokat",
+    "build": "gulp build --release",
     "android": "cordova run android --buildConfig=.vscode/build.json",
     "release" : "npm run build && npm run android -- --release"
   },

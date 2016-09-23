@@ -1,6 +1,7 @@
 var gulp = require('gulp'),
     gulpWatch = require('gulp-watch'),
     del = require('del'),
+    browserify = require('browserify'),
     fs = require('fs'),
     glob = require('glob'),
     async = require('async'),
@@ -44,7 +45,7 @@ var shouldSkipBuild = argv.indexOf('--skip-build') > 1;
 
 gulp.task('watch', ['clean'], function(done){
   runSequence(
-    ['sass', 'html', 'fonts', 'scripts'],
+    ['sass', 'html', 'fonts', 'scripts', 'octokat'],
     function(){
       gulpWatch('app/**/*.scss', function(){ gulp.start('sass'); });
       gulpWatch('app/**/*.html', function(){ gulp.start('html'); });
@@ -61,7 +62,7 @@ if (shouldSkipBuild) {
 else {
   gulp.task('build:prequel', ['clean'], function(done){
     runSequence(
-      ['sass', 'html', 'fonts', 'scripts'],
+      ['sass', 'html', 'fonts', 'scripts', 'octokat'],
       function(){
         buildBrowserify({
           minify: isRelease,
@@ -116,6 +117,18 @@ gulp.task('sass', function() {
 gulp.task('html', copyHTML);
 gulp.task('fonts', copyFonts);
 gulp.task('scripts', copyScripts);
+
+gulp.task('octokat', function(done) {
+  var b = browserify();
+  b.add('./github.js');
+  var rootPath = './www/build/js';
+  b.bundle((err, buf) => {
+    fs.writeFile(rootPath + '/github.js', buf, () => {
+      return done();
+    })
+  })
+})
+
 gulp.task('clean', function(){
   return del('www/build');
 });
