@@ -83,7 +83,7 @@ export class NotificationsPage {
     .read()
     .then(res => {
       res = res.json();
-      this.browser.open(res.htmlUrl);
+      this.browser.open(res.html_url);
     });
   }
 

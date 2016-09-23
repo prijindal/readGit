@@ -76,11 +76,11 @@ export class SearchPage {
   }
 
   openIssue(issue) {
-    this.browser.open(issue.htmlUrl);
+    this.browser.open(issue.html_url);
   }
 
 
   openCode(code) {
-    this.browser.open(code.htmlUrl);
+    this.browser.open(code.html_url);
   }
 }
