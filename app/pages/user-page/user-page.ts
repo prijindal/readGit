@@ -5,6 +5,9 @@ import OctokatService from '../../services/octokat';
 import BrowserService from '../../services/browser';
 
 import { ErrorPage } from '../error-page/error-page';
+import { ReposPage } from '../repos-page/repos-page';
+import { StarredPage } from '../starred-page/starred-page';
+import { WatchedPage } from '../watched-page/watched-page';
 
 import { Popover } from './popover/popover';
 
@@ -48,6 +51,10 @@ export class UserPage {
       this.loading = false;
       this.nav.push(ErrorPage, {error: {message: 'Problem with Authentication'}});
     });
+  }
+
+  openReposPage() {
+    this.nav.push(ReposPage, {user: this.user.login});
   }
 
   presentPopover(event) {

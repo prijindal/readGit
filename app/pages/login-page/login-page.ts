@@ -87,9 +87,11 @@ export class LoginPage {
       this.message = 'Verifying You...';
       this.octokat.octo.me.read()
       .then(res => {
+        res = JSON.parse(res);
+        this.octokat.user = res.login;
         this.message = 'Logged In';
         this.events.publish('login', true);
-        this.nav.setRoot(HomePage, {user: JSON.parse(res)});
+        this.nav.setRoot(HomePage, {user: res});
       })
       .catch(err => {
         this.nav.push(ErrorPage, {error: err});

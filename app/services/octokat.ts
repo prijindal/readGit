@@ -6,6 +6,7 @@ import LocalService from './local';
 export class OctokatService {
   public octo: any;
   private Octokat: any;
+  public user: string; 
 
   constructor(
     private local: LocalService

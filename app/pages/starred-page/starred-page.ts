@@ -19,6 +19,7 @@ export class StarredPage {
   public loading: Boolean = true;
   public starred: any = [];
   private page: number = 1;
+  private user: string;
 
   constructor(
     private ref: ChangeDetectorRef,
@@ -29,6 +30,12 @@ export class StarredPage {
   ) { }
 
   ionViewWillEnter() {
+    this.user = this.params.get('user');
+    if (!this.user || this.user === this.octokat.user) {
+      this.user = 'user';
+    } else {
+      this.user = 'users/' + this.user;
+    }
     this.refreshEvents();
   }
 
@@ -42,7 +49,7 @@ export class StarredPage {
   }
 
   getStarred(shouldRefresh: Boolean = false) {
-    return this.octokat.octo.fromUrl('/user/starred' + '?page=' + this.page + '&per_page=' + PER_PAGE).read()
+    return this.octokat.octo.fromUrl('/' + this.user + '/starred' + '?page=' + this.page + '&per_page=' + PER_PAGE).read()
     .then(res => {
       res = JSON.parse(res);
       if (shouldRefresh) {

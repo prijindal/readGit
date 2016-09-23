@@ -65,7 +65,7 @@
         <div class="count">{{user.following}}</div>
         <div class="icon-name">Following</div>
       </div>
-      <div class="user-icon user-followers layout flex column">
+      <div class="user-icon user-followers layout flex column" (click)="openReposPage()">
         <div class="count">{{user.public_repos + (user.total_private_repos ? user.total_private_repos : 0)}}</div>
         <div class="icon-name">Repositories</div>
       </div>
