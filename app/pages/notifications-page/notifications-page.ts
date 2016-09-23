@@ -4,6 +4,7 @@ import {NavController, NavParams, PopoverController} from 'ionic-angular';
 import OctokatService from '../../services/octokat';
 
 import { ErrorPage } from '../error-page/error-page';
+import { RepoPage } from '../repo-page/repo-page';
 
 import { Popover } from './popover/popover';
 
@@ -72,7 +73,7 @@ export class NotificationsPage {
   }
 
   openRepository(notification) {
-    window.open(notification.repository.html_url, '_system');
+    this.nav.push(RepoPage, {repo: notification.repository});
   }
 
   openNotification(notification) {
