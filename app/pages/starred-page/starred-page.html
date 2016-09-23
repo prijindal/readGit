@@ -26,12 +26,16 @@
     </div>
   </div>
   <ion-list *ngIf="starred.length > 0">
-    <ion-card class="notification" *ngFor="let star of starred">
-      <ion-card-header class="sound-click" (click)="openRepository(star)">
-        {{star.full_name}}
+    <ion-card class="notification" *ngFor="let repo of starred">
+      <ion-card-header
+        class="sound-click layout flex between"
+        (click)="openRepository(repo)"
+      >
+        <span>{{repo.full_name}}</span>
+        <span>{{repo.stargazers_count}} <ion-icon name="star"></ion-icon></span>
       </ion-card-header>
       <ion-card-content class="sound-click">
-        {{star.description}}
+        {{repo.description}}
       </ion-card-content>
     </ion-card>
   </ion-list>

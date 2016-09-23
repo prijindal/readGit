@@ -8,6 +8,7 @@ import {LoginPage} from './pages/login-page/login-page';
 
 import {HomePage} from './pages/home-page/home-page';
 import {NotificationsPage} from './pages/notifications-page/notifications-page';
+import {ReposPage} from './pages/repos-page/repos-page';
 import {StarredPage} from './pages/starred-page/starred-page';
 import {WatchedPage} from './pages/watched-page/watched-page';
 
@@ -40,6 +41,7 @@ class MyApp {
     this.pages = [
       {title: 'News Feed', component: HomePage},
       {title: 'Notifications', component: NotificationsPage},
+      {title: 'Repositories', component: ReposPage},
       {title: 'Stars', component: StarredPage},
       {title: 'Watching', component: WatchedPage}
     ];

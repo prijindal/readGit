@@ -3,9 +3,9 @@
     <button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Watching</ion-title>
+    <ion-title>Repos</ion-title>
     <ion-buttons end>
-      <button [disabled]="loading" (click)="refreshWatched($event)">
+      <button [disabled]="loading" (click)="refreshRepos($event)">
         <ion-icon name="refresh"></ion-icon>
       </button>
       <button (click)="presentPopover($event)">
@@ -16,17 +16,17 @@
 </ion-header>
 
 
-<ion-content #subscriptionsContent class="subscriptions-page">
-  <div text-center margin-top *ngIf="subscriptions.length <= 0">
+<ion-content #reposContent class="repos-page">
+  <div text-center margin-top *ngIf="repos.length <= 0">
     <div *ngIf="loading">
       Loading...
     </div>
     <div *ngIf="!loading">
-      No Subscriptions
+      No Repos
     </div>
   </div>
-  <ion-list *ngIf="subscriptions.length > 0">
-    <ion-card class="notification" *ngFor="let repo of subscriptions">
+  <ion-list *ngIf="repos.length > 0">
+    <ion-card class="repo" *ngFor="let repo of repos">
       <ion-card-header
         class="sound-click layout flex between"
         (click)="openRepository(repo)"
