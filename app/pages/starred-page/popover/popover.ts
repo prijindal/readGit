@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ViewController } from 'ionic-angular';
+import { ViewController, Platform } from 'ionic-angular';
 
 @Component({
   template: `
@@ -13,7 +13,22 @@ import { ViewController } from 'ionic-angular';
   `
 })
 export class Popover {
-  constructor(private viewCtrl: ViewController) {}
+  private sub: any;
+
+  constructor(
+    private viewCtrl: ViewController,
+    private platform: Platform
+  ) {}
+
+  ngOnInit() {
+    this.sub = this.platform.registerBackButtonAction(() => {
+      this.close();
+    });
+  }
+
+  ngOnDestroy() {
+    this.sub();
+  }
 
   close() {
     this.viewCtrl.dismiss();
