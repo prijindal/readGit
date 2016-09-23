@@ -1,13 +1,9 @@
-<div class="profile-title">
-  <ion-title *ngIf="user">{{user.login}}</ion-title>
-</div>
-
 <div class="logout-button" (click)="logout()" *ngIf="user">
   <ion-icon name="log-out"></ion-icon>
 </div>
 
 <div (click)="goToProfile($event)" class="profile-info layout flex row start" *ngIf="user">
-  <div class="profile-image-wrapper" *ngIf="user.avatarUrl">
+  <div class="profile-image-wrapper layout flex column center" *ngIf="user.avatarUrl">
     <div class="profile-image-background"
     [style.background-image]="'url(' + user.avatarUrl +')'">    </div>
   </div>
@@ -17,6 +13,9 @@
     </div>
     <div class="profile-karma">
       {{user.email}}
+    </div>
+    <div class="profile-karma">
+      @{{user.login}}
     </div>
   </div>
 </div>

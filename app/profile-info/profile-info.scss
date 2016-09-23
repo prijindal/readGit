@@ -8,7 +8,7 @@ $proflie-color: #fff;
 profile-info {
   display: flex;
   flex-direction: column;
-  padding: 25px 20px 25px 10px;
+  padding: 0 20px 0 10px;
 
   $login-button-size: 24px;
 
@@ -20,15 +20,6 @@ profile-info {
     right: 12px;
     top: 12px;
     width: $login-button-size;
-  }
-}
-
-.profile-title {
-  margin-top: 20px;
-
-  .toolbar-title {
-    color: $proflie-color;
-    text-align: center;
   }
 }
 
