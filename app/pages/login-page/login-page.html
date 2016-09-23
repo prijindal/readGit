@@ -1,10 +1,36 @@
-<ion-content padding text-center class="login-page">
+<ion-header>
+  <ion-navbar>
+    <ion-title>Login</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding matgin-top text-center class="login-page">
   <div *ngIf="loading">
     <ion-icon name="github"></ion-icon>
     <span *ngIf="message">{{message}}</span>
   </div>
   <div *ngIf="!loading">
-    <span *ngIf="message">{{message}}</span>
-    <button ion-button (click)="login()">Login</button>
+    <div *ngIf="!acceptcode">
+      <ion-list>
+        <ion-item>
+          <ion-label fixed>Username</ion-label>
+          <ion-input type="text" [(ngModel)]="username"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label fixed>Password</ion-label>
+          <ion-input type="password" [(ngModel)]="password"></ion-input>
+        </ion-item>
+        <button ion-button (click)="login()">Login</button>
+      </ion-list>
+    </div>
+    <div *ngIf="acceptcode">
+      <ion-list>
+        <ion-item>
+          <ion-label fixed>Two Factor Code</ion-label>
+          <ion-input type="text" [(ngModel)]="twofactor"></ion-input>
+        </ion-item>
+        <button ion-button (click)="verifyTwoFactor()">Verify Code</button>
+      </ion-list>
+    </div>
   </div>
 </ion-content>

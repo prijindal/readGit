@@ -12,7 +12,11 @@ import {ErrorPage} from '../error-page/error-page';
 })
 export class LoginPage {
   private loading: Boolean = true;
-  public message: string;
+  private acceptcode: Boolean = false;
+  private message: string;
+  private username: string;
+  private password: string;
+  private twofactor: string;
 
   constructor(
     private ref: ChangeDetectorRef,
@@ -24,12 +28,26 @@ export class LoginPage {
 
   login() {
     this.message = 'Waiting For User To be Authenticated';
-    this.githubLogin.login()
-    .then(() => {
+    this.githubLogin.login(this.username, this.password)
+    .subscribe(() => {
       this.message = 'Successfully Authenticated';
       this.verifyLogin();
-    })
-    .catch(err => {
+    }, (err) => {
+      if (err.headers.get('X-GitHub-OTP') && err.headers.get('X-GitHub-OTP').search('required') === 0) {
+        this.acceptcode = true;
+      } else {
+        this.nav.push(ErrorPage, {error: err});
+      }
+    });
+  }
+
+  verifyTwoFactor() {
+    console.log(this.twofactor);
+    this.githubLogin.login(this.username, this.password, this.twofactor)
+    .subscribe(() => {
+      this.message = 'Successfully Authenticated';
+      this.verifyLogin();
+    }, (err) => {
       this.nav.push(ErrorPage, {error: err});
     });
   }

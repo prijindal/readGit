@@ -3,7 +3,6 @@ import { Component, Input } from '@angular/core';
 import { MenuController, Nav } from 'ionic-angular';
 
 import OctokatService from '../services/octokat';
-import GithubLogin from '../services/githublogin';
 
 import { LoginPage } from '../pages/login-page/login-page';
 
@@ -18,8 +17,7 @@ export class ProfileInfo {
 
   constructor(
     private menu: MenuController,
-    private octokat: OctokatService,
-    private githubLogin: GithubLogin
+    private octokat: OctokatService
   ) {}
 
   ngOnInit() {
@@ -41,7 +39,6 @@ export class ProfileInfo {
     .then(() => {
       this.octokat.logout()
       .then(() => {
-        this.githubLogin.logout();
         this.nav.setRoot(LoginPage);
       });
     });
