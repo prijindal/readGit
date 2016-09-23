@@ -4,6 +4,7 @@ import {NavController, NavParams, PopoverController} from 'ionic-angular';
 import OctokatService from '../../services/octokat';
 
 import { ErrorPage } from '../error-page/error-page';
+import { RepoPage } from '../repo-page/repo-page';
 
 import { Popover } from './popover/popover';
 
@@ -71,8 +72,8 @@ export class StarredPage {
     }
   }
 
-  openRepository(star) {
-    window.open(star.html_url, '_system');
+  openRepository(repo) {
+    this.nav.push(RepoPage, {repo: repo});
   }
 
   presentPopover(event) {
