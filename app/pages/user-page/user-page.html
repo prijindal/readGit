@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Your Profile</ion-title>
+    <ion-buttons end>
+      <button [disabled]="loading" (click)="getUserInfo($event)">
+        <ion-icon name="refresh"></ion-icon>
+      </button>
+      <button (click)="presentPopover($event)">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="user-page">
+  <div text-center margin-top *ngIf="!user">
+    <div *ngIf="loading">
+      Loading...
+    </div>
+    <div *ngIf="!loading">
+      Error Fetching Profile
+    </div>
+  </div>
+  <div *ngIf="user">
+    <img [src]="'https://avatars.githubusercontent.com/u/' + user.id +'?s=400'"/>
+    {{user | json}}
+  </div>
+</ion-content>

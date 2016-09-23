@@ -3,9 +3,9 @@
 </div>
 
 <div (click)="goToProfile($event)" class="profile-info layout flex row start" *ngIf="user">
-  <div class="profile-image-wrapper layout flex column center" *ngIf="user.avatarUrl">
+  <div class="profile-image-wrapper layout flex column center" *ngIf="user.id">
     <div class="profile-image-background"
-    [style.background-image]="'url(' + user.avatarUrl +')'">    </div>
+    [style.background-image]="'url(https://avatars.githubusercontent.com/u/' + user.id +'?s=50)'">    </div>
   </div>
   <div class="profile-info-text layout flex column center">
     <div class="profile-name">

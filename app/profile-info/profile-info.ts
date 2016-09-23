@@ -5,6 +5,7 @@ import { MenuController, Nav } from 'ionic-angular';
 import OctokatService from '../services/octokat';
 
 import { LoginPage } from '../pages/login-page/login-page';
+import { UserPage } from '../pages/user-page/user-page';
 
 @Component({
   selector: 'profile-info',
@@ -30,7 +31,7 @@ export class ProfileInfo {
   goToProfile() {
     this.menu.close()
     .then(() => {
-      // this.nav.push(UserPage);
+      this.nav.push(UserPage, {user: this.user});
     });
   }
 
