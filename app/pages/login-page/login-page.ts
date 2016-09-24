@@ -98,6 +98,7 @@ export class LoginPage {
       });
     })
     .catch(res => {
+      this.events.publish('login', false);
       this.loading = false;
       this.message = '';
       this.ref.detectChanges();

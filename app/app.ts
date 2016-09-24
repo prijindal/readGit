@@ -4,8 +4,9 @@ import {Component, ViewChild} from '@angular/core';
 import {App, ionicBootstrap, Platform, MenuController, Nav, Events} from 'ionic-angular';
 import {StatusBar, Deeplinks} from 'ionic-native';
 
-import {LoginPage} from './pages/login-page/login-page';
 
+import {ErrorPage} from './pages/error-page/error-page';
+import {LoginPage} from './pages/login-page/login-page';
 import {HomePage} from './pages/home-page/home-page';
 import {NotificationsPage} from './pages/notifications-page/notifications-page';
 import {ReposPage} from './pages/repos-page/repos-page';
@@ -27,7 +28,7 @@ import FileService from './services/filehttp';
 })
 class MyApp {
   @ViewChild(Nav) nav: Nav;
-  rootPage: any = LoginPage;
+  rootPage: any;
   menuEnabled: Boolean = false;
   pages: Array<{title: string, component: any}>;
 
@@ -35,19 +36,10 @@ class MyApp {
     private app: App,
     private menu: MenuController,
     private platform: Platform,
-    private events: Events
+    private events: Events,
+    private octokat: OctokatService
   ) {
     this.initializeApp();
-
-    // used for an example of ngFor and navigation
-    this.pages = [
-      {title: 'News Feed', component: HomePage},
-      {title: 'Notifications', component: NotificationsPage},
-      {title: 'Repositories', component: ReposPage},
-      {title: 'Stars', component: StarredPage},
-      {title: 'Watching', component: WatchedPage}
-    ];
-
   }
 
   initializeApp() {
@@ -57,7 +49,7 @@ class MyApp {
       StatusBar.styleDefault();
       this.registerBackButtonListener();
       this.eventsInit();
-
+      this.verifyLogin();
       if (window['nativeclick']) {
         window['nativeclick'].watch(['sound-click', 'button']);
       }
@@ -78,9 +70,45 @@ class MyApp {
     }
   }
 
+  private verifyLogin() {
+    return this.octokat.checkLogin()
+    .then(res => {
+      this.octokat.octo.me.read()
+      .then(res => {
+        res = JSON.parse(res);
+        this.octokat.user = res.login;
+        this.events.publish('login', true);
+        this.nav.setRoot(HomePage, {user: res});
+      })
+      .catch(err => {
+        if (err.status === 0) {
+          this.nav.push(ErrorPage, {error: err});
+        } else {
+          this.nav.setRoot(LoginPage);
+          this.events.publish('login', false);
+        }
+      });
+    })
+    .catch(err => {
+      this.nav.setRoot(LoginPage);
+      this.events.publish('login', false);
+    });
+  }
+
   private eventsInit() {
-    this.events.subscribe('login', () => {
+    this.events.subscribe('login', (isLoggedIn) => {
       this.menuEnabled = true;
+      if (isLoggedIn) {
+        this.pages = [
+          {title: 'News Feed', component: HomePage},
+          {title: 'Notifications', component: NotificationsPage},
+          {title: 'Repositories', component: ReposPage},
+          {title: 'Stars', component: StarredPage},
+          {title: 'Watching', component: WatchedPage}
+        ];
+      } else {
+        this.pages = [];
+      }
     });
   }
 
