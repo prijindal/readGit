@@ -26,7 +26,7 @@
     </div>
   </div>
   <div margin *ngIf="user">
-    <div class="user-image">
+    <div class="user-image" *ngIf="user.id">
       <img *ngIf="!imageLoaded" [src]="'https://avatars.githubusercontent.com/u/' + user.id +'?s=50'"/>
       <img [class.hidden]="!imageLoaded" (load)="imageLoaded = true" [src]="'https://avatars.githubusercontent.com/u/' + user.id +'?s=400'"/>
     </div>

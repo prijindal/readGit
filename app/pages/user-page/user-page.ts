@@ -31,9 +31,13 @@ export class UserPage {
 
   ionViewWillEnter() {
     let user = this.params.get('user');
+    let username = this.params.get('username');
     if (user) {
       this.loading = false;
       this.user = user;
+      this.getUserInfo();
+    } else if (username) {
+      this.user = {url: 'users/' + username};
       this.getUserInfo();
     } else {
       this.loading = false;

@@ -27,9 +27,15 @@ export class RepoPage {
 
   ionViewWillEnter() {
     let repo = this.params.get('repo');
+    let username = this.params.get('username');
+    let reponame = this.params.get('reponame');
     if (repo) {
       this.loading = false;
       this.repo = repo;
+      this.getRepoInfo();
+    } else if (username && reponame) {
+      this.repo = { full_name: username + '/' + reponame};
+      this.repo['url'] = '/repos/' + this.repo['full_name'];
       this.getRepoInfo();
     } else {
       // Replace With Better Error Handling

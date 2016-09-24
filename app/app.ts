@@ -7,6 +7,8 @@ import {StatusBar, Deeplinks} from 'ionic-native';
 
 import {ErrorPage} from './pages/error-page/error-page';
 import {LoginPage} from './pages/login-page/login-page';
+import {UserPage} from './pages/user-page/user-page';
+import {RepoPage} from './pages/repo-page/repo-page';
 import {HomePage} from './pages/home-page/home-page';
 import {NotificationsPage} from './pages/notifications-page/notifications-page';
 import {ReposPage} from './pages/repos-page/repos-page';
@@ -28,8 +30,9 @@ import FileService from './services/filehttp';
 })
 class MyApp {
   @ViewChild(Nav) nav: Nav;
-  rootPage: any;
+  rootPage: any = LoginPage;
   menuEnabled: Boolean = false;
+  profileEnabled: Boolean = false;
   pages: Array<{title: string, component: any}>;
 
   constructor(
@@ -49,7 +52,8 @@ class MyApp {
       StatusBar.styleDefault();
       this.registerBackButtonListener();
       this.eventsInit();
-      this.verifyLogin();
+      // this.verifyLogin();
+      this.deeplinkInit();
       if (window['nativeclick']) {
         window['nativeclick'].watch(['sound-click', 'button']);
       }
@@ -70,35 +74,27 @@ class MyApp {
     }
   }
 
-  private verifyLogin() {
-    return this.octokat.checkLogin()
-    .then(res => {
-      this.octokat.octo.me.read()
-      .then(res => {
-        res = JSON.parse(res);
-        this.octokat.user = res.login;
-        this.events.publish('login', true);
-        this.nav.setRoot(HomePage, {user: res});
-      })
-      .catch(err => {
-        if (err.status === 0) {
-          this.nav.push(ErrorPage, {error: err});
-        } else {
-          this.nav.setRoot(LoginPage);
-          this.events.publish('login', false);
-        }
-      });
+  private deeplinkInit() {
+    Deeplinks.routeWithNavController(this.nav, {
+      '': LoginPage,
+      '/:username': UserPage,
+      '/:username/:reponame': RepoPage,
+      // '/:username/:reponame/milestones': MilestonesPage
     })
-    .catch(err => {
-      this.nav.setRoot(LoginPage);
-      this.events.publish('login', false);
+    .subscribe((match) => {
+      console.dir(match);
+      console.log('Successfully matched route');
+    }, (nomatch) => {
+      console.dir(nomatch);
+      console.error('Got a deeplink that didn\'t match');
     });
   }
 
   private eventsInit() {
     this.events.subscribe('login', (isLoggedIn) => {
       this.menuEnabled = true;
-      if (isLoggedIn) {
+      if (isLoggedIn[0]) {
+        this.profileEnabled = true;
         this.pages = [
           {title: 'News Feed', component: HomePage},
           {title: 'Notifications', component: NotificationsPage},
@@ -107,6 +103,7 @@ class MyApp {
           {title: 'Watching', component: WatchedPage}
         ];
       } else {
+        this.profileEnabled = false;
         this.pages = [];
       }
     });
