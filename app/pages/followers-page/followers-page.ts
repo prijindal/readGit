@@ -71,8 +71,11 @@ export class FollowersPage {
     this.page += 1;
     if (this.page <= LIMIT / PER_PAGE) {
       this.getFollowers()
-      .then(() => {
+      .then((res) => {
         infiniteScroll.complete();
+        if (res.length < PER_PAGE) {
+          infiniteScroll.enable(false);
+        }
       });
     } else {
       infiniteScroll.enable(false);

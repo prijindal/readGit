@@ -40,7 +40,8 @@ export class StarredPage {
   getStarred() {
     return this.octokat.octo.fromUrl('/' + this.user + '/starred' + '?per_page=' + PER_PAGE).read()
     .then(res => {
-      this.starred = JSON.parse(res);
+      res = JSON.parse(res);
+      this.starred = res;
       this.ref.detectChanges();
       return res;
     })

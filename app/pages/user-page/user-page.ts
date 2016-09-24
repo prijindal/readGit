@@ -73,6 +73,7 @@ export class UserPage {
     .then(res => {
       this.loading = false;
       this.user = JSON.parse(res);
+      this.ref.detectChanges();
       this.octokat.octo.fromUrl(this.user.url + '/starred?per_page=' + PER_PAGE)
       .read()
       .then(res => {

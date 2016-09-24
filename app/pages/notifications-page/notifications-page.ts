@@ -44,7 +44,7 @@ export class NotificationsPage {
   }
 
   getNotifications(shouldRefresh: Boolean = false) {
-    return this.octokat.octo.fromUrl('/notifications' + '?page=' + this.page + '&per_page=' + PER_PAGE).read()
+    return this.octokat.octo.fromUrl('/notifications' + '?page=' + this.page + '&all=true&per_page=' + PER_PAGE).read()
     .then(res => {
       res = JSON.parse(res);
       if (shouldRefresh) {
@@ -52,7 +52,13 @@ export class NotificationsPage {
         this.notifications = [];
       }
       res.forEach((notification) => {
-        this.notifications.push(notification);
+        this.octokat.octo.fromUrl(notification.subject.url)
+        .read()
+        .then(notificationResponse => {
+          notificationResponse = JSON.parse(notificationResponse);
+          notification.response = notificationResponse;
+          this.notifications.push(notification);
+        });
       });
       this.ref.detectChanges();
       return res;
@@ -66,8 +72,11 @@ export class NotificationsPage {
     this.page += 1;
     if (this.page <= LIMIT / PER_PAGE) {
       this.getNotifications()
-      .then(() => {
+      .then((res) => {
         infiniteScroll.complete();
+        if (res.length < PER_PAGE) {
+          infiniteScroll.enable(false);
+        }
       });
     } else {
       infiniteScroll.enable(false);
@@ -79,12 +88,7 @@ export class NotificationsPage {
   }
 
   openNotification(notification) {
-    this.octokat.octo.fromUrl(notification.subject.url)
-    .read()
-    .then(res => {
-      res = res.json();
-      this.browser.open(res.html_url);
-    });
+    this.browser.open(notification.response.html_url);
   }
 
   presentPopover(event) {

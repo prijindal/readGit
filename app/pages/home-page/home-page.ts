@@ -166,8 +166,11 @@ export class HomePage {
     this.page += 1;
     if (this.page <= LIMIT / PER_PAGE) {
       this.getEvents()
-      .then(() => {
+      .then((res) => {
         infiniteScroll.complete();
+        if (res.length < PER_PAGE) {
+          infiniteScroll.enable(false);
+        }
       });
     } else {
       infiniteScroll.enable(false);

@@ -71,8 +71,11 @@ export class ReposPage {
     this.page += 1;
     if (this.page <= LIMIT / PER_PAGE) {
       this.getRepos()
-      .then(() => {
+      .then((res) => {
         infiniteScroll.complete();
+        if (res.length < PER_PAGE) {
+          infiniteScroll.enable(false);
+        }
       });
     } else {
       infiniteScroll.enable(false);
