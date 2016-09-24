@@ -11,6 +11,7 @@ import {HomePage} from './pages/home-page/home-page';
 import {NotificationsPage} from './pages/notifications-page/notifications-page';
 import {ReposPage} from './pages/repos-page/repos-page';
 import {StarredPage} from './pages/starred-page/starred-page';
+import {FollowersPage} from './pages/followers-page/followers-page';
 import {WatchedPage} from './pages/watched-page/watched-page';
 
 import { ProfileInfo } from './profile-info/profile-info';
@@ -97,7 +98,8 @@ class MyApp {
           {title: 'Notifications', component: NotificationsPage},
           {title: 'Repositories', component: ReposPage},
           {title: 'Stars', component: StarredPage},
-          {title: 'Watching', component: WatchedPage}
+          {title: 'Watching', component: WatchedPage},
+          {title: 'Followers', component: FollowersPage}
         ];
       } else {
         this.profileEnabled = false;

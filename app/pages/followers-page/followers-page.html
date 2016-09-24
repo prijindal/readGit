@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Followers</ion-title>
+    <ion-buttons end>
+      <button [disabled]="loading" (click)="refreshFollowers($event)">
+        <ion-icon name="refresh"></ion-icon>
+      </button>
+      <button (click)="presentPopover($event)">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content #followersContent class="followers-page">
+  <div text-center margin-top *ngIf="followers.length <= 0">
+    <div *ngIf="loading">
+      Loading...
+    </div>
+    <div *ngIf="!loading">
+      No Followers
+    </div>
+  </div>
+  <ion-list *ngIf="followers.length > 0">
+    <ion-item
+      class="notification"
+      *ngFor="let user of followers"
+      (click)="openUser(user)"
+    >
+      <ion-avatar item-left>
+        <img [src]="'https://avatars.githubusercontent.com/u/' + user.id + '?s=50'">
+      </ion-avatar>
+      <h2>{{user.login}}</h2>
+    </ion-item>
+  </ion-list>
+
+ <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="20%">
+   <ion-infinite-scroll-content></ion-infinite-scroll-content>
+ </ion-infinite-scroll>
+</ion-content>

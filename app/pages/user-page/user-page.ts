@@ -7,6 +7,7 @@ import BrowserService from '../../services/browser';
 import { ErrorPage } from '../error-page/error-page';
 import { ReposPage } from '../repos-page/repos-page';
 import { StarredPage } from '../starred-page/starred-page';
+import { FollowersPage } from '../followers-page/followers-page';
 import { WatchedPage } from '../watched-page/watched-page';
 
 import { Popover } from './popover/popover';
@@ -90,6 +91,10 @@ export class UserPage {
 
   openStarredPage() {
     this.nav.push(StarredPage, {user: this.user.login});
+  }
+
+  openFollowersPage() {
+    this.nav.push(FollowersPage, {user: this.user.login});
   }
 
   openWatchingPage() {
