@@ -37,7 +37,20 @@ export class UserPage {
       this.user = user;
       this.getUserInfo();
     } else if (username) {
-      this.user = {url: 'users/' + username};
+      this.user = {url: '/users/' + username, login: username};
+      let tab = this.params.get('tab');
+      if (tab) {
+        this.nav.pop().then(() => {
+          if (tab === 'repositories') {
+            this.openReposPage();
+          } else if (tab === 'stars') {
+            this.openStarredPage();
+          } else {
+            this.nav.push(ErrorPage, {error: {status: 404, message: 'Not Found'}});
+          }
+        });
+        return ;
+      }
       this.getUserInfo();
     } else {
       this.loading = false;

@@ -27,7 +27,7 @@ export class ErrorPage {
         this.message = 'No Network Connection';
         break;
       default:
-        this.message = 'Unexpected Error';
+        this.message = this.error.message || 'Unexpected Error';
     }
     // Check If It is a network problem
   }

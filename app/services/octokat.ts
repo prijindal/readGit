@@ -24,6 +24,7 @@ export class OctokatService {
         });
         return token;
       } else {
+        this.octo = new this.Octokat({});
         throw new Error('Not Authenticated');
       }
     });

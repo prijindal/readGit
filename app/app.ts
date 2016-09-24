@@ -4,8 +4,6 @@ import {Component, ViewChild} from '@angular/core';
 import {App, ionicBootstrap, Platform, MenuController, Nav, Events} from 'ionic-angular';
 import {StatusBar, Deeplinks} from 'ionic-native';
 
-
-import {ErrorPage} from './pages/error-page/error-page';
 import {LoginPage} from './pages/login-page/login-page';
 import {UserPage} from './pages/user-page/user-page';
 import {RepoPage} from './pages/repo-page/repo-page';
@@ -76,7 +74,6 @@ class MyApp {
 
   private deeplinkInit() {
     Deeplinks.routeWithNavController(this.nav, {
-      '': LoginPage,
       '/:username': UserPage,
       '/:username/:reponame': RepoPage,
       // '/:username/:reponame/milestones': MilestonesPage
