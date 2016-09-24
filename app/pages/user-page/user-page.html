@@ -41,7 +41,7 @@
       </div>
       <div *ngIf="user.email" class="user-tag">
         <ion-icon name="mail"></ion-icon>
-        <span>{{user.email}}</span>
+        <span><a (click)="browser.open('mailto:' + user.email)">{{user.email}}</a></span>
       </div>
       <div *ngIf="user.blog" class="user-tag">
         <ion-icon name="link"></ion-icon>
@@ -53,7 +53,7 @@
     </div>
 
     <div class="user-icons layout flex row center wrap">
-      <div class="user-icon user-followers layout flex column">
+      <div class="user-icon user-followers layout flex column" (click)="openFollowersPage()">
         <div class="count">{{user.followers}}</div>
         <div class="icon-name">Followers</div>
       </div>
@@ -61,7 +61,7 @@
         <div class="count">{{user.public_gists + (user.private_gists ? user.private_gists : 0)}}</div>
         <div class="icon-name">Gists</div>
       </div>
-      <div class="user-icon user-followers layout flex column">
+      <div class="user-icon user-followers layout flex column" (click)="openFollowingPage()">
         <div class="count">{{user.following}}</div>
         <div class="icon-name">Following</div>
       </div>
