@@ -2,7 +2,7 @@ import 'es6-shim';
 import 'rxjs/Rx';
 import {Component, ViewChild} from '@angular/core';
 import {App, ionicBootstrap, Platform, MenuController, Nav, Events} from 'ionic-angular';
-import {StatusBar} from 'ionic-native';
+import {StatusBar, Deeplinks} from 'ionic-native';
 
 import {LoginPage} from './pages/login-page/login-page';
 
@@ -92,20 +92,10 @@ class MyApp {
         if (this.nav.canGoBack()) {
           this.nav.pop();
         } else {
-          this.confirmExitApp();
+          navigator['app'].exitApp();
         }
       }
     });
-  }
-
-  private confirmExitApp() {
-    let homeIntent = navigator['home'];
-    if (homeIntent) {
-      homeIntent.home();
-    } else if (navigator['app']) {
-      navigator['app'].exitApp();
-    }
-    return true;
   }
 }
 
@@ -117,5 +107,5 @@ ionicBootstrap(MyApp, [
   BrowserService,
   FileService
 ], {
-  pageTransition: 'ios'
+
 });
