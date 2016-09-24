@@ -3,7 +3,7 @@
     <button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Following {{user}}</ion-title>
+    <ion-title>Following<span *ngIf="user && user !== 'user'"> {{user.substr(6)}}</span></ion-title>
     <ion-buttons end>
       <button [disabled]="loading" (click)="refreshFollowing($event)">
         <ion-icon name="refresh"></ion-icon>
