@@ -63,7 +63,8 @@ export class RepoPage {
   getReadMe() {
     this.filehttp.getFileFromUrl(this.repo.url + '/readme', 'html')
     .then(res => {
-      this.readme = res.text();
+      let text = res.text();
+      this.readme = text;
       this.ref.detectChanges();
     })
     .catch(err => {
