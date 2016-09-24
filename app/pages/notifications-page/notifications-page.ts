@@ -44,7 +44,7 @@ export class NotificationsPage {
   }
 
   getNotifications(shouldRefresh: Boolean = false) {
-    return this.octokat.octo.fromUrl('/notifications' + '?page=' + this.page + '&all=true&per_page=' + PER_PAGE).read()
+    return this.octokat.octo.fromUrl('/notifications' + '?page=' + this.page + '&per_page=' + PER_PAGE).read()
     .then(res => {
       res = JSON.parse(res);
       if (shouldRefresh) {
