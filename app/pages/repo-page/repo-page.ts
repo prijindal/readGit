@@ -20,6 +20,14 @@ export class RepoPage {
   private readmeError: any;
   private branches: any;
   private pulls: any;
+  private contributors: any;
+  private collaborators: any;
+  private subscription: any;
+  private isSubscribed: any;
+  private starring: any;
+  private isStarring: any;
+  private watchingLoading: Boolean = false;
+  private starringLoading: Boolean = false;
 
   constructor(
     private ref: ChangeDetectorRef,
@@ -61,6 +69,10 @@ export class RepoPage {
       this.getReadMe();
       this.getBranches();
       this.getPulls();
+      this.getContributors();
+      this.getCollaborators();
+      this.checkWatching();
+      this.checkStarring();
     })
     .catch(err => {
       this.loading = false;
@@ -96,6 +108,98 @@ export class RepoPage {
     .then(res => {
       res = JSON.parse(res);
       this.pulls = res;
+    });
+  }
+
+  getContributors() {
+    this.octokat.octo.fromUrl(this.repo.url + '/contributors')
+    .read()
+    .then(res => {
+      res = JSON.parse(res);
+      this.contributors = res;
+    });
+  }
+
+  getCollaborators() {
+    this.octokat.octo.fromUrl(this.repo.url + '/collaborators')
+    .read()
+    .then(res => {
+      res = JSON.parse(res);
+      this.collaborators = res;
+    });
+  }
+
+  checkWatching() {
+    if (this.octokat.user) {
+      this.octokat.octo.repos(this.repo.owner.login, this.repo.name).subscription
+      .read()
+      .then(res => {
+        this.subscription = true;
+        this.isSubscribed = true;
+      })
+      .catch(err => {
+        if (err.status === 404) {
+          this.isSubscribed = false;
+          this.subscription = true;
+        }
+      });
+    }
+  }
+
+  watchRepo(repo) {
+    this.watchingLoading = true;
+    this.octokat.octo.repos(repo.owner.login, repo.name).subscription
+    .add({subscribed: true})
+    .then(res => {
+      this.isSubscribed = true;
+      this.watchingLoading = false;
+    });
+  }
+
+  unWatchRepo(repo) {
+    this.watchingLoading = true;
+    this.octokat.octo.repos(repo.owner.login, repo.name).subscription
+    .remove()
+    .then(res => {
+      this.isSubscribed = false;
+      this.watchingLoading = false;
+    });
+  }
+
+  checkStarring() {
+    if (this.octokat.user) {
+      this.octokat.octo.me.starred(this.repo.owner.login, this.repo.name)
+      .read()
+      .then(res => {
+        this.starring = true;
+        this.isStarring = true;
+      })
+      .catch(err => {
+        if (err.status === 404) {
+          this.isStarring = false;
+          this.starring = true;
+        }
+      });
+    }
+  }
+
+  starRepo(repo) {
+    this.starringLoading = true;
+    this.octokat.octo.me.starred(this.repo.owner.login, this.repo.name)
+    .add()
+    .then(res => {
+      this.isStarring = true;
+      this.starringLoading = false;
+    });
+  }
+
+  unStarRepo(repo) {
+    this.starringLoading = true;
+    this.octokat.octo.me.starred(this.repo.owner.login, this.repo.name)
+    .remove()
+    .then(res => {
+      this.isStarring = false;
+      this.starringLoading = false;
     });
   }
 

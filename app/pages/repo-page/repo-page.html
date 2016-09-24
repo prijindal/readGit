@@ -26,6 +26,26 @@
     </div>
   </div>
   <div *ngIf="repo">
+    <ion-card *ngIf="octokat.user" class="buttons">
+      <ion-card-content class="layout flex around">
+        <div *ngIf="subscription">
+          <button ion-button clear [disabled]="watchingLoading" *ngIf="isSubscribed" (click)="unWatchRepo(repo)">
+            Unwatch
+          </button>
+          <button ion-button outline [disabled]="watchingLoading" *ngIf="!isSubscribed" (click)="watchRepo(repo)">
+            Watch
+          </button>
+        </div>
+        <div *ngIf="starring">
+          <button ion-button clear [disabled]="starringLoading" *ngIf="isStarring" (click)="unStarRepo(repo)">
+            Unstar
+          </button>
+          <button ion-button outline [disabled]="starringLoading" *ngIf="!isStarring" (click)="starRepo(repo)">
+            Star
+          </button>
+        </div>
+      </ion-card-content>
+    </ion-card>
     <ion-card *ngIf="repo.owner">
       <ion-card-header>
         <a (click)="openUser(repo.owner)" *ngIf="repo.owner.login">{{repo.owner.login}}</a>
@@ -71,6 +91,14 @@
           <div *ngIf="pulls" class="user-icon layout flex column" (click)="openFollowersPage()">
             <div class="count">{{pulls.length}}</div>
             <div class="icon-name">Pulls</div>
+          </div>
+          <div *ngIf="contributors" class="user-icon layout flex column" (click)="openFollowersPage()">
+            <div class="count">{{contributors.length}}</div>
+            <div class="icon-name">Contributors</div>
+          </div>
+          <div *ngIf="collaborators" class="user-icon layout flex column" (click)="openFollowersPage()">
+            <div class="count">{{collaborators.length}}</div>
+            <div class="icon-name">Collaborators</div>
           </div>
         </div>
       </ion-card-content>
