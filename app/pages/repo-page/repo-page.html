@@ -16,7 +16,7 @@
 </ion-header>
 
 
-<ion-content class="user-page">
+<ion-content class="repo-page">
   <div text-center margin-top *ngIf="!repo">
     <div *ngIf="loading">
       Loading...
@@ -25,7 +25,53 @@
       Error Fetching Repository
     </div>
   </div>
-  <div padding *ngIf="readme" [innerHTML]="readme">
-
+  <div *ngIf="repo">
+    <ion-card *ngIf="repo.owner">
+      <ion-card-header>
+        <a (click)="openUser(repo.owner)" *ngIf="repo.owner.login">{{repo.owner.login}}</a>
+        /
+        <span>{{repo.name}}</span>
+      </ion-card-header>
+      <ion-card-content>
+        <p *ngIf="repo.description">
+          {{repo.description}}
+        </p>
+        <p *ngIf="repo.homepage">
+          <a (click)="browser.open(repo.homepage)">{{repo.homepage}}</a>
+        </p>
+        <p *ngIf="repo.language">
+          LANGUAGE {{repo.language}}
+        </p>
+      </ion-card-content>
+    </ion-card>
+    <ion-card *ngIf="!loading && repo">
+      <ion-card-content class="icons-ion-card-content">
+        <div class="user-icons layout flex row around wrap">
+          <div class="user-icon layout flex column" (click)="openFollowersPage()">
+            <div class="count">{{repo.open_issues_count}}</div>
+            <div class="icon-name">Issues</div>
+          </div>
+          <div class="user-icon layout flex column" (click)="openFollowersPage()">
+            <div class="count">{{repo.stargazers_count}}</div>
+            <div class="icon-name">Issues</div>
+          </div>
+          <div class="user-icon layout flex column" (click)="openFollowersPage()">
+            <div class="count">{{repo.forks_count}}</div>
+            <div class="icon-name">Forks</div>
+          </div>
+          <div class="user-icon layout flex column" (click)="openFollowersPage()">
+            <div class="count">{{repo.watchers_count}}</div>
+            <div class="icon-name">Watchers</div>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    <ion-card *ngIf="readme">
+      <ion-card-header>README</ion-card-header>
+      <ion-card-content [innerHTML]="readme"></ion-card-content>
+    </ion-card>
+    <ion-card *ngIf="readmeError">
+      <ion-card-header>No Readme Found</ion-card-header>
+    </ion-card>
   </div>
 </ion-content>

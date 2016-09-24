@@ -15,11 +15,11 @@ export class FileService {
       this.local.storage.get('TOKEN')
       .then(token => {
         this.sendRequest(url, type, token)
-        .subscribe(resolve);
+        .subscribe(resolve, reject);
       })
       .catch(err => {
         this.sendRequest(url, type)
-        .subscribe(resolve);
+        .subscribe(resolve, reject);
       });
     });
   }

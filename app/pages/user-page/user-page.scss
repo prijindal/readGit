@@ -34,17 +34,20 @@
 
   .user-icons {
     margin: 16px;
-    .user-icon {
-      margin: 8px;
-    }
-    .count {
-      font-size: 32px;
-      font-weight: bold;
-      text-align: center;
-    }
+  }
+}
 
-    .icon-name {
-      text-align: center;
-    }
+.user-icons {
+  .user-icon {
+    margin: 8px;
+  }
+  .count {
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .icon-name {
+    text-align: center;
   }
 }

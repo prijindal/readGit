@@ -3,8 +3,10 @@ import {NavController, NavParams, PopoverController} from 'ionic-angular';
 
 import OctokatService from '../../services/octokat';
 import FileService from '../../services/filehttp';
+import BrowserService from '../../services/browser';
 
 import { ErrorPage } from '../error-page/error-page';
+import { UserPage } from '../user-page/user-page';
 
 import { Popover } from './popover/popover';
 
@@ -15,6 +17,7 @@ export class RepoPage {
   public loading: Boolean = true;
   private repo: any;
   private readme: string;
+  private readmeError: any;
 
   constructor(
     private ref: ChangeDetectorRef,
@@ -22,7 +25,8 @@ export class RepoPage {
     private params: NavParams,
     private popoverCtrl: PopoverController,
     private octokat: OctokatService,
-    private filehttp: FileService
+    private filehttp: FileService,
+    private browser: BrowserService
   ) { }
 
   ionViewWillEnter() {
@@ -68,8 +72,13 @@ export class RepoPage {
       this.ref.detectChanges();
     })
     .catch(err => {
-      this.nav.push(ErrorPage, {error: {message: 'Problem with Fetching Repository'}});
+      this.readmeError = true;
+      this.ref.detectChanges();
     });
+  }
+
+  openUser(owner) {
+    this.nav.push(UserPage, {user: owner});
   }
 
   presentPopover(event) {
