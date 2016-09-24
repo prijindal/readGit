@@ -18,6 +18,8 @@ export class RepoPage {
   private repo: any;
   private readme: string;
   private readmeError: any;
+  private branches: any;
+  private pulls: any;
 
   constructor(
     private ref: ChangeDetectorRef,
@@ -57,6 +59,8 @@ export class RepoPage {
       this.loading = false;
       this.repo = JSON.parse(res);
       this.getReadMe();
+      this.getBranches();
+      this.getPulls();
     })
     .catch(err => {
       this.loading = false;
@@ -74,6 +78,24 @@ export class RepoPage {
     .catch(err => {
       this.readmeError = true;
       this.ref.detectChanges();
+    });
+  }
+
+  getBranches() {
+    this.octokat.octo.fromUrl(this.repo.url + '/branches')
+    .read()
+    .then(res => {
+      res = JSON.parse(res);
+      this.branches = res;
+    });
+  }
+
+  getPulls() {
+    this.octokat.octo.fromUrl(this.repo.url + '/pulls')
+    .read()
+    .then(res => {
+      res = JSON.parse(res);
+      this.pulls = res;
     });
   }
 

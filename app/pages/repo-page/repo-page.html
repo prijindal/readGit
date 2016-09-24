@@ -48,7 +48,8 @@
       <ion-card-content class="icons-ion-card-content">
         <div class="user-icons layout flex row around wrap">
           <div class="user-icon layout flex column" (click)="openFollowersPage()">
-            <div class="count">{{repo.open_issues_count}}</div>
+            <div *ngIf="!pulls" class="count">{{repo.open_issues_count}}</div>
+            <div *ngIf="pulls" class="count">{{repo.open_issues_count - pulls.length}}</div>
             <div class="icon-name">Issues</div>
           </div>
           <div class="user-icon layout flex column" (click)="openFollowersPage()">
@@ -62,6 +63,14 @@
           <div class="user-icon layout flex column" (click)="openFollowersPage()">
             <div class="count">{{repo.watchers_count}}</div>
             <div class="icon-name">Watchers</div>
+          </div>
+          <div *ngIf="branches" class="user-icon layout flex column" (click)="openFollowersPage()">
+            <div class="count">{{branches.length}}</div>
+            <div class="icon-name">Branches</div>
+          </div>
+          <div *ngIf="pulls" class="user-icon layout flex column" (click)="openFollowersPage()">
+            <div class="count">{{pulls.length}}</div>
+            <div class="icon-name">Pulls</div>
           </div>
         </div>
       </ion-card-content>
