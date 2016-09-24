@@ -3,9 +3,9 @@
     <button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Watching</ion-title>
+    <ion-title>Watching<span *ngIf="user && user !== 'user'"> {{user.substr(6)}}</span></ion-title>
     <ion-buttons end>
-      <button [disabled]="loading" (click)="refreshWatched($event)">
+      <button [disabled]="loading" (click)="getWatched($event)">
         <ion-icon name="refresh"></ion-icon>
       </button>
       <button (click)="presentPopover($event)">
@@ -40,8 +40,4 @@
       </ion-card-content>
     </ion-card>
   </ion-list>
-
- <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="20%">
-   <ion-infinite-scroll-content></ion-infinite-scroll-content>
- </ion-infinite-scroll>
 </ion-content>

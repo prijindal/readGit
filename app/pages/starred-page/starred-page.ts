@@ -8,8 +8,7 @@ import { RepoPage } from '../repo-page/repo-page';
 
 import { Popover } from './popover/popover';
 
-const PER_PAGE: number = 30;
-const LIMIT: number = 300;
+const PER_PAGE: number = 10000;
 
 @Component({
   templateUrl: 'build/pages/starred-page/starred-page.html'
@@ -18,7 +17,6 @@ export class StarredPage {
   @ViewChild('starredContent') homeContent;
   public loading: Boolean = true;
   public starred: any = [];
-  private page: number = 1;
   private user: string;
 
   constructor(
@@ -36,47 +34,19 @@ export class StarredPage {
     } else {
       this.user = 'users/' + this.user;
     }
-    this.refreshEvents();
+    this.getStarred();
   }
 
-  refreshEvents() {
-    this.loading = true;
-    this.page = 1;
-    this.getStarred(true)
-    .then(() => {
-      this.loading = false;
-    });
-  }
-
-  getStarred(shouldRefresh: Boolean = false) {
-    return this.octokat.octo.fromUrl('/' + this.user + '/starred' + '?page=' + this.page + '&per_page=' + PER_PAGE).read()
+  getStarred() {
+    return this.octokat.octo.fromUrl('/' + this.user + '/starred' + '?per_page=' + PER_PAGE).read()
     .then(res => {
-      res = JSON.parse(res);
-      if (shouldRefresh) {
-        this.homeContent.scrollTo(0, 0);
-        this.starred = [];
-      }
-      res.forEach((notification) => {
-        this.starred.push(notification);
-      });
+      this.starred = JSON.parse(res);
       this.ref.detectChanges();
       return res;
     })
     .catch(err => {
       this.nav.push(ErrorPage, {error: err});
     });
-  }
-
-  doInfinite(infiniteScroll) {
-    this.page += 1;
-    if (this.page <= LIMIT / PER_PAGE) {
-      this.getStarred()
-      .then(() => {
-        infiniteScroll.complete();
-      });
-    } else {
-      infiniteScroll.enable(false);
-    }
   }
 
   openRepository(repo) {

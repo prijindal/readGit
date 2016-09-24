@@ -13,6 +13,8 @@ import { WatchedPage } from '../watched-page/watched-page';
 
 import { Popover } from './popover/popover';
 
+const PER_PAGE: number = 10000;
+
 @Component({
   templateUrl: 'build/pages/user-page/user-page.html'
 })
@@ -71,13 +73,13 @@ export class UserPage {
     .then(res => {
       this.loading = false;
       this.user = JSON.parse(res);
-      this.octokat.octo.fromUrl(this.user.url + '/starred?per_page=10000')
+      this.octokat.octo.fromUrl(this.user.url + '/starred?per_page=' + PER_PAGE)
       .read()
       .then(res => {
         res = JSON.parse(res);
         this.starred = res.length;
       });
-      this.octokat.octo.fromUrl(this.user.url + '/subscriptions?per_page=10000')
+      this.octokat.octo.fromUrl(this.user.url + '/subscriptions?per_page=' + PER_PAGE)
       .read()
       .then(res => {
         res = JSON.parse(res);

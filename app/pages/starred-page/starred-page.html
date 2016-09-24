@@ -5,7 +5,7 @@
     </button>
     <ion-title>Starred Repos<span *ngIf="user && user !== 'user'"> of {{user.substr(6)}}</span></ion-title>
     <ion-buttons end>
-      <button [disabled]="loading" (click)="refreshStarred($event)">
+      <button [disabled]="loading" (click)="getStarred($event)">
         <ion-icon name="refresh"></ion-icon>
       </button>
       <button (click)="presentPopover($event)">
@@ -40,8 +40,4 @@
       </ion-card-content>
     </ion-card>
   </ion-list>
-
- <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="20%">
-   <ion-infinite-scroll-content></ion-infinite-scroll-content>
- </ion-infinite-scroll>
 </ion-content>
