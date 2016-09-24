@@ -4,7 +4,6 @@ import {Component, ViewChild} from '@angular/core';
 import {App, ionicBootstrap, Platform, MenuController, Nav, Events} from 'ionic-angular';
 import {StatusBar, Deeplinks} from 'ionic-native';
 
-import {LoginPage} from './pages/login-page/login-page';
 import {UserPage} from './pages/user-page/user-page';
 import {RepoPage} from './pages/repo-page/repo-page';
 import {HomePage} from './pages/home-page/home-page';
@@ -30,7 +29,7 @@ import FileService from './services/filehttp';
 })
 class MyApp {
   @ViewChild(Nav) nav: Nav;
-  rootPage: any = LoginPage;
+  rootPage: any = HomePage;
   menuEnabled: Boolean = false;
   profileEnabled: Boolean = false;
   pages: Array<{title: string, component: any}>;

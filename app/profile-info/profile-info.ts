@@ -4,7 +4,7 @@ import { MenuController, Nav } from 'ionic-angular';
 
 import OctokatService from '../services/octokat';
 
-import { LoginPage } from '../pages/login-page/login-page';
+import { HomePage } from '../pages/home-page/home-page';
 import { UserPage } from '../pages/user-page/user-page';
 
 @Component({
@@ -40,7 +40,7 @@ export class ProfileInfo {
     .then(() => {
       this.octokat.logout()
       .then(() => {
-        this.nav.setRoot(LoginPage);
+        this.nav.setRoot(HomePage);
       });
     });
   }
