@@ -8,7 +8,7 @@
       <button [disabled]="loading" (click)="getRepoInfo($event)">
         <ion-icon name="refresh"></ion-icon>
       </button>
-      <button (click)="presentPopover($event)">
+      <button *ngIf="repo" (click)="presentPopover($event)">
         <ion-icon name="more"></ion-icon>
       </button>
     </ion-buttons>
@@ -91,14 +91,6 @@
           <div *ngIf="pulls" class="user-icon layout flex column" (click)="openPullsPage()">
             <div class="count">{{pulls.length}}</div>
             <div class="icon-name">Pulls</div>
-          </div>
-          <div *ngIf="contributors" class="user-icon layout flex column" (click)="openContributorsPage()">
-            <div class="count">{{contributors.length}}</div>
-            <div class="icon-name">Contributors</div>
-          </div>
-          <div *ngIf="collaborators" class="user-icon layout flex column" (click)="openCollabaratorsPage()">
-            <div class="count">{{collaborators.length}}</div>
-            <div class="icon-name">Collaborators</div>
           </div>
         </div>
       </ion-card-content>

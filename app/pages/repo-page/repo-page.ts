@@ -20,8 +20,6 @@ export class RepoPage {
   private readmeError: any;
   private branches: any;
   private pulls: any;
-  private contributors: any;
-  private collaborators: any;
   private subscription: any;
   private isSubscribed: any;
   private starring: any;
@@ -69,8 +67,6 @@ export class RepoPage {
       this.getReadMe();
       this.getBranches();
       this.getPulls();
-      this.getContributors();
-      this.getCollaborators();
       this.checkWatching();
       this.checkStarring();
     })
@@ -108,24 +104,6 @@ export class RepoPage {
     .then(res => {
       res = JSON.parse(res);
       this.pulls = res;
-    });
-  }
-
-  getContributors() {
-    this.octokat.octo.fromUrl(this.repo.url + '/contributors')
-    .read()
-    .then(res => {
-      res = JSON.parse(res);
-      this.contributors = res;
-    });
-  }
-
-  getCollaborators() {
-    this.octokat.octo.fromUrl(this.repo.url + '/collaborators')
-    .read()
-    .then(res => {
-      res = JSON.parse(res);
-      this.collaborators = res;
     });
   }
 
@@ -231,16 +209,8 @@ export class RepoPage {
     this.browser.open(this.repo.html_url + '/pulls');
   }
 
-  openContributorsPage() {
-    this.browser.open(this.repo.html_url + '/contributors');
-  }
-
-  openCollabaratorsPage() {
-    this.browser.open(this.repo.html_url + '/settings/collaboration');
-  }
-
   presentPopover(event) {
-    let popover = this.popoverCtrl.create(Popover);
+    let popover = this.popoverCtrl.create(Popover, {repo: this.repo});
     popover.present({
       ev: event
     });
