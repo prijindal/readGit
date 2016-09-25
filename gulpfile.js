@@ -41,7 +41,7 @@ var tslint = require('ionic-gulp-tslint');
 
 var isRelease = argv.indexOf('--release') > -1;
 
-var shouldSkipBuild = argv.indexOf('--skip-build') > 1;
+var shouldSkipBuild = argv.indexOf('--skip-build') > -1;
 
 gulp.task('watch', ['clean'], function(done){
   runSequence(

@@ -7,6 +7,7 @@ export class OctokatService {
   public octo: any;
   private Octokat: any;
   public user: string;
+  public userData: any;
 
   constructor(
     private local: LocalService

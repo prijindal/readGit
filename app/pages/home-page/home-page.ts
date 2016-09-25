@@ -105,6 +105,7 @@ export class HomePage {
       this.octokat.octo.me.read()
       .then(res => {
         res = JSON.parse(res);
+        this.octokat.userData = res;
         this.octokat.user = res.login;
         this.message = 'Logged In';
         this.events.publish('login', true);
