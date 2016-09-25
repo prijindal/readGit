@@ -26,6 +26,9 @@ export class ErrorPage {
       case 0:
         this.message = 'No Network Connection';
         break;
+      case 404:
+        this.message = 'Not Found';
+        break;
       default:
         this.message = this.error.message || 'Unexpected Error';
     }

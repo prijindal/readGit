@@ -72,7 +72,11 @@ export class RepoPage {
     })
     .catch(err => {
       this.loading = false;
-      this.nav.push(ErrorPage, {error: {message: 'Problem with Fetching Repository'}});
+      if (err.status === 404) {
+        this.nav.push(ErrorPage, {error: err});
+      } else {
+        this.nav.push(ErrorPage, {error: {message: 'Problem with Fetching Repository'}});
+      }
     });
   }
 
