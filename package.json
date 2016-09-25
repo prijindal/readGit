@@ -41,7 +41,8 @@
     "livereload": "ionic run android --livereload --address 192.168.137.1 --device",
     "build": "gulp build --release",
     "android": "cordova run android --buildConfig=.vscode/build.json",
-    "release": "npm run build && npm run android -- --release"
+    "release": "npm run build && npm run android -- --release",
+    "deeplink": "adb shell am start -a android.intent.action.VIEW -d 'github://github.com/prijindal/readGit/issues'"
   },
   "cordovaPlugins": [
     "cordova-plugin-device",

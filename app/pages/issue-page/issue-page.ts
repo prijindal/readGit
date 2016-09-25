@@ -34,7 +34,7 @@ export class IssuePage {
       let reponame = this.params.get('reponame');
       let issuenumber = this.params.get('issuenumber');
       let url = '/repos/' + username + '/' + reponame + '/issues/' + issuenumber;
-      this.issue = {url: url};
+      this.issue = {url: url, number: issuenumber};
      }
     this.getIssue();
     this.getComments();

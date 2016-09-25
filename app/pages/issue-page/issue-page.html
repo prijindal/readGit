@@ -55,7 +55,9 @@
       </ion-card>
     </div>
     <ion-card *ngIf="comments.length === 0 && !issue.body">
-      No Comments
+      <ion-card-content>
+        No Comments
+      </ion-card-content>
     </ion-card>
   </div>
 </ion-content>
