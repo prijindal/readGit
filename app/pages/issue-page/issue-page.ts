@@ -29,6 +29,13 @@ export class IssuePage {
 
   ionViewWillEnter() {
     this.issue = this.params.get('issue');
+    if (!this.issue) {
+      let username = this.params.get('username');
+      let reponame = this.params.get('reponame');
+      let issuenumber = this.params.get('issuenumber');
+      let url = '/repos/' + username + '/' + reponame + '/issues/' + issuenumber;
+      this.issue = {url: url};
+     }
     this.getIssue();
     this.getComments();
   }
@@ -41,6 +48,7 @@ export class IssuePage {
       res = JSON.parse(res);
       this.issue = res;
       this.loading = false;
+      this.ref.detectChanges();
     })
     .catch(err => {
       this.nav.push(ErrorPage, {error: err});
@@ -53,7 +61,7 @@ export class IssuePage {
     .then(res => {
       res = JSON.parse(res);
       this.comments = res;
-      this.loading = false;
+      this.ref.detectChanges();
     });
   }
 

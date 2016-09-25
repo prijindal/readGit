@@ -34,6 +34,11 @@ export class IssuesPage {
 
   ionViewWillEnter() {
     this.repo = this.params.get('repo');
+    if (!this.repo) {
+      let username = this.params.get('username');
+      let reponame = this.params.get('reponame');
+      this.repo = username + '/' + reponame;
+     }
     this.refreshEvents();
   }
 

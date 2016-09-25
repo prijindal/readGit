@@ -30,12 +30,12 @@
       <h2 class="sound-click layout flex between">
         {{issue.title}}
       </h2>
-      <p class="sound-click">
+      <p class="sound-click" *ngIf="issue.user">
         {{issue.user.login}} opened this issue {{timeFromNow(issue.created_at)}}
       </p>
     </div>
     <ion-card *ngIf="issue.body">
-      <ion-card-header>
+      <ion-card-header *ngIf="issue.user">
         {{issue.user.login}} commented {{timeFromNow(issue.created_at)}}
       </ion-card-header>
       <ion-card-content>

@@ -5,7 +5,6 @@ import {App, ionicBootstrap, Platform, MenuController, Nav, Events} from 'ionic-
 import {StatusBar, Deeplinks} from 'ionic-native';
 
 import {UserPage} from './pages/user-page/user-page';
-import {RepoPage} from './pages/repo-page/repo-page';
 import {SearchPage} from './pages/search-page/search-page';
 import {HomePage} from './pages/home-page/home-page';
 import {NotificationsPage} from './pages/notifications-page/notifications-page';
@@ -14,6 +13,10 @@ import {StarredPage} from './pages/starred-page/starred-page';
 import {FollowersPage} from './pages/followers-page/followers-page';
 import {FollowingPage} from './pages/following-page/following-page';
 import {WatchedPage} from './pages/watched-page/watched-page';
+
+import {RepoPage} from './pages/repo-page/repo-page';
+import {IssuesPage} from './pages/issues-page/issues-page';
+import {IssuePage} from './pages/issue-page/issue-page';
 
 import { ProfileInfo } from './profile-info/profile-info';
 
@@ -79,6 +82,8 @@ class MyApp {
     Deeplinks.routeWithNavController(this.nav, {
       '/:username': UserPage,
       '/:username/:reponame': RepoPage,
+      '/:username/:reponame/issues': IssuesPage,
+      '/:username/:reponame/issues/:issuenumber': IssuePage
       // '/:username/:reponame/milestones': MilestonesPage
     })
     .subscribe((match) => {
