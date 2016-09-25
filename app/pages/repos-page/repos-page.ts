@@ -48,7 +48,7 @@ export class ReposPage {
   }
 
   getRepos(shouldRefresh: Boolean = false) {
-    return this.octokat.octo.fromUrl('/' + this.user + '/repos' + '?page=' + this.page + '&per_page=' + PER_PAGE).read()
+    return this.octokat.octo.fromUrl('/' + this.user + '/repos' + '?sort=updated&page=' + this.page + '&per_page=' + PER_PAGE).read()
     .then(res => {
       res = JSON.parse(res);
       if (shouldRefresh) {
