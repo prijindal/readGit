@@ -1,4 +1,4 @@
-import {Component, ChangeDetectorRef, ViewChild} from '@angular/core';
+import {Component, ChangeDetectorRef} from '@angular/core';
 import {NavController, NavParams, PopoverController} from 'ionic-angular';
 
 import * as moment from 'moment';
