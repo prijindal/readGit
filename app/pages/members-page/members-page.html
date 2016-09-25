@@ -3,7 +3,7 @@
     <button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Members<span *ngIf="user && user !== 'user'"> {{user.substr(6)}}</span></ion-title>
+    <ion-title>Members<span *ngIf="user && user !== 'user'"> of {{user.substr(5)}}</span></ion-title>
     <ion-buttons end>
       <button [disabled]="loading" (click)="refreshMembers($event)">
         <ion-icon name="refresh"></ion-icon>
