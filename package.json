@@ -42,7 +42,7 @@
     "build": "gulp build --release",
     "android": "cordova run android --buildConfig=.vscode/build.json",
     "release": "npm run build && npm run android -- --release",
-    "deeplink": "adb shell am start -a android.intent.action.VIEW -d 'github://github.com/prijindal/readGit/issues'"
+    "deeplink": "adb shell am start -a android.intent.action.VIEW -d 'github://github.com/prijindal/readGit'"
   },
   "cordovaPlugins": [
     "cordova-plugin-device",
