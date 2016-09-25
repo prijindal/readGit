@@ -189,6 +189,10 @@ export class RepoPage {
     this.nav.push(UserPage, {user: owner});
   }
 
+  openCode() {
+    this.browser.open(this.repo.html_url + '/tree/' + this.repo.default_branch);
+  }
+
   openIssuesPage() {
     this.browser.open(this.repo.html_url + '/issues');
   }
