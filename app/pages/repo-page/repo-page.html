@@ -65,7 +65,8 @@
       </ion-card-content>
     </ion-card>
     <div margin>
-      <button ion-button full (click)="openCode()">View Code</button>
+      <button ion-button full margin-bottom (click)="openCode()">View Code</button>
+      <button ion-button full (click)="openCommits()">View Commits</button>
     </div>
     <ion-card *ngIf="!loading && repo">
       <ion-card-content class="icons-ion-card-content">

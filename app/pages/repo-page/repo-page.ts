@@ -194,6 +194,10 @@ export class RepoPage {
     this.browser.open(this.repo.html_url + '/tree/' + this.repo.default_branch);
   }
 
+  openCommits() {
+    this.browser.open(this.repo.html_url + '/commits');
+  }
+
   openIssuesPage() {
     this.nav.push(IssuesPage, {repo: this.repo.full_name});
   }
