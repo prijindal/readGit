@@ -53,15 +53,15 @@
     </div>
 
     <div class="user-icons layout flex row center wrap">
-      <div class="user-icon user-followers layout flex column" (click)="openFollowersPage()">
+      <div *ngIf="user.type=='User'" class="user-icon user-followers layout flex column" (click)="openFollowersPage()">
         <div class="count">{{user.followers}}</div>
         <div class="icon-name">Followers</div>
       </div>
-      <div class="user-icon user-starred layout flex column">
+      <div *ngIf="user.type=='User'" class="user-icon user-starred layout flex column">
         <div class="count">{{user.public_gists + (user.private_gists ? user.private_gists : 0)}}</div>
         <div class="icon-name">Gists</div>
       </div>
-      <div class="user-icon user-followers layout flex column" (click)="openFollowingPage()">
+      <div *ngIf="user.type=='User'" class="user-icon user-followers layout flex column" (click)="openFollowingPage()">
         <div class="count">{{user.following}}</div>
         <div class="icon-name">Following</div>
       </div>
@@ -69,13 +69,26 @@
         <div class="count">{{user.public_repos + (user.total_private_repos ? user.total_private_repos : 0)}}</div>
         <div class="icon-name">Repositories</div>
       </div>
-      <div *ngIf="starred" class="user-icon user-followers layout flex column" (click)="openStarredPage()">
+      <div *ngIf="starred && user.type=='User'" class="user-icon user-followers layout flex column" (click)="openStarredPage()">
         <div class="count">{{starred}}</div>
         <div class="icon-name">Starred</div>
       </div>
-      <div *ngIf="watching" class="user-icon user-followers layout flex column" (click)="openWatchingPage()">
+      <div *ngIf="watching && user.type=='User'" class="user-icon user-followers layout flex column" (click)="openWatchingPage()">
         <div class="count">{{watching}}</div>
         <div class="icon-name">Watching</div>
+      </div>
+      <div *ngIf="members && user.type=='Organization'" class="user-icon user-followers layout flex column" (click)="openWatchingPage()">
+        <div class="count">{{members}}</div>
+        <div class="icon-name">Members</div>
+      </div>
+    </div>
+
+    <div *ngIf="orgs && orgs.length > 0" class="user-orgs" padding-horizontal>
+      <h4>Organizations</h4>
+      <div class="layout flex wrap row start">
+        <div class="org-image" *ngFor="let org of orgs" margin (click)="openUser(org)">
+          <img [src]="'https://avatars.githubusercontent.com/u/' + org.id + '?s=40'"/>
+        </div>
       </div>
     </div>
   </div>

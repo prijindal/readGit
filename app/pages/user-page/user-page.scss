@@ -35,6 +35,17 @@
   .user-icons {
     margin: 16px;
   }
+
+  .user-orgs {
+    .org-image {
+      width: 40px;
+      height: 40px;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
 }
 
 .user-icons {

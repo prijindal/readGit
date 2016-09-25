@@ -23,6 +23,8 @@ export class UserPage {
   private user: any;
   public starred: number;
   public watching: number;
+  public members: number;
+  public orgs: any;
 
   constructor(
     private ref: ChangeDetectorRef,
@@ -39,7 +41,6 @@ export class UserPage {
     if (user) {
       this.loading = false;
       this.user = user;
-      this.getUserInfo();
     } else if (username) {
       this.user = {url: '/users/' + username, login: username};
       let tab = this.params.get('tab');
@@ -59,11 +60,16 @@ export class UserPage {
         });
         return ;
       }
-      this.getUserInfo();
     } else {
       this.loading = false;
       this.nav.push(ErrorPage, {error: {message: 'Problem with Authentication'}});
+      return ;
     }
+
+    if (this.user.login === this.octokat.user) {
+      this.user.url = '/user';
+    }
+    this.getUserInfo();
   }
 
   getUserInfo() {
@@ -74,22 +80,56 @@ export class UserPage {
       this.loading = false;
       this.user = JSON.parse(res);
       this.ref.detectChanges();
-      this.octokat.octo.fromUrl(this.user.url + '/starred?per_page=' + PER_PAGE)
-      .read()
-      .then(res => {
-        res = JSON.parse(res);
-        this.starred = res.length;
-      });
-      this.octokat.octo.fromUrl(this.user.url + '/subscriptions?per_page=' + PER_PAGE)
-      .read()
-      .then(res => {
-        res = JSON.parse(res);
-        this.watching = res.length;
-      });
+      if (this.user.login === this.octokat.user) {
+        this.user.url = '/user';
+      }
+      if (this.user.type === 'User') {
+        this.getStarred();
+        this.getSubscriptions();
+        this.getOrganizations();
+      } else {
+        this.getMembers();
+      }
     })
     .catch(err => {
       this.loading = false;
       this.nav.push(ErrorPage, {error: {message: 'Problem with Authentication'}});
+    });
+  }
+
+  getStarred() {
+    this.octokat.octo.fromUrl(this.user.url + '/starred?per_page=' + PER_PAGE)
+    .read()
+    .then(res => {
+      res = JSON.parse(res);
+      this.starred = res.length;
+    });
+  }
+
+  getSubscriptions() {
+    this.octokat.octo.fromUrl(this.user.url + '/subscriptions?per_page=' + PER_PAGE)
+    .read()
+    .then(res => {
+      res = JSON.parse(res);
+      this.watching = res.length;
+    });
+  }
+
+  getOrganizations() {
+    this.octokat.octo.fromUrl(this.user.url + '/orgs?per_page=' + PER_PAGE)
+    .read()
+    .then(res => {
+      res = JSON.parse(res);
+      this.orgs = res;
+    });
+  }
+
+  getMembers() {
+    this.octokat.octo.fromUrl(this.user.url + '/members?per_page=' + PER_PAGE)
+    .read()
+    .then(res => {
+      res = JSON.parse(res);
+      this.members = res.length;
     });
   }
 
@@ -111,6 +151,10 @@ export class UserPage {
 
   openWatchingPage() {
     this.nav.push(WatchedPage, {user: this.user.login});
+  }
+
+  openUser(user) {
+    this.nav.push(UserPage, {user: user});
   }
 
   presentPopover(event) {

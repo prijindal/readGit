@@ -6,6 +6,7 @@ import {StatusBar, Deeplinks} from 'ionic-native';
 
 import {UserPage} from './pages/user-page/user-page';
 import {RepoPage} from './pages/repo-page/repo-page';
+import {SearchPage} from './pages/search-page/search-page';
 import {HomePage} from './pages/home-page/home-page';
 import {NotificationsPage} from './pages/notifications-page/notifications-page';
 import {ReposPage} from './pages/repos-page/repos-page';
@@ -100,7 +101,8 @@ class MyApp {
           {title: 'Stars', component: StarredPage},
           {title: 'Watching', component: WatchedPage},
           {title: 'Followers', component: FollowersPage},
-          {title: 'Following', component: FollowingPage}
+          {title: 'Following', component: FollowingPage},
+          {title: 'Search', component: SearchPage}
         ];
       } else {
         this.profileEnabled = false;

@@ -9,7 +9,6 @@ import { RepoPage } from '../repo-page/repo-page';
 import { Popover } from './popover/popover';
 
 const PER_PAGE: number = 30;
-const LIMIT: number = 300;
 
 @Component({
   templateUrl: 'build/pages/repos-page/repos-page.html'
@@ -69,17 +68,13 @@ export class ReposPage {
 
   doInfinite(infiniteScroll) {
     this.page += 1;
-    if (this.page <= LIMIT / PER_PAGE) {
-      this.getRepos()
-      .then((res) => {
-        infiniteScroll.complete();
-        if (res.length < PER_PAGE) {
-          infiniteScroll.enable(false);
-        }
-      });
-    } else {
-      infiniteScroll.enable(false);
-    }
+    this.getRepos()
+    .then((res) => {
+      infiniteScroll.complete();
+      if (res.length < PER_PAGE) {
+        infiniteScroll.enable(false);
+      }
+    });
   }
 
   openRepository(repo) {
