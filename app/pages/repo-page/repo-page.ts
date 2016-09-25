@@ -7,6 +7,7 @@ import BrowserService from '../../services/browser';
 
 import { ErrorPage } from '../error-page/error-page';
 import { UserPage } from '../user-page/user-page';
+import { IssuesPage } from '../issues-page/issues-page';
 
 import { Popover } from './popover/popover';
 
@@ -194,7 +195,7 @@ export class RepoPage {
   }
 
   openIssuesPage() {
-    this.browser.open(this.repo.html_url + '/issues');
+    this.nav.push(IssuesPage, {repo: this.repo.full_name});
   }
 
   openStargazersPage() {
