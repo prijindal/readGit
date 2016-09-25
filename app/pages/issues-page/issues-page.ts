@@ -7,6 +7,7 @@ import OctokatService from '../../services/octokat';
 import BrowserService from '../../services/browser';
 
 import { ErrorPage } from '../error-page/error-page';
+import { IssuePage } from '../issue-page/issue-page';
 
 import { Popover } from './popover/popover';
 
@@ -32,7 +33,6 @@ export class IssuesPage {
   ) { }
 
   ionViewWillEnter() {
-    console.log('Issues Page');
     this.repo = this.params.get('repo');
     this.refreshEvents();
   }
@@ -81,7 +81,7 @@ export class IssuesPage {
   }
 
   openIssue(issue) {
-    this.browser.open(issue.html_url);
+    this.nav.push(IssuePage, {issue: issue});
   }
 
   presentPopover(event) {

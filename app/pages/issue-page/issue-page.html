@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Issue <span *ngIf="issue"># {{issue.number}}</span></ion-title>
+    <ion-buttons end>
+      <button [disabled]="loading" (click)="getIssue($event)">
+        <ion-icon name="refresh"></ion-icon>
+      </button>
+      <button (click)="presentPopover($event)">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="issues-page">
+  <div text-center margin-top *ngIf="!issue">
+    <div *ngIf="loading">
+      Loading...
+    </div>
+    <div *ngIf="!loading">
+      No Issues
+    </div>
+  </div>
+  <ion-card *ngIf="issue" class="card">
+    <ion-card-header class="sound-click layout flex between">
+      {{issue.title}}
+    </ion-card-header>
+    <ion-card-content class="sound-click">
+      #{{issue.number}} opened {{timeFromNow(issue.created_at)}} by {{issue.user.login}}
+    </ion-card-content>
+  </ion-card>
+  <div *ngIf="comments">
+    <ion-list *ngIf="comments.length > 0">
+      <ion-item *ngFor="let comment of comments">
+        {{comment.body}}
+      </ion-item>
+    </ion-list>
+    <ion-card *ngIf="comments.length === 0">
+      No Comments
+    </ion-card>
+  </div>
+</ion-content>
