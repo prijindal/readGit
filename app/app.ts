@@ -106,7 +106,9 @@ class MyApp {
         ];
       } else {
         this.profileEnabled = false;
-        this.pages = [];
+        this.pages = [
+          {title: 'Search', component: SearchPage}
+        ];
       }
     });
   }

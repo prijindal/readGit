@@ -8,6 +8,7 @@ import { ErrorPage } from '../error-page/error-page';
 import { ReposPage } from '../repos-page/repos-page';
 import { StarredPage } from '../starred-page/starred-page';
 import { FollowersPage } from '../followers-page/followers-page';
+import { MembersPage } from '../members-page/members-page';
 import { FollowingPage } from '../following-page/following-page';
 import { WatchedPage } from '../watched-page/watched-page';
 
@@ -193,6 +194,10 @@ export class UserPage {
 
   openWatchingPage() {
     this.nav.push(WatchedPage, {user: this.user.login});
+  }
+
+  openMembersPage() {
+    this.nav.push(MembersPage, {user: this.user.login});
   }
 
   openUser(user) {
