@@ -25,6 +25,9 @@ export class UserPage {
   public watching: number;
   public members: number;
   public orgs: any;
+  public followingLoaded: Boolean;
+  public isFollowing: Boolean;
+  public followingLoading: Boolean;
 
   constructor(
     private ref: ChangeDetectorRef,
@@ -87,6 +90,7 @@ export class UserPage {
         this.getStarred();
         this.getSubscriptions();
         this.getOrganizations();
+        this.checkFollow();
       } else {
         this.getMembers();
       }
@@ -122,6 +126,44 @@ export class UserPage {
       res = JSON.parse(res);
       this.orgs = res;
     });
+  }
+
+  checkFollow() {
+    if (this.octokat.user && this.user.login !== this.octokat.user) {
+      this.octokat.octo.user.following(this.user.login)
+      .read()
+      .then(res => {
+        this.followingLoaded = true;
+        this.isFollowing = true;
+      }).catch(err => {
+        this.followingLoaded = true;
+        this.isFollowing = false;
+      });
+    }
+  }
+
+  followUser() {
+    this.followingLoading = true;
+    if (this.octokat.user && this.user.login !== this.octokat.user) {
+      this.octokat.octo.user.following(this.user.login)
+      .add()
+      .then(res => {
+        this.isFollowing = true;
+        this.followingLoading = false;
+      });
+    }
+  }
+
+  unFollowUser() {
+    this.followingLoading = true;
+    if (this.octokat.user && this.user.login !== this.octokat.user) {
+      this.octokat.octo.user.following(this.user.login)
+      .remove()
+      .then(res => {
+        this.isFollowing = false;
+        this.followingLoading = false;
+      });
+    }
   }
 
   getMembers() {
