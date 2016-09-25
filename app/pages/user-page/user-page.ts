@@ -3,6 +3,7 @@ import {NavController, NavParams, PopoverController} from 'ionic-angular';
 
 import OctokatService from '../../services/octokat';
 import BrowserService from '../../services/browser';
+import FaviconService from '../../services/favicon';
 
 import { ErrorPage } from '../error-page/error-page';
 import { ReposPage } from '../repos-page/repos-page';
@@ -36,7 +37,8 @@ export class UserPage {
     private params: NavParams,
     private popoverCtrl: PopoverController,
     private octokat: OctokatService,
-    private browser: BrowserService
+    private browser: BrowserService,
+    private favicon: FaviconService
   ) { }
 
   ionViewWillEnter() {
@@ -95,6 +97,7 @@ export class UserPage {
       } else {
         this.getMembers();
       }
+      this.favicon.set('https://avatars.githubusercontent.com/u/' + this.user.id + '?s=50');
     })
     .catch(err => {
       this.loading = false;

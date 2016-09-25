@@ -21,6 +21,7 @@ import GithubLogin from './services/githublogin';
 import LocalService from './services/local';
 import OctokatService from './services/octokat';
 import EventParser from './services/eventparser';
+import FaviconService from './services/favicon';
 import BrowserService from './services/browser';
 import FileService from './services/filehttp';
 
@@ -132,6 +133,7 @@ ionicBootstrap(MyApp, [
   LocalService,
   OctokatService,
   GithubLogin,
+  FaviconService,
   EventParser,
   BrowserService,
   FileService
