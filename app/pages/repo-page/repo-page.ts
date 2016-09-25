@@ -207,6 +207,38 @@ export class RepoPage {
     this.nav.push(UserPage, {user: owner});
   }
 
+  openIssuesPage() {
+    this.browser.open(this.repo.html_url + '/issues');
+  }
+
+  openStargazersPage() {
+    this.browser.open(this.repo.html_url + '/stargazers');
+  }
+
+  openForksPage() {
+    this.browser.open(this.repo.html_url + '/network');
+  }
+
+  openWatchersPage() {
+    this.browser.open(this.repo.html_url + '/watchers');
+  }
+
+  openBranchesPage() {
+    this.browser.open(this.repo.html_url + '/branches');
+  }
+
+  openPullsPage() {
+    this.browser.open(this.repo.html_url + '/pulls');
+  }
+
+  openContributorsPage() {
+    this.browser.open(this.repo.html_url + '/contributors');
+  }
+
+  openCollabaratorsPage() {
+    this.browser.open(this.repo.html_url + '/settings/collaboration');
+  }
+
   presentPopover(event) {
     let popover = this.popoverCtrl.create(Popover);
     popover.present({

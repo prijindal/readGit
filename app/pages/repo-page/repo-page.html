@@ -67,36 +67,36 @@
     <ion-card *ngIf="!loading && repo">
       <ion-card-content class="icons-ion-card-content">
         <div class="user-icons layout flex row around wrap">
-          <div class="user-icon layout flex column" (click)="openFollowersPage()">
+          <div class="user-icon layout flex column" (click)="openIssuesPage()">
             <div *ngIf="!pulls" class="count">{{repo.open_issues_count}}</div>
             <div *ngIf="pulls" class="count">{{repo.open_issues_count - pulls.length}}</div>
             <div class="icon-name">Issues</div>
           </div>
-          <div class="user-icon layout flex column" (click)="openFollowersPage()">
+          <div class="user-icon layout flex column" (click)="openStargazersPage()">
             <div class="count">{{repo.stargazers_count}}</div>
-            <div class="icon-name">Issues</div>
+            <div class="icon-name">Stargazers</div>
           </div>
-          <div class="user-icon layout flex column" (click)="openFollowersPage()">
+          <div class="user-icon layout flex column" (click)="openForksPage()">
             <div class="count">{{repo.forks_count}}</div>
             <div class="icon-name">Forks</div>
           </div>
-          <div class="user-icon layout flex column" (click)="openFollowersPage()">
+          <div class="user-icon layout flex column" (click)="openWatchersPage()">
             <div class="count">{{repo.watchers_count}}</div>
             <div class="icon-name">Watchers</div>
           </div>
-          <div *ngIf="branches" class="user-icon layout flex column" (click)="openFollowersPage()">
+          <div *ngIf="branches" class="user-icon layout flex column" (click)="openBranchesPage()">
             <div class="count">{{branches.length}}</div>
             <div class="icon-name">Branches</div>
           </div>
-          <div *ngIf="pulls" class="user-icon layout flex column" (click)="openFollowersPage()">
+          <div *ngIf="pulls" class="user-icon layout flex column" (click)="openPullsPage()">
             <div class="count">{{pulls.length}}</div>
             <div class="icon-name">Pulls</div>
           </div>
-          <div *ngIf="contributors" class="user-icon layout flex column" (click)="openFollowersPage()">
+          <div *ngIf="contributors" class="user-icon layout flex column" (click)="openContributorsPage()">
             <div class="count">{{contributors.length}}</div>
             <div class="icon-name">Contributors</div>
           </div>
-          <div *ngIf="collaborators" class="user-icon layout flex column" (click)="openFollowersPage()">
+          <div *ngIf="collaborators" class="user-icon layout flex column" (click)="openCollabaratorsPage()">
             <div class="count">{{collaborators.length}}</div>
             <div class="icon-name">Collaborators</div>
           </div>
