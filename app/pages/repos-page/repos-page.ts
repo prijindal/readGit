@@ -52,7 +52,6 @@ export class ReposPage {
     .then(res => {
       res = JSON.parse(res);
       if (shouldRefresh) {
-        this.homeContent.scrollTo(0, 0);
         this.repos = [];
       }
       res.forEach((notification) => {

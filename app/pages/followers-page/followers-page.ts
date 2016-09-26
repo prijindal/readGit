@@ -53,7 +53,6 @@ export class FollowersPage {
     .then(res => {
       res = JSON.parse(res);
       if (shouldRefresh) {
-        this.homeContent.scrollTo(0, 0);
         this.followers = [];
       }
       res.forEach((notification) => {

@@ -56,7 +56,6 @@ export class IssuesPage {
     .then(res => {
       res = JSON.parse(res);
       if (shouldRefresh) {
-        this.homeContent.scrollTo(0, 0);
         this.issues = [];
       }
       res.forEach((notification) => {
