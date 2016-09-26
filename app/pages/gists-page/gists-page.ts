@@ -4,7 +4,7 @@ import {NavController, NavParams, PopoverController} from 'ionic-angular';
 import OctokatService from '../../services/octokat';
 
 import { ErrorPage } from '../error-page/error-page';
-// import { GistPage } from '../gist-page/gist-page';
+import { GistPage } from '../gist-page/gist-page';
 
 import { Popover } from './popover/popover';
 
@@ -77,7 +77,7 @@ export class GistsPage {
   }
 
   openGist(gist) {
-    // this.nav.push(GistPage, {gist: gist});
+    this.nav.push(GistPage, {gist: gist});
   }
 
   presentPopover(event) {

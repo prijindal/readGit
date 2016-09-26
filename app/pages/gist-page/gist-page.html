@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Gist # <span *ngIf="gist">{{gist.id}}</span></ion-title>
+    <ion-buttons end>
+      <button [disabled]="loading" (click)="getGist($event)">
+        <ion-icon name="refresh"></ion-icon>
+      </button>
+      <button (click)="presentPopover($event)">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="gist-page">
+  <div text-center margin-top *ngIf="!gist">
+    <div *ngIf="loading">
+      Loading...
+    </div>
+    <div *ngIf="!loading">
+      No Gists
+    </div>
+  </div>
+  <ion-card *ngIf="gist">
+    <ion-card-header class="sound-click layout-notoverflow">
+      gist: {{gist.id}}
+    </ion-card-header>
+    <ion-card-content class="sound-click">
+      {{gist.description}}
+    </ion-card-content>
+  </ion-card>
+  <div *ngIf="files.length > 0">
+    <ion-card *ngFor="let file of files">
+      <ion-card-header>{{file.name}}</ion-card-header>
+      <ion-card-content [innerHTML]="file.html"></ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
