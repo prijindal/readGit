@@ -35,7 +35,7 @@ export class IssuePage {
       let username = this.params.get('username');
       let reponame = this.params.get('reponame');
       let issuenumber = this.params.get('issuenumber');
-      let url = '/repos/' + username + '/' + reponame + '/issues/' + issuenumber;
+      let url = 'https://api.github.com/repos/' + username + '/' + reponame + '/issues/' + issuenumber;
       this.issue = {url: url, number: issuenumber};
      }
     this.getIssue();

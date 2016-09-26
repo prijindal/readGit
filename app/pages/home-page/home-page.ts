@@ -3,8 +3,10 @@ import {NavController, PopoverController, Events} from 'ionic-angular';
 
 import OctokatService from '../../services/octokat';
 import EventParser from '../../services/eventparser';
+import UrlParser from '../../services/urlparser';
 import BrowserService from '../../services/browser';
 import GithubLogin from '../../services/githublogin';
+import FaviconService from '../../services/favicon';
 
 import { ErrorPage } from '../error-page/error-page';
 import { RepoPage } from '../repo-page/repo-page';
@@ -42,7 +44,9 @@ export class HomePage {
     private octokat: OctokatService,
     private eventParser: EventParser,
     private browser: BrowserService,
-    private githubLogin: GithubLogin
+    private githubLogin: GithubLogin,
+    private favicon: FaviconService,
+    private urlparser: UrlParser
   ) { }
 
   ionViewWillEnter() {
@@ -116,6 +120,7 @@ export class HomePage {
           if (this.received_events.length === 0) {
             this.refreshEvents();
           }
+          this.favicon.set('https://avatars.githubusercontent.com/u/' + user.id + '?s=50');
         } else {
           this.nav.push(ErrorPage, {error: {message: 'Problem with Authentication'}});
         }
@@ -178,7 +183,7 @@ export class HomePage {
   }
 
   openEvent(event) {
-    this.browser.open(event.html_url);
+    this.urlparser.openUrl(this.nav, event.html_url);
   }
 
   openUser(user) {

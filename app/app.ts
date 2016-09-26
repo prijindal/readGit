@@ -27,6 +27,7 @@ import EventParser from './services/eventparser';
 import FaviconService from './services/favicon';
 import BrowserService from './services/browser';
 import FileService from './services/filehttp';
+import UrlParser from './services/urlparser';
 
 @Component({
   templateUrl: 'build/app.html',
@@ -141,7 +142,8 @@ ionicBootstrap(MyApp, [
   FaviconService,
   EventParser,
   BrowserService,
-  FileService
+  FileService,
+  UrlParser
 ], {
 
 });

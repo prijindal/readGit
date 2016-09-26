@@ -2,7 +2,7 @@ import {Component, ChangeDetectorRef, ViewChild} from '@angular/core';
 import {NavController, NavParams, PopoverController} from 'ionic-angular';
 
 import OctokatService from '../../services/octokat';
-import BrowserService from '../../services/browser';
+import UrlParser from '../../services/urlparser';
 
 import { ErrorPage } from '../error-page/error-page';
 import { RepoPage } from '../repo-page/repo-page';
@@ -27,7 +27,7 @@ export class NotificationsPage {
     private params: NavParams,
     private popoverCtrl: PopoverController,
     private octokat: OctokatService,
-    private browser: BrowserService
+    private urlparser: UrlParser
   ) { }
 
   ionViewWillEnter() {
@@ -87,7 +87,7 @@ export class NotificationsPage {
   }
 
   openNotification(notification) {
-    this.browser.open(notification.response.html_url);
+    this.urlparser.openUrl(this.nav, notification.response.html_url);
   }
 
   presentPopover(event) {
