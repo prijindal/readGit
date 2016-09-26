@@ -6,6 +6,7 @@ import BrowserService from '../../services/browser';
 
 import { RepoPage } from '../repo-page/repo-page';
 import { UserPage } from '../user-page/user-page';
+import { IssuePage } from '../issue-page/issue-page';
 
 const SEARCH_URL = '/search';
 
@@ -76,7 +77,7 @@ export class SearchPage {
   }
 
   openIssue(issue) {
-    this.browser.open(issue.html_url);
+    this.nav.push(IssuePage, {issue: issue});
   }
 
 
