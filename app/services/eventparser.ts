@@ -6,6 +6,7 @@ declare interface ParsedEvent {
   html_url?: string;
 }
 
+// TODO: Merge With Url Parser
 @Injectable()
 export class EventParser {
   constructor() {}

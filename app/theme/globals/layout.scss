@@ -53,3 +53,8 @@
     }
   }
 }
+
+.layout-notoverflow {
+  text-overflow: clip;
+  white-space: normal;
+}

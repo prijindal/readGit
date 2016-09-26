@@ -9,6 +9,7 @@ import { ReposPage } from '../repos-page/repos-page';
 import { StarredPage } from '../starred-page/starred-page';
 import { FollowersPage } from '../followers-page/followers-page';
 import { MembersPage } from '../members-page/members-page';
+import { GistsPage } from '../gists-page/gists-page';
 import { FollowingPage } from '../following-page/following-page';
 import { WatchedPage } from '../watched-page/watched-page';
 
@@ -186,6 +187,10 @@ export class UserPage {
 
   openFollowersPage() {
     this.nav.push(FollowersPage, {user: this.user.login});
+  }
+
+  openGistsPage() {
+    this.nav.push(GistsPage, {user: this.user.login});
   }
 
   openFollowingPage() {

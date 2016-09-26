@@ -9,6 +9,7 @@ import {SearchPage} from './pages/search-page/search-page';
 import {HomePage} from './pages/home-page/home-page';
 import {NotificationsPage} from './pages/notifications-page/notifications-page';
 import {ReposPage} from './pages/repos-page/repos-page';
+import {GistsPage} from './pages/gists-page/gists-page';
 import {StarredPage} from './pages/starred-page/starred-page';
 import {FollowersPage} from './pages/followers-page/followers-page';
 import {FollowingPage} from './pages/following-page/following-page';
@@ -109,6 +110,7 @@ class MyApp {
           {title: 'Watching', component: WatchedPage},
           {title: 'Followers', component: FollowersPage},
           {title: 'Following', component: FollowingPage},
+          {title: 'Gists', component: GistsPage},
           {title: 'Search', component: SearchPage}
         ];
       } else {

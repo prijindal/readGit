@@ -65,13 +65,13 @@
         <div class="count">{{user.followers}}</div>
         <div class="icon-name">Followers</div>
       </div>
-      <div *ngIf="user.type=='User'" class="user-icon user-starred layout flex column">
-        <div class="count">{{user.public_gists + (user.private_gists ? user.private_gists : 0)}}</div>
-        <div class="icon-name">Gists</div>
-      </div>
       <div *ngIf="user.type=='User'" class="user-icon user-followers layout flex column" (click)="openFollowingPage()">
         <div class="count">{{user.following}}</div>
         <div class="icon-name">Following</div>
+      </div>
+      <div *ngIf="user.type=='User'" class="user-icon user-starred layout flex column" (click)="openGistsPage()">
+        <div class="count">{{user.public_gists + (user.private_gists ? user.private_gists : 0)}}</div>
+        <div class="icon-name">Gists</div>
       </div>
       <div class="user-icon user-followers layout flex column" (click)="openReposPage()">
         <div class="count">{{user.public_repos + (user.total_private_repos ? user.total_private_repos : 0)}}</div>
