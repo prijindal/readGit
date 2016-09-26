@@ -4,6 +4,7 @@ import {NavController, NavParams, PopoverController} from 'ionic-angular';
 import * as moment from 'moment';
 
 import OctokatService from '../../services/octokat';
+import FileService from '../../services/filehttp';
 import BrowserService from '../../services/browser';
 
 import { ErrorPage } from '../error-page/error-page';
@@ -24,6 +25,7 @@ export class IssuePage {
     private params: NavParams,
     private popoverCtrl: PopoverController,
     private octokat: OctokatService,
+    private filehttp: FileService,
     private browser: BrowserService
   ) { }
 
@@ -42,11 +44,9 @@ export class IssuePage {
 
   getIssue() {
     this.loading = true;
-    this.octokat.octo.fromUrl(this.issue.url)
-    .read()
+    this.filehttp.getFileFromUrl(this.issue.url, 'html')
     .then(res => {
-      res = JSON.parse(res);
-      this.issue = res;
+      this.issue = res.json();
       this.loading = false;
       this.ref.detectChanges();
     })
@@ -56,11 +56,9 @@ export class IssuePage {
   }
 
   getComments() {
-    this.octokat.octo.fromUrl(this.issue.url + '/comments?per_page=10000')
-    .read()
+    this.filehttp.getFileFromUrl(this.issue.url + '/comments?per_page=10000', 'html')
     .then(res => {
-      res = JSON.parse(res);
-      this.comments = res;
+      this.comments = res.json();
       this.ref.detectChanges();
     });
   }

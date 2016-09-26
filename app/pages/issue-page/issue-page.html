@@ -34,13 +34,11 @@
         {{issue.user.login}} opened this issue {{timeFromNow(issue.created_at)}}
       </p>
     </div>
-    <ion-card *ngIf="issue.body">
+    <ion-card *ngIf="issue.body_html">
       <ion-card-header *ngIf="issue.user">
         {{issue.user.login}} commented {{timeFromNow(issue.created_at)}}
       </ion-card-header>
-      <ion-card-content>
-        {{issue.body}}
-      </ion-card-content>
+      <ion-card-content [innerHTML]="issue.body_html"></ion-card-content>
     </ion-card>
   </div>
   <div *ngIf="comments">
@@ -49,12 +47,10 @@
         <ion-card-header>
           {{comment.user.login}} commented {{timeFromNow(comment.created_at)}}
         </ion-card-header>
-        <ion-card-content>
-          {{comment.body}}
-        </ion-card-content>
+        <ion-card-content [innerHTML]="comment.body_html"></ion-card-content>
       </ion-card>
     </div>
-    <ion-card *ngIf="comments.length === 0 && !issue.body">
+    <ion-card *ngIf="comments.length === 0 && !issue.body_html">
       <ion-card-content>
         No Comments
       </ion-card-content>

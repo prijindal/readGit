@@ -26,7 +26,7 @@ export class FileService {
 
   private sendRequest(url, type, token?) {
     let headers = new Headers({
-      'Accept': 'application/vnd.github.damage-preview.' + type,
+      'Accept': 'application/vnd.github.cannonball-preview.' + type + '+json',
       'Content-Type': 'application/json'
     });
     if (token) {
