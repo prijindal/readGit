@@ -16,6 +16,7 @@ import {FollowingPage} from './pages/following-page/following-page';
 import {WatchedPage} from './pages/watched-page/watched-page';
 
 import {RepoPage} from './pages/repo-page/repo-page';
+import {CommitsPage} from './pages/commits-page/commits-page';
 import {IssuesPage} from './pages/issues-page/issues-page';
 import {IssuePage} from './pages/issue-page/issue-page';
 
@@ -84,6 +85,7 @@ class MyApp {
     Deeplinks.routeWithNavController(this.nav, {
       '/:username': UserPage,
       '/:username/:reponame': RepoPage,
+      '/:username/:reponame/commits': CommitsPage,
       '/:username/:reponame/issues': IssuesPage,
       '/:username/:reponame/issues/:issuenumber': IssuePage
       // '/:username/:reponame/milestones': MilestonesPage
