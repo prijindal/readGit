@@ -56,6 +56,7 @@ export class CommitPage {
         this.commit.head = message;
       }
       this.commit.files.forEach(file => {
+        if (!file.patch) return ;
         let lines = file.patch.split('\n');
         file.lines = [];
         lines.forEach(line => {
