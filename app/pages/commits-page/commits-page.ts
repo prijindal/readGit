@@ -7,6 +7,7 @@ import OctokatService from '../../services/octokat';
 import BrowserService from '../../services/browser';
 
 import { ErrorPage } from '../error-page/error-page';
+import { CommitPage } from '../commit-page/commit-page';
 
 import { Popover } from './popover/popover';
 
@@ -84,7 +85,7 @@ export class CommitsPage {
   }
 
   openCommit(commit) {
-    // this.nav.push(CommitPage, {commit: commit});
+    this.nav.push(CommitPage, {commit: commit});
   }
 
   presentPopover(event) {

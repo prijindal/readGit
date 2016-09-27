@@ -1,0 +1,17 @@
+.commit-page {
+  .file {
+    .pre-div {
+      &.grey {
+        background-color: #E0E0E0;
+      }
+
+      &.red {
+        background-color: #EF5350;
+      }
+
+      &.green {
+        background-color: #81C784;
+      }
+    }
+  }
+}

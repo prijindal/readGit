@@ -31,16 +31,16 @@
       *ngFor="let commit of commits"
       (click)="openCommit(commit)"
     >
-    <ion-avatar item-left *ngIf="commit.author">
-      <img [src]="'https://avatars.githubusercontent.com/u/' + commit.author.id + '?s=50'">
-    </ion-avatar>
-    <h2 class="layout-overflow">{{commit.commit.message}}</h2>
-    <p class="layout-notoverflow">
-      committed
-      <span *ngIf="commit.author">by {{commit.author.login}}</span>
-      <span *ngIf="commit.commit.author && !commit.author">by {{commit.commit.author.name}}</span>
-      <span>{{timeFromNow(commit.commit.author.date)}}</span>
-    </p>
+      <ion-avatar item-left *ngIf="commit.author">
+        <img [src]="'https://avatars.githubusercontent.com/u/' + commit.author.id + '?s=50'">
+      </ion-avatar>
+      <h2 class="layout-overflow">{{commit.commit.message}}</h2>
+      <p class="layout-notoverflow">
+        committed
+        <span *ngIf="commit.author">by {{commit.author.login}}</span>
+        <span *ngIf="commit.commit.author && !commit.author">by {{commit.commit.author.name}}</span>
+        <span>{{timeFromNow(commit.commit.author.date)}}</span>
+      </p>
     </ion-item>
   </ion-list>
 
