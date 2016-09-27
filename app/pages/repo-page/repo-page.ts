@@ -8,6 +8,7 @@ import BrowserService from '../../services/browser';
 import { ErrorPage } from '../error-page/error-page';
 import { UserPage } from '../user-page/user-page';
 import { IssuesPage } from '../issues-page/issues-page';
+import { CommitsPage } from '../commits-page/commits-page';
 
 import { Popover } from './popover/popover';
 
@@ -195,7 +196,7 @@ export class RepoPage {
   }
 
   openCommits() {
-    this.browser.open(this.repo.html_url + '/commits');
+    this.nav.push(CommitsPage, {repo: this.repo.full_name});
   }
 
   openIssuesPage() {

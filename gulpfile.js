@@ -108,9 +108,7 @@ gulp.task('sass', function() {
   return buildSass({
     includePaths: [
       'node_modules/ionic-angular',
-      'node_modules/ionicons/dist/scss',
-      'node_modules/semantic-ui-label',
-      'node_modules/material-design-lite/src'
+      'node_modules/ionicons/dist/scss'
     ]
   })
 });

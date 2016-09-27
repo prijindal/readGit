@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Commits of {{repo}}</ion-title>
+    <ion-buttons end>
+      <button [disabled]="loading" (click)="refreshCommits($event)">
+        <ion-icon name="refresh"></ion-icon>
+      </button>
+      <button (click)="presentPopover($event)">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content #commitsContent class="commits-page">
+  <div text-center margin-top *ngIf="commits.length <= 0">
+    <div *ngIf="loading">
+      Loading...
+    </div>
+    <div *ngIf="!loading">
+      No Commits
+    </div>
+  </div>
+  <ion-list *ngIf="commits.length > 0">
+    <ion-item
+      class="commits"
+      *ngFor="let commit of commits"
+      (click)="openCommit(commit)"
+    >
+    <ion-avatar item-left *ngIf="commit.committer">
+      <img [src]="'https://avatars.githubusercontent.com/u/' + commit.committer.id + '?s=50'">
+    </ion-avatar>
+    <h2 class="layout-overflow">{{commit.commit.message}}</h2>
+    <p class="layout-notoverflow">
+      committed by
+      <span *ngIf="commit.committer">{{commit.committer.login}}</span>
+      <span *ngIf="commit.commit.author && !commit.committer">{{commit.commit.author.name}}</span>
+      <span>{{timeFromNow(commit.commit.committer.date)}}</span>
+    </p>
+    </ion-item>
+  </ion-list>
+
+ <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="20%">
+   <ion-infinite-scroll-content></ion-infinite-scroll-content>
+ </ion-infinite-scroll>
+</ion-content>

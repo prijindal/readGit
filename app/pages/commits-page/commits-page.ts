@@ -1,4 +1,4 @@
-import {Component, ChangeDetectorRef, ViewChild} from '@angular/core';
+import {Component, ChangeDetectorRef} from '@angular/core';
 import {NavController, NavParams, PopoverController} from 'ionic-angular';
 
 import * as moment from 'moment';
@@ -7,19 +7,17 @@ import OctokatService from '../../services/octokat';
 import BrowserService from '../../services/browser';
 
 import { ErrorPage } from '../error-page/error-page';
-import { IssuePage } from '../issue-page/issue-page';
 
 import { Popover } from './popover/popover';
 
 const PER_PAGE: number = 30;
 
 @Component({
-  templateUrl: 'build/pages/issues-page/issues-page.html'
+  templateUrl: 'build/pages/commits-page/commits-page.html'
 })
-export class IssuesPage {
-  @ViewChild('issuesContent') homeContent;
+export class CommitsPage {
   public loading: Boolean = true;
-  public issues: any = [];
+  public commits: any = [];
   private page: number = 1;
   private repo: string;
 
@@ -39,27 +37,28 @@ export class IssuesPage {
       let reponame = this.params.get('reponame');
       this.repo = username + '/' + reponame;
     }
-    this.refreshEvents();
+    this.refreshCommits();
   }
 
-  refreshEvents() {
+  refreshCommits() {
     this.loading = true;
     this.page = 1;
-    this.getIssues(true)
+    this.getCommits(true)
     .then(() => {
       this.loading = false;
     });
   }
 
-  getIssues(shouldRefresh: Boolean = false) {
-    return this.octokat.octo.fromUrl('/repos/' + this.repo + '/issues' + '?page=' + this.page + '&per_page=' + PER_PAGE).read()
+  getCommits(shouldRefresh: Boolean = false) {
+    return this.octokat.octo.fromUrl('/repos/' + this.repo + '/commits' + '?page=' + this.page + '&per_page=' + PER_PAGE)
+    .read()
     .then(res => {
       res = JSON.parse(res);
       if (shouldRefresh) {
-        this.issues = [];
+        this.commits = [];
       }
-      res.forEach((notification) => {
-        this.issues.push(notification);
+      res.forEach((commit) => {
+        this.commits.push(commit);
       });
       this.ref.detectChanges();
       return res;
@@ -69,9 +68,13 @@ export class IssuesPage {
     });
   }
 
+  timeFromNow(time) {
+    return moment(time).fromNow();
+  }
+
   doInfinite(infiniteScroll) {
     this.page += 1;
-    this.getIssues()
+    this.getCommits()
     .then((res) => {
       infiniteScroll.complete();
       if (res.length < PER_PAGE) {
@@ -80,12 +83,8 @@ export class IssuesPage {
     });
   }
 
-  timeFromNow(time) {
-    return moment(time).fromNow();
-  }
-
-  openIssue(issue) {
-    this.nav.push(IssuePage, {issue: issue});
+  openCommit(commit) {
+    // this.nav.push(CommitPage, {commit: commit});
   }
 
   presentPopover(event) {

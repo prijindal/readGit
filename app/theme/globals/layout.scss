@@ -58,3 +58,9 @@
   text-overflow: clip;
   white-space: normal;
 }
+
+.layout-overflow {
+  text-overflow: ellipsis;;
+  white-space: nowrap;
+  overflow: hidden;
+}
