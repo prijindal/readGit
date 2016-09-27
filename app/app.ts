@@ -92,7 +92,9 @@ class MyApp {
       '/:username/:reponame/commit/:sha': CommitPage,
       '/:username/:reponame/compare/:sha': ComparePage,
       '/:username/:reponame/issues': IssuesPage,
-      '/:username/:reponame/issues/:issuenumber': IssuePage
+      '/:username/:reponame/issues/:issuenumber': IssuePage,
+      '/:username/:reponame/pulls': IssuesPage,
+      '/:username/:reponame/pull/:issuenumber': IssuePage
       // '/:username/:reponame/milestones': MilestonesPage
     })
     .subscribe((match) => {

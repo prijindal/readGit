@@ -77,6 +77,38 @@ export class UrlParser {
               }
             };
           }
+        } else if (urlArray[2] === 'pulls') {
+          if (urlArray.length === 3) {
+            return {
+              html_url: url,
+              page: IssuesPage,
+              params: {
+                username: urlArray[0],
+                reponame: urlArray[1]
+              }
+            };
+          } else if (urlArray.length === 4) {
+            return {
+              html_url: url,
+              page: IssuesPage, // Add Other Options Here
+              params: {
+                username: urlArray[0],
+                reponame: urlArray[1]
+              }
+            };
+          }
+        } else if (urlArray[2] === 'pull') {
+          if (urlArray.length === 4) {
+            return {
+              html_url: url,
+              page: IssuePage, // Add Other Options Here
+              params: {
+                username: urlArray[0],
+                reponame: urlArray[1],
+                issuenumber: urlArray[3]
+              }
+            };
+          }
         } else if (urlArray[2] === 'commits') {
           if (urlArray.length === 3) {
             return {
