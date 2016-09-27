@@ -40,8 +40,12 @@ Features
 - [ ] View code with syntax hightlighting
 
 ###Gist###
-- [ ] List public gists
-- [ ] View gist content
+- [x] List public gists
+- [x] View gist content
+- [ ] Create Gists
+- [ ] Edit Gists
+- [ ] Create Offline Gists
+- [ ] Edit Offline Gists
 
 ###Explore Github###
 - [ ] Public timeline
