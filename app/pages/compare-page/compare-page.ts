@@ -11,11 +11,11 @@ import { ErrorPage } from '../error-page/error-page';
 import { Popover } from './popover/popover';
 
 @Component({
-  templateUrl: 'build/pages/commit-page/commit-page.html'
+  templateUrl: 'build/pages/compare-page/compare-page.html'
 })
-export class CommitPage {
+export class ComparePage {
   public loading: Boolean = true;
-  public commit: any;
+  public compare: any;
   public comments: any;
   public files: any = [];
 
@@ -29,33 +29,24 @@ export class CommitPage {
   ) { }
 
   ionViewWillEnter() {
-    this.commit = this.params.get('commit');
-    if (!this.commit) {
+    this.compare = this.params.get('compare');
+    if (!this.compare) {
       let username = this.params.get('username');
       let reponame = this.params.get('reponame');
       let sha = this.params.get('sha');
-      let url = 'https://api.github.com/repos/' + username + '/' + reponame + '/commits/' + sha;
-      this.commit = {url: url, sha: sha};
+      let url = 'https://api.github.com/repos/' + username + '/' + reponame + '/compare/' + sha;
+      this.compare = {url: url, sha: sha};
      }
-    this.getCommit();
-    this.getComments();
+    this.getCompare();
   }
 
-  getCommit() {
+  getCompare() {
     this.loading = true;
-    this.octokat.octo.fromUrl(this.commit.url, 'html')
+    this.octokat.octo.fromUrl(this.compare.url, 'html')
     .read()
     .then(res => {
-      this.commit = JSON.parse(res);
-      let message = this.commit.commit.message;
-      let messageSpliter = message.indexOf('\n');
-      if (messageSpliter >= 0) {
-        this.commit.head = message.substr(0, messageSpliter);
-        this.commit.body = message.substr(messageSpliter + 2);
-      } else {
-        this.commit.head = message;
-      }
-      this.commit.files.forEach(file => {
+      this.compare = JSON.parse(res);
+      this.compare.files.forEach(file => {
         if (!file.patch) return ;
         let lines = file.patch.split('\n');
         file.lines = [];
@@ -80,15 +71,6 @@ export class CommitPage {
     });
   }
 
-  getComments() {
-    this.octokat.octo.fromUrl(this.commit.url + '/comments?per_page=10000', 'html')
-    .read()
-    .then(res => {
-      this.comments = JSON.parse(res);
-      this.ref.detectChanges();
-    });
-  }
-  
   getDate(time) {
     return moment(time).format('LL');
   }

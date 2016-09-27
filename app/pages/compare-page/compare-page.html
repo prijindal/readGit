@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title *ngIf="compare">
+      Comparing
+      <span *ngIf="compare.base_commit">{{compare.base_commit.sha}}</span>...
+      <span *ngIf="compare.commits">{{compare.commits[compare.commits.length - 1].sha}}</span>
+    </ion-title>
+    <ion-buttons end>
+      <button [disabled]="loading" (click)="getCompare($event)">
+        <ion-icon name="refresh"></ion-icon>
+      </button>
+      <button (click)="presentPopover($event)">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="commit-page">
+  <div text-center margin-top *ngIf="!compare">
+    <div *ngIf="loading">
+      Loading...
+    </div>
+    <div *ngIf="!loading">
+      No Compares
+    </div>
+  </div>
+  <div *ngIf="compare">
+    <div margin *ngIf="compare.base_commit">
+      <h2 class="sound-click layout flex between">
+        Comparing changes
+      </h2>
+      <p class="sound-click">
+        <span *ngIf="compare.base_commit">{{compare.base_commit.sha}}</span>...
+        <span *ngIf="compare.commits">{{compare.commits[compare.commits.length - 1].sha}}</span>
+      </p>
+    </div>
+  </div>
+  <div *ngIf="files">
+    <div *ngIf="files.length > 0">
+      <ion-card class="file" *ngFor="let file of files">
+        <ion-card-header>
+          {{file.filename}}
+        </ion-card-header>
+        <ion-card-content>
+          <pre><div
+                  [ngClass]="line.class"
+                  *ngFor="let line of file.lines"
+                >{{line.content}}</div></pre>
+        </ion-card-content>
+      </ion-card>
+    </div>
+    <ion-card *ngIf="files.length === 0">
+      <ion-card-content>
+        No Files
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

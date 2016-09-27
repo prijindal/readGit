@@ -39,12 +39,16 @@
         <img [src]="'https://avatars.githubusercontent.com/u/' + commit.author.id + '?s=50'">
       </ion-avatar>
       <p class="layout-notoverflow">
-      <span *ngIf="commit.author">{{commit.author.login}}</span>
-      <span *ngIf="commit.commit.author && !commit.author">{{commit.commit.author.name}}</span>
-      commited
-      <span>{{timeFromNow(commit.commit.author.date)}}</span>
+        <span *ngIf="commit.author">{{commit.author.login}}</span>
+        <span *ngIf="commit.commit.author && !commit.author">{{commit.commit.author.name}}</span>
+        commited
+        <span>{{timeFromNow(commit.commit.author.date)}}</span>
+        <span>on {{getDate(commit.commit.author.date)}}</span>
       </p>
     </ion-item>
+    <p margin-horizontal *ngIf="commit.stats">
+      Showing {{commit.stats.total}} changed file with {{commit.stats.additions}} additions and {{commit.stats.deletions}} deletions.
+    </p>
   </div>
   <div *ngIf="files">
     <div *ngIf="files.length > 0">

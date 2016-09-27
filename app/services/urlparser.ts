@@ -7,6 +7,7 @@ import {IssuesPage} from '../pages/issues-page/issues-page';
 import {IssuePage} from '../pages/issue-page/issue-page';
 import {CommitsPage} from '../pages/commits-page/commits-page';
 import {CommitPage} from '../pages/commit-page/commit-page';
+import {ComparePage} from '../pages/compare-page/compare-page';
 
 import BrowserService from './browser';
 
@@ -111,6 +112,18 @@ export class UrlParser {
             return {
               html_url: url,
               page: CommitPage,
+              params: {
+                username: urlArray[0],
+                reponame: urlArray[1],
+                sha: urlArray[3]
+              }
+            };
+          }
+        } else if (urlArray[2] === 'compare') {
+          if (urlArray.length === 4) {
+            return {
+              html_url: url,
+              page: ComparePage,
               params: {
                 username: urlArray[0],
                 reponame: urlArray[1],

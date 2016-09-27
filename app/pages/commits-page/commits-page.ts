@@ -11,7 +11,7 @@ import { CommitPage } from '../commit-page/commit-page';
 
 import { Popover } from './popover/popover';
 
-const PER_PAGE: number = 30;
+const PER_PAGE: number = 60;
 
 @Component({
   templateUrl: 'build/pages/commits-page/commits-page.html'

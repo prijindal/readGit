@@ -20,6 +20,7 @@ import {CommitsPage} from './pages/commits-page/commits-page';
 import {CommitPage} from './pages/commit-page/commit-page';
 import {IssuesPage} from './pages/issues-page/issues-page';
 import {IssuePage} from './pages/issue-page/issue-page';
+import {ComparePage} from './pages/compare-page/compare-page';
 
 import { ProfileInfo } from './profile-info/profile-info';
 
@@ -89,6 +90,7 @@ class MyApp {
       '/:username/:reponame/commits': CommitsPage,
       '/:username/:reponame/commits/:branch': CommitsPage,
       '/:username/:reponame/commit/:sha': CommitPage,
+      '/:username/:reponame/compare/:sha': ComparePage,
       '/:username/:reponame/issues': IssuesPage,
       '/:username/:reponame/issues/:issuenumber': IssuePage
       // '/:username/:reponame/milestones': MilestonesPage
