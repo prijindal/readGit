@@ -55,6 +55,7 @@ export class CommitPage {
       } else {
         this.commit.head = message;
       }
+      this.files = [];
       this.commit.files.forEach(file => {
         if (!file.patch) return ;
         let lines = file.patch.split('\n');
@@ -88,7 +89,7 @@ export class CommitPage {
       this.ref.detectChanges();
     });
   }
-  
+
   getDate(time) {
     return moment(time).format('LL');
   }

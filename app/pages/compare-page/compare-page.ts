@@ -46,6 +46,7 @@ export class ComparePage {
     .read()
     .then(res => {
       this.compare = JSON.parse(res);
+      this.files = [];
       this.compare.files.forEach(file => {
         if (!file.patch) return ;
         let lines = file.patch.split('\n');
