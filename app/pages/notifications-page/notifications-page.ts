@@ -87,6 +87,9 @@ export class NotificationsPage {
   }
 
   openNotification(notification) {
+    this.octokat.octo.notifications.threads(notification.id)
+    .update()
+    .then(res => {});
     this.urlparser.openUrl(this.nav, notification.response.html_url);
   }
 
