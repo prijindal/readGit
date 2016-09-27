@@ -6,6 +6,7 @@ import {RepoPage} from '../pages/repo-page/repo-page';
 import {IssuesPage} from '../pages/issues-page/issues-page';
 import {IssuePage} from '../pages/issue-page/issue-page';
 import {CommitsPage} from '../pages/commits-page/commits-page';
+import {CommitPage} from '../pages/commit-page/commit-page';
 
 import BrowserService from './browser';
 
@@ -74,10 +75,6 @@ export class UrlParser {
                 issuenumber: urlArray[3]
               }
             };
-          } else {
-            return {
-              html_url: url
-            };
           }
         } else if (urlArray[2] === 'commits') {
           if (urlArray.length === 3) {
@@ -92,25 +89,41 @@ export class UrlParser {
           } else if (urlArray.length === 4) {
             return {
               html_url: url,
-              // page: CommitPage,
-              // params: {
-              //   username: urlArray[0],
-              //   reponame: urlArray[1],
-              //   commitnumber: urlArray[3]
-              // }
-            };
-          } else {
-            return {
-              html_url: url
+              page: CommitsPage,
+              params: {
+                username: urlArray[0],
+                reponame: urlArray[1],
+                branch: urlArray[3]
+              }
             };
           }
-        } else {
-          return {
-            html_url: url
-          };
+        } else if (urlArray[2] === 'commit') {
+          if (urlArray.length === 3) {
+            return {
+              html_url: url,
+              page: CommitsPage,
+              params: {
+                username: urlArray[0],
+                reponame: urlArray[1]
+              }
+            };
+          } else if (urlArray.length === 4) {
+            return {
+              html_url: url,
+              page: CommitPage,
+              params: {
+                username: urlArray[0],
+                reponame: urlArray[1],
+                sha: urlArray[3]
+              }
+            };
+          }
         }
       }
     }
+    return {
+      html_url: url
+    };
   }
 
   openUrl(nav, url: string) {

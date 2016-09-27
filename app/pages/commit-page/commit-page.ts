@@ -33,9 +33,9 @@ export class CommitPage {
     if (!this.commit) {
       let username = this.params.get('username');
       let reponame = this.params.get('reponame');
-      let commitnumber = this.params.get('commitnumber');
-      let url = 'https://api.github.com/repos/' + username + '/' + reponame + '/commits/' + commitnumber;
-      this.commit = {url: url, number: commitnumber};
+      let sha = this.params.get('sha');
+      let url = 'https://api.github.com/repos/' + username + '/' + reponame + '/commits/' + sha;
+      this.commit = {url: url, sha: sha};
      }
     this.getCommit();
     this.getComments();
