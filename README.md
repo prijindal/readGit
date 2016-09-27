@@ -31,8 +31,8 @@ Features
 - [ ] Manage milestones
 
 ###Commit###
-- [ ] View commit (shows files changed/added/deleted)
-- [ ] Diff viewer with colorized HTML
+- [x] View commit (shows files changed/added/deleted)
+- [x] Diff viewer with colorized HTML
 - [ ] View commit history on each file
 
 ###Tree/File browser###
