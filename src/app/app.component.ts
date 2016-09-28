@@ -76,9 +76,7 @@ export class MyApp {
       '/:1/:2/:3/:4/:5': 1
     })
     .subscribe((match) => {
-      setTimeout(() => {
-        this.urlparser.openUrl(this.nav, match.$link.url);
-      }, 800);
+      this.urlparser.openUrl(this.nav, match.$link.url);
     }, (nomatch) => {
       console.dir(nomatch);
       console.error('Got a deeplink that didn\'t match');
