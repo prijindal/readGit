@@ -1,17 +1,17 @@
 {
   "name": "read-git",
-  "description": "Read Git: An Ionic project",
+  "description": "A smart way to use Github",
   "homepage": "https://readgit.herokuapp.com/",
   "private": false,
   "scripts": {
-    "cordova": "./node_modules/cordova/bin/cordova",
-    "build": "ionic-app-scripts build",
+    "build": "ionic-app-scripts build --release && npm run octokat",
     "watch": "ionic-app-scripts watch",
     "serve:before": "watch",
     "emulate:before": "build",
     "deploy:before": "build",
     "build:before": "build",
     "run:before": "build",
+    "octokat": "browserify github.js -o www/build/github.js",
     "heroku-postbuild": "npm run build && gzip -k -r --best --force www",
     "livereload": "ionic run android --livereload --address 192.168.137.1 --device",
     "android": "cordova run android --buildConfig=.vscode/build.json",
@@ -28,11 +28,10 @@
     "x2js": "^3.0.0"
   },
   "devDependencies": {
-    "cordova": "^6.3.1",
     "@ionic/app-scripts": "^0.0.23",
+    "browserify": "^13.1.0",
     "typescript": "^2.0.3"
   },
-  "description": "testapp: An Ionic project",
   "cordovaPlugins": [
     "cordova-plugin-device",
     "cordova-plugin-console",
