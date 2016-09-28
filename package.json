@@ -15,6 +15,7 @@
     "octokat": "git+https://github.com/prijindal/octokat.js.git",
     "reflect-metadata": "0.1.8",
     "rxjs": "5.0.0-beta.6",
+    "x2js": "^3.0.0",
     "zone.js": "0.6.12"
   },
   "devDependencies": {

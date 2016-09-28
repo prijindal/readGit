@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Github Blog</ion-title>
+    <ion-buttons end>
+      <button [disabled]="loading" (click)="getBlogs($event)">
+        <ion-icon name="refresh"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="blogs-page">
+  <div text-center margin-top *ngIf="!blogs">
+    <div *ngIf="loading">
+      Loading...
+    </div>
+    <div *ngIf="!loading">
+      No Blogs
+    </div>
+  </div>
+  <div *ngIf="blogs && blogs.feed">
+    <ion-list *ngIf="blogs.feed.entry.length > 0">
+      <button ion-item (click)="openBlog(blog)" *ngFor="let blog of blogs.feed.entry">
+        <ion-thumbnail item-left *ngIf="blog.thumbnail">
+          <img [src]="blog.thumbnail._url">
+        </ion-thumbnail>
+        <h2>{{blog.title}}</h2>
+        <p>
+          <span *ngIf="blog.author">by {{blog.author.name}}</span>
+          <span *ngIf="blog.updated">{{timeFromNow(blog.updated)}}</span>
+        </p>
+      </button>
+    </ion-list>
+    <div *ngIf="blogs.length < 0">
+      No Blogs
+    </div>
+  </div>
+</ion-content>

@@ -15,6 +15,8 @@ import {FollowersPage} from './pages/followers-page/followers-page';
 import {FollowingPage} from './pages/following-page/following-page';
 import {WatchedPage} from './pages/watched-page/watched-page';
 
+import {BlogsPage} from './pages/blogs-page/blogs-page';
+
 import {RepoPage} from './pages/repo-page/repo-page';
 import {CommitsPage} from './pages/commits-page/commits-page';
 import {CommitPage} from './pages/commit-page/commit-page';
@@ -120,12 +122,14 @@ class MyApp {
           {title: 'Followers', component: FollowersPage},
           {title: 'Following', component: FollowingPage},
           {title: 'Gists', component: GistsPage},
-          {title: 'Search', component: SearchPage}
+          {title: 'Search', component: SearchPage},
+          {title: 'Github Blog', component: BlogsPage}
         ];
       } else {
         this.profileEnabled = false;
         this.pages = [
-          {title: 'Search', component: SearchPage}
+          {title: 'Search', component: SearchPage},
+          {title: 'Github Blog', component: BlogsPage}
         ];
       }
     });
