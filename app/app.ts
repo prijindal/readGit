@@ -4,7 +4,6 @@ import {Component, ViewChild} from '@angular/core';
 import {App, ionicBootstrap, Platform, MenuController, Nav, Events} from 'ionic-angular';
 import {StatusBar, Deeplinks} from 'ionic-native';
 
-import {UserPage} from './pages/user-page/user-page';
 import {SearchPage} from './pages/search-page/search-page';
 import {HomePage} from './pages/home-page/home-page';
 import {NotificationsPage} from './pages/notifications-page/notifications-page';
@@ -16,13 +15,6 @@ import {FollowingPage} from './pages/following-page/following-page';
 import {WatchedPage} from './pages/watched-page/watched-page';
 
 import {BlogsPage} from './pages/blogs-page/blogs-page';
-
-import {RepoPage} from './pages/repo-page/repo-page';
-import {CommitsPage} from './pages/commits-page/commits-page';
-import {CommitPage} from './pages/commit-page/commit-page';
-import {IssuesPage} from './pages/issues-page/issues-page';
-import {IssuePage} from './pages/issue-page/issue-page';
-import {ComparePage} from './pages/compare-page/compare-page';
 
 import { ProfileInfo } from './profile-info/profile-info';
 
@@ -51,7 +43,8 @@ class MyApp {
     private menu: MenuController,
     private platform: Platform,
     private events: Events,
-    private octokat: OctokatService
+    private octokat: OctokatService,
+    private urlparser: UrlParser
   ) {
     this.initializeApp();
   }
@@ -86,22 +79,17 @@ class MyApp {
   }
 
   private deeplinkInit() {
-    Deeplinks.routeWithNavController(this.nav, {
-      '/:username': UserPage,
-      '/:username/:reponame': RepoPage,
-      '/:username/:reponame/commits': CommitsPage,
-      '/:username/:reponame/commits/:branch': CommitsPage,
-      '/:username/:reponame/commit/:sha': CommitPage,
-      '/:username/:reponame/compare/:sha': ComparePage,
-      '/:username/:reponame/issues': IssuesPage,
-      '/:username/:reponame/issues/:issuenumber': IssuePage,
-      '/:username/:reponame/pulls': IssuesPage,
-      '/:username/:reponame/pull/:issuenumber': IssuePage
-      // '/:username/:reponame/milestones': MilestonesPage
+    Deeplinks.route({
+      '/:1': 1,
+      '/:1/:2': 1,
+      '/:1/:2/:3': 1,
+      '/:1/:2/:3/:4': 1,
+      '/:1/:2/:3/:4/:5': 1
     })
     .subscribe((match) => {
-      console.dir(match);
-      console.log('Successfully matched route');
+      setTimeout(() => {
+        this.urlparser.openUrl(this.nav, match.$link.url);
+      }, 800);
     }, (nomatch) => {
       console.dir(nomatch);
       console.error('Got a deeplink that didn\'t match');

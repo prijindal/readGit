@@ -8,6 +8,7 @@ import {IssuePage} from '../pages/issue-page/issue-page';
 import {CommitsPage} from '../pages/commits-page/commits-page';
 import {CommitPage} from '../pages/commit-page/commit-page';
 import {ComparePage} from '../pages/compare-page/compare-page';
+import {BlogsPage} from '../pages/blogs-page/blogs-page';
 
 import BrowserService from './browser';
 
@@ -25,13 +26,13 @@ export class UrlParser {
   ) {}
 
   parse(url: string): DeepUrl {
-    const GITHUB_DOMAIN = 'https://github.com/';
-    if (url.indexOf(GITHUB_DOMAIN) !== 0) {
+    const GITHUB_DOMAIN = 'github.com/';
+    if (url.indexOf(GITHUB_DOMAIN) < 0) {
       return {
         html_url: url
       };
     } else {
-      let urlArray = url.substring(GITHUB_DOMAIN.length).split('/');
+      let urlArray = url.substring(url.indexOf(GITHUB_DOMAIN) + GITHUB_DOMAIN.length).split('/');
       if (urlArray.length === 0) {
         return {
           html_url: url,
@@ -39,13 +40,20 @@ export class UrlParser {
           params: {}
         };
       } else if (urlArray.length === 1) {
-        return {
-          html_url: url,
-          page: UserPage,
-          params: {
-            username: urlArray[0]
-          }
-        };
+        if (urlArray[0] === 'blog') {
+          return {
+            html_url: url,
+            page: BlogsPage
+          };
+        } else {
+          return {
+            html_url: url,
+            page: UserPage,
+            params: {
+              username: urlArray[0]
+            }
+          };
+        }
       } else if (urlArray.length === 2) {
         return {
           html_url: url,
