@@ -1,0 +1,103 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title *ngIf="user">{{user.login}}</ion-title>
+    <ion-buttons end>
+      <button ion-button [disabled]="loading" (click)="getUserInfo($event)">
+        <ion-icon name="refresh"></ion-icon>
+      </button>
+      <button ion-button (click)="presentPopover($event)">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="user-page">
+  <div text-center margin-top *ngIf="!user">
+    <div *ngIf="loading">
+      Loading...
+    </div>
+    <div *ngIf="!loading">
+      Error Fetching Profile
+    </div>
+  </div>
+  <div margin *ngIf="user">
+    <div class="user-image" *ngIf="user.id">
+      <img *ngIf="!imageLoaded" [src]="'https://avatars.githubusercontent.com/u/' + user.id +'?s=50'"/>
+      <img [class.hidden]="!imageLoaded" (load)="imageLoaded = true" [src]="'https://avatars.githubusercontent.com/u/' + user.id +'?s=400'"/>
+    </div>
+    <div class="user-title">
+      <h4>{{user.name}}</h4>
+      <p>{{user.login}}</p>
+    </div>
+    <div class="user-tags">
+      <div *ngIf="user.location" class="user-tag">
+        <ion-icon name="pin"></ion-icon>
+        <span>{{user.location}}</span>
+      </div>
+      <div *ngIf="user.email" class="user-tag">
+        <ion-icon name="mail"></ion-icon>
+        <span><a (click)="browser.open('mailto:' + user.email)">{{user.email}}</a></span>
+      </div>
+      <div *ngIf="user.blog" class="user-tag">
+        <ion-icon name="link"></ion-icon>
+        <span><a (click)="browser.open(user.blog)">{{user.blog}}</a></span>
+      </div>
+    </div>
+    <div *ngIf="octokat.user && followingLoaded" margin class="follow-button">
+      <button ion-button *ngIf="!isFollowing" full light round [disabled]="followingLoading" (click)="followUser()">
+        Follow
+      </button>
+      <button ion-button *ngIf="isFollowing" full light round [disabled]="followingLoading" (click)="unFollowUser()">
+        UnFollow
+      </button>
+    </div>
+    <div *ngIf="user.bio" class="user-bio">
+      {{user.bio}}
+    </div>
+
+    <div class="user-icons layout flex row center wrap">
+      <div *ngIf="user.type=='User'" class="user-icon user-followers layout flex column" (click)="openFollowersPage()">
+        <div class="count">{{user.followers}}</div>
+        <div class="icon-name">Followers</div>
+      </div>
+      <div *ngIf="user.type=='User'" class="user-icon user-followers layout flex column" (click)="openFollowingPage()">
+        <div class="count">{{user.following}}</div>
+        <div class="icon-name">Following</div>
+      </div>
+      <div *ngIf="user.type=='User'" class="user-icon user-starred layout flex column" (click)="openGistsPage()">
+        <div class="count">{{user.public_gists + (user.private_gists ? user.private_gists : 0)}}</div>
+        <div class="icon-name">Gists</div>
+      </div>
+      <div class="user-icon user-followers layout flex column" (click)="openReposPage()">
+        <div class="count">{{user.public_repos + (user.total_private_repos ? user.total_private_repos : 0)}}</div>
+        <div class="icon-name">Repositories</div>
+      </div>
+      <div *ngIf="starred && user.type=='User'" class="user-icon user-followers layout flex column" (click)="openStarredPage()">
+        <div class="count">{{starred}}</div>
+        <div class="icon-name">Starred</div>
+      </div>
+      <div *ngIf="watching && user.type=='User'" class="user-icon user-followers layout flex column" (click)="openWatchingPage()">
+        <div class="count">{{watching}}</div>
+        <div class="icon-name">Watching</div>
+      </div>
+      <div *ngIf="members && user.type=='Organization'" class="user-icon user-followers layout flex column" (click)="openMembersPage()">
+        <div class="count">{{members}}</div>
+        <div class="icon-name">Members</div>
+      </div>
+    </div>
+
+    <div *ngIf="orgs && orgs.length > 0" class="user-orgs" padding-horizontal>
+      <h4>Organizations</h4>
+      <div class="layout flex wrap row start">
+        <div class="org-image" *ngFor="let org of orgs" margin (click)="openUser(org)">
+          <img [src]="'https://avatars.githubusercontent.com/u/' + org.id + '?s=40'"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

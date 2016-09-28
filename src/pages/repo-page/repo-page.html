@@ -1,0 +1,110 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title *ngIf="repo">{{repo.full_name || repo.name}}</ion-title>
+    <ion-buttons end>
+      <button ion-button [disabled]="loading" (click)="getRepoInfo($event)">
+        <ion-icon name="refresh"></ion-icon>
+      </button>
+      <button ion-button *ngIf="repo" (click)="presentPopover($event)">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="repo-page">
+  <div text-center margin-top *ngIf="!repo">
+    <div *ngIf="loading">
+      Loading...
+    </div>
+    <div *ngIf="!loading">
+      Error Fetching Repository
+    </div>
+  </div>
+  <div *ngIf="repo">
+    <ion-card *ngIf="octokat.user" class="buttons">
+      <ion-card-content class="layout flex around">
+        <div *ngIf="subscription">
+          <button ion-button clear [disabled]="watchingLoading" *ngIf="isSubscribed" (click)="unWatchRepo(repo)">
+            Unwatch
+          </button>
+          <button ion-button outline [disabled]="watchingLoading" *ngIf="!isSubscribed" (click)="watchRepo(repo)">
+            Watch
+          </button>
+        </div>
+        <div *ngIf="starring">
+          <button ion-button clear [disabled]="starringLoading" *ngIf="isStarring" (click)="unStarRepo(repo)">
+            Unstar
+          </button>
+          <button ion-button outline [disabled]="starringLoading" *ngIf="!isStarring" (click)="starRepo(repo)">
+            Star
+          </button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    <ion-card *ngIf="repo.owner">
+      <ion-card-header>
+        <a (click)="openUser(repo.owner)" *ngIf="repo.owner.login">{{repo.owner.login}}</a>
+        /
+        <span>{{repo.name}}</span>
+      </ion-card-header>
+      <ion-card-content>
+        <p *ngIf="repo.description">
+          {{repo.description}}
+        </p>
+        <p *ngIf="repo.homepage">
+          <a (click)="browser.open(repo.homepage)">{{repo.homepage}}</a>
+        </p>
+        <p *ngIf="repo.language">
+          LANGUAGE {{repo.language}}
+        </p>
+      </ion-card-content>
+    </ion-card>
+    <div margin>
+      <button ion-button full margin-bottom (click)="openCode()">View Code</button>
+      <button ion-button full (click)="openCommits()">View Commits</button>
+    </div>
+    <ion-card *ngIf="!loading && repo">
+      <ion-card-content class="icons-ion-card-content">
+        <div class="user-icons layout flex row around wrap">
+          <div class="user-icon layout flex column" (click)="openIssuesPage()">
+            <div *ngIf="!pulls" class="count">{{repo.open_issues_count}}</div>
+            <div *ngIf="pulls" class="count">{{repo.open_issues_count - pulls.length}}</div>
+            <div class="icon-name">Issues</div>
+          </div>
+          <div class="user-icon layout flex column" (click)="openStargazersPage()">
+            <div class="count">{{repo.stargazers_count}}</div>
+            <div class="icon-name">Stargazers</div>
+          </div>
+          <div class="user-icon layout flex column" (click)="openForksPage()">
+            <div class="count">{{repo.forks_count}}</div>
+            <div class="icon-name">Forks</div>
+          </div>
+          <div class="user-icon layout flex column" (click)="openWatchersPage()">
+            <div class="count">{{repo.watchers_count}}</div>
+            <div class="icon-name">Watchers</div>
+          </div>
+          <div *ngIf="branches" class="user-icon layout flex column" (click)="openBranchesPage()">
+            <div class="count">{{branches.length}}</div>
+            <div class="icon-name">Branches</div>
+          </div>
+          <div *ngIf="pulls" class="user-icon layout flex column" (click)="openPullsPage()">
+            <div class="count">{{pulls.length}}</div>
+            <div class="icon-name">Pulls</div>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    <ion-card *ngIf="readme">
+      <ion-card-header>README</ion-card-header>
+      <ion-card-content [innerHTML]="readme"></ion-card-content>
+    </ion-card>
+    <ion-card *ngIf="readmeError">
+      <ion-card-header>No Readme Found</ion-card-header>
+    </ion-card>
+  </div>
+</ion-content>

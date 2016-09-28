@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Watching<span *ngIf="user && user !== 'user'"> {{user.substr(6)}}</span></ion-title>
+    <ion-buttons end>
+      <button ion-button [disabled]="loading" (click)="getWatched($event)">
+        <ion-icon name="refresh"></ion-icon>
+      </button>
+      <button ion-button (click)="presentPopover($event)">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content #subscriptionsContent class="subscriptions-page">
+  <div text-center margin-top *ngIf="subscriptions.length <= 0">
+    <div *ngIf="loading">
+      Loading...
+    </div>
+    <div *ngIf="!loading">
+      No Subscriptions
+    </div>
+  </div>
+  <ion-list *ngIf="subscriptions.length > 0">
+    <ion-card
+      class="notification"
+      *ngFor="let repo of subscriptions"
+      (click)="openRepository(repo)"
+    >
+      <ion-card-header class="sound-click layout flex between">
+        <span>{{repo.full_name}}</span>
+        <span>{{repo.stargazers_count}} <ion-icon name="star"></ion-icon></span>
+      </ion-card-header>
+      <ion-card-content class="sound-click">
+        {{repo.description}}
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>

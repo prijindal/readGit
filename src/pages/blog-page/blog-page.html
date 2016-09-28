@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Github Blog</ion-title>
+    <ion-buttons end>
+      <button ion-button [disabled]="loading" (click)="getBlogs($event)">
+        <ion-icon name="refresh"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="blog-page">
+  <div text-center margin-top *ngIf="!blog">
+    <div *ngIf="loading">
+      Loading...
+    </div>
+    <div *ngIf="!loading">
+      No Blog
+    </div>
+  </div>
+  <div *ngIf="blog">
+    <div padding [innerHTML]="blog.content.__text"></div>
+  </div>
+</ion-content>
