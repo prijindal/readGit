@@ -16,33 +16,33 @@
 <ion-content class="search-page">
   <ion-item-group *ngIf="repos">
     <ion-item-divider light>Repositories</ion-item-divider>
-    <ion-item *ngFor="let repo of repos.items" (click)="openRepository(repo)">
+    <button ion-item (click)="openRepository(repo)" *ngFor="let repo of repos.items">
       <h2>{{repo.full_name}}</h2>
       <p>{{repo.description}}</p>
-    </ion-item>
+    </button>
   </ion-item-group>
   <ion-item-group *ngIf="users">
     <ion-item-divider light>Users</ion-item-divider>
-    <ion-item *ngFor="let user of users.items" (click)="openUser(user)">
+    <button ion-item (click)="openUser(user)" *ngFor="let user of users.items">
       <ion-avatar item-left>
         <img [src]="'https://avatars.githubusercontent.com/u/' + user.id + '?s=50'">
       </ion-avatar>
       <h2>{{user.login}}</h2>
-    </ion-item>
+    </button>
   </ion-item-group>
   <ion-item-group *ngIf="issues">
     <ion-item-divider light>Issues</ion-item-divider>
-    <ion-item *ngFor="let issue of issues.items" (click)="openIssue(issue)">
+    <button ion-item (click)="openIssue(issue)" *ngFor="let issue of issues.items">
       <h2>{{issue.title}}</h2>
       <p>{{issue.body}}</p>
       <h3 *ngIf="issue.repository_url">{{issue.repository_url.substr(issue.repository_url.indexOf('repos') + 6)}}</h3>
-    </ion-item>
+    </button>
   </ion-item-group>
   <ion-item-group *ngIf="codes">
     <ion-item-divider light>Codes</ion-item-divider>
-    <ion-item *ngFor="let code of codes.items" (click)="openCode(code)">
+    <button ion-item (click)="openCode(code)" *ngFor="let code of codes.items">
       <h2>{{code.repository.ful_name}}</h2>
       <p>{{code.name}}
-    </ion-item>
+    </button>
   </ion-item-group>
 </ion-content>

@@ -10,7 +10,7 @@ import BrowserService from '../../../services/browser';
       <button ion-item (click)="openMilestonesPage()">Milestones</button>
       <button ion-item (click)="openReleasesPage()">Releases</button>
       <button ion-item (click)="openContributorsPage()">Contributors</button>
-      <button ion-button *ngIf="repo.permissions && repo.permissions.admin" ion-item (click)="openCollabaratorsPage()">Collabarators</button>
+      <button ion-item *ngIf="repo.permissions && repo.permissions.admin" (click)="openCollabaratorsPage()">Collabarators</button>
     </ion-list>
   `
 })

@@ -26,16 +26,16 @@
     </div>
   </div>
   <ion-list *ngIf="followers.length > 0">
-    <ion-item
+    <button ion-item
+      (click)="openUser(user)"
       class="notification"
       *ngFor="let user of followers"
-      (click)="openUser(user)"
     >
       <ion-avatar item-left>
         <img [src]="'https://avatars.githubusercontent.com/u/' + user.id + '?s=50'">
       </ion-avatar>
       <h2>{{user.login}}</h2>
-    </ion-item>
+    </button>
   </ion-list>
 
  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="20%">

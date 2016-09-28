@@ -26,10 +26,10 @@
     </div>
   </div>
   <ion-list *ngIf="commits.length > 0">
-    <ion-item
+    <button ion-item
       class="commits"
-      *ngFor="let commit of commits"
       (click)="openCommit(commit)"
+      *ngFor="let commit of commits"
     >
       <ion-avatar item-left *ngIf="commit.author">
         <img [src]="'https://avatars.githubusercontent.com/u/' + commit.author.id + '?s=50'">
@@ -41,7 +41,7 @@
         <span *ngIf="commit.commit.author && !commit.author">by {{commit.commit.author.name}}</span>
         <span>{{timeFromNow(commit.commit.author.date)}}</span>
       </p>
-    </ion-item>
+    </button>
   </ion-list>
 
  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="20%">
