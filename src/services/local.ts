@@ -10,5 +10,3 @@ export class LocalService {
     this.storage = new Storage();
   }
 }
-
-export default LocalService;

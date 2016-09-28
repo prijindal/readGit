@@ -14,8 +14,8 @@ import {WatchedPage} from '../pages/watched-page/watched-page';
 
 import {BlogsPage} from '../pages/blogs-page/blogs-page';
 
-import OctokatService from '../services/octokat';
-import UrlParser from '../services/urlparser';
+import {OctokatService} from '../services/octokat';
+import {UrlParser} from '../services/urlparser';
 
 @Component({
   templateUrl: 'app.component.html'

@@ -5,11 +5,8 @@
     </button>
     <ion-title *ngIf="commit && commit.commit">{{commit.head}}</ion-title>
     <ion-buttons end>
-      <button ion-button [disabled]="loading" (click)="getCommit($event)">
+      <button ion-button [disabled]="loading" (click)="getCommit()">
         <ion-icon name="refresh"></ion-icon>
-      </button>
-      <button ion-button (click)="presentPopover($event)">
-        <ion-icon name="more"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>

@@ -3,7 +3,7 @@ import {NavController, AlertController} from 'ionic-angular';
 
 import moment from 'moment';
 
-import FileService from '../../services/filehttp';
+import {FileService} from '../../services/filehttp';
 
 import { ErrorPage } from '../error-page/error-page';
 import { BlogPage } from '../blog-page/blog-page';

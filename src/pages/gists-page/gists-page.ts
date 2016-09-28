@@ -1,12 +1,12 @@
 import {Component, ChangeDetectorRef, ViewChild} from '@angular/core';
-import {NavController, NavParams, PopoverController} from 'ionic-angular';
+import {NavController, NavParams} from 'ionic-angular';
 
-import OctokatService from '../../services/octokat';
+import {OctokatService} from '../../services/octokat';
 
 import { ErrorPage } from '../error-page/error-page';
 import { GistPage } from '../gist-page/gist-page';
 
-import { Popover } from './popover/popover';
+
 
 const PER_PAGE: number = 30;
 
@@ -18,13 +18,13 @@ export class GistsPage {
   public loading: Boolean = true;
   public gists: any = [];
   private page: number = 1;
-  private user: string;
+  public user: string;
 
   constructor(
     private ref: ChangeDetectorRef,
     private nav: NavController,
     private params: NavParams,
-    private popoverCtrl: PopoverController,
+
     private octokat: OctokatService
   ) { }
 
@@ -35,10 +35,10 @@ export class GistsPage {
     } else {
       this.user = '/users/' + this.user;
     }
-    this.refreshEvents();
+    this.refreshGists();
   }
 
-  refreshEvents() {
+  refreshGists() {
     this.loading = true;
     this.page = 1;
     this.getGists(true)
@@ -78,12 +78,5 @@ export class GistsPage {
 
   openGist(gist) {
     this.nav.push(GistPage, {gist: gist});
-  }
-
-  presentPopover(event) {
-    let popover = this.popoverCtrl.create(Popover);
-    popover.present({
-      ev: event
-    });
   }
 }

@@ -1,12 +1,12 @@
 import {Component, ChangeDetectorRef, ViewChild} from '@angular/core';
-import {NavController, NavParams, PopoverController} from 'ionic-angular';
+import {NavController, NavParams} from 'ionic-angular';
 
-import OctokatService from '../../services/octokat';
+import {OctokatService} from '../../services/octokat';
 
 import { ErrorPage } from '../error-page/error-page';
 import { RepoPage } from '../repo-page/repo-page';
 
-import { Popover } from './popover/popover';
+
 
 const PER_PAGE: number = 10000;
 
@@ -17,13 +17,13 @@ export class WatchedPage {
   @ViewChild('subscriptionsContent') homeContent;
   public loading: Boolean = true;
   public subscriptions: any = [];
-  private user: string;
+  public user: string;
 
   constructor(
     private ref: ChangeDetectorRef,
     private nav: NavController,
     private params: NavParams,
-    private popoverCtrl: PopoverController,
+
     private octokat: OctokatService
   ) { }
 
@@ -51,12 +51,5 @@ export class WatchedPage {
 
   openRepository(repo) {
     this.nav.push(RepoPage, {repo: repo});
-  }
-
-  presentPopover(event) {
-    let popover = this.popoverCtrl.create(Popover);
-    popover.present({
-      ev: event
-    });
   }
 }

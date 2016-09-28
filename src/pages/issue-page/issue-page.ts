@@ -1,15 +1,15 @@
 import {Component, ChangeDetectorRef} from '@angular/core';
-import {NavController, NavParams, PopoverController} from 'ionic-angular';
+import {NavController, NavParams} from 'ionic-angular';
 
 import moment from 'moment';
 
-import OctokatService from '../../services/octokat';
-import FileService from '../../services/filehttp';
-import BrowserService from '../../services/browser';
+import {OctokatService} from '../../services/octokat';
+import {FileService} from '../../services/filehttp';
+import {BrowserService} from '../../services/browser';
 
 import { ErrorPage } from '../error-page/error-page';
 
-import { Popover } from './popover/popover';
+
 
 @Component({
   templateUrl: 'issue-page.html'
@@ -23,7 +23,7 @@ export class IssuePage {
     private ref: ChangeDetectorRef,
     private nav: NavController,
     private params: NavParams,
-    private popoverCtrl: PopoverController,
+
     private octokat: OctokatService,
     private filehttp: FileService,
     private browser: BrowserService
@@ -65,12 +65,5 @@ export class IssuePage {
 
   timeFromNow(time) {
     return moment(time).fromNow();
-  }
-
-  presentPopover(event) {
-    let popover = this.popoverCtrl.create(Popover);
-    popover.present({
-      ev: event
-    });
   }
 }

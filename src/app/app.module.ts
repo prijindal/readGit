@@ -11,27 +11,30 @@ import {ReposPage} from '../pages/repos-page/repos-page';
 import {GistsPage} from '../pages/gists-page/gists-page';
 import {StarredPage} from '../pages/starred-page/starred-page';
 import {FollowersPage} from '../pages/followers-page/followers-page';
+import {MembersPage} from '../pages/members-page/members-page';
 import {FollowingPage} from '../pages/following-page/following-page';
 import {WatchedPage} from '../pages/watched-page/watched-page';
 import {UserPage} from '../pages/user-page/user-page';
 import {RepoPage} from '../pages/repo-page/repo-page';
 import {IssuesPage} from '../pages/issues-page/issues-page';
 import {IssuePage} from '../pages/issue-page/issue-page';
+import {GistPage} from '../pages/gist-page/gist-page';
 import {CommitsPage} from '../pages/commits-page/commits-page';
 import {CommitPage} from '../pages/commit-page/commit-page';
 import {ComparePage} from '../pages/compare-page/compare-page';
 import {BlogsPage} from '../pages/blogs-page/blogs-page';
+import {BlogPage} from '../pages/blog-page/blog-page';
 
 import { ProfileInfo } from './profile-info/profile-info';
 
-import GithubLogin from '../services/githublogin';
-import LocalService from '../services/local';
-import OctokatService from '../services/octokat';
-import EventParser from '../services/eventparser';
-import FaviconService from '../services/favicon';
-import BrowserService from '../services/browser';
-import FileService from '../services/filehttp';
-import UrlParser from '../services/urlparser';
+import {GithubLogin} from '../services/githublogin';
+import {LocalService} from '../services/local';
+import {OctokatService} from '../services/octokat';
+import {EventParser} from '../services/eventparser';
+import {FaviconService} from '../services/favicon';
+import {BrowserService} from '../services/browser';
+import {FileService} from '../services/filehttp';
+import {UrlParser} from '../services/urlparser';
 
 @NgModule({
   declarations: [
@@ -41,8 +44,10 @@ import UrlParser from '../services/urlparser';
     ErrorPage,
     SearchPage,
     NotificationsPage,
+    MembersPage,
     ReposPage,
     GistsPage,
+    GistPage,
     StarredPage,
     FollowersPage,
     FollowingPage,
@@ -54,7 +59,8 @@ import UrlParser from '../services/urlparser';
     CommitsPage,
     CommitPage,
     ComparePage,
-    BlogsPage
+    BlogsPage,
+    BlogPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -66,8 +72,10 @@ import UrlParser from '../services/urlparser';
     ErrorPage,
     SearchPage,
     NotificationsPage,
+    MembersPage,
     ReposPage,
     GistsPage,
+    GistPage,
     StarredPage,
     FollowersPage,
     FollowingPage,
@@ -79,7 +87,8 @@ import UrlParser from '../services/urlparser';
     CommitsPage,
     CommitPage,
     ComparePage,
-    BlogsPage
+    BlogsPage,
+    BlogPage
   ],
   providers: [
     LocalService,

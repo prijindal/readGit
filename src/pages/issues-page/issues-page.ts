@@ -1,15 +1,15 @@
 import {Component, ChangeDetectorRef, ViewChild} from '@angular/core';
-import {NavController, NavParams, PopoverController} from 'ionic-angular';
+import {NavController, NavParams} from 'ionic-angular';
 
 import moment from 'moment';
 
-import OctokatService from '../../services/octokat';
-import BrowserService from '../../services/browser';
+import {OctokatService} from '../../services/octokat';
+import {BrowserService} from '../../services/browser';
 
 import { ErrorPage } from '../error-page/error-page';
 import { IssuePage } from '../issue-page/issue-page';
 
-import { Popover } from './popover/popover';
+
 
 const PER_PAGE: number = 30;
 
@@ -21,13 +21,13 @@ export class IssuesPage {
   public loading: Boolean = true;
   public issues: any = [];
   private page: number = 1;
-  private repo: string;
+  public repo: string;
 
   constructor(
     private ref: ChangeDetectorRef,
     private nav: NavController,
     private params: NavParams,
-    private popoverCtrl: PopoverController,
+
     private octokat: OctokatService,
     private browser: BrowserService
   ) { }
@@ -39,10 +39,10 @@ export class IssuesPage {
       let reponame = this.params.get('reponame');
       this.repo = username + '/' + reponame;
     }
-    this.refreshEvents();
+    this.refreshIssues();
   }
 
-  refreshEvents() {
+  refreshIssues() {
     this.loading = true;
     this.page = 1;
     this.getIssues(true)
@@ -86,12 +86,5 @@ export class IssuesPage {
 
   openIssue(issue) {
     this.nav.push(IssuePage, {issue: issue});
-  }
-
-  presentPopover(event) {
-    let popover = this.popoverCtrl.create(Popover);
-    popover.present({
-      ev: event
-    });
   }
 }

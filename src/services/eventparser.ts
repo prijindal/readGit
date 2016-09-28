@@ -289,5 +289,3 @@ export class EventParser {
     return userName + ' ' + result;
   }
 }
-
-export default EventParser;

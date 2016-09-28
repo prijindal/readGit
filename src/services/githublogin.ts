@@ -4,7 +4,7 @@ import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 
-import LocalService from './local';
+import {LocalService} from './local';
 
 const CLIENT_ID = 'c6afa760610b0177b86b';
 const CLIENT_SECRET = 'b40dc4d20753cb9ac2a9e8741ecf04574516f422';
@@ -55,5 +55,3 @@ export class GithubLogin {
     this.local.storage.set('TOKEN', token);
   }
 }
-
-export default GithubLogin;

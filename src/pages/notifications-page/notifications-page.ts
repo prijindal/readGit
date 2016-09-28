@@ -1,13 +1,13 @@
 import {Component, ChangeDetectorRef, ViewChild} from '@angular/core';
-import {NavController, NavParams, PopoverController} from 'ionic-angular';
+import {NavController, NavParams} from 'ionic-angular';
 
-import OctokatService from '../../services/octokat';
-import UrlParser from '../../services/urlparser';
+import {OctokatService} from '../../services/octokat';
+import {UrlParser} from '../../services/urlparser';
 
 import { ErrorPage } from '../error-page/error-page';
 import { RepoPage } from '../repo-page/repo-page';
 
-import { Popover } from './popover/popover';
+
 
 const PER_PAGE: number = 10;
 const LIMIT: number = 300;
@@ -25,7 +25,7 @@ export class NotificationsPage {
     private ref: ChangeDetectorRef,
     private nav: NavController,
     private params: NavParams,
-    private popoverCtrl: PopoverController,
+
     private octokat: OctokatService,
     private urlparser: UrlParser
   ) { }
@@ -91,12 +91,5 @@ export class NotificationsPage {
     .update()
     .then(res => {});
     this.urlparser.openUrl(this.nav, notification.response.html_url);
-  }
-
-  presentPopover(event) {
-    let popover = this.popoverCtrl.create(Popover);
-    popover.present({
-      ev: event
-    });
   }
 }

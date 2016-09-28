@@ -5,11 +5,8 @@
     </button>
     <ion-title *ngIf="repo">{{repo.full_name || repo.name}}</ion-title>
     <ion-buttons end>
-      <button ion-button [disabled]="loading" (click)="getRepoInfo($event)">
+      <button ion-button [disabled]="loading" (click)="getRepoInfo()">
         <ion-icon name="refresh"></ion-icon>
-      </button>
-      <button ion-button *ngIf="repo" (click)="presentPopover($event)">
-        <ion-icon name="more"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>

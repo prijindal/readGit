@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 
 import { MenuController, Nav } from 'ionic-angular';
 
-import OctokatService from '../../services/octokat';
+import {OctokatService} from '../../services/octokat';
 
 import { HomePage } from '../../pages/home-page/home-page';
 import { UserPage } from '../../pages/user-page/user-page';

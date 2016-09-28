@@ -1,13 +1,13 @@
 <ion-header>
   <ion-searchbar
     showCancelButton="true"
-    (ionCancel)="cancelSearch($event)"
+    (ionCancel)="cancelSearch()"
     debounce="500"
     autocomplete="off"
     autocorrect="off"
     spellcheck="false"
-    (ionInput)="getItems($event)"
-    (ionClear)="clearItems($event)"
+    (ionInput)="getItems()"
+    (ionClear)="clearItems()"
     [(ngModel)]="searchterm"
   ></ion-searchbar>
 </ion-header>

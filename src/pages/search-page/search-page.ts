@@ -1,8 +1,8 @@
 import {Component, ChangeDetectorRef} from '@angular/core';
-import {NavController, NavParams, PopoverController} from 'ionic-angular';
+import {NavController, NavParams} from 'ionic-angular';
 
-import OctokatService from '../../services/octokat';
-import BrowserService from '../../services/browser';
+import {OctokatService} from '../../services/octokat';
+import {BrowserService} from '../../services/browser';
 
 import { RepoPage } from '../repo-page/repo-page';
 import { UserPage } from '../user-page/user-page';
@@ -15,16 +15,16 @@ const SEARCH_URL = '/search';
 })
 export class SearchPage {
   public searchterm: string = '';
-  private repos: any;
-  private users: any;
-  private issues: any;
-  private codes: any;
+  public repos: any;
+  public users: any;
+  public issues: any;
+  public codes: any;
 
   constructor(
     private ref: ChangeDetectorRef,
     private nav: NavController,
     private params: NavParams,
-    private popoverCtrl: PopoverController,
+
     private octokat: OctokatService,
     private browser: BrowserService
   ) { }

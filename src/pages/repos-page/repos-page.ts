@@ -1,12 +1,12 @@
 import {Component, ChangeDetectorRef, ViewChild} from '@angular/core';
-import {NavController, NavParams, PopoverController} from 'ionic-angular';
+import {NavController, NavParams} from 'ionic-angular';
 
-import OctokatService from '../../services/octokat';
+import {OctokatService} from '../../services/octokat';
 
 import { ErrorPage } from '../error-page/error-page';
 import { RepoPage } from '../repo-page/repo-page';
 
-import { Popover } from './popover/popover';
+
 
 const PER_PAGE: number = 30;
 
@@ -18,13 +18,13 @@ export class ReposPage {
   public loading: Boolean = true;
   public repos: any = [];
   private page: number = 1;
-  private user: string;
+  public user: string;
 
   constructor(
     private ref: ChangeDetectorRef,
     private nav: NavController,
     private params: NavParams,
-    private popoverCtrl: PopoverController,
+
     private octokat: OctokatService
   ) { }
 
@@ -35,10 +35,10 @@ export class ReposPage {
     } else {
       this.user = 'users/' + this.user;
     }
-    this.refreshEvents();
+    this.refreshRepos();
   }
 
-  refreshEvents() {
+  refreshRepos() {
     this.loading = true;
     this.page = 1;
     this.getRepos(true)
@@ -78,12 +78,5 @@ export class ReposPage {
 
   openRepository(repo) {
     this.nav.push(RepoPage, {repo: repo});
-  }
-
-  presentPopover(event) {
-    let popover = this.popoverCtrl.create(Popover);
-    popover.present({
-      ev: event
-    });
   }
 }

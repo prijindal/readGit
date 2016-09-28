@@ -1,39 +1,39 @@
 import {Component, ChangeDetectorRef} from '@angular/core';
-import {NavController, NavParams, PopoverController} from 'ionic-angular';
+import {NavController, NavParams} from 'ionic-angular';
 
-import OctokatService from '../../services/octokat';
-import FileService from '../../services/filehttp';
-import BrowserService from '../../services/browser';
+import {OctokatService} from '../../services/octokat';
+import {FileService} from '../../services/filehttp';
+import {BrowserService} from '../../services/browser';
 
 import { ErrorPage } from '../error-page/error-page';
 import { UserPage } from '../user-page/user-page';
 import { IssuesPage } from '../issues-page/issues-page';
 import { CommitsPage } from '../commits-page/commits-page';
 
-import { Popover } from './popover/popover';
+
 
 @Component({
   templateUrl: 'repo-page.html'
 })
 export class RepoPage {
   public loading: Boolean = true;
-  private repo: any;
-  private readme: string;
-  private readmeError: any;
-  private branches: any;
-  private pulls: any;
-  private subscription: any;
-  private isSubscribed: any;
-  private starring: any;
-  private isStarring: any;
-  private watchingLoading: Boolean = false;
-  private starringLoading: Boolean = false;
+  public repo: any;
+  public readme: string;
+  public readmeError: any;
+  public branches: any;
+  public pulls: any;
+  public subscription: any;
+  public isSubscribed: any;
+  public starring: any;
+  public isStarring: any;
+  public watchingLoading: Boolean = false;
+  public starringLoading: Boolean = false;
 
   constructor(
     private ref: ChangeDetectorRef,
     private nav: NavController,
     private params: NavParams,
-    private popoverCtrl: PopoverController,
+
     private octokat: OctokatService,
     private filehttp: FileService,
     private browser: BrowserService
@@ -221,12 +221,5 @@ export class RepoPage {
 
   openPullsPage() {
     this.browser.open(this.repo.html_url + '/pulls');
-  }
-
-  presentPopover(event) {
-    let popover = this.popoverCtrl.create(Popover, {repo: this.repo});
-    popover.present({
-      ev: event
-    });
   }
 }

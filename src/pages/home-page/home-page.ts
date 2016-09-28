@@ -1,19 +1,19 @@
 import {Component, ChangeDetectorRef, ViewChild} from '@angular/core';
-import {NavController, PopoverController, Events} from 'ionic-angular';
+import {NavController, Events} from 'ionic-angular';
 
-import OctokatService from '../../services/octokat';
-import EventParser from '../../services/eventparser';
-import UrlParser from '../../services/urlparser';
-import BrowserService from '../../services/browser';
-import GithubLogin from '../../services/githublogin';
-import FaviconService from '../../services/favicon';
+import {OctokatService} from '../../services/octokat';
+import {EventParser} from '../../services/eventparser';
+import {UrlParser} from '../../services/urlparser';
+import {BrowserService} from '../../services/browser';
+import {GithubLogin} from '../../services/githublogin';
+import {FaviconService} from '../../services/favicon';
 
 import { ErrorPage } from '../error-page/error-page';
 import { RepoPage } from '../repo-page/repo-page';
 import { UserPage } from '../user-page/user-page';
 import { SearchPage } from '../search-page/search-page';
 
-import { Popover } from './popover/popover';
+
 
 const PER_PAGE: number = 10;
 const LIMIT: number = 300;
@@ -24,15 +24,15 @@ const LIMIT: number = 300;
 export class HomePage {
   @ViewChild('homeContent') homeContent;
   public loggedIn: Boolean = false;
-  private loading: Boolean = true;
-  private waiting: Boolean = false;
-  private acceptcode: Boolean = false;
+  public loading: Boolean = true;
+  public waiting: Boolean = false;
+  public acceptcode: Boolean = false;
   public received_events: any = [];
-  private message: string;
-  private username: string;
-  private password: string;
-  private twofactor: string;
-  private errorMessage: string;
+  public message: string;
+  public username: string;
+  public password: string;
+  public twofactor: string;
+  public errorMessage: string;
   private page: number = 1;
   private received_eventsUrl: string;
 
@@ -40,7 +40,7 @@ export class HomePage {
     private ref: ChangeDetectorRef,
     private nav: NavController,
     private events: Events,
-    private popoverCtrl: PopoverController,
+
     private octokat: OctokatService,
     private eventParser: EventParser,
     private browser: BrowserService,
@@ -196,12 +196,5 @@ export class HomePage {
 
   openSearchPage() {
     this.nav.push(SearchPage);
-  }
-
-  presentPopover(event) {
-    let popover = this.popoverCtrl.create(Popover);
-    popover.present({
-      ev: event
-    });
   }
 }

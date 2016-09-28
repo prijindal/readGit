@@ -10,7 +10,7 @@ import {CommitPage} from '../pages/commit-page/commit-page';
 import {ComparePage} from '../pages/compare-page/compare-page';
 import {BlogsPage} from '../pages/blogs-page/blogs-page';
 
-import BrowserService from './browser';
+import {BrowserService} from './browser';
 
 // If !page, redirect to html_url, otherwise open page with params
 export declare interface DeepUrl {
@@ -188,5 +188,3 @@ export class UrlParser {
     }
   }
 }
-
-export default UrlParser;

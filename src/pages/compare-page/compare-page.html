@@ -9,11 +9,8 @@
       <span *ngIf="compare.commits">{{compare.commits[compare.commits.length - 1].sha}}</span>
     </ion-title>
     <ion-buttons end>
-      <button ion-button [disabled]="loading" (click)="getCompare($event)">
+      <button ion-button [disabled]="loading" (click)="getCompare()">
         <ion-icon name="refresh"></ion-icon>
-      </button>
-      <button ion-button (click)="presentPopover($event)">
-        <ion-icon name="more"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>

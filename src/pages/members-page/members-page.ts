@@ -1,12 +1,12 @@
 import {Component, ChangeDetectorRef, ViewChild} from '@angular/core';
-import {NavController, NavParams, PopoverController} from 'ionic-angular';
+import {NavController, NavParams} from 'ionic-angular';
 
-import OctokatService from '../../services/octokat';
+import {OctokatService} from '../../services/octokat';
 
 import { ErrorPage } from '../error-page/error-page';
 import { UserPage } from '../user-page/user-page';
 
-import { Popover } from './popover/popover';
+
 
 const PER_PAGE: number = 30;
 const LIMIT: number = 300;
@@ -19,23 +19,23 @@ export class MembersPage {
   public loading: Boolean = true;
   public members: any = [];
   private page: number = 1;
-  private user: string;
+  public user: string;
 
   constructor(
     private ref: ChangeDetectorRef,
     private nav: NavController,
     private params: NavParams,
-    private popoverCtrl: PopoverController,
+
     private octokat: OctokatService
   ) { }
 
   ionViewWillEnter() {
     this.user = this.params.get('user');
     this.user = 'orgs/' + this.user;
-    this.refreshEvents();
+    this.refreshMembers();
   }
 
-  refreshEvents() {
+  refreshMembers() {
     this.loading = true;
     this.page = 1;
     this.getMembers(true)
@@ -79,12 +79,5 @@ export class MembersPage {
 
   openUser(user) {
     this.nav.push(UserPage, {user: user});
-  }
-
-  presentPopover(event) {
-    let popover = this.popoverCtrl.create(Popover);
-    popover.present({
-      ev: event
-    });
   }
 }

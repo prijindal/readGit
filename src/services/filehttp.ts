@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import { Http, Headers, RequestOptions, Response, RequestMethod } from '@angular/http';
 
-import LocalService from './local';
+import {LocalService} from './local';
 
 @Injectable()
 export class FileService {
@@ -59,5 +59,3 @@ export class FileService {
     return this.http.request(url, options);
   }
 }
-
-export default FileService;

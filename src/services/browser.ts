@@ -21,5 +21,3 @@ export class BrowserService {
     }
   }
 }
-
-export default BrowserService;

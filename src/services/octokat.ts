@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 
-import LocalService from './local';
+import {LocalService} from './local';
 
 @Injectable()
 export class OctokatService {
@@ -38,5 +38,3 @@ export class OctokatService {
     });
   }
 }
-
-export default OctokatService;
