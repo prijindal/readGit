@@ -1,11 +1,11 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
+    <button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Starred Repos<span *ngIf="user && user !== 'user'"> of {{user.substr(6)}}</span></ion-title>
     <ion-buttons end>
-      <button ion-button [disabled]="loading" (click)="getStarred()">
+      <button ion-button icon-only [disabled]="loading" (click)="getStarred()">
         <ion-icon name="refresh"></ion-icon>
       </button>
     </ion-buttons>

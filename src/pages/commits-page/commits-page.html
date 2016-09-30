@@ -1,11 +1,11 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
+    <button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Commits of {{repo}}</ion-title>
     <ion-buttons end>
-      <button ion-button [disabled]="loading" (click)="refreshCommits()">
+      <button ion-button icon-only [disabled]="loading" (click)="refreshCommits()">
         <ion-icon name="refresh"></ion-icon>
       </button>
     </ion-buttons>

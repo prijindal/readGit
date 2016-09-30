@@ -1,11 +1,11 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
+    <button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Issue <span *ngIf="issue"># {{issue.number}}</span></ion-title>
     <ion-buttons end>
-      <button ion-button [disabled]="loading" (click)="getIssue()">
+      <button ion-button icon-only [disabled]="loading" (click)="getIssue()">
         <ion-icon name="refresh"></ion-icon>
       </button>
     </ion-buttons>

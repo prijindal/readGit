@@ -2,28 +2,27 @@ import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 
-import {HomePage} from '../pages/home-page/home-page';
-import {ErrorPage} from '../pages/error-page/error-page';
-
-import {SearchPage} from '../pages/search-page/search-page';
-import {NotificationsPage} from '../pages/notifications-page/notifications-page';
-import {ReposPage} from '../pages/repos-page/repos-page';
-import {GistsPage} from '../pages/gists-page/gists-page';
-import {StarredPage} from '../pages/starred-page/starred-page';
-import {FollowersPage} from '../pages/followers-page/followers-page';
-import {MembersPage} from '../pages/members-page/members-page';
-import {FollowingPage} from '../pages/following-page/following-page';
-import {WatchedPage} from '../pages/watched-page/watched-page';
-import {UserPage} from '../pages/user-page/user-page';
-import {RepoPage} from '../pages/repo-page/repo-page';
-import {IssuesPage} from '../pages/issues-page/issues-page';
-import {IssuePage} from '../pages/issue-page/issue-page';
-import {GistPage} from '../pages/gist-page/gist-page';
-import {CommitsPage} from '../pages/commits-page/commits-page';
-import {CommitPage} from '../pages/commit-page/commit-page';
-import {ComparePage} from '../pages/compare-page/compare-page';
-import {BlogsPage} from '../pages/blogs-page/blogs-page';
 import {BlogPage} from '../pages/blog-page/blog-page';
+import {BlogsPage} from '../pages/blogs-page/blogs-page';
+import {CommitPage} from '../pages/commit-page/commit-page';
+import {CommitsPage} from '../pages/commits-page/commits-page';
+import {ComparePage} from '../pages/compare-page/compare-page';
+import {ErrorPage} from '../pages/error-page/error-page';
+import {FollowersPage} from '../pages/followers-page/followers-page';
+import {FollowingPage} from '../pages/following-page/following-page';
+import {GistPage} from '../pages/gist-page/gist-page';
+import {GistsPage} from '../pages/gists-page/gists-page';
+import {HomePage} from '../pages/home-page/home-page';
+import {IssuePage} from '../pages/issue-page/issue-page';
+import {IssuesPage} from '../pages/issues-page/issues-page';
+import {MembersPage} from '../pages/members-page/members-page';
+import {NotificationsPage} from '../pages/notifications-page/notifications-page';
+import {RepoPage} from '../pages/repo-page/repo-page';
+import {ReposPage} from '../pages/repos-page/repos-page';
+import {StarredPage} from '../pages/starred-page/starred-page';
+import {SearchPage} from '../pages/search-page/search-page';
+import {UserPage} from '../pages/user-page/user-page';
+import {WatchedPage} from '../pages/watched-page/watched-page';
 
 import { ProfileInfo } from './profile-info/profile-info';
 
@@ -40,27 +39,28 @@ import {UrlParser} from '../services/urlparser';
   declarations: [
     MyApp,
     ProfileInfo,
-    HomePage,
+
+    BlogPage,
+    BlogsPage,
+    CommitPage,
+    CommitsPage,
+    ComparePage,
     ErrorPage,
-    SearchPage,
-    NotificationsPage,
-    MembersPage,
-    ReposPage,
-    GistsPage,
-    GistPage,
-    StarredPage,
     FollowersPage,
     FollowingPage,
-    WatchedPage,
-    UserPage,
-    RepoPage,
-    IssuesPage,
+    GistPage,
+    GistsPage,
+    HomePage,
     IssuePage,
-    CommitsPage,
-    CommitPage,
-    ComparePage,
-    BlogsPage,
-    BlogPage
+    IssuesPage,
+    MembersPage,
+    NotificationsPage,
+    RepoPage,
+    ReposPage,
+    StarredPage,
+    SearchPage,
+    UserPage,
+    WatchedPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -68,27 +68,28 @@ import {UrlParser} from '../services/urlparser';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
+    
+    BlogPage,
+    BlogsPage,
+    CommitPage,
+    CommitsPage,
+    ComparePage,
     ErrorPage,
-    SearchPage,
-    NotificationsPage,
-    MembersPage,
-    ReposPage,
-    GistsPage,
-    GistPage,
-    StarredPage,
     FollowersPage,
     FollowingPage,
-    WatchedPage,
-    UserPage,
-    RepoPage,
-    IssuesPage,
+    GistPage,
+    GistsPage,
+    HomePage,
     IssuePage,
-    CommitsPage,
-    CommitPage,
-    ComparePage,
-    BlogsPage,
-    BlogPage
+    IssuesPage,
+    MembersPage,
+    NotificationsPage,
+    RepoPage,
+    ReposPage,
+    StarredPage,
+    SearchPage,
+    UserPage,
+    WatchedPage
   ],
   providers: [
     LocalService,

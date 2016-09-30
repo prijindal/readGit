@@ -1,11 +1,11 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
+    <button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Watching<span *ngIf="user && user !== 'user'"> {{user.substr(6)}}</span></ion-title>
     <ion-buttons end>
-      <button ion-button [disabled]="loading" (click)="getWatched()">
+      <button ion-button icon-only [disabled]="loading" (click)="getWatched()">
         <ion-icon name="refresh"></ion-icon>
       </button>
     </ion-buttons>

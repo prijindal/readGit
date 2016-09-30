@@ -1,11 +1,11 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
+    <button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Issues of {{repo}}</ion-title>
     <ion-buttons end>
-      <button ion-button [disabled]="loading" (click)="refreshIssues()">
+      <button ion-button icon-only [disabled]="loading" (click)="refreshIssues()">
         <ion-icon name="refresh"></ion-icon>
       </button>
     </ion-buttons>
