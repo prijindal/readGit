@@ -13,7 +13,9 @@ export class OctokatService {
     private local: LocalService
   ) {
     this.Octokat = window['Octokat'];
-    this.checkLogin();
+    this.checkLogin().catch(err => {
+      this.logout();
+    });
   }
 
   checkLogin() {
@@ -32,6 +34,8 @@ export class OctokatService {
   }
 
   logout() {
+    this.user = undefined;
+    this.userData = undefined;
     return this.local.storage.clear()
     .then(res => {
       this.octo = new this.Octokat();
