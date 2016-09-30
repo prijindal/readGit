@@ -32,18 +32,28 @@
       </p>
     </div>
     <ion-card *ngIf="issue.body_html">
-      <ion-card-header *ngIf="issue.user">
-        {{issue.user.login}} commented {{timeFromNow(issue.created_at)}}
-      </ion-card-header>
+      <ion-item *ngIf="issue.user">
+        <ion-avatar item-left>
+          <img [src]="'https://avatars.githubusercontent.com/u/' + issue.user.id + '?s=50'">
+        </ion-avatar>
+        <p class="layout-notoverflow">
+          {{issue.user.login}} commented {{timeFromNow(issue.created_at)}}
+        </p>
+      </ion-item>
       <ion-card-content [innerHTML]="issue.body_html"></ion-card-content>
     </ion-card>
   </div>
   <div *ngIf="comments">
     <div *ngIf="comments.length > 0">
       <ion-card *ngFor="let comment of comments">
-        <ion-card-header>
-          {{comment.user.login}} commented {{timeFromNow(comment.created_at)}}
-        </ion-card-header>
+        <ion-item>
+          <ion-avatar item-left>
+            <img [src]="'https://avatars.githubusercontent.com/u/' + comment.user.id + '?s=50'">
+          </ion-avatar>
+          <p class="layout-notoverflow">
+            {{comment.user.login}} commented {{timeFromNow(comment.created_at)}}
+          </p>
+        </ion-item>
         <ion-card-content [innerHTML]="comment.body_html"></ion-card-content>
       </ion-card>
     </div>
@@ -51,6 +61,32 @@
       <ion-card-content>
         No Comments
       </ion-card-content>
+    </ion-card>
+    <ion-card *ngIf="octokat.user">
+      <ion-item *ngIf="octokat.userData">
+        <ion-avatar item-left>
+          <img [src]="'https://avatars.githubusercontent.com/u/' + octokat.userData.id + '?s=50'">
+        </ion-avatar>
+        <h2>Write</h2>
+      </ion-item>
+      <ion-item class="textarea">
+        <textarea
+          [disabled]="loading"
+          [(ngModel)]="issuecomment"
+          (ngModelChange)="expandTextArea()"
+          placeholder="Leave a comment"
+          [rows]="textarearows"
+        ></textarea>
+      </ion-item>
+      <button
+        margin-bottom
+        margin-left
+        ion-button
+        color="primary"
+        [disabled]="loading || !issuecomment"
+        (click)="commentIssue()"
+      >Comment
+      </button>
     </ion-card>
   </div>
 </ion-content>

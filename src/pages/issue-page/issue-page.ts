@@ -1,5 +1,5 @@
 import {Component, ChangeDetectorRef} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {NavController, NavParams, AlertController} from 'ionic-angular';
 
 import moment from 'moment';
 
@@ -9,12 +9,14 @@ import {BrowserService} from '../../providers/browser';
 
 import { ErrorPage } from '../error-page/error-page';
 
-
+const DEFAULT_TEXTROWS = 2;
 
 @Component({
   templateUrl: 'issue-page.html'
 })
 export class IssuePage {
+  public issuecomment: string;
+  public textarearows: number = DEFAULT_TEXTROWS;
   public loading: Boolean = true;
   public issue: any;
   public comments: any;
@@ -23,8 +25,9 @@ export class IssuePage {
     private ref: ChangeDetectorRef,
     private nav: NavController,
     private params: NavParams,
+    private alertCtrl: AlertController,
 
-    private octokat: OctokatService,
+    public octokat: OctokatService,
     private filehttp: FileService,
     private browser: BrowserService
   ) { }
@@ -58,6 +61,7 @@ export class IssuePage {
   getComments() {
     this.filehttp.getFileFromUrl(this.issue.url + '/comments?per_page=10000', 'html')
     .then(res => {
+      this.loading = false;
       this.comments = res.json();
       this.ref.detectChanges();
     });
@@ -65,5 +69,49 @@ export class IssuePage {
 
   timeFromNow(time) {
     return moment(time).fromNow();
+  }
+
+  expandTextArea() {
+    let length = this.issuecomment.split('\n').length;
+    if (length > 2) {
+      this.textarearows = length;
+    } else {
+      this.textarearows = DEFAULT_TEXTROWS;
+    }
+  }
+
+  commentIssue() {
+    this.loading = true;
+    let urlSplit = this.issue.url.split('https://api.github.com/repos/')[1].split('/');
+    let username = urlSplit[0];
+    let reponame = urlSplit[1];
+    this.octokat.octo.repos(username, reponame).issues(this.issue.number)
+    .comments.create({
+      body: this.issuecomment
+    })
+    .then(res => {
+      this.filehttp.getFileFromUrl(res.url, 'html')
+      .then(res => {
+        this.issuecomment = '';
+        this.loading = false;
+        this.comments.push(res.json());
+        this.ref.detectChanges();
+        this.getComments();
+      })
+      .catch(err => {
+        this.loading = false;
+        this.alertCtrl.create({
+          title: 'ERROR',
+          message: 'There was an Error commenting'
+        }).present();
+      });
+    })
+    .catch(err => {
+      this.loading = false;
+      this.alertCtrl.create({
+        title: 'ERROR',
+        message: 'There was an Error commenting'
+      }).present();
+    });
   }
 }
