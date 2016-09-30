@@ -16,7 +16,7 @@
     "heroku-postbuild": "npm run build && gzip -k -r --best --force www",
     "livereload": "ionic run android --livereload --address 192.168.137.1 --device",
     "android": "cordova run android --buildConfig=.vscode/build.json",
-    "release": "npm run build && npm run android -- --release",
+    "release": "ionic run android --release --buildConfig=.vscode/build.json",
     "deeplink": "adb shell am start -a android.intent.action.VIEW -d 'github://github.com/prijindal/readGit'"
   },
   "dependencies": {

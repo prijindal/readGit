@@ -23,7 +23,6 @@ import {UrlParser} from '../providers/urlparser';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
   rootPage: any = HomePage;
-  menuEnabled: Boolean = false;
   profileEnabled: Boolean = false;
   pages: Array<{title: string, component: any}>;
 
@@ -85,7 +84,6 @@ export class MyApp {
 
   private eventsInit() {
     this.events.subscribe('login', (isLoggedIn) => {
-      this.menuEnabled = true;
       if (isLoggedIn[0]) {
         this.profileEnabled = true;
         this.pages = [
