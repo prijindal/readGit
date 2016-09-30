@@ -1,8 +1,8 @@
 import {Component, ChangeDetectorRef, ViewChild} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 
-import {OctokatService} from '../../services/octokat';
-import {UrlParser} from '../../services/urlparser';
+import {OctokatService} from '../../providers/octokat';
+import {UrlParser} from '../../providers/urlparser';
 
 import { ErrorPage } from '../error-page/error-page';
 import { RepoPage } from '../repo-page/repo-page';

@@ -26,14 +26,14 @@ import {WatchedPage} from '../pages/watched-page/watched-page';
 
 import { ProfileInfo } from './profile-info/profile-info';
 
-import {GithubLogin} from '../services/githublogin';
-import {LocalService} from '../services/local';
-import {OctokatService} from '../services/octokat';
-import {EventParser} from '../services/eventparser';
-import {FaviconService} from '../services/favicon';
-import {BrowserService} from '../services/browser';
-import {FileService} from '../services/filehttp';
-import {UrlParser} from '../services/urlparser';
+import {GithubLogin} from '../providers/githublogin';
+import {LocalService} from '../providers/local';
+import {OctokatService} from '../providers/octokat';
+import {EventParser} from '../providers/eventparser';
+import {FaviconService} from '../providers/favicon';
+import {BrowserService} from '../providers/browser';
+import {FileService} from '../providers/filehttp';
+import {UrlParser} from '../providers/urlparser';
 
 @NgModule({
   declarations: [

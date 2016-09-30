@@ -1,8 +1,8 @@
 import {Component, ChangeDetectorRef} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 
-import {OctokatService} from '../../services/octokat';
-import {BrowserService} from '../../services/browser';
+import {OctokatService} from '../../providers/octokat';
+import {BrowserService} from '../../providers/browser';
 
 import { RepoPage } from '../repo-page/repo-page';
 import { UserPage } from '../user-page/user-page';

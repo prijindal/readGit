@@ -1,12 +1,12 @@
 import {Component, ChangeDetectorRef, ViewChild} from '@angular/core';
 import {NavController, Events} from 'ionic-angular';
 
-import {OctokatService} from '../../services/octokat';
-import {EventParser} from '../../services/eventparser';
-import {UrlParser} from '../../services/urlparser';
-import {BrowserService} from '../../services/browser';
-import {GithubLogin} from '../../services/githublogin';
-import {FaviconService} from '../../services/favicon';
+import {OctokatService} from '../../providers/octokat';
+import {EventParser} from '../../providers/eventparser';
+import {UrlParser} from '../../providers/urlparser';
+import {BrowserService} from '../../providers/browser';
+import {GithubLogin} from '../../providers/githublogin';
+import {FaviconService} from '../../providers/favicon';
 
 import { ErrorPage } from '../error-page/error-page';
 import { RepoPage } from '../repo-page/repo-page';

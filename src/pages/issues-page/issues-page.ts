@@ -3,8 +3,8 @@ import {NavController, NavParams} from 'ionic-angular';
 
 import moment from 'moment';
 
-import {OctokatService} from '../../services/octokat';
-import {BrowserService} from '../../services/browser';
+import {OctokatService} from '../../providers/octokat';
+import {BrowserService} from '../../providers/browser';
 
 import { ErrorPage } from '../error-page/error-page';
 import { IssuePage } from '../issue-page/issue-page';
