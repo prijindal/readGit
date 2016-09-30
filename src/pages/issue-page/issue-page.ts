@@ -96,7 +96,6 @@ export class IssuePage {
         this.loading = false;
         this.comments.push(res.json());
         this.ref.detectChanges();
-        this.getComments();
       })
       .catch(err => {
         this.loading = false;
