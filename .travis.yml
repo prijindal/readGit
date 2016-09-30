@@ -10,4 +10,4 @@ cache:
 
 install: npm install
 script:
-  - node ./node_modules/@ionic/app-scripts/bin/ionic-app-scripts.js lint
+  - npm run test
