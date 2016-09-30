@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/prijindal/readGit.svg?branch=master)](https://travis-ci.org/prijindal/readGit)
+
 # Read Git
 **A Simple way to use Github**
 
