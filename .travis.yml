@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+  - "5"
+  - "6"
+
+cache:
+  directories:
+    - node_modules
+
+install: npm install
+script:
+  - node ./node_modules/@ionic/app-scripts/bin/ionic-app-scripts.js lint
