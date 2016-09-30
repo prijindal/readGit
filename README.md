@@ -52,4 +52,4 @@ Features
 ###Explore Github###
 - [ ] Public timeline
 - [ ] Trending repos (today, week, month, forever)
-- [ ] GitHub blog
+- [x] GitHub blog
