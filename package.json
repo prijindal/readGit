@@ -11,7 +11,7 @@
     "deploy:before": "build",
     "build:before": "build",
     "run:before": "build",
-    "lint": "ionic-app-scripts test",
+    "lint": "ionic-app-scripts lint",
     "octokat": "browserify github.js -o www/build/github.js",
     "heroku-postbuild": "npm run build && gzip -k -r --best --force www",
     "livereload": "ionic run android --livereload --address 192.168.137.1 --device",
