@@ -28,7 +28,7 @@ Features
 - [x] List issues
 - [ ] Filter by label, assignee or milestone
 - [ ] Create/edit/close/reopen issue
-- [ ] Comment on issue
+- [x] Comment on issue
 - [ ] Manage labels
 - [ ] Manage milestones
 
