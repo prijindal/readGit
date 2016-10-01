@@ -53,3 +53,16 @@ Features
 - [ ] Public timeline
 - [ ] Trending repos (today, week, month, forever)
 - [x] GitHub blog
+
+###Accounts###
+- [ ] Multiple Github Accounts
+- [x] User Login with Two Factor Authentication Support
+- [ ] Enterprise Account Support
+- [ ] User Signup
+- [ ] Account Settings
+
+###User Specific Data###
+- [x] News Feed
+- [ ] Most Visited repositories
+- [ ] Recently Visited Repositories
+- [ ] Push Notifications
