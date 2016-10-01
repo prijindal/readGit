@@ -39,7 +39,6 @@ export class BlogsPage {
     .catch(err => {
       if (err.status === 0) {
         this.octokat.handleError({
-          title: 'Unable to Complete Request',
           message: 'It seems like your device can not process this request'
         })
         .then(res => {

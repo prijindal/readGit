@@ -1,16 +1,24 @@
 import {Injectable} from '@angular/core';
-import {AlertController} from 'ionic-angular';
+import {ToastController} from 'ionic-angular';
+
+import { Toast } from 'ionic-native';
 
 @Injectable()
-export class ErrorService {
+export class ErrorService {  
   constructor(
-    private alertCtrl: AlertController
+    private toastCtrl: ToastController
   ) {}
 
-  handleError(message: string, title: string = 'Error') {
-    return this.alertCtrl.create({
-      title: title,
-      message: message
-    }).present();
+  handleError(message: string, duration: number = 3000) {
+    if (Toast['installed']()) {
+      return Toast.show(message, duration.toString(), 'bottom');
+    } else {
+      let toast = this.toastCtrl.create({
+        message: message,
+        showCloseButton: true,
+        duration: duration
+      });
+      return toast.present();
+    }
   }
 }

@@ -1,5 +1,5 @@
 import {Component, ChangeDetectorRef} from '@angular/core';
-import {NavController, NavParams, AlertController} from 'ionic-angular';
+import {NavController, NavParams} from 'ionic-angular';
 
 import moment from 'moment';
 
@@ -23,7 +23,6 @@ export class IssuePage {
     private ref: ChangeDetectorRef,
     private nav: NavController,
     private params: NavParams,
-    private alertCtrl: AlertController,
 
     public octokat: OctokatService,
     private filehttp: FileService,
@@ -97,18 +96,16 @@ export class IssuePage {
       })
       .catch(err => {
         this.loading = false;
-        this.alertCtrl.create({
-          title: 'ERROR',
+        this.octokat.handleError({
           message: 'There was an Error commenting'
-        }).present();
+        });
       });
     })
     .catch(err => {
       this.loading = false;
-      this.alertCtrl.create({
-        title: 'ERROR',
+      this.octokat.handleError({
         message: 'There was an Error commenting'
-      }).present();
+      });
     });
   }
 }
