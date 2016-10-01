@@ -5,12 +5,9 @@ import {OctokatService} from '../../providers/octokat';
 import {FileService} from '../../providers/filehttp';
 import {BrowserService} from '../../providers/browser';
 
-import { ErrorPage } from '../error-page/error-page';
 import { UserPage } from '../user-page/user-page';
 import { IssuesPage } from '../issues-page/issues-page';
 import { CommitsPage } from '../commits-page/commits-page';
-
-
 
 @Component({
   templateUrl: 'repo-page.html'
@@ -55,7 +52,7 @@ export class RepoPage {
       // Replace With Better Error Handling
       // Use Case: Fetching Repo using just the link
       this.loading = false;
-      this.nav.push(ErrorPage, {error: {message: 'Problem with Fetching Repository'}});
+      this.octokat.handleError({message: 'Problem with Fetching Repository'});
     }
   }
 
@@ -75,9 +72,9 @@ export class RepoPage {
     .catch(err => {
       this.loading = false;
       if (err.status === 404) {
-        this.nav.push(ErrorPage, {error: err});
+        this.octokat.handleError(err);
       } else {
-        this.nav.push(ErrorPage, {error: {message: 'Problem with Fetching Repository'}});
+        this.octokat.handleError({message: 'Problem with Fetching Repository'});
       }
     });
   }

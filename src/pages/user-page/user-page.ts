@@ -4,7 +4,6 @@ import {NavController, NavParams} from 'ionic-angular';
 import {OctokatService} from '../../providers/octokat';
 import {BrowserService} from '../../providers/browser';
 
-import { ErrorPage } from '../error-page/error-page';
 import { ReposPage } from '../repos-page/repos-page';
 import { StarredPage } from '../starred-page/starred-page';
 import { FollowersPage } from '../followers-page/followers-page';
@@ -12,8 +11,6 @@ import { MembersPage } from '../members-page/members-page';
 import { GistsPage } from '../gists-page/gists-page';
 import { FollowingPage } from '../following-page/following-page';
 import { WatchedPage } from '../watched-page/watched-page';
-
-
 
 const PER_PAGE: number = 10000;
 
@@ -60,14 +57,14 @@ export class UserPage {
           } else if (tab === 'following') {
             this.openFollowingPage();
           } else {
-            this.nav.push(ErrorPage, {error: {status: 404, message: 'Not Found'}});
+            this.octokat.handleError({status: 404, message: 'Not Found'});
           }
         });
         return ;
       }
     } else {
       this.loading = false;
-      this.nav.push(ErrorPage, {error: {message: 'Problem with Authentication'}});
+      this.octokat.handleError({message: 'Problem with Authentication'});
       return ;
     }
 
@@ -99,7 +96,7 @@ export class UserPage {
     })
     .catch(err => {
       this.loading = false;
-      this.nav.push(ErrorPage, {error: {message: 'Problem with Authentication'}});
+      this.octokat.handleError({message: 'Problem with Authentication'});
     });
   }
 

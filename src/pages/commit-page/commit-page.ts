@@ -6,10 +6,6 @@ import moment from 'moment';
 import {OctokatService} from '../../providers/octokat';
 import {BrowserService} from '../../providers/browser';
 
-import { ErrorPage } from '../error-page/error-page';
-
-
-
 @Component({
   templateUrl: 'commit-page.html'
 })
@@ -77,7 +73,7 @@ export class CommitPage {
       this.ref.detectChanges();
     })
     .catch(err => {
-      this.nav.push(ErrorPage, {error: err});
+      this.octokat.handleError(err);
     });
   }
 

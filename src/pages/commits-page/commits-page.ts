@@ -6,10 +6,7 @@ import moment from 'moment';
 import {OctokatService} from '../../providers/octokat';
 import {BrowserService} from '../../providers/browser';
 
-import { ErrorPage } from '../error-page/error-page';
 import { CommitPage } from '../commit-page/commit-page';
-
-
 
 const PER_PAGE: number = 60;
 
@@ -65,7 +62,7 @@ export class CommitsPage {
       return res;
     })
     .catch(err => {
-      this.nav.push(ErrorPage, {error: err});
+      this.octokat.handleError(err);
     });
   }
 

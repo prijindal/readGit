@@ -7,7 +7,6 @@ import {BlogsPage} from '../pages/blogs-page/blogs-page';
 import {CommitPage} from '../pages/commit-page/commit-page';
 import {CommitsPage} from '../pages/commits-page/commits-page';
 import {ComparePage} from '../pages/compare-page/compare-page';
-import {ErrorPage} from '../pages/error-page/error-page';
 import {FollowersPage} from '../pages/followers-page/followers-page';
 import {FollowingPage} from '../pages/following-page/following-page';
 import {GistPage} from '../pages/gist-page/gist-page';
@@ -27,6 +26,7 @@ import {WatchedPage} from '../pages/watched-page/watched-page';
 import { ProfileInfo } from './profile-info/profile-info';
 
 import {GithubLogin} from '../providers/githublogin';
+import {ErrorService} from '../providers/error';
 import {LocalService} from '../providers/local';
 import {OctokatService} from '../providers/octokat';
 import {EventParser} from '../providers/eventparser';
@@ -45,7 +45,6 @@ import {UrlParser} from '../providers/urlparser';
     CommitPage,
     CommitsPage,
     ComparePage,
-    ErrorPage,
     FollowersPage,
     FollowingPage,
     GistPage,
@@ -74,7 +73,6 @@ import {UrlParser} from '../providers/urlparser';
     CommitPage,
     CommitsPage,
     ComparePage,
-    ErrorPage,
     FollowersPage,
     FollowingPage,
     GistPage,
@@ -93,6 +91,7 @@ import {UrlParser} from '../providers/urlparser';
   ],
   providers: [
     LocalService,
+    ErrorService,
     OctokatService,
     GithubLogin,
     FaviconService,

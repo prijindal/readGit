@@ -42,4 +42,5 @@
         <variable name="DEEPLINK_HOST" value="github.com" />
         <variable name="ANDROID_PATH_PREFIX" value="/" />
     </plugin>
+    <engine name="browser" spec="~4.1.0" />
 </widget>

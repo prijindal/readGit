@@ -7,8 +7,6 @@ import {OctokatService} from '../../providers/octokat';
 import {FileService} from '../../providers/filehttp';
 import {BrowserService} from '../../providers/browser';
 
-import { ErrorPage } from '../error-page/error-page';
-
 const DEFAULT_TEXTROWS = 2;
 
 @Component({
@@ -54,7 +52,7 @@ export class IssuePage {
       this.ref.detectChanges();
     })
     .catch(err => {
-      this.nav.push(ErrorPage, {error: err});
+      this.octokat.handleError(err);
     });
   }
 

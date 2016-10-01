@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 
 import {LocalService} from './local';
+import {ErrorService} from './error';
 
 @Injectable()
 export class OctokatService {
@@ -10,7 +11,8 @@ export class OctokatService {
   public userData: any;
 
   constructor(
-    private local: LocalService
+    private local: LocalService,
+    private errorService: ErrorService
   ) {
     this.Octokat = window['Octokat'];
     this.checkLogin().catch(err => {
@@ -31,6 +33,21 @@ export class OctokatService {
         throw new Error('Not Authenticated');
       }
     });
+  }
+
+  handleError(error: any) {
+    let message: string;
+    switch (error.status) {
+      case 0:
+        message = 'No Network Connection';
+        break;
+      case 404:
+        message = 'Not Found';
+        break;
+      default:
+        message = error.message || 'Unexpected Error';
+    }
+    this.errorService.handleError(message);
   }
 
   logout() {

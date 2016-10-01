@@ -7,10 +7,6 @@ import {OctokatService} from '../../providers/octokat';
 import {FileService} from '../../providers/filehttp';
 import {BrowserService} from '../../providers/browser';
 
-import { ErrorPage } from '../error-page/error-page';
-
-
-
 @Component({
   templateUrl: 'gist-page.html'
 })
@@ -51,7 +47,7 @@ export class GistPage {
       }
     })
     .catch(err => {
-      this.nav.push(ErrorPage, {error: err});
+      this.octokat.handleError(err);
     });
   }
 

@@ -5,7 +5,6 @@ import moment from 'moment';
 
 import {FileService} from '../../providers/filehttp';
 
-import { ErrorPage } from '../error-page/error-page';
 import { BlogPage } from '../blog-page/blog-page';
 
 @Component({
@@ -46,7 +45,7 @@ export class BlogsPage {
           this.nav.pop();
         });
       } else {
-        this.nav.push(ErrorPage, {error: err});
+        this.octokat.handleError(err);
       }
     });
   }

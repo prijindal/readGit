@@ -8,7 +8,6 @@ import {BrowserService} from '../../providers/browser';
 import {GithubLogin} from '../../providers/githublogin';
 import {FaviconService} from '../../providers/favicon';
 
-import { ErrorPage } from '../error-page/error-page';
 import { RepoPage } from '../repo-page/repo-page';
 import { UserPage } from '../user-page/user-page';
 import { SearchPage } from '../search-page/search-page';
@@ -90,7 +89,7 @@ export class HomePage {
         console.log(errParsed);
         this.errorMessage = errParsed.message;
       } else {
-        this.nav.push(ErrorPage, {error: err});
+        this.octokat.handleError(err);
       }
     });
   }
@@ -122,11 +121,11 @@ export class HomePage {
           }
           this.favicon.set('https://avatars.githubusercontent.com/u/' + user.id + '?s=50');
         } else {
-          this.nav.push(ErrorPage, {error: {message: 'Problem with Authentication'}});
+          this.octokat.handleError({message: 'Problem with Authentication'});
         }
       })
       .catch(err => {
-        this.nav.push(ErrorPage, {error: err});
+        this.octokat.handleError(err);
       });
     })
     .catch(res => {
@@ -163,7 +162,7 @@ export class HomePage {
       return res;
     })
     .catch(err => {
-      this.nav.push(ErrorPage, {error: err});
+      this.octokat.handleError(err);
     });
   }
 

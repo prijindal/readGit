@@ -4,10 +4,7 @@ import {NavController, NavParams} from 'ionic-angular';
 import {OctokatService} from '../../providers/octokat';
 import {UrlParser} from '../../providers/urlparser';
 
-import { ErrorPage } from '../error-page/error-page';
 import { RepoPage } from '../repo-page/repo-page';
-
-
 
 const PER_PAGE: number = 10;
 const LIMIT: number = 300;
@@ -63,7 +60,7 @@ export class NotificationsPage {
       return res;
     })
     .catch(err => {
-      this.nav.push(ErrorPage, {error: err});
+      this.octokat.handleError(err);
     });
   }
 
