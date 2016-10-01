@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, ViewChild, ChangeDetectorRef} from '@angular/core';
 import {App, Platform, MenuController, Nav, Events} from 'ionic-angular';
 import {StatusBar, Deeplinks} from 'ionic-native';
 
@@ -27,6 +27,7 @@ export class MyApp {
   pages: Array<{title: string, component: any}>;
 
   constructor(
+    private ref: ChangeDetectorRef,
     private app: App,
     private menu: MenuController,
     private platform: Platform,
@@ -105,6 +106,7 @@ export class MyApp {
           {title: 'Github Blog', component: BlogsPage}
         ];
       }
+      this.ref.detectChanges();
     });
   }
 
