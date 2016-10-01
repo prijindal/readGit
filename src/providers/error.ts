@@ -7,9 +7,9 @@ export class ErrorService {
     private alertCtrl: AlertController
   ) {}
 
-  handleError(message: string) {
-    this.alertCtrl.create({
-      title: 'Error',
+  handleError(message: string, title: string = 'Error') {
+    return this.alertCtrl.create({
+      title: title,
       message: message
     }).present();
   }

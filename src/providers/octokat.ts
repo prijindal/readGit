@@ -47,7 +47,7 @@ export class OctokatService {
       default:
         message = error.message || 'Unexpected Error';
     }
-    this.errorService.handleError(message);
+    return this.errorService.handleError(message, error.title);
   }
 
   logout() {

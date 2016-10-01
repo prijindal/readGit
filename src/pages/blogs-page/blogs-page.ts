@@ -3,6 +3,7 @@ import {NavController, AlertController} from 'ionic-angular';
 
 import moment from 'moment';
 
+import {OctokatService} from '../../providers/octokat';
 import {FileService} from '../../providers/filehttp';
 
 import { BlogPage } from '../blog-page/blog-page';
@@ -18,7 +19,8 @@ export class BlogsPage {
     private ref: ChangeDetectorRef,
     private nav: NavController,
     private filehttp: FileService,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private octokat: OctokatService
   ) { }
 
   ionViewWillEnter() {
@@ -36,11 +38,10 @@ export class BlogsPage {
     })
     .catch(err => {
       if (err.status === 0) {
-        let errorAlert = this.alertCtrl.create({
+        this.octokat.handleError({
           title: 'Unable to Complete Request',
           message: 'It seems like your device can not process this request'
-        });
-        errorAlert.present()
+        })
         .then(res => {
           this.nav.pop();
         });
