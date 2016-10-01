@@ -108,6 +108,13 @@ export class MyApp {
       }
       this.ref.detectChanges();
     });
+    this.octokat.checkLogin()
+    .then(res => {
+      this.events.publish('login', true);
+    })
+    .catch(err => {
+      this.events.publish('login', false);
+    });
   }
 
   private registerBackButtonListener() {
