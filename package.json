@@ -13,7 +13,7 @@
     "run:before": "build",
     "lint": "ionic-app-scripts lint",
     "octokat": "browserify github.js -o www/build/github.js",
-    "heroku-postbuild": "npm run build && gzip -k -r --best --force www",
+    "heroku-postbuild": "ionic build browser && gzip -k -r --best --force platforms/browser/www",
     "livereload": "ionic run android --livereload --address 192.168.137.1 --device",
     "android": "cordova run android --buildConfig=.vscode/build.json",
     "release": "ionic run android --release --buildConfig=.vscode/build.json",
@@ -29,6 +29,7 @@
     "x2js": "^3.0.0"
   },
   "devDependencies": {
+    "ionic": "^2.1.0",
     "@ionic/app-scripts": "^0.0.23",
     "browserify": "^13.1.0",
     "node-static": "^0.7.8",

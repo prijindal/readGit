@@ -274,11 +274,6 @@ export class EventParser {
     };
   }
 
-  private compile(event) {
-    var object = this.parse(event);
-    return this.compileHelper(event, object);
-  }
-
   private compileHelper(event, object) {
     var userName = event.actor.login;
     var keys = Object.keys(object.data);

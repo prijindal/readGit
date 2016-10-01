@@ -11,14 +11,14 @@ export class ErrorService {
 
   handleError(message: string, duration: number = 3000) {
     if (Toast['installed']()) {
-      return Toast.show(message, duration.toString(), 'bottom');
+      Toast.show(message, duration.toString(), 'bottom');
     } else {
       let toast = this.toastCtrl.create({
         message: message,
         showCloseButton: true,
         duration: duration
       });
-      return toast.present();
+      toast.present();
     }
   }
 }
