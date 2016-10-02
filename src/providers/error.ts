@@ -11,7 +11,7 @@ export class ErrorService {
 
   handleError(message: string, duration: number = 3000) {
     if (Toast['installed']()) {
-      Toast.show(message, duration.toString(), 'bottom');
+      Toast.show(message, duration.toString(), 'bottom').subscribe();
     } else {
       let toast = this.toastCtrl.create({
         message: message,
