@@ -8,12 +8,15 @@ import {FileService} from '../../providers/filehttp';
 
 import { BlogPage } from '../blog-page/blog-page';
 
+const PER_PAGE: number = 30;
+
 @Component({
   templateUrl: 'blogs-page.html'
 })
 export class BlogsPage {
+  private page: number = 1;
   public loading: Boolean = true;
-  public blogs: any;
+  public blogs: any = [];
 
   constructor(
     private ref: ChangeDetectorRef,
@@ -24,15 +27,32 @@ export class BlogsPage {
   ) { }
 
   ionViewWillEnter() {
-    this.getBlogs();
+    this.refreshBlogs();
+  }
+  
+  refreshBlogs() {
+    this.loading = true;
+    this.page = 1;
+    this.getBlogs(true)
+    .then(() => {
+      this.loading = false;
+    });
   }
 
   getBlogs(shouldRefresh: Boolean = false) {
-    this.filehttp.getFileFromUrl('https://github.com/blog.atom')
+    return this.filehttp.getFileFromUrl('https://github.com/blog.atom?page=' + this.page)
     .then(res => {
       let xmlText = res.text();
       let x2js = new window['X2JS']();
-      this.blogs = x2js.xml2js( xmlText );
+      let parsed = x2js.xml2js( xmlText );
+      let blogs = parsed.feed.entry;
+      if (shouldRefresh) {
+        this.blogs = [];
+      }
+      blogs.forEach(blog => {
+        blog.thumbnail._url = blog.thumbnail._url.replace('s=60', 's=120');
+        this.blogs.push(blog);
+      });
       this.ref.detectChanges();
       return res;
     })
@@ -44,6 +64,17 @@ export class BlogsPage {
         this.nav.pop();
       } else {
         this.octokat.handleError(err);
+      }
+    });
+  }
+
+  doInfinite(infiniteScroll) {
+    this.page += 1;
+    this.getBlogs()
+    .then((res) => {
+      infiniteScroll.complete();
+      if (res.length < PER_PAGE) {
+        infiniteScroll.enable(false);
       }
     });
   }

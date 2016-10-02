@@ -3,7 +3,7 @@
     <button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Github Blog</ion-title>
+    <ion-title><span *ngIf="blog">{{blog.title}}</span></ion-title>
   </ion-navbar>
 </ion-header>
 
