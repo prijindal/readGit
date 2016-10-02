@@ -66,3 +66,7 @@ Features
 - [ ] Most Visited repositories
 - [ ] Recently Visited Repositories
 - [ ] Push Notifications
+
+###Github Jobs###
+- [ ] Job listings
+- [ ] Posting jobs
