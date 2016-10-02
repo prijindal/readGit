@@ -125,6 +125,8 @@ export class HomePage {
         }
       })
       .catch(err => {
+        this.loading = false;
+        this.errorMessage = 'Some Error Occured';
         this.octokat.handleError(err);
       });
     })

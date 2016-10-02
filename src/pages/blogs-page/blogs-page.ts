@@ -9,7 +9,7 @@ import {FileService} from '../../providers/filehttp';
 
 import { BlogPage } from '../blog-page/blog-page';
 
-const PER_PAGE: number = 30;
+const PER_PAGE: number = 15;
 
 @Component({
   templateUrl: 'blogs-page.html'
