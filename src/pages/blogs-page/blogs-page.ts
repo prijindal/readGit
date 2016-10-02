@@ -56,7 +56,7 @@ export class BlogsPage {
         this.blogs.push(blog);
       });
       this.ref.detectChanges();
-      return res;
+      return blogs;
     })
     .catch(err => {
       if (err.status === 0 && !this.platform.is('cordova')) {
