@@ -4,7 +4,6 @@ import {BlogsPopover} from './blogs-popover/blogs-popover';
 
 import moment from 'moment';
 
-import {BrowserService} from '../../providers/browser';
 import {OctokatService} from '../../providers/octokat';
 import {FileService} from '../../providers/filehttp';
 
@@ -27,8 +26,7 @@ export class BlogsPage {
     private platform: Platform,
     private popoverCtrl: PopoverController,
     private filehttp: FileService,
-    private octokat: OctokatService,
-    private browser: BrowserService
+    private octokat: OctokatService
   ) { }
 
   ionViewWillEnter() {
@@ -38,6 +36,7 @@ export class BlogsPage {
   refreshBlogs() {
     this.loading = true;
     this.page = 1;
+    this.blogs = [];
     this.getBlogs(true)
     .then(() => {
       this.loading = false;
@@ -66,8 +65,7 @@ export class BlogsPage {
         this.octokat.handleError({
           message: 'Your device can not process this request'
         });
-        // this.browser.open('https://github.com/blog');
-        // this.nav.pop();
+        this.nav.pop();
       } else {
         this.octokat.handleError(err);
       }
