@@ -3,7 +3,10 @@ import { IonicApp, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 
 import {BlogPage} from '../pages/blog-page/blog-page';
+
 import {BlogsPage} from '../pages/blogs-page/blogs-page';
+import {BlogsPopover} from '../pages/blogs-page/blogs-popover/blogs-popover';
+
 import {CommitPage} from '../pages/commit-page/commit-page';
 import {CommitsPage} from '../pages/commits-page/commits-page';
 import {ComparePage} from '../pages/compare-page/compare-page';
@@ -23,6 +26,7 @@ import {SearchPage} from '../pages/search-page/search-page';
 import {UserPage} from '../pages/user-page/user-page';
 import {WatchedPage} from '../pages/watched-page/watched-page';
 
+
 import { ProfileInfo } from './profile-info/profile-info';
 
 import {GithubLogin} from '../providers/githublogin';
@@ -41,7 +45,10 @@ import {UrlParser} from '../providers/urlparser';
     ProfileInfo,
 
     BlogPage,
+
     BlogsPage,
+    BlogsPopover,
+
     CommitPage,
     CommitsPage,
     ComparePage,
@@ -67,9 +74,12 @@ import {UrlParser} from '../providers/urlparser';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    
+
     BlogPage,
+
     BlogsPage,
+    BlogsPopover,
+
     CommitPage,
     CommitsPage,
     ComparePage,

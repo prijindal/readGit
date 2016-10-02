@@ -1,5 +1,6 @@
 import {Component, ChangeDetectorRef} from '@angular/core';
-import {NavController, Platform} from 'ionic-angular';
+import {NavController, Platform, PopoverController} from 'ionic-angular';
+import {BlogsPopover} from './blogs-popover/blogs-popover';
 
 import moment from 'moment';
 
@@ -17,12 +18,14 @@ const PER_PAGE: number = 15;
 export class BlogsPage {
   private page: number = 1;
   public loading: Boolean = true;
+  public blogstype: string = '';
   public blogs: any = [];
 
   constructor(
     private ref: ChangeDetectorRef,
     private nav: NavController,
     private platform: Platform,
+    private popoverCtrl: PopoverController,
     private filehttp: FileService,
     private octokat: OctokatService,
     private browser: BrowserService
@@ -31,7 +34,7 @@ export class BlogsPage {
   ionViewWillEnter() {
     this.refreshBlogs();
   }
-  
+
   refreshBlogs() {
     this.loading = true;
     this.page = 1;
@@ -42,7 +45,7 @@ export class BlogsPage {
   }
 
   getBlogs(shouldRefresh: Boolean = false) {
-    return this.filehttp.getFileFromUrl('https://github.com/blog.atom?page=' + this.page)
+    return this.filehttp.getFileFromUrl('https://github.com/blog' + this.blogstype +'.atom?page=' + this.page)
     .then(res => {
       let xmlText = res.text();
       let x2js = new window['X2JS']();
@@ -63,8 +66,8 @@ export class BlogsPage {
         this.octokat.handleError({
           message: 'Your device can not process this request'
         });
-        this.browser.open('https://github.com/blog');
-        this.nav.pop();
+        // this.browser.open('https://github.com/blog');
+        // this.nav.pop();
       } else {
         this.octokat.handleError(err);
       }
@@ -88,5 +91,17 @@ export class BlogsPage {
 
   timeFromNow(time) {
     return moment(time).fromNow();
+  }
+
+  presentPopover(event) {
+    let popover = this.popoverCtrl.create(BlogsPopover, {current: this.blogstype})
+    popover.present({ev: event});
+
+    popover.onDidDismiss((value) => {
+      if (value !== null) {
+        this.blogstype = value;
+        this.refreshBlogs();
+      }
+    });
   }
 }
