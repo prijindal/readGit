@@ -1,8 +1,9 @@
 import {Component, ChangeDetectorRef} from '@angular/core';
-import {NavController, AlertController} from 'ionic-angular';
+import {NavController, Platform} from 'ionic-angular';
 
 import moment from 'moment';
 
+import {BrowserService} from '../../providers/browser';
 import {OctokatService} from '../../providers/octokat';
 import {FileService} from '../../providers/filehttp';
 
@@ -21,9 +22,10 @@ export class BlogsPage {
   constructor(
     private ref: ChangeDetectorRef,
     private nav: NavController,
+    private platform: Platform,
     private filehttp: FileService,
-    private alertCtrl: AlertController,
-    private octokat: OctokatService
+    private octokat: OctokatService,
+    private browser: BrowserService
   ) { }
 
   ionViewWillEnter() {
@@ -57,10 +59,11 @@ export class BlogsPage {
       return res;
     })
     .catch(err => {
-      if (err.status === 0) {
+      if (err.status === 0 && !this.platform.is('cordova')) {
         this.octokat.handleError({
           message: 'Your device can not process this request'
-        })
+        });
+        this.browser.open('https://github.com/blog');
         this.nav.pop();
       } else {
         this.octokat.handleError(err);
