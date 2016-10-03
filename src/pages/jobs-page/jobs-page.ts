@@ -1,7 +1,7 @@
 import {Component, ChangeDetectorRef} from '@angular/core';
 import {Jsonp, Http} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
-import {NavController, Platform, PopoverController} from 'ionic-angular';
+import {NavController, PopoverController} from 'ionic-angular';
 
 import moment from 'moment';
 
@@ -23,7 +23,6 @@ export class JobsPage {
   constructor(
     private ref: ChangeDetectorRef,
     private nav: NavController,
-    private platform: Platform,
     private popoverCtrl: PopoverController,
     private jsonp: Jsonp,
     private http: Http,
@@ -49,7 +48,7 @@ export class JobsPage {
 
   getJobs(shouldRefresh: Boolean = false): Observable<any> {
     let request:Observable<any>;
-    if (this.platform.is('cordova')) {
+    if (window.location.protocol === 'file:') {
       request = this.http.get('https://jobs.github.com/positions.json?page=' + this.page)
     } else {
       request = this.jsonp.get('https://jobs.github.com/positions.json?callback=JSONP_CALLBACK&page=' + this.page)
