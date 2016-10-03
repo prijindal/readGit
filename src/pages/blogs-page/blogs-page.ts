@@ -30,7 +30,14 @@ export class BlogsPage {
   ) { }
 
   ionViewWillEnter() {
-    this.refreshBlogs();
+    if (!this.platform.is('cordova')) {
+      this.octokat.handleError({
+        message: 'Your device can not process this request'
+      });
+      this.nav.pop();
+    } else {
+      this.refreshBlogs();
+    }
   }
 
   refreshBlogs() {
@@ -61,14 +68,7 @@ export class BlogsPage {
       return blogs;
     })
     .catch(err => {
-      if (err.status === 0 && !this.platform.is('cordova')) {
-        this.octokat.handleError({
-          message: 'Your device can not process this request'
-        });
-        this.nav.pop();
-      } else {
-        this.octokat.handleError(err);
-      }
+      this.octokat.handleError(err);
     });
   }
 

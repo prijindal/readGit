@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
+import {JsonpModule} from '@angular/http';
 import { MyApp } from './app.component';
 
 import {BlogPage} from '../pages/blog-page/blog-page';
@@ -17,6 +18,7 @@ import {GistsPage} from '../pages/gists-page/gists-page';
 import {HomePage} from '../pages/home-page/home-page';
 import {IssuePage} from '../pages/issue-page/issue-page';
 import {IssuesPage} from '../pages/issues-page/issues-page';
+import {JobsPage} from '../pages/jobs-page/jobs-page';
 import {MembersPage} from '../pages/members-page/members-page';
 import {NotificationsPage} from '../pages/notifications-page/notifications-page';
 import {RepoPage} from '../pages/repo-page/repo-page';
@@ -59,6 +61,7 @@ import {UrlParser} from '../providers/urlparser';
     HomePage,
     IssuePage,
     IssuesPage,
+    JobsPage,
     MembersPage,
     NotificationsPage,
     RepoPage,
@@ -69,7 +72,8 @@ import {UrlParser} from '../providers/urlparser';
     WatchedPage
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    JsonpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -90,6 +94,7 @@ import {UrlParser} from '../providers/urlparser';
     HomePage,
     IssuePage,
     IssuesPage,
+    JobsPage,
     MembersPage,
     NotificationsPage,
     RepoPage,

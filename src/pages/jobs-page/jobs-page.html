@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Github Jobs</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only [disabled]="loading" (click)="refreshJobs()">
+        <ion-icon name="refresh"></ion-icon>
+      </button>
+      <button ion-button icon-only (click)="presentPopover($event)">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="jobs-page">
+  <div text-center margin-top *ngIf="!jobs || jobs.length <= 0">
+    <div *ngIf="loading">
+      Loading...
+    </div>
+    <div *ngIf="!loading">
+      No Jobs
+    </div>
+  </div>
+  <div *ngIf="jobs">
+    <ion-list *ngIf="jobs.length > 0">
+      <button ion-item (click)="openJob(job)" *ngFor="let job of jobs">
+        <ion-thumbnail item-left *ngIf="job.company_logo">
+          <img [src]="job.company_logo">
+        </ion-thumbnail>
+        <h2 class="layout-notoverflow">{{job.title}}</h2>
+        <p class="layout-notoverflow">
+          <span *ngIf="job.company">by {{job.company}}</span>
+          <span *ngIf="job.location">at {{job.location}}</span>
+          <span *ngIf="job.created_at">posted {{timeFromNow(job.created_at)}}</span>
+        </p>
+      </button>
+    </ion-list>
+
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="20%">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+    <div *ngIf="jobs.length < 0">
+      No Jobs
+    </div>
+  </div>
+</ion-content>

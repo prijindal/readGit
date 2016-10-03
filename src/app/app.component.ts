@@ -13,6 +13,7 @@ import {FollowingPage} from '../pages/following-page/following-page';
 import {WatchedPage} from '../pages/watched-page/watched-page';
 
 import {BlogsPage} from '../pages/blogs-page/blogs-page';
+import {JobsPage} from '../pages/jobs-page/jobs-page';
 
 import {OctokatService} from '../providers/octokat';
 import {UrlParser} from '../providers/urlparser';
@@ -97,21 +98,20 @@ export class MyApp {
           {title: 'Following', component: FollowingPage},
           {title: 'Gists', component: GistsPage},
           {title: 'Search', component: SearchPage},
-          {title: 'Github Blog', component: BlogsPage}
+          {title: 'Github Blog', component: BlogsPage},
+          {title: 'Github Jobs', component: JobsPage}
         ];
       } else {
         this.profileEnabled = false;
         this.pages = [
           {title: 'Search', component: SearchPage},
-          {title: 'Github Blog', component: BlogsPage}
+          {title: 'Github Blog', component: BlogsPage},
+          {title: 'Github Jobs', component: JobsPage}
         ];
       }
       this.ref.detectChanges();
     });
     this.octokat.checkLogin()
-    .then(res => {
-      this.events.publish('login', true);
-    })
     .catch(err => {
       this.events.publish('login', false);
     });
