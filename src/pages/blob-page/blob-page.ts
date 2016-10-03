@@ -33,6 +33,12 @@ export class BlobPage {
       if (this.branch) {
         url = url + '?ref=' + this.branch;
       }
+    } else {
+      let partialUrl = this.url.split('https://api.github.com/repos/')[1];
+      partialUrl = partialUrl.split('/contents/');
+      this.repo = partialUrl[0];
+      this.path = partialUrl[1].split('?ref=')[0];
+      this.branch = partialUrl[1].split('?ref=')[1];
     }
     this.url = url;
     this.getBlob();
