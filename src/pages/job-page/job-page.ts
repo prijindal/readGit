@@ -13,7 +13,7 @@ export class JobPage {
   constructor(
     private ref: ChangeDetectorRef,
     private params: NavParams,
-    private browser: BrowserService
+    public browser: BrowserService
   ) { }
 
   ionViewWillEnter() {

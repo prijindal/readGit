@@ -1,7 +1,7 @@
 import {Component, ChangeDetectorRef} from '@angular/core';
 import {Jsonp, Http} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
-import {NavController, PopoverController} from 'ionic-angular';
+import {NavController} from 'ionic-angular';
 
 import moment from 'moment';
 
@@ -22,7 +22,6 @@ export class JobsPage {
   constructor(
     private ref: ChangeDetectorRef,
     private nav: NavController,
-    private popoverCtrl: PopoverController,
     private jsonp: Jsonp,
     private http: Http,
     private octokat: OctokatService
@@ -35,7 +34,6 @@ export class JobsPage {
   refreshJobs() {
     this.loading = true;
     this.page = 0;
-    this.jobs = [];
     this.getJobs(true)
     .subscribe(() => {
       this.loading = false;
@@ -54,6 +52,10 @@ export class JobsPage {
     return request
     .map(res => {
       let jobs = res.json();
+      if (shouldRefresh) {
+        this.page = 0;
+        this.jobs = [];
+      }
       jobs.forEach((job) => {
         this.jobs.push(job);
       });
@@ -81,9 +83,5 @@ export class JobsPage {
 
   timeFromNow(time) {
     return moment(time).fromNow();
-  }
-
-  presentPopover(event) {
-
   }
 }

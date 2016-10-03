@@ -42,7 +42,6 @@ export class BlogsPage {
   refreshBlogs() {
     this.loading = true;
     this.page = 1;
-    this.blogs = [];
     this.getBlogs(true)
     .then(() => {
       this.loading = false;
