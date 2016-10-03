@@ -53,6 +53,7 @@ Features
 - [ ] Public timeline
 - [ ] Trending repos (today, week, month, forever)
 - [x] GitHub blog
+- [ ] Github Jobs
 
 ###Accounts###
 - [ ] Multiple Github Accounts
@@ -66,6 +67,3 @@ Features
 - [ ] Most Visited repositories
 - [ ] Recently Visited Repositories
 - [ ] Push Notifications
-
-###Github Jobs###
-- [x] Job listings
