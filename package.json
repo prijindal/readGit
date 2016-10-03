@@ -42,7 +42,31 @@
     "cordova-plugin-whitelist",
     "cordova-plugin-splashscreen",
     "cordova-plugin-statusbar",
-    "ionic-plugin-keyboard"
+    "ionic-plugin-keyboard",
+    "cordova-plugin-nativeclicksound",
+    "cordova-plugin-browsertab",
+    "cordova-plugin-compat",
+    {
+      "id": "ionic-plugin-deeplinks",
+      "locator": "ionic-plugin-deeplinks",
+      "variables": {
+        "URL_SCHEME": "github",
+        "DEEPLINK_SCHEME": "https",
+        "DEEPLINK_HOST": "github.com"
+      }
+    },
+    "cordova-plugin-x-toast"
   ],
-  "cordovaPlatforms": []
+  "cordovaPlatforms": [
+    {
+      "platform": "android",
+      "version": "",
+      "locator": "android"
+    },
+    {
+      "platform": "browser",
+      "version": "",
+      "locator": "browser"
+    }
+  ]
 }

@@ -5,6 +5,7 @@ import {OctokatService} from '../../providers/octokat';
 import {FileService} from '../../providers/filehttp';
 import {BrowserService} from '../../providers/browser';
 
+import { TreePage } from '../tree-page/tree-page';
 import { UserPage } from '../user-page/user-page';
 import { IssuesPage } from '../issues-page/issues-page';
 import { CommitsPage } from '../commits-page/commits-page';
@@ -189,7 +190,7 @@ export class RepoPage {
   }
 
   openCode() {
-    this.browser.open(this.repo.html_url + '/tree/' + this.repo.default_branch);
+    this.nav.push(TreePage, {repo: this.repo.full_name});
   }
 
   openCommits() {

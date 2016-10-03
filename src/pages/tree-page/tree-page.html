@@ -1,0 +1,29 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{repo}}/{{path}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<ion-list *ngIf="contents">
+		<ion-list-header>
+	    /{{path}}
+	  </ion-list-header>
+		<button ion-item *ngFor="let content of contents" (click)="openContent(content)">
+			<ion-icon 
+				*ngIf="content.type==='file'" 
+				name="document" 
+				item-left
+			></ion-icon>
+			<ion-icon 
+				*ngIf="content.type==='dir'" 
+				name="folder" 
+				item-left
+			></ion-icon>
+			{{content.name}}
+		</button>
+	</ion-list>
+</ion-content>

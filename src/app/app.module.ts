@@ -3,6 +3,7 @@ import { IonicApp, IonicModule } from 'ionic-angular';
 import {JsonpModule} from '@angular/http';
 import { MyApp } from './app.component';
 
+import {BlobPage} from '../pages/blob-page/blob-page';
 import {BlogPage} from '../pages/blog-page/blog-page';
 
 import {BlogsPage} from '../pages/blogs-page/blogs-page';
@@ -26,6 +27,7 @@ import {RepoPage} from '../pages/repo-page/repo-page';
 import {ReposPage} from '../pages/repos-page/repos-page';
 import {StarredPage} from '../pages/starred-page/starred-page';
 import {SearchPage} from '../pages/search-page/search-page';
+import {TreePage} from '../pages/tree-page/tree-page';
 import {UserPage} from '../pages/user-page/user-page';
 import {WatchedPage} from '../pages/watched-page/watched-page';
 
@@ -47,6 +49,7 @@ import {UrlParser} from '../providers/urlparser';
     MyApp,
     ProfileInfo,
 
+    BlobPage,
     BlogPage,
 
     BlogsPage,
@@ -70,6 +73,7 @@ import {UrlParser} from '../providers/urlparser';
     ReposPage,
     StarredPage,
     SearchPage,
+    TreePage,
     UserPage,
     WatchedPage
   ],
@@ -81,6 +85,7 @@ import {UrlParser} from '../providers/urlparser';
   entryComponents: [
     MyApp,
 
+    BlobPage,
     BlogPage,
 
     BlogsPage,
@@ -104,6 +109,7 @@ import {UrlParser} from '../providers/urlparser';
     ReposPage,
     StarredPage,
     SearchPage,
+    TreePage,
     UserPage,
     WatchedPage
   ],
