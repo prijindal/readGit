@@ -38,7 +38,7 @@ Features
 - [ ] View commit history on each file
 
 ###Tree/File browser###
-- [ ] Browse source code
+- [x] Browse source code
 - [ ] View code with syntax hightlighting
 
 ###Gist###
@@ -68,5 +68,4 @@ Features
 - [ ] Push Notifications
 
 ###Github Jobs###
-- [ ] Job listings
-- [ ] Posting jobs
+- [x] Job listings
