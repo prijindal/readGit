@@ -9,6 +9,8 @@ import {CommitsPage} from '../pages/commits-page/commits-page';
 import {CommitPage} from '../pages/commit-page/commit-page';
 import {ComparePage} from '../pages/compare-page/compare-page';
 import {BlogsPage} from '../pages/blogs-page/blogs-page';
+import {BlobPage} from '../pages/blob-page/blob-page';
+import {TreePage} from '../pages/tree-page/tree-page';
 
 import {BrowserService} from './browser';
 
@@ -168,6 +170,40 @@ export class UrlParser {
                 username: urlArray[0],
                 reponame: urlArray[1],
                 sha: urlArray[3]
+              }
+            };
+          }
+        } else if (urlArray[2] === 'blob') {
+          if (urlArray.length > 4) {
+            let path = '';
+            for (let i = 4;i < urlArray.length; ++i) {
+              path+=urlArray[i] + '/'; 
+            }
+            return {
+              html_url: url,
+              page: BlobPage,
+              params: {
+                repo: urlArray[0] + '/' + urlArray[1],
+                path: path,
+                branch: urlArray[3]
+              }
+            };
+          }
+        } else if (urlArray[2] === 'tree') {
+          if (urlArray.length >= 4) {
+            let path;
+            if (urlArray.length > 4) {
+              path = urlArray[4];
+            } else {
+              path = '';
+            }
+            return {
+              html_url: url,
+              page: TreePage,
+              params: {
+                repo: urlArray[0] + '/' + urlArray[1],
+                path: path,
+                branch: urlArray[3]
               }
             };
           }
