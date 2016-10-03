@@ -6,9 +6,8 @@ import {NavController, PopoverController} from 'ionic-angular';
 import moment from 'moment';
 
 import {OctokatService} from '../../providers/octokat';
-import {BrowserService} from '../../providers/browser';
 
-// import { JobPage } from '../job-page/job-page';
+import { JobPage } from '../job-page/job-page';
 
 const PER_PAGE: number = 50;
 
@@ -26,8 +25,7 @@ export class JobsPage {
     private popoverCtrl: PopoverController,
     private jsonp: Jsonp,
     private http: Http,
-    private octokat: OctokatService,
-    private browser: BrowserService
+    private octokat: OctokatService
   ) { }
 
   ionViewWillEnter() {
@@ -78,8 +76,7 @@ export class JobsPage {
   }
 
   openJob(job) {
-    this.browser.open(job.url);
-    // this.nav.push(JobPage, {job: job});
+    this.nav.push(JobPage, {job: job});
   }
 
   timeFromNow(time) {

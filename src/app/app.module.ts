@@ -18,6 +18,7 @@ import {GistsPage} from '../pages/gists-page/gists-page';
 import {HomePage} from '../pages/home-page/home-page';
 import {IssuePage} from '../pages/issue-page/issue-page';
 import {IssuesPage} from '../pages/issues-page/issues-page';
+import {JobPage} from '../pages/job-page/job-page';
 import {JobsPage} from '../pages/jobs-page/jobs-page';
 import {MembersPage} from '../pages/members-page/members-page';
 import {NotificationsPage} from '../pages/notifications-page/notifications-page';
@@ -61,6 +62,7 @@ import {UrlParser} from '../providers/urlparser';
     HomePage,
     IssuePage,
     IssuesPage,
+    JobPage,
     JobsPage,
     MembersPage,
     NotificationsPage,
@@ -94,6 +96,7 @@ import {UrlParser} from '../providers/urlparser';
     HomePage,
     IssuePage,
     IssuesPage,
+    JobPage,
     JobsPage,
     MembersPage,
     NotificationsPage,

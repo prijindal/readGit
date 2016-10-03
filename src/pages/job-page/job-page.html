@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title><span *ngIf="job">{{job.title}}</span></ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="browser.open(job.url)">
+        <ion-icon name="location"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="job-page">
+  <div text-center margin-top *ngIf="!job">
+    <div *ngIf="loading">
+      Loading...
+    </div>
+    <div *ngIf="!loading">
+      No Job
+    </div>
+  </div>
+  <div *ngIf="job">
+    <ion-card>
+      <img [src]="job.company_logo"/>
+      <ion-card-content>
+        <ion-card-title *ngIf="job.company">
+          Company: <a (click)="browser.open(job.company_url)">{{job.company}}</a>
+        </ion-card-title>
+        <p *ngIf="job.location">
+          <ion-card name="location"></ion-card>
+          <span>{{job.location}}</span>
+        </p>
+        <p *ngIf="job.type">
+          <span>{{job.type}}</span>
+        </p>
+      </ion-card-content>
+    </ion-card>
+    <div padding [innerHTML]="job.description"></div>
+    <ion-card *ngIf="job.how_to_apply">
+      <ion-card-header>
+        How To Apply
+      </ion-card-header>
+      <ion-card-content [innerHTML]="job.description"></ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

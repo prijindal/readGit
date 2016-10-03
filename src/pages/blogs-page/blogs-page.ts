@@ -1,5 +1,5 @@
 import {Component, ChangeDetectorRef} from '@angular/core';
-import {NavController, Platform, PopoverController} from 'ionic-angular';
+import {NavController, PopoverController} from 'ionic-angular';
 import {BlogsPopover} from './blogs-popover/blogs-popover';
 
 import moment from 'moment';
@@ -23,14 +23,13 @@ export class BlogsPage {
   constructor(
     private ref: ChangeDetectorRef,
     private nav: NavController,
-    private platform: Platform,
     private popoverCtrl: PopoverController,
     private filehttp: FileService,
     private octokat: OctokatService
   ) { }
 
   ionViewWillEnter() {
-    if (!this.platform.is('cordova')) {
+    if (window.location.protocol === 'file:') {
       this.octokat.handleError({
         message: 'Your device can not process this request'
       });
