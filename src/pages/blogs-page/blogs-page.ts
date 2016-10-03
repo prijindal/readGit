@@ -30,12 +30,12 @@ export class BlogsPage {
 
   ionViewWillEnter() {
     if (window.location.protocol === 'file:') {
+      this.refreshBlogs();
+    } else {
       this.octokat.handleError({
         message: 'Your device can not process this request'
       });
       this.nav.pop();
-    } else {
-      this.refreshBlogs();
     }
   }
 
