@@ -1,16 +1,16 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>branches-page</ion-title>
+    <ion-title>{{repo}} Branches</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-	<ion-list>
-		<ion-item *ngFor="let branch of branches">
-			{{branch}}
-		</ion-item>
+<ion-content>
+	<ion-list *ngIf="branches">
+		<button ion-item (click)="openBranch(branch)" *ngFor="let branch of branches">
+			{{branch.name}}
+		</button>
 	</ion-list>
 </ion-content>

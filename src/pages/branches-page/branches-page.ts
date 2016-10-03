@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
+import {TreePage} from '../tree-page/tree-page';
+
 import {OctokatService} from '../../providers/octokat';
 
 @Component({
@@ -29,5 +31,9 @@ export class BranchesPage {
   		res = JSON.parse(res);
   		this.branches = res;
   	});
+  }
+
+  openBranch(branch) {
+  	this.nav.push(TreePage, {repo: this.repo, branch: branch.name})
   }
 }
