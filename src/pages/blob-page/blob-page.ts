@@ -10,6 +10,7 @@ import {FileService} from '../../providers/filehttp';
 export class BlobPage {
   repo: string;
   path: string;
+  branch: string;
   blob: any;
 
   constructor(
@@ -21,6 +22,7 @@ export class BlobPage {
   ionViewWillEnter() {
     this.repo = this.params.get('repo');
     this.path = this.params.get('path');
+    this.branch = this.params.get('branch');
     if (!this.path) {
       this.path = '';
     }
@@ -28,7 +30,11 @@ export class BlobPage {
   }
 
   getBlob() {
-    this.filehttp.getFileFromUrl('https://api.github.com/repos/' + this.repo + '/contents/' + this.path, 'html')
+    let url = 'https://api.github.com/repos/' + this.repo + '/contents/' + this.path;
+    if (this.branch) {
+      url = url + '?ref=' + this.branch;
+    }
+    this.filehttp.getFileFromUrl(url, 'html')
     .then(res => {
       this.blob = res.text();
     })

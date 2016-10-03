@@ -190,7 +190,7 @@ export class RepoPage {
   }
 
   openCode() {
-    this.nav.push(TreePage, {repo: this.repo.full_name});
+    this.nav.push(TreePage, {repo: this.repo.full_name, branch: this.repo.default_branch});
   }
 
   openCommits() {
