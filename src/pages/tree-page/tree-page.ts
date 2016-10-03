@@ -12,6 +12,7 @@ import {BlobPage} from '../blob-page/blob-page';
 export class TreePage {
   repo: string;
   path: string;
+  branch: string;
   contents: any;
 
   constructor(

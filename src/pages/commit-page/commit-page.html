@@ -51,7 +51,7 @@
     <div *ngIf="files.length > 0">
       <ion-card class="file" *ngFor="let file of files">
         <ion-card-header>
-          {{file.filename}}
+          <a (click)="openBlob(file)">{{file.filename}}</a>
         </ion-card-header>
         <ion-card-content>
           <pre><div

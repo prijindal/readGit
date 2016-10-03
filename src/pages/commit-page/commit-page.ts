@@ -6,6 +6,8 @@ import moment from 'moment';
 import {OctokatService} from '../../providers/octokat';
 import {BrowserService} from '../../providers/browser';
 
+import {BlobPage} from '../blob-page/blob-page';
+
 @Component({
   templateUrl: 'commit-page.html'
 })
@@ -92,5 +94,9 @@ export class CommitPage {
 
   timeFromNow(time) {
     return moment(time).fromNow();
+  }
+
+  openBlob(file) {
+    this.nav.push(BlobPage, {url: file.contents_url});
   }
 }
