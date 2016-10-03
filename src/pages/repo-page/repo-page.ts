@@ -6,6 +6,7 @@ import {FileService} from '../../providers/filehttp';
 import {BrowserService} from '../../providers/browser';
 
 import { TreePage } from '../tree-page/tree-page';
+import { BranchesPage } from '../branches-page/branches-page';
 import { UserPage } from '../user-page/user-page';
 import { IssuesPage } from '../issues-page/issues-page';
 import { CommitsPage } from '../commits-page/commits-page';
@@ -214,7 +215,7 @@ export class RepoPage {
   }
 
   openBranchesPage() {
-    this.browser.open(this.repo.html_url + '/branches');
+    this.nav.push(BranchesPage, {repo: this.repo.full_name});
   }
 
   openPullsPage() {

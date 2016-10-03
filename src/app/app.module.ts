@@ -9,6 +9,7 @@ import {BlogPage} from '../pages/blog-page/blog-page';
 import {BlogsPage} from '../pages/blogs-page/blogs-page';
 import {BlogsPopover} from '../pages/blogs-page/blogs-popover/blogs-popover';
 
+import {BranchesPage} from '../pages/branches-page/branches-page';
 import {CommitPage} from '../pages/commit-page/commit-page';
 import {CommitsPage} from '../pages/commits-page/commits-page';
 import {ComparePage} from '../pages/compare-page/compare-page';
@@ -55,6 +56,7 @@ import {UrlParser} from '../providers/urlparser';
     BlogsPage,
     BlogsPopover,
 
+    BranchesPage,
     CommitPage,
     CommitsPage,
     ComparePage,
@@ -91,6 +93,7 @@ import {UrlParser} from '../providers/urlparser';
     BlogsPage,
     BlogsPopover,
 
+    BranchesPage,
     CommitPage,
     CommitsPage,
     ComparePage,
