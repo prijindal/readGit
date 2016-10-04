@@ -8,7 +8,10 @@ const IMAGE_EXTENSIONS = [
   'jpg',
   'jpeg',
   'gif',
-  'bmp'
+  'bmp',
+  'webp',
+  'bpg',
+  'svg'
 ]
 
 @Component({
