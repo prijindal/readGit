@@ -33,7 +33,7 @@
     </div>
     <ion-item>
       <ion-avatar item-left *ngIf="commit.author">
-        <img [src]="'https://avatars.githubusercontent.com/u/' + commit.author.id + '?s=50'">
+        <ion-img [src]="'https://avatars.githubusercontent.com/u/' + commit.author.id + '?s=50'"></ion-img>
       </ion-avatar>
       <p class="layout-notoverflow">
         <span *ngIf="commit.author">{{commit.author.login}}</span>

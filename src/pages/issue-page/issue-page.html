@@ -34,7 +34,7 @@
     <ion-card *ngIf="issue.body_html">
       <ion-item *ngIf="issue.user">
         <ion-avatar item-left>
-          <img [src]="'https://avatars.githubusercontent.com/u/' + issue.user.id + '?s=50'">
+          <ion-img [src]="'https://avatars.githubusercontent.com/u/' + issue.user.id + '?s=50'"></ion-img>
         </ion-avatar>
         <p class="layout-notoverflow">
           {{issue.user.login}} commented {{timeFromNow(issue.created_at)}}
@@ -48,7 +48,7 @@
       <ion-card *ngFor="let comment of comments">
         <ion-item>
           <ion-avatar item-left>
-            <img [src]="'https://avatars.githubusercontent.com/u/' + comment.user.id + '?s=50'">
+            <ion-img [src]="'https://avatars.githubusercontent.com/u/' + comment.user.id + '?s=50'"></ion-img>
           </ion-avatar>
           <p class="layout-notoverflow">
             {{comment.user.login}} commented {{timeFromNow(comment.created_at)}}
@@ -65,7 +65,7 @@
     <ion-card *ngIf="octokat.user">
       <ion-item *ngIf="octokat.userData">
         <ion-avatar item-left>
-          <img [src]="'https://avatars.githubusercontent.com/u/' + octokat.userData.id + '?s=50'">
+          <ion-img [src]="'https://avatars.githubusercontent.com/u/' + octokat.userData.id + '?s=50'"></ion-img>
         </ion-avatar>
         <h2>Write</h2>
       </ion-item>

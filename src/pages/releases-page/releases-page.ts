@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
+import moment from 'moment';
+
 import {FileService} from '../../providers/filehttp';
 
-const PER_PAGE: number = 10;
+const PER_PAGE: number = 5;
 
 @Component({
   selector: 'releases-page',
@@ -48,5 +50,9 @@ export class ReleasesPage {
         infiniteScroll.enable(false);
       }
     });
+  }
+
+  timeFromNow(time) {
+    return moment(time).fromNow();
   }
 }

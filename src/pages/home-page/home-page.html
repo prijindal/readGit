@@ -87,7 +87,7 @@
       <ion-card class="event" *ngFor="let event of received_events">
         <ion-item *ngIf="event.actor">
           <ion-avatar item-left (click)="openUser(event.actor)">
-            <img [src]="'https://avatars.githubusercontent.com/u/' + event.actor.id + '?s=50'">
+            <ion-img [src]="'https://avatars.githubusercontent.com/u/' + event.actor.id + '?s=50'"></ion-img>
           </ion-avatar>
           <h2 (click)="openUser(event.actor)">{{event.actor.login}}</h2>
           <p (click)="openRepo(event.repo)">{{event.repo.name}}</p>

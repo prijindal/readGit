@@ -13,6 +13,7 @@ import {BlobPage} from '../pages/blob-page/blob-page';
 import {TreePage} from '../pages/tree-page/tree-page';
 import {BranchesPage} from '../pages/branches-page/branches-page';
 import {NetworkPage} from '../pages/network-page/network-page';
+import {ReleasesPage} from '../pages/releases-page/releases-page';
 
 import {BrowserService} from './browser';
 
@@ -221,6 +222,14 @@ export class UrlParser {
           return {
             html_url: url,
             page: NetworkPage,
+            params: {
+              repo: urlArray[0] + '/' + urlArray[1]
+            }
+          }
+        } else if (urlArray[2] === 'releases') {
+          return {
+            html_url: url,
+            page: ReleasesPage,
             params: {
               repo: urlArray[0] + '/' + urlArray[1]
             }

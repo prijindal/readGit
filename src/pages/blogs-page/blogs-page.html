@@ -29,7 +29,7 @@
     <ion-list *ngIf="blogs.length > 0">
       <button ion-item (click)="openBlog(blog)" *ngFor="let blog of blogs">
         <ion-thumbnail item-left *ngIf="blog.thumbnail">
-          <img [src]="blog.thumbnail._url">
+          <ion-img [src]="blog.thumbnail._url"></ion-img>
         </ion-thumbnail>
         <h2 class="layout-notoverflow">{{blog.title}}</h2>
         <p>

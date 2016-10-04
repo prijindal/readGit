@@ -29,7 +29,7 @@
       *ngFor="let user of following"
     >
       <ion-avatar item-left>
-        <img [src]="'https://avatars.githubusercontent.com/u/' + user.id + '?s=50'">
+        <ion-img [src]="'https://avatars.githubusercontent.com/u/' + user.id + '?s=50'"></ion-img>
       </ion-avatar>
       <h2>{{user.login}}</h2>
     </button>

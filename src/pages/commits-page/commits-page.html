@@ -29,7 +29,7 @@
       *ngFor="let commit of commits"
     >
       <ion-avatar item-left *ngIf="commit.author">
-        <img [src]="'https://avatars.githubusercontent.com/u/' + commit.author.id + '?s=50'">
+        <ion-img [src]="'https://avatars.githubusercontent.com/u/' + commit.author.id + '?s=50'"></ion-img>
       </ion-avatar>
       <h2 class="layout-overflow">{{commit.commit.message}}</h2>
       <p class="layout-notoverflow">

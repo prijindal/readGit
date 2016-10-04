@@ -26,7 +26,7 @@
     <ion-list *ngIf="jobs.length > 0">
       <button ion-item (click)="openJob(job)" *ngFor="let job of jobs">
         <ion-thumbnail item-left *ngIf="job.company_logo">
-          <img [src]="job.company_logo">
+          <ion-img [src]="job.company_logo"></ion-img>
         </ion-thumbnail>
         <h2 class="layout-notoverflow">{{job.title}}</h2>
         <p class="layout-notoverflow">

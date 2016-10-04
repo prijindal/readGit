@@ -24,7 +24,7 @@
   </div>
   <div *ngIf="job">
     <ion-card>
-      <img [src]="job.company_logo"/>
+      <ion-img [src]="job.company_logo"></ion-img>
       <ion-card-content>
         <ion-card-title *ngIf="job.company">
           Company: <a (click)="browser.open(job.company_url)">{{job.company}}</a>
