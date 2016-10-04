@@ -84,7 +84,7 @@
         <div class="user-icons layout flex row around wrap">
           <div class="user-icon layout flex column" (click)="openIssuesPage()">
             <div *ngIf="!pulls" class="count">{{repo.open_issues_count}}</div>
-            <div *ngIf="pulls" class="count">{{repo.open_issues_count - pulls.length}}</div>
+            <div *ngIf="pulls" class="count">{{repo.open_issues_count - pulls}}</div>
             <div class="icon-name">Issues</div>
           </div>
           <div class="user-icon layout flex column" (click)="openStargazersPage()">
@@ -95,17 +95,17 @@
             <div class="count">{{repo.forks_count}}</div>
             <div class="icon-name">Forks</div>
           </div>
-          <div class="user-icon layout flex column" (click)="openWatchersPage()">
-            <div class="count">{{repo.watchers_count}}</div>
-            <div class="icon-name">Watchers</div>
-          </div>
-          <div *ngIf="branches" class="user-icon layout flex column" (click)="openBranchesPage()">
-            <div class="count">{{branches.length}}</div>
+          <div class="user-icon layout flex column" (click)="openBranchesPage()">
+            <div class="count">{{branches}}</div>
             <div class="icon-name">Branches</div>
           </div>
-          <div *ngIf="pulls" class="user-icon layout flex column" (click)="openPullsPage()">
-            <div class="count">{{pulls.length}}</div>
+          <div class="user-icon layout flex column" (click)="openPullsPage()">
+            <div class="count">{{pulls}}</div>
             <div class="icon-name">Pulls</div>
+          </div>
+          <div class="user-icon layout flex column" (click)="openCommits()">
+            <div class="count">{{commits}}</div>
+            <div class="icon-name">Commits</div>
           </div>
         </div>
       </ion-card-content>

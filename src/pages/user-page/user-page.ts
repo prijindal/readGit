@@ -2,6 +2,7 @@ import {Component, ChangeDetectorRef} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 
 import {OctokatService} from '../../providers/octokat';
+import {FileService} from '../../providers/filehttp';
 import {BrowserService} from '../../providers/browser';
 
 import { ReposPage } from '../repos-page/repos-page';
@@ -34,7 +35,8 @@ export class UserPage {
     private params: NavParams,
 
     private octokat: OctokatService,
-    private browser: BrowserService
+    private browser: BrowserService,
+    private filehttp: FileService
   ) { }
 
   ionViewWillEnter() {
@@ -44,7 +46,7 @@ export class UserPage {
       this.loading = false;
       this.user = user;
     } else if (username) {
-      this.user = {url: '/users/' + username, login: username};
+      this.user = {url: 'https://api.github.com/users/' + username, login: username};
       let tab = this.params.get('tab');
       if (tab) {
         this.nav.pop().then(() => {
@@ -69,7 +71,7 @@ export class UserPage {
     }
 
     if (this.user.login === this.octokat.user) {
-      this.user.url = '/user';
+      this.user.url = 'https://api.github.com/user';
     }
     this.getUserInfo();
   }
@@ -101,20 +103,16 @@ export class UserPage {
   }
 
   getStarred() {
-    this.octokat.octo.fromUrl(this.user.url + '/starred?per_page=' + PER_PAGE)
-    .read()
+    this.filehttp.getHeaders(this.user.url + '/starred?page=1&per_page=1')
     .then(res => {
-      res = JSON.parse(res);
-      this.starred = res.length;
+      this.starred = this.filehttp.getLinkLength(res);
     });
   }
 
   getSubscriptions() {
-    this.octokat.octo.fromUrl(this.user.url + '/subscriptions?per_page=' + PER_PAGE)
-    .read()
+    this.filehttp.getHeaders(this.user.url + '/subscriptions?page=1&per_page=1')
     .then(res => {
-      res = JSON.parse(res);
-      this.watching = res.length;
+      this.watching = this.filehttp.getLinkLength(res);
     });
   }
 

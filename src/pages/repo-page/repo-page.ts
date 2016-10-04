@@ -22,8 +22,9 @@ export class RepoPage {
   public repo: any;
   public readme: string;
   public readmeError: any;
-  public branches: any;
-  public pulls: any;
+  public branches: number;
+  public pulls: number;
+  public commits: number;
   public subscription: any;
   public isSubscribed: any;
   public starring: any;
@@ -52,7 +53,7 @@ export class RepoPage {
       this.getRepoInfo();
     } else if (username && reponame) {
       this.repo = { full_name: username + '/' + reponame};
-      this.repo['url'] = '/repos/' + this.repo['full_name'];
+      this.repo['url'] = 'https://api.github.com/repos/' + this.repo['full_name'];
       this.getRepoInfo();
     } else {
       // Replace With Better Error Handling
@@ -72,6 +73,7 @@ export class RepoPage {
       this.getReadMe();
       this.getBranches();
       this.getPulls();
+      this.getCommits();
       this.checkWatching();
       this.checkStarring();
     })
@@ -99,20 +101,23 @@ export class RepoPage {
   }
 
   getBranches() {
-    this.octokat.octo.fromUrl(this.repo.url + '/branches')
-    .read()
+    this.filehttp.getHeaders(this.repo.url + '/branches?page=1&per_page=1')
     .then(res => {
-      res = JSON.parse(res);
-      this.branches = res;
+      this.branches = this.filehttp.getLinkLength(res);
     });
   }
 
   getPulls() {
-    this.octokat.octo.fromUrl(this.repo.url + '/pulls')
-    .read()
+    this.filehttp.getHeaders(this.repo.url + '/pulls?page=1&per_page=1')
     .then(res => {
-      res = JSON.parse(res);
-      this.pulls = res;
+      this.pulls = this.filehttp.getLinkLength(res);
+    });
+  }
+
+  getCommits() {
+    this.filehttp.getHeaders(this.repo.url + '/commits?page=1&per_page=1')
+    .then(res => {
+      this.commits = this.filehttp.getLinkLength(res);
     });
   }
 
@@ -216,10 +221,6 @@ export class RepoPage {
 
   openRepo(repo) {
     this.nav.push(RepoPage, {repo: repo})
-  }
-
-  openWatchersPage() {
-    this.browser.open(this.repo.html_url + '/watchers');
   }
 
   openBranchesPage() {
