@@ -25,14 +25,21 @@
       No Gists
     </div>
   </div>
-  <ion-card *ngIf="gist">
-    <ion-card-header class="sound-click layout-notoverflow">
-      gist: {{gist.id}}
-    </ion-card-header>
-    <ion-card-content class="sound-click">
-      {{gist.description}}
-    </ion-card-content>
-  </ion-card>
+  <div *ngIf="gist">
+    <ion-card>
+      <ion-card-header class="sound-click layout-notoverflow">
+        gist: {{gist.id}}
+      </ion-card-header>
+      <ion-card-content class="sound-click">
+        {{gist.description}}
+      </ion-card-content>
+    </ion-card>
+    <ion-card *ngIf="gist.fork_of">
+      <ion-card-content text-center>
+        Fork of <a (click)="goToGist(gist.fork_of)">{{gist.fork_of.owner.login}} / {{gist.fork_of.id}}</a>
+      </ion-card-content>
+    </ion-card>
+  </div>
   <div *ngIf="files.length > 0">
     <ion-card *ngFor="let file of files">
       <ion-card-header>{{file.name}}</ion-card-header>
@@ -46,7 +53,7 @@
         </ion-col>
         <ion-col>
           <button ion-button color="primary" clear small icon-left (click)="removeFile(file)">
-            <ion-icon name="minus"></ion-icon>
+            <ion-icon name="trash"></ion-icon>
             <div>Remove</div>
           </button>
         </ion-col>

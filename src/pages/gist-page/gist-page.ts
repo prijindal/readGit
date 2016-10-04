@@ -150,6 +150,10 @@ export class GistPage {
     prompt.present({ev: event})
   }
 
+  goToGist(gist) {
+    this.nav.push(GistPage, {gist: gist});
+  }
+
   timeFromNow(time) {
     return moment(time).fromNow();
   }
