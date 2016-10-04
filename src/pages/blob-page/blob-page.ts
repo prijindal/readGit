@@ -56,7 +56,12 @@ export class BlobPage {
   getBlob() {
     let extension = this.path.split('.')[this.path.split('.').length - 1].toLowerCase();
     if (IMAGE_EXTENSIONS.indexOf(extension) >= 0) {
-      this.imageUrl = this.url.replace('https://api.github.com/repos', 'https://raw.githubusercontent.com')
+      this.filehttp.getFileFromUrl(this.url, 'json')
+      .then(res => {
+        let data = res.json();
+        let src = 'data:image/png;' + data.encoding + ',' + data.content
+        this.imageUrl = src;
+      })
       return ;
     }
     this.filehttp.getFileFromUrl(this.url, 'html')
