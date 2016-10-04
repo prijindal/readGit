@@ -23,6 +23,7 @@ import {IssuesPage} from '../pages/issues-page/issues-page';
 import {JobPage} from '../pages/job-page/job-page';
 import {JobsPage} from '../pages/jobs-page/jobs-page';
 import {MembersPage} from '../pages/members-page/members-page';
+import {NetworkPage} from '../pages/network-page/network-page';
 import {NotificationsPage} from '../pages/notifications-page/notifications-page';
 import {RepoPage} from '../pages/repo-page/repo-page';
 import {ReposPage} from '../pages/repos-page/repos-page';
@@ -70,6 +71,7 @@ import {UrlParser} from '../providers/urlparser';
     JobPage,
     JobsPage,
     MembersPage,
+    NetworkPage,
     NotificationsPage,
     RepoPage,
     ReposPage,
@@ -107,6 +109,7 @@ import {UrlParser} from '../providers/urlparser';
     JobPage,
     JobsPage,
     MembersPage,
+    NetworkPage,
     NotificationsPage,
     RepoPage,
     ReposPage,

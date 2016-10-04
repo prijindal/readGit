@@ -7,6 +7,7 @@ import {BrowserService} from '../../providers/browser';
 
 import { TreePage } from '../tree-page/tree-page';
 import { BranchesPage } from '../branches-page/branches-page';
+import { NetworkPage } from '../network-page/network-page';
 import { UserPage } from '../user-page/user-page';
 import { IssuesPage } from '../issues-page/issues-page';
 import { CommitsPage } from '../commits-page/commits-page';
@@ -207,7 +208,11 @@ export class RepoPage {
   }
 
   openForksPage() {
-    this.browser.open(this.repo.html_url + '/network');
+    this.nav.push(NetworkPage, {repo: this.repo.full_name});
+  }
+
+  openRepo(repo) {
+    this.nav.push(RepoPage, {repo: repo})
   }
 
   openWatchersPage() {

@@ -23,6 +23,11 @@
     </div>
   </div>
   <div *ngIf="repo">
+    <ion-card *ngIf="repo.fork" class="buttons">
+      <ion-card-content text-center *ngIf="repo.parent">
+        Forked from <a (click)="openRepo(repo.parent)">{{repo.parent.full_name}}</a>
+      </ion-card-content>
+    </ion-card>
     <ion-card *ngIf="octokat.user" class="buttons">
       <ion-card-content class="layout flex around">
         <div *ngIf="subscription">
@@ -62,11 +67,11 @@
       </ion-card-content>
     </ion-card>
     <div margin>
-      <button 
+      <button
         *ngIf="repo.full_name"
-        ion-button 
-        full 
-        margin-bottom 
+        ion-button
+        full
+        margin-bottom
         (click)="openCode()"
       >View Code</button>
       <button ion-button full (click)="openCommits()">View Commits</button>
