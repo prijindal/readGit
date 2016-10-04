@@ -3,6 +3,14 @@ import { NavController, NavParams } from 'ionic-angular';
 
 import {FileService} from '../../providers/filehttp';
 
+const IMAGE_EXTENSIONS = [
+  'png',
+  'jpg',
+  'jpeg',
+  'gif',
+  'bmp'
+]
+
 @Component({
   selector: 'blob-page',
   templateUrl: 'blob-page.html'
@@ -13,6 +21,7 @@ export class BlobPage {
   branch: string;
   url: string;
   blob: any;
+  imageUrl: string;
 
   constructor(
     private nav: NavController,
@@ -45,6 +54,11 @@ export class BlobPage {
   }
 
   getBlob() {
+    let extension = this.path.split('.')[this.path.split('.').length - 1].toLowerCase();
+    if (IMAGE_EXTENSIONS.indexOf(extension) >= 0) {
+      this.imageUrl = this.url.replace('https://api.github.com/repos', 'https://raw.githubusercontent.com')
+      return ;
+    }
     this.filehttp.getFileFromUrl(this.url, 'html')
     .then(res => {
       this.blob = res.text();

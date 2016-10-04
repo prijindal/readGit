@@ -8,5 +8,8 @@
 
 
 <ion-content padding>
-	<div [innerHTML]="blob"></div>
+	<div *ngIf="blob" [innerHTML]="blob"></div>
+  <div *ngIf="imageUrl">
+    <ion-img [src]="imageUrl"></ion-img>
+  </div>
 </ion-content>
