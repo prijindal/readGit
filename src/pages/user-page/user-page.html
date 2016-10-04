@@ -24,8 +24,8 @@
   </div>
   <div margin *ngIf="user">
     <div class="user-image" *ngIf="user.id">
-      <ion-img *ngIf="!imageLoaded" [src]="'https://avatars.githubusercontent.com/u/' + user.id +'?s=50'"/></ion-img>
-      <ion-img [class.hidden]="!imageLoaded" (load)="imageLoaded = true" [src]="'https://avatars.githubusercontent.com/u/' + user.id +'?s=400'"/></ion-img>
+      <ion-img *ngIf="!imageLoaded" [src]="'https://avatars.githubusercontent.com/u/' + user.id +'?s=50'"></ion-img>
+      <ion-img [class.hidden]="!imageLoaded" (load)="imageLoaded = true" [src]="'https://avatars.githubusercontent.com/u/' + user.id +'?s=400'"></ion-img>
     </div>
     <div class="user-title">
       <h4>{{user.name}}</h4>
@@ -92,7 +92,7 @@
       <h4>Organizations</h4>
       <div class="layout flex wrap row start">
         <div class="org-image" *ngFor="let org of orgs" margin (click)="openUser(org)">
-          <ion-img [src]="'https://avatars.githubusercontent.com/u/' + org.id + '?s=40'"/></ion-img>
+          <ion-img [src]="'https://avatars.githubusercontent.com/u/' + org.id + '?s=40'"></ion-img>
         </div>
       </div>
     </div>
