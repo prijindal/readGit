@@ -1,5 +1,5 @@
 import {Component, ChangeDetectorRef} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {NavController, NavParams, PopoverController} from 'ionic-angular';
 
 import {OctokatService} from '../../providers/octokat';
 import {FileService} from '../../providers/filehttp';
@@ -11,6 +11,8 @@ import { NetworkPage } from '../network-page/network-page';
 import { UserPage } from '../user-page/user-page';
 import { IssuesPage } from '../issues-page/issues-page';
 import { CommitsPage } from '../commits-page/commits-page';
+
+import {RepoPopover} from './repo-popover/repo-popover';
 
 @Component({
   templateUrl: 'repo-page.html'
@@ -33,6 +35,7 @@ export class RepoPage {
     private ref: ChangeDetectorRef,
     private nav: NavController,
     private params: NavParams,
+    private popoverCtrl: PopoverController,
 
     private octokat: OctokatService,
     private filehttp: FileService,
@@ -225,5 +228,16 @@ export class RepoPage {
 
   openPullsPage() {
     this.browser.open(this.repo.html_url + '/pulls');
+  }
+
+  presentPopover(event) {
+    let popover = this.popoverCtrl.create(RepoPopover)
+    popover.present({ev: event});
+
+    popover.onDidDismiss((value) => {
+      if (value !== null) {
+        this.nav.push(value, {repo: this.repo.full_name});
+      }
+    });
   }
 }

@@ -25,7 +25,11 @@ import {JobsPage} from '../pages/jobs-page/jobs-page';
 import {MembersPage} from '../pages/members-page/members-page';
 import {NetworkPage} from '../pages/network-page/network-page';
 import {NotificationsPage} from '../pages/notifications-page/notifications-page';
+import {ReleasesPage} from '../pages/releases-page/releases-page';
+
 import {RepoPage} from '../pages/repo-page/repo-page';
+import {RepoPopover} from '../pages/repo-page/repo-popover/repo-popover';
+
 import {ReposPage} from '../pages/repos-page/repos-page';
 import {StarredPage} from '../pages/starred-page/starred-page';
 import {SearchPage} from '../pages/search-page/search-page';
@@ -73,7 +77,11 @@ import {UrlParser} from '../providers/urlparser';
     MembersPage,
     NetworkPage,
     NotificationsPage,
+    ReleasesPage,
+
     RepoPage,
+    RepoPopover,
+
     ReposPage,
     StarredPage,
     SearchPage,
@@ -111,7 +119,11 @@ import {UrlParser} from '../providers/urlparser';
     MembersPage,
     NetworkPage,
     NotificationsPage,
+    ReleasesPage,
+
     RepoPage,
+    RepoPopover,
+
     ReposPage,
     StarredPage,
     SearchPage,

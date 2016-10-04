@@ -13,7 +13,8 @@ Features
 - [ ] View tags
 - [ ] View pull requests
 - [ ] View contributors
-- [ ] View watchers/networks
+- [ ] View watchers
+- [x] View forks
 - [x] View issues
 
 ###User###
