@@ -164,11 +164,9 @@ export class UserPage {
   }
 
   getMembers() {
-    this.octokat.octo.fromUrl(this.user.url + '/members?per_page=' + PER_PAGE)
-    .read()
+    this.filehttp.getHeaders(this.user.url + '/members?page=1&per_page=1')
     .then(res => {
-      res = JSON.parse(res);
-      this.members = res.length;
+      this.members = this.filehttp.getLinkLength(res);
     });
   }
 

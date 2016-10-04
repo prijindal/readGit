@@ -232,7 +232,7 @@ export class RepoPage {
   }
 
   presentPopover(event) {
-    let popover = this.popoverCtrl.create(RepoPopover)
+    let popover = this.popoverCtrl.create(RepoPopover, {url: this.repo.url})
     popover.present({ev: event});
 
     popover.onDidDismiss((value) => {
