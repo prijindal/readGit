@@ -24,8 +24,8 @@
   </div>
   <div margin *ngIf="user">
     <div class="user-image" *ngIf="user.id">
-      <ion-img *ngIf="!imageLoaded" [src]="'https://avatars.githubusercontent.com/u/' + user.id +'?s=50'"></ion-img>
-      <ion-img [class.hidden]="!imageLoaded" (load)="imageLoaded = true" [src]="'https://avatars.githubusercontent.com/u/' + user.id +'?s=400'"></ion-img>
+      <img *ngIf="!imageLoaded" [src]="'https://avatars.githubusercontent.com/u/' + user.id +'?s=50'"/>
+      <img [class.hidden]="!imageLoaded" (load)="imageLoaded = true" [src]="'https://avatars.githubusercontent.com/u/' + user.id +'?s=400'"/>
     </div>
     <div class="user-title">
       <h4>{{user.name}}</h4>
