@@ -1,5 +1,5 @@
 import {Component, ChangeDetectorRef} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {NavController, NavParams, AlertController} from 'ionic-angular';
 
 import moment from 'moment';
 
@@ -19,6 +19,7 @@ export class GistPage {
     private ref: ChangeDetectorRef,
     private nav: NavController,
     private params: NavParams,
+    private alertCtrl: AlertController,
 
     private octokat: OctokatService,
     private filehttp: FileService,
@@ -31,16 +32,19 @@ export class GistPage {
   }
 
   getGist() {
+    this.loading = true;
     this.octokat.octo.fromUrl(this.gist.url)
     .read()
     .then(res => {
       res = JSON.parse(res);
       this.gist = res;
+      this.loading = false;
+      this.files = [];
       for (let key in this.gist.files) {
         if (this.gist.files[key]) {
           this.filehttp.getHtmlFromMarkdown(this.gist.files[key].content)
           .then(res => {
-            this.files.push({name: key, html: res.text()});
+            this.files.push({name: key, html: res.text(), content: this.gist.files[key].content});
             this.ref.detectChanges();
           });
         }
@@ -49,6 +53,101 @@ export class GistPage {
     .catch(err => {
       this.octokat.handleError(err);
     });
+  }
+
+  deleteGist(event) {
+    this.loading = true;
+    let prompt = this.alertCtrl.create({
+      title: 'Delete this gist?',
+      message: 'All the files associated with gist will be deleted',
+      buttons:[{
+        text: 'No',
+        role: 'cancel',
+        handler: () => {
+          this.loading = false;
+        }
+      },{
+        text: 'Yes',
+        handler: () => {
+          this.filehttp.deleteRequest(this.gist.url)
+          .then(res => {
+            this.loading = false;
+            this.nav.pop();
+          });
+        }
+      }]
+    })
+    prompt.present({ev: event})
+  }
+
+  editFile(file) {
+    this.loading = true;
+    let prompt = this.alertCtrl.create({
+      title: 'Edit ' + file.name +'?',
+      inputs:[{
+        name: 'filename',
+        placeholder: 'Filename',
+        value: file.name
+      }, {
+        name: 'content',
+        placeholder: 'Content',
+        value: file.content
+      }],
+      buttons:[{
+        text: 'Cancel',
+        role: 'cancel',
+        handler: () => {
+          this.loading = false;
+        }
+      },{
+        text: 'Save',
+        handler: (data) => {
+          let body = {
+            files: {}
+          }
+          body.files[file.name] = {
+            filename: data.filename,
+            content: data.content
+          }
+          this.filehttp.patchRequest(this.gist.url, body)
+          .then(res => {
+            this.loading = false;
+            this.getGist();
+          });
+        }
+      }]
+    })
+    prompt.present({ev: event})
+  }
+
+  removeFile(file) {
+    this.loading = true;
+    let prompt = this.alertCtrl.create({
+      title: 'Delete ' + file.name +'?',
+      subTitle: 'Are You sure you want to delete this?',
+      message: "File cannot be recovered once deleted.",
+      buttons:[{
+        text: 'No',
+        role: 'cancel',
+        handler: () => {
+          this.loading = false;
+        }
+      },{
+        text: 'Yes',
+        handler: () => {
+          let body = {
+            files: {}
+          }
+          body.files[file.name] = null;
+          this.filehttp.patchRequest(this.gist.url, body)
+          .then(res => {
+            this.loading = false;
+            this.getGist();
+          });
+        }
+      }]
+    })
+    prompt.present({ev: event})
   }
 
   timeFromNow(time) {

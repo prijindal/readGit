@@ -66,6 +66,36 @@ export class FileService {
     }
   }
 
+  postNewRequest(url, body, type: string = 'raw') {
+    return new Promise((resolve: (res: Response) => {}, reject) => {
+      this.getToken()
+      .then(token => {
+        this.sendRequest(url, type, token, body, RequestMethod.Post)
+        .subscribe(resolve, reject);
+      });
+    });
+  }
+
+  patchRequest(url, body, type: string = 'raw') {
+    return new Promise((resolve: (res: Response) => {}, reject) => {
+      this.getToken()
+      .then(token => {
+        this.sendRequest(url, type, token, body, RequestMethod.Patch)
+        .subscribe(resolve, reject);
+      });
+    });
+  }
+
+  deleteRequest(url, type: string = 'raw') {
+    return new Promise((resolve: (res: Response) => {}, reject) => {
+      this.getToken()
+      .then(token => {
+        this.sendRequest(url, type, token, null, RequestMethod.Delete)
+        .subscribe(resolve, reject);
+      });
+    });
+  }
+
   private sendRequest(url, type, token?, body?: Object, method: RequestMethod = RequestMethod.Get) {
     let headers = new Headers({
       'Accept': 'application/vnd.github.cannonball-preview.' + type + '+json',

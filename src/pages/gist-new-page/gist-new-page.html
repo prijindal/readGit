@@ -1,0 +1,62 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>New Gist</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-item class="textarea">
+    <textarea
+      [disabled]="loading"
+      [(ngModel)]="description"
+      (ngModelChange)="expandTextArea()"
+      placeholder="Enter a description"
+      [rows]="textarearows"
+    ></textarea>
+  </ion-item>
+  <ion-card *ngFor="let file of files">
+    <ion-card-header>
+      <ion-input [(ngModel)]="file.name" placeholder="File Name"></ion-input>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item class="textarea">
+        <textarea
+          [disabled]="loading"
+          [(ngModel)]="file.content"
+          (ngModelChange)="expandContentArea(file)"
+          placeholder="Enter File content"
+          [rows]="file.textarearows"
+        ></textarea>
+      </ion-item>
+    </ion-card-content>
+    <ion-row>
+      <ion-col>
+        <button ion-button color="primary" clear small icon-left (click)="removeFile(file)">
+          <ion-icon name="minus"></ion-icon>
+          <div>Remove</div>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+  <div padding>
+    <button
+      full
+      ion-button
+      color="secondary"
+      (click)="addFile()"
+    >Add File
+    </button>
+    <button
+      fixed-button
+      full
+      ion-button
+      color="primary"
+      [disabled]="loading"
+      (click)="createGist()"
+    >Create Gist
+    </button>
+  </div>
+</ion-content>

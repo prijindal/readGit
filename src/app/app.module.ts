@@ -15,6 +15,7 @@ import {CommitsPage} from '../pages/commits-page/commits-page';
 import {ComparePage} from '../pages/compare-page/compare-page';
 import {FollowersPage} from '../pages/followers-page/followers-page';
 import {FollowingPage} from '../pages/following-page/following-page';
+import {GistNewPage} from '../pages/gist-new-page/gist-new-page';
 import {GistPage} from '../pages/gist-page/gist-page';
 import {GistsPage} from '../pages/gists-page/gists-page';
 import {HomePage} from '../pages/home-page/home-page';
@@ -67,6 +68,7 @@ import {UrlParser} from '../providers/urlparser';
     ComparePage,
     FollowersPage,
     FollowingPage,
+    GistNewPage,
     GistPage,
     GistsPage,
     HomePage,
@@ -109,6 +111,7 @@ import {UrlParser} from '../providers/urlparser';
     ComparePage,
     FollowersPage,
     FollowingPage,
+    GistNewPage,
     GistPage,
     GistsPage,
     HomePage,

@@ -4,7 +4,7 @@ import {NavController, NavParams} from 'ionic-angular';
 import {OctokatService} from '../../providers/octokat';
 
 import { GistPage } from '../gist-page/gist-page';
-
+import { GistNewPage } from '../gist-new-page/gist-new-page';
 
 const PER_PAGE: number = 30;
 
@@ -72,6 +72,10 @@ export class GistsPage {
         infiniteScroll.enable(false);
       }
     });
+  }
+
+  openNewGist() {
+    this.nav.push(GistNewPage);
   }
 
   openGist(gist) {
