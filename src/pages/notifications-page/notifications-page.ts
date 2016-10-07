@@ -28,7 +28,9 @@ export class NotificationsPage {
   ) { }
 
   ionViewWillEnter() {
-    this.refreshNotifications();
+    if (this.notifications.length === 0) {
+      this.refreshNotifications();
+    }
   }
 
   refreshNotifications() {
