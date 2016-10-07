@@ -97,7 +97,7 @@ export class NotificationsPage {
   }
 
   markRepoRead(notificationInfo) {
-    this.alertCtrl.create({
+    let prompt = this.alertCtrl.create({
       title: 'Are you sure',
       message: 'All Notifications of ' + notificationInfo.repository + ' will be cleared.',
       buttons: [{
@@ -113,5 +113,6 @@ export class NotificationsPage {
         }
       }]
     })
+    prompt.present({ev: event});
   }
 }
