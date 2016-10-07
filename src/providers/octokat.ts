@@ -3,10 +3,11 @@ import {Injectable} from '@angular/core';
 import {LocalService} from './local';
 import {ErrorService} from './error';
 
+import Octokat from 'octokat';
+
 @Injectable()
 export class OctokatService {
   public octo: any;
-  private Octokat: any;
   public user: string;
   public userData: any;
 
@@ -14,7 +15,6 @@ export class OctokatService {
     private local: LocalService,
     private errorService: ErrorService
   ) {
-    this.Octokat = window['Octokat'];
     this.checkLogin().catch(err => {
       this.logout();
     });
@@ -24,12 +24,12 @@ export class OctokatService {
     return this.local.storage.get('TOKEN')
     .then(token => {
       if (token) {
-        this.octo = new this.Octokat({
+        this.octo = new Octokat({
           token: token
         });
         return token;
       } else {
-        this.octo = new this.Octokat({});
+        this.octo = new Octokat({});
         throw new Error('Not Authenticated');
       }
     });
@@ -55,7 +55,7 @@ export class OctokatService {
     this.userData = undefined;
     return this.local.storage.clear()
     .then(res => {
-      this.octo = new this.Octokat();
+      this.octo = new Octokat();
     });
   }
 }

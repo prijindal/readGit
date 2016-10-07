@@ -3,6 +3,7 @@ import {NavController, PopoverController} from 'ionic-angular';
 import {BlogsPopover} from './blogs-popover/blogs-popover';
 
 import moment from 'moment';
+import X2JS from 'x2js';
 
 import {OctokatService} from '../../providers/octokat';
 import {FileService} from '../../providers/filehttp';
@@ -52,7 +53,7 @@ export class BlogsPage {
     return this.filehttp.getFileFromUrl('https://github.com/blog' + this.blogstype +'.atom?page=' + this.page)
     .then(res => {
       let xmlText = res.text();
-      let x2js = new window['X2JS']();
+      let x2js = new X2JS();
       let parsed = x2js.xml2js( xmlText );
       let blogs = parsed.feed.entry;
       if (shouldRefresh) {
