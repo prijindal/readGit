@@ -144,10 +144,17 @@ export class HomePage {
   refreshEvents() {
     this.loading = true;
     this.page = 1;
-    this.getEvents(true)
+    return this.getEvents(true)
     .then(() => {
       this.loading = false;
     });
+  }
+
+  doRefresh(refresher) {
+    this.refreshEvents()
+    .then(() => {
+      refresher.complete();
+    })
   }
 
   getEvents(shouldRefresh: Boolean = false) {

@@ -19,7 +19,7 @@ export class NotificationsService {
     return notification.subject.url.replace('https://api.github.com/repos', 'https://github.com');
   }
 
-  getNotifications(loadCount: number = 30) {
+  getNotifications(loadCount: number = 50) {
     return new Promise((resolve, reject) => {
       this.filehttp.getFileFromUrl('/notifications?page=1&per_page=' + loadCount + '&timestamp=' + new Date().getTime())
       .then((response) => {

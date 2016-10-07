@@ -31,16 +31,15 @@
         {{commit.body}}
       </p>
     </div>
-    <ion-item>
-      <ion-avatar item-left *ngIf="commit.author">
+    <ion-item *ngIf="commit.author">
+      <ion-avatar item-left>
         <ion-img [src]="'https://avatars.githubusercontent.com/u/' + commit.author.id + '?s=50'"></ion-img>
       </ion-avatar>
       <p class="layout-notoverflow">
-        <span *ngIf="commit.author">{{commit.author.login}}</span>
-        <span *ngIf="commit.commit.author && !commit.author">{{commit.commit.author.name}}</span>
+        <span>{{commit.author.login}}</span>
         commited
-        <span>{{timeFromNow(commit.commit.author.date)}}</span>
-        <span>on {{getDate(commit.commit.author.date)}}</span>
+        <span>{{timeFromNow(commit.author.date)}}</span>
+        <span>on {{getDate(commit.author.date)}}</span>
       </p>
     </ion-item>
     <p margin-horizontal *ngIf="commit.stats">

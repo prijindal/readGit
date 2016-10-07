@@ -14,7 +14,7 @@
 
 
 <ion-content #notificationsContent class="notifications-page">
-  <div text-center margin-top *ngIf="notifications.length <= 0">
+  <div text-center margin-top *ngIf="notifications.length == 0">
     <div *ngIf="loading">
       Loading...
     </div>
@@ -22,9 +22,24 @@
       No Notifications
     </div>
   </div>
+  <ion-refresher *ngIf="notifications.length > 0" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-list *ngIf="notifications.length > 0">
     <ion-item-group *ngFor="let notificationInfo of notifications">
-      <ion-item-divider light>{{notificationInfo.repository}}</ion-item-divider>
+      <ion-item-divider light>
+        <span (click)="openRepo(notificationInfo)">{{notificationInfo.repository}}</span>
+        <button
+          color="dark"
+          clear
+          item-right
+          ion-button
+          icon-only
+          (click)="markRepoRead(notificationInfo)">
+          <ion-icon
+            name="checkmark"></ion-icon>
+        </button>
+      </ion-item-divider>
       <ion-item
         [class.disabled]="!notification.unread"
         *ngFor="let notification of notificationInfo.notifications">
@@ -39,7 +54,7 @@
           [disabled]="!notification.unread">
           <ion-icon
             name="checkmark"></ion-icon>
-          </button>
+        </button>
       </ion-item>
       <button
         ion-item

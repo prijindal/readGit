@@ -1,5 +1,7 @@
 import {Component, ChangeDetectorRef, ViewChild} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {NavController, NavParams, AlertController} from 'ionic-angular';
+
+import {RepoPage} from '../repo-page/repo-page/';
 
 import {OctokatService} from '../../providers/octokat';
 import {FileService} from '../../providers/filehttp';
@@ -20,6 +22,7 @@ export class NotificationsPage {
     private ref: ChangeDetectorRef,
     private nav: NavController,
     private params: NavParams,
+    private alertCtrl: AlertController,
 
     private octokat: OctokatService,
     private urlparser: UrlParser,
@@ -35,11 +38,19 @@ export class NotificationsPage {
 
   refreshNotifications() {
     this.loading = true;
-    this.notificationsService.getNotifications()
+    return this.notificationsService.getNotifications()
     .then((response: any) => {
       this.notifications = response.notifications
       this.more = response.more
       this.loading = false;
+      return response;
+    })
+  }
+
+  doRefresh(refresher) {
+    this.refreshNotifications()
+    .then(() => {
+      refresher.complete();
     })
   }
 
@@ -79,5 +90,28 @@ export class NotificationsPage {
   openNotification(notification) {
     this.markRead(notification);
     this.urlparser.openUrl(this.nav, this.notificationsService.getHtmlUrl(notification));
+  }
+
+  openRepo(notificationInfo) {
+    this.nav.push(RepoPage, {repo: notificationInfo.notifications[0].repository})
+  }
+
+  markRepoRead(notificationInfo) {
+    this.alertCtrl.create({
+      title: 'Are you sure',
+      message: 'All Notifications of ' + notificationInfo.repository + ' will be cleared.',
+      buttons: [{
+        text: 'No',
+        action: 'cancel',
+        handler:() => {}
+      }, {
+        text: 'Yes',
+        handler: () => {
+          notificationInfo.notifications.forEach(notification => {
+              this.markRead(notification);
+          });
+        }
+      }]
+    })
   }
 }

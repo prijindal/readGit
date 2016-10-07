@@ -83,6 +83,9 @@
         No Events
       </div>
     </div>
+    <ion-refresher *ngIf="received_events.length > 0" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
     <ion-list *ngIf="received_events.length > 0">
       <ion-card class="event" *ngFor="let event of received_events">
         <ion-item *ngIf="event.actor">

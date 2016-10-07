@@ -2,7 +2,7 @@
   "name": "read-git",
   "description": "A smart way to use Github",
   "homepage": "https://readgit.herokuapp.com/",
-  "private": false,
+  "private": true,
   "scripts": {
     "build": "ionic-app-scripts build --release",
     "watch": "ionic-app-scripts watch",
