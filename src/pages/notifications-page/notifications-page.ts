@@ -2,21 +2,19 @@ import {Component, ChangeDetectorRef, ViewChild} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 
 import {OctokatService} from '../../providers/octokat';
+import {FileService} from '../../providers/filehttp';
+import {NotificationsService} from '../../providers/notifications';
 import {UrlParser} from '../../providers/urlparser';
 
-import { RepoPage } from '../repo-page/repo-page';
-
-const PER_PAGE: number = 10;
-const LIMIT: number = 300;
-
 @Component({
+  selector: 'notifications-page',
   templateUrl: 'notifications-page.html'
 })
 export class NotificationsPage {
   @ViewChild('notificationsContent') homeContent;
   public loading: Boolean = true;
   public notifications: any = [];
-  private page: number = 1;
+  public more: number;
 
   constructor(
     private ref: ChangeDetectorRef,
@@ -24,7 +22,9 @@ export class NotificationsPage {
     private params: NavParams,
 
     private octokat: OctokatService,
-    private urlparser: UrlParser
+    private urlparser: UrlParser,
+    private filehttp: FileService,
+    private notificationsService: NotificationsService
   ) { }
 
   ionViewWillEnter() {
@@ -35,60 +35,49 @@ export class NotificationsPage {
 
   refreshNotifications() {
     this.loading = true;
-    this.page = 1;
-    this.getNotifications(true)
-    .then(() => {
+    this.notificationsService.getNotifications()
+    .then((response: any) => {
+      this.notifications = response.notifications
+      this.more = response.more
       this.loading = false;
-    });
-  }
-
-  getNotifications(shouldRefresh: Boolean = false) {
-    return this.octokat.octo.fromUrl('/notifications' + '?page=' + this.page + '&per_page=' + PER_PAGE + '&timestamp=' + new Date().getTime()).read()
-    .then(res => {
-      res = JSON.parse(res);
-      if (shouldRefresh) {
-        this.notifications = [];
-      }
-      res.forEach((notification) => {
-        this.octokat.octo.fromUrl(notification.subject.url)
-        .read()
-        .then(notificationResponse => {
-          notificationResponse = JSON.parse(notificationResponse);
-          notification.response = notificationResponse;
-          this.notifications.push(notification);
-        });
-      });
-      this.ref.detectChanges();
-      return res;
     })
-    .catch(err => {
-      this.octokat.handleError(err);
-    });
   }
 
-  doInfinite(infiniteScroll) {
-    this.page += 1;
-    if (this.page <= LIMIT / PER_PAGE) {
-      this.getNotifications()
-      .then((res) => {
-        infiniteScroll.complete();
-        if (res.length < PER_PAGE) {
-          infiniteScroll.enable(false);
+  loadMore() {
+    let count = 0;
+    this.notifications.forEach((notification) => {
+      count+=notification.notifications.length + notification.more;
+    })
+    this.notificationsService.getNotifications(count)
+    .then((response: any) => {
+      this.notifications = response.notifications
+      this.more = response.more
+      this.loading = false;
+    })
+  }
+
+  loadPartialMore(notificationInfo) {
+    this.notificationsService.getRepoNotifications(notificationInfo)
+    .then(notifications => {
+      notificationInfo.notifications = notifications
+      notificationInfo.more = 0;
+      for(let i = 0;i < this.notifications.length; ++i) {
+        if (this.notifications[i].repository === notificationInfo.repository) {
+          this.notifications[i] = notificationInfo;
         }
-      });
-    } else {
-      infiniteScroll.enable(false);
-    }
+      }
+    })
   }
 
-  openRepository(notification) {
-    this.nav.push(RepoPage, {repo: notification.repository});
-  }
-
-  openNotification(notification) {
+  markRead(notification) {
+    notification.unread = false;
     this.octokat.octo.notifications.threads(notification.id)
     .update()
     .then(res => {});
-    this.urlparser.openUrl(this.nav, notification.response.html_url);
+  }
+
+  openNotification(notification) {
+    this.markRead(notification);
+    this.urlparser.openUrl(this.nav, this.notificationsService.getHtmlUrl(notification));
   }
 }

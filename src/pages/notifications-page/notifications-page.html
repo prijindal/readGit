@@ -23,17 +23,36 @@
     </div>
   </div>
   <ion-list *ngIf="notifications.length > 0">
-    <ion-card class="notification" *ngFor="let notification of notifications">
-      <ion-card-header class="sound-click" (click)="openRepository(notification)">
-        {{notification.repository.full_name}}
-      </ion-card-header>
-      <ion-card-content class="sound-click" (click)="openNotification(notification)">
-        {{notification.subject.title}}
-      </ion-card-content>
-    </ion-card>
+    <ion-item-group *ngFor="let notificationInfo of notifications">
+      <ion-item-divider light>{{notificationInfo.repository}}</ion-item-divider>
+      <ion-item
+        [class.disabled]="!notification.unread"
+        *ngFor="let notification of notificationInfo.notifications">
+        <span (click)="openNotification(notification)">{{notification.subject.title}}</span>
+        <button
+          color="dark"
+          clear
+          item-right
+          ion-button
+          icon-only
+          (click)="markRead(notification)"
+          [disabled]="!notification.unread">
+          <ion-icon
+            name="checkmark"></ion-icon>
+          </button>
+      </ion-item>
+      <button
+        ion-item
+        (click)="loadPartialMore(notificationInfo)"
+        text-center
+        *ngIf="notificationInfo.more"
+      >{{notificationInfo.more}} more notifications for {{notificationInfo.repository}}</button>
+    </ion-item-group>
+    <button
+      (click)="loadMore()"
+      ion-item
+      text-center
+      *ngIf="more"
+    >{{more}} more notifications</button>
   </ion-list>
-
- <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="20%">
-   <ion-infinite-scroll-content></ion-infinite-scroll-content>
- </ion-infinite-scroll>
 </ion-content>
