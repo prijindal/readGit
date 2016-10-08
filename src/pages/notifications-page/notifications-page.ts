@@ -1,7 +1,9 @@
 import {Component, ChangeDetectorRef, ViewChild} from '@angular/core';
-import {NavController, NavParams, AlertController} from 'ionic-angular';
+import {NavController, NavParams, AlertController, PopoverController} from 'ionic-angular';
 
 import {RepoPage} from '../repo-page/repo-page/';
+
+import {NotificationsPopover} from './notifications-popover/notifications-popover';
 
 import {OctokatService} from '../../providers/octokat';
 import {FileService} from '../../providers/filehttp';
@@ -16,6 +18,7 @@ export class NotificationsPage {
   @ViewChild('notificationsContent') homeContent;
   public loading: Boolean = true;
   public notifications: any = [];
+  private query: string = '';
   public more: number;
 
   constructor(
@@ -23,6 +26,7 @@ export class NotificationsPage {
     private nav: NavController,
     private params: NavParams,
     private alertCtrl: AlertController,
+    private popoverCtrl: PopoverController,
 
     private octokat: OctokatService,
     private urlparser: UrlParser,
@@ -38,7 +42,7 @@ export class NotificationsPage {
 
   refreshNotifications() {
     this.loading = true;
-    return this.notificationsService.getNotifications()
+    return this.notificationsService.getNotifications(50, this.query)
     .then((response: any) => {
       this.notifications = response.notifications
       this.more = response.more
@@ -59,7 +63,7 @@ export class NotificationsPage {
     this.notifications.forEach((notification) => {
       count+=notification.notifications.length + notification.more;
     })
-    this.notificationsService.getNotifications(count)
+    this.notificationsService.getNotifications(count, this.query)
     .then((response: any) => {
       this.notifications = response.notifications
       this.more = response.more
@@ -68,7 +72,7 @@ export class NotificationsPage {
   }
 
   loadPartialMore(notificationInfo) {
-    this.notificationsService.getRepoNotifications(notificationInfo)
+    this.notificationsService.getRepoNotifications(notificationInfo, this.query)
     .then(notifications => {
       notificationInfo.notifications = notifications
       notificationInfo.more = 0;
@@ -114,5 +118,16 @@ export class NotificationsPage {
       }]
     })
     prompt.present({ev: event});
+  }
+
+  presentPopover(event) {
+    let popover = this.popoverCtrl.create(NotificationsPopover, {current: this.query})
+    popover.onDidDismiss(current => {
+      this.query = current;
+      this.notifications = [];
+      this.more = 0;
+      this.refreshNotifications();
+    })
+    popover.present({ev: event});
   }
 }

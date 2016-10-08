@@ -19,9 +19,9 @@ export class NotificationsService {
     return notification.subject.url.replace('https://api.github.com/repos', 'https://github.com');
   }
 
-  getNotifications(loadCount: number = 50) {
+  getNotifications(loadCount: number = 50, query: string = '') {
     return new Promise((resolve, reject) => {
-      this.filehttp.getFileFromUrl('/notifications?page=1&per_page=' + loadCount + '&timestamp=' + new Date().getTime())
+      this.filehttp.getFileFromUrl('/notifications?page=1&per_page=' + loadCount + query + '&timestamp=' + new Date().getTime())
       .then((response) => {
         let linkHeader = response.headers.get('Link');
         let notificationsArray = response.json();
@@ -43,12 +43,12 @@ export class NotificationsService {
         });
         // Parse notificationsArray
         if (linkHeader && notificationsCount >= loadCount) {
-          this.filehttp.getHeaders('/notifications?page=1&per_page=1')
+          this.filehttp.getHeaders('/notifications?page=1&per_page=1' + query)
           .then(headerResponse => {
             let counted = 0;
             let headerNotificationsCount = this.filehttp.getLinkLength(headerResponse);
             async.eachSeries(notifications, (notification, callback) => {
-              this.filehttp.getHeaders('/repos/' + notification.repository + '/notifications?page=1&per_page=1')
+              this.filehttp.getHeaders('/repos/' + notification.repository + '/notifications?page=1&per_page=1' + query)
               .then(repoNotifications => {
                 let repoNotificationsCount = this.filehttp.getLinkLength(repoNotifications);
                 if (!repoNotificationsCount) repoNotificationsCount = 1;
@@ -67,10 +67,10 @@ export class NotificationsService {
     })
   }
 
-  getRepoNotifications(notificationInfo) {
+  getRepoNotifications(notificationInfo, query: string = '') {
     return new Promise((resolve, reject) => {
       let count = notificationInfo.notifications.length + notificationInfo.more
-      this.filehttp.getFileFromUrl('/repos/' + notificationInfo.repository + '/notifications?page=1&per_page=' + count)
+      this.filehttp.getFileFromUrl('/repos/' + notificationInfo.repository + '/notifications?page=1&per_page=' + count + query)
       .then(res => {
         let notifications = res.json();
         resolve(notifications)
