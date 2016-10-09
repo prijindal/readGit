@@ -25,3 +25,25 @@
 // Layout Scss
 
 @import "../theme/globals/layout";
+
+
+// Icon Styles
+.item-md ion-icon.octicon[item-left] + .item-inner,
+.item-md ion-icon.octicon[item-left] + .item-input {
+  margin-left: 4px;
+}
+.octicon {
+  &.green {
+    color: #6cc644;
+  }
+  &.red {
+    color: #bd2c00;
+  }
+  svg {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    vertical-align: text-top;
+    fill: currentColor;
+  }
+}

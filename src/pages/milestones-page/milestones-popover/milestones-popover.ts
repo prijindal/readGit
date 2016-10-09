@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import {ViewController, NavParams} from 'ionic-angular';
 
-import {ReleasesPage} from '../../releases-page/releases-page';
 import {FileService} from '../../../providers/filehttp';
 
 @Component({

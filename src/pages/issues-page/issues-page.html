@@ -35,18 +35,19 @@
     </div>
   </div>
   <ion-list class="issues" *ngIf="issues.length > 0">
-    <ion-card
+    <button ion-item
       class="issue"
       *ngFor="let issue of issues"
       (click)="openIssue(issue)"
     >
-      <ion-card-header class="sound-click layout flex between">
+      <ion-icon [class]="issue.class" item-left *ngIf="issue.icon" [innerHTML]="issue.icon"></ion-icon>
+      <h2 class="sound-click layout flex between layout-notoverflow">
         {{issue.title}}
-      </ion-card-header>
-      <ion-card-content class="sound-click issue-description">
+      </h2>
+      <p class="sound-click issue-description layout-notoverflow">
         #{{issue.number}} opened {{timeFromNow(issue.created_at)}} by {{issue.user.login}}
-      </ion-card-content>
-    </ion-card>
+      </p>
+    </button>
   </ion-list>
 
  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="20%">

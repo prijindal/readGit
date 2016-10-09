@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import {ViewController, NavParams} from 'ionic-angular';
 
-import {ReleasesPage} from '../../releases-page/releases-page';
 import {FileService} from '../../../providers/filehttp';
 
 @Component({
@@ -21,15 +20,15 @@ import {FileService} from '../../../providers/filehttp';
 export class IssuesPopover {
   public stateTypes = [
     {
-      type: 'open',
+      type: 'is:open',
       name: 'View Open'
     },
     {
-      type: 'closed',
+      type: 'is:closed',
       name: 'View Closed'
     },
     {
-      type: 'all',
+      type: '',
       name: 'View All'
     }
   ]

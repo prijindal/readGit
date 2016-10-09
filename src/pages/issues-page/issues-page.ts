@@ -1,4 +1,5 @@
 import {Component, ChangeDetectorRef, ViewChild} from '@angular/core';
+import {DomSanitizer} from '@angular/platform-browser';
 import {NavController, NavParams, PopoverController} from 'ionic-angular';
 
 import moment from 'moment';
@@ -22,12 +23,14 @@ export class IssuesPage {
   public searchbarhidden: Boolean = false;
   public loading: Boolean = true;
   public issues: any = [];
+  public icons: {};
   private page: number = 1;
   public repo: string;
   public query: string = 'is:issue is:open';
 
   constructor(
     private ref: ChangeDetectorRef,
+    private sanitizer: DomSanitizer,
     private nav: NavController,
     private params: NavParams,
     private popoverCtrl: PopoverController,
@@ -38,6 +41,9 @@ export class IssuesPage {
   ) { }
 
   ionViewWillEnter() {
+    if (Window['octicons']) {
+      console.dir(Window['octicons'])
+    }
     this.repo = this.params.get('repo');
     let query = this.params.get('query');
     if (query) {
@@ -104,6 +110,11 @@ export class IssuesPage {
     }));
   }
 
+  ionViewWillLeave() {
+    let scroller = this.issuesContent.getElementRef().nativeElement.querySelector('.scroll-content')
+    scroller.removeEventListener('scroll')
+  }
+
   refreshIssues() {
     this.loading = true;
     this.page = 1;
@@ -123,8 +134,14 @@ export class IssuesPage {
       if (shouldRefresh) {
         this.issues = [];
       }
-      res.items.forEach((notification) => {
-        this.issues.push(notification);
+      res.items.forEach((issue) => {
+        if (octicons) {
+          let icon = 'issue-opened';
+          let svg = octicons.svg[icon];
+          issue.icon = this.sanitizer.bypassSecurityTrustHtml(svg);
+          issue.class = 'octicon green'
+        }
+        this.issues.push(issue);
       });
       this.ref.detectChanges();
       return res.items;
