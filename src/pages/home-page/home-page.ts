@@ -41,7 +41,7 @@ export class HomePage {
     private nav: NavController,
     private events: Events,
 
-    
+
     private filehttp: FileService,
     private eventParser: EventParser,
     private browser: BrowserService,
@@ -75,11 +75,15 @@ export class HomePage {
     this.waiting = true;
     this.errorMessage = '';
     this.githubLogin.login(this.username, this.password, this.twofactor)
-    .subscribe(() => {
+    .subscribe((res) => {
       this.waiting = false;
       this.message = 'Successfully Authenticated';
-      this.verifyLogin();
+      this.filehttp.setToken(res.token)
+      .then(() => {
+        this.verifyLogin();
+      });
     }, (err) => {
+      console.dir(err);
       this.waiting = false;
       let errParsed = err.json();
       if (err.headers.get('X-GitHub-OTP') && err.headers.get('X-GitHub-OTP').search('required') === 0) {
@@ -106,6 +110,7 @@ export class HomePage {
     this.loading = true;
     return this.filehttp.checkLogin()
     .then(res => {
+      console.dir(res);
       this.message = 'Verifying You...';
       this.filehttp.getFileFromUrl('/user')
       .then(response => {
@@ -127,6 +132,7 @@ export class HomePage {
         }
       })
       .catch(err => {
+        console.dir(err);
         this.loading = false;
         this.errorMessage = 'Some Error Occured';
         this.filehttp.handleError(err);

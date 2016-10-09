@@ -30,6 +30,11 @@ export class FileService {
     });
   }
 
+  setToken(token) {
+    this.token = token;
+    return this.local.storage.set('TOKEN', token);
+  }
+
   logout() {
     this.user = undefined;
     this.userData = undefined;
