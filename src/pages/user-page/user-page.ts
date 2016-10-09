@@ -59,14 +59,14 @@ export class UserPage {
           } else if (tab === 'following') {
             this.openFollowingPage();
           } else {
-            this.octokat.handleError({status: 404, message: 'Not Found'});
+            this.filehttp.handleError({status: 404, message: 'Not Found'});
           }
         });
         return ;
       }
     } else {
       this.loading = false;
-      this.octokat.handleError({message: 'Problem with Authentication'});
+      this.filehttp.handleError({message: 'Problem with Authentication'});
       return ;
     }
 
@@ -98,7 +98,7 @@ export class UserPage {
     })
     .catch(err => {
       this.loading = false;
-      this.octokat.handleError({message: 'Problem with Authentication'});
+      this.filehttp.handleError({message: 'Problem with Authentication'});
     });
   }
 

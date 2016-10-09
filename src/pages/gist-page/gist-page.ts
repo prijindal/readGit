@@ -51,7 +51,7 @@ export class GistPage {
       }
     })
     .catch(err => {
-      this.octokat.handleError(err);
+      this.filehttp.handleError(err);
     });
   }
 

@@ -33,6 +33,7 @@ import {RepoPopover} from '../pages/repo-page/repo-popover/repo-popover';
 import {ReposPage} from '../pages/repos-page/repos-page';
 import {StarredPage} from '../pages/starred-page/starred-page';
 import {SearchPage} from '../pages/search-page/search-page';
+import {TagPage} from '../pages/tag-page/tag-page';
 import {TreePage} from '../pages/tree-page/tree-page';
 import {UserPage} from '../pages/user-page/user-page';
 import {WatchedPage} from '../pages/watched-page/watched-page';
@@ -72,6 +73,7 @@ export const APP_PAGES = [
   ReposPage,
   StarredPage,
   SearchPage,
+  TagPage,
   TreePage,
   UserPage,
   WatchedPage

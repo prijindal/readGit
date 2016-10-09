@@ -4,6 +4,7 @@ import {NavController, NavParams} from 'ionic-angular';
 import moment from 'moment';
 
 import {OctokatService} from '../../providers/octokat';
+import {FileService} from '../../providers/filehttp';
 import {BrowserService} from '../../providers/browser';
 
 import {BlobPage} from '../blob-page/blob-page';
@@ -23,6 +24,7 @@ export class CommitPage {
     private params: NavParams,
 
     private octokat: OctokatService,
+    private filehttp: FileService,
     private browser: BrowserService
   ) { }
 
@@ -75,7 +77,7 @@ export class CommitPage {
       this.ref.detectChanges();
     })
     .catch(err => {
-      this.octokat.handleError(err);
+      this.filehttp.handleError(err);
     });
   }
 

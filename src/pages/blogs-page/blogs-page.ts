@@ -33,7 +33,7 @@ export class BlogsPage {
     if (window.location.protocol === 'file:') {
       this.refreshBlogs();
     } else {
-      this.octokat.handleError({
+      this.filehttp.handleError({
         message: 'Your device can not process this request'
       });
       this.nav.pop();
@@ -67,7 +67,7 @@ export class BlogsPage {
       return blogs;
     })
     .catch(err => {
-      this.octokat.handleError(err);
+      this.filehttp.handleError(err);
     });
   }
 

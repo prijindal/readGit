@@ -2,6 +2,7 @@ import {Component, ChangeDetectorRef, ViewChild} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 
 import {OctokatService} from '../../providers/octokat';
+import {FileService} from '../../providers/filehttp';
 
 import { UserPage } from '../user-page/user-page';
 
@@ -23,7 +24,8 @@ export class MembersPage {
     private nav: NavController,
     private params: NavParams,
 
-    private octokat: OctokatService
+    private octokat: OctokatService,
+    private filehttp: FileService
   ) { }
 
   ionViewWillEnter() {
@@ -55,7 +57,7 @@ export class MembersPage {
       return res;
     })
     .catch(err => {
-      this.octokat.handleError(err);
+      this.filehttp.handleError(err);
     });
   }
 

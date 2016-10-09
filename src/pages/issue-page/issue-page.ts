@@ -51,7 +51,7 @@ export class IssuePage {
       this.ref.detectChanges();
     })
     .catch(err => {
-      this.octokat.handleError(err);
+      this.filehttp.handleError(err);
     });
   }
 
@@ -96,14 +96,14 @@ export class IssuePage {
       })
       .catch(err => {
         this.loading = false;
-        this.octokat.handleError({
+        this.filehttp.handleError({
           message: 'There was an Error commenting'
         });
       });
     })
     .catch(err => {
       this.loading = false;
-      this.octokat.handleError({
+      this.filehttp.handleError({
         message: 'There was an Error commenting'
       });
     });

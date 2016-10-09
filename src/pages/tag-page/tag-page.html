@@ -1,0 +1,27 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Tag <span *ngIf="tag">{{tag.name}}</span></ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div padding text-center *ngIf="!tag">
+    <div *ngIf="loading">
+      Loading...
+    </div>
+    <div *ngIf="!loading">
+      404 Not Found
+    </div>
+  </div>
+  <div *ngIf="tag">
+    <h2 *ngIf="tag.name">{{tag.name}}</h2>
+    <p class="layout-notoverflow">
+      <a *ngIf="tag.author" (click)="openUser(tag.author)">{{tag.author.login}}</a>
+      released this
+      <span *ngIf="tag.published_at">{{timeFromNow(tag.published_at)}}</span>
+    </p>
+  </div>
+</ion-content>

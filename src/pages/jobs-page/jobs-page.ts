@@ -6,6 +6,7 @@ import {NavController} from 'ionic-angular';
 import moment from 'moment';
 
 import {OctokatService} from '../../providers/octokat';
+import {FileService} from '../../providers/filehttp';
 
 import { JobPage } from '../job-page/job-page';
 
@@ -24,7 +25,8 @@ export class JobsPage {
     private nav: NavController,
     private jsonp: Jsonp,
     private http: Http,
-    private octokat: OctokatService
+    private octokat: OctokatService,
+    private filehttp: FileService
   ) { }
 
   ionViewWillEnter() {
@@ -38,7 +40,7 @@ export class JobsPage {
     .subscribe(() => {
       this.loading = false;
     }, (err) => {
-      this.octokat.handleError(err);
+      this.filehttp.handleError(err);
     });
   }
 
@@ -73,7 +75,7 @@ export class JobsPage {
         infiniteScroll.enable(false);
       }
     }, (err) => {
-      this.octokat.handleError(err);
+      this.filehttp.handleError(err);
     });
   }
 

@@ -4,6 +4,7 @@ import {NavController, NavParams} from 'ionic-angular';
 import moment from 'moment';
 
 import {OctokatService} from '../../providers/octokat';
+import {FileService} from '../../providers/filehttp';
 import {BrowserService} from '../../providers/browser';
 
 import { IssuePage } from '../issue-page/issue-page';
@@ -26,6 +27,7 @@ export class IssuesPage {
     private params: NavParams,
 
     private octokat: OctokatService,
+    private filehttp: FileService,
     private browser: BrowserService
   ) { }
 
@@ -62,7 +64,7 @@ export class IssuesPage {
       return res;
     })
     .catch(err => {
-      this.octokat.handleError(err);
+      this.filehttp.handleError(err);
     });
   }
 

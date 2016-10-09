@@ -4,6 +4,7 @@ import {NavController, NavParams} from 'ionic-angular';
 import moment from 'moment';
 
 import {OctokatService} from '../../providers/octokat';
+import {FileService} from '../../providers/filehttp';
 import {BrowserService} from '../../providers/browser'
 
 @Component({
@@ -21,6 +22,7 @@ export class ComparePage {
     private params: NavParams,
 
     private octokat: OctokatService,
+    private filehttp: FileService,
     private browser: BrowserService
   ) { }
 
@@ -38,10 +40,9 @@ export class ComparePage {
 
   getCompare() {
     this.loading = true;
-    this.octokat.octo.fromUrl(this.compare.url, 'html')
-    .read()
+    this.filehttp.getFileFromUrl(this.compare.url, 'html')
     .then(res => {
-      this.compare = JSON.parse(res);
+      this.compare = res.json();
       this.files = [];
       this.compare.files.forEach(file => {
         if (!file.patch) return ;
@@ -64,7 +65,7 @@ export class ComparePage {
       this.ref.detectChanges();
     })
     .catch(err => {
-      this.octokat.handleError(err);
+      this.filehttp.handleError(err);
     });
   }
 

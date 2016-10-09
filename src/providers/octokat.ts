@@ -35,21 +35,6 @@ export class OctokatService {
     });
   }
 
-  handleError(error: any) {
-    let message: string;
-    switch (error.status) {
-      case 0:
-        message = 'No Network Connection';
-        break;
-      case 404:
-        message = 'Not Found';
-        break;
-      default:
-        message = error.message || 'Unexpected Error';
-    }
-    return this.errorService.handleError(message);
-  }
-
   logout() {
     this.user = undefined;
     this.userData = undefined;

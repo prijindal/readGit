@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import { Http, Headers, RequestOptions, Response, RequestMethod } from '@angular/http';
 
 import {LocalService} from './local';
+import {ErrorService} from './error';
 
 const HOST: string = 'https://api.github.com';
 
@@ -9,6 +10,7 @@ const HOST: string = 'https://api.github.com';
 export class FileService {
   constructor(
     private local: LocalService,
+    private errorService: ErrorService,
     private http: Http
   ) {}
 
@@ -86,6 +88,16 @@ export class FileService {
     });
   }
 
+  putRequest(url, body, type: string = 'raw') {
+    return new Promise((resolve: (res: Response) => {}, reject) => {
+      this.getToken()
+      .then(token => {
+        this.sendRequest(url, type, token, body, RequestMethod.Put)
+        .subscribe(resolve, reject);
+      });
+    });
+  }
+
   deleteRequest(url, type: string = 'raw') {
     return new Promise((resolve: (res: Response) => {}, reject) => {
       this.getToken()
@@ -109,10 +121,26 @@ export class FileService {
     }
     let options = new RequestOptions({
       method: method,
-      body: body,
       headers: headers
     });
-
+    if (body) {
+      options.body = body;
+    }
     return this.http.request(url, options);
+  }
+
+  handleError(error: any) {
+    let message: string;
+    switch (error.status) {
+      case 0:
+        message = 'No Network Connection';
+        break;
+      case 404:
+        message = 'Not Found';
+        break;
+      default:
+        message = error.message || 'Unexpected Error';
+    }
+    return this.errorService.handleError(message);
   }
 }

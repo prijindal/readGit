@@ -2,6 +2,7 @@ import {Component, ChangeDetectorRef, ViewChild} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 
 import {OctokatService} from '../../providers/octokat';
+import {FileService} from '../../providers/filehttp';
 
 import { RepoPage } from '../repo-page/repo-page';
 
@@ -22,7 +23,8 @@ export class ReposPage {
     private nav: NavController,
     private params: NavParams,
 
-    private octokat: OctokatService
+    private octokat: OctokatService,
+    private filehttp: FileService
   ) { }
 
   ionViewWillEnter() {
@@ -45,9 +47,9 @@ export class ReposPage {
   }
 
   getRepos(shouldRefresh: Boolean = false) {
-    return this.octokat.octo.fromUrl('/' + this.user + '/repos' + '?sort=updated&page=' + this.page + '&per_page=' + PER_PAGE).read()
-    .then(res => {
-      res = JSON.parse(res);
+    return this.filehttp.getFileFromUrl('/' + this.user + '/repos' + '?sort=updated&page=' + this.page + '&per_page=' + PER_PAGE)
+    .then(response => {
+      let res = response.json();
       if (shouldRefresh) {
         this.repos = [];
       }
@@ -58,7 +60,7 @@ export class ReposPage {
       return res;
     })
     .catch(err => {
-      this.octokat.handleError(err);
+      this.filehttp.handleError(err);
     });
   }
 

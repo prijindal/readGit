@@ -2,6 +2,7 @@ import {Component, ChangeDetectorRef, ViewChild} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 
 import {OctokatService} from '../../providers/octokat';
+import {FileService} from '../../providers/filehttp';
 
 import { UserPage } from '../user-page/user-page';
 
@@ -23,7 +24,8 @@ export class FollowersPage {
     private nav: NavController,
     private params: NavParams,
 
-    private octokat: OctokatService
+    private octokat: OctokatService,
+    private filehttp: FileService
   ) { }
 
   ionViewWillEnter() {
@@ -46,9 +48,9 @@ export class FollowersPage {
   }
 
   getFollowers(shouldRefresh: Boolean = false) {
-    return this.octokat.octo.fromUrl('/' + this.user + '/followers' + '?page=' + this.page + '&per_page=' + PER_PAGE).read()
-    .then(res => {
-      res = JSON.parse(res);
+    return this.filehttp.getFileFromUrl('/' + this.user + '/followers' + '?page=' + this.page + '&per_page=' + PER_PAGE)
+    .then(response => {
+      let res = response.json();
       if (shouldRefresh) {
         this.followers = [];
       }
@@ -59,7 +61,7 @@ export class FollowersPage {
       return res;
     })
     .catch(err => {
-      this.octokat.handleError(err);
+      this.filehttp.handleError(err);
     });
   }
 

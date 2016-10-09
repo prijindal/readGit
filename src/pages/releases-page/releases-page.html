@@ -12,10 +12,10 @@
     <ion-card *ngFor="let release of releases">
       <ion-card-header>
         <h2 *ngIf="release.name">
-          <a>{{release.name}}</a>
+          <a (click)="openRelease(release)">{{release.name}}</a>
         </h2>
         <p>
-          <a *ngIf="release.author">{{release.author.login}}</a>
+          <a *ngIf="release.author" (click)="openUser(release.author)">{{release.author.login}}</a>
           released this
           <span *ngIf="release.published_at">{{timeFromNow(release.published_at)}}</span>
         </p>
@@ -23,7 +23,7 @@
       <ion-card-content *ngIf="release.body_html" [innerHTML]="release.body_html"></ion-card-content>
     </ion-card>
 
-    <ion-card *ngIf="releases.length <= 0">
+    <ion-card text-center padding *ngIf="releases.length <= 0">
       No Releases
     </ion-card>
 

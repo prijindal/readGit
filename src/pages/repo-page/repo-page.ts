@@ -59,17 +59,16 @@ export class RepoPage {
       // Replace With Better Error Handling
       // Use Case: Fetching Repo using just the link
       this.loading = false;
-      this.octokat.handleError({message: 'Problem with Fetching Repository'});
+      this.filehttp.handleError({message: 'Problem with Fetching Repository'});
     }
   }
 
   getRepoInfo() {
     this.loading = true;
-    this.octokat.octo.fromUrl(this.repo.url)
-    .read()
+    this.filehttp.getFileFromUrl(this.repo.url)
     .then(res => {
       this.loading = false;
-      this.repo = JSON.parse(res);
+      this.repo = res.json();
       this.getReadMe();
       this.getBranches();
       this.getPulls();
@@ -80,9 +79,9 @@ export class RepoPage {
     .catch(err => {
       this.loading = false;
       if (err.status === 404) {
-        this.octokat.handleError(err);
+        this.filehttp.handleError(err);
       } else {
-        this.octokat.handleError({message: 'Problem with Fetching Repository'});
+        this.filehttp.handleError({message: 'Problem with Fetching Repository'});
       }
     });
   }
@@ -123,8 +122,7 @@ export class RepoPage {
 
   checkWatching() {
     if (this.octokat.user) {
-      this.octokat.octo.repos(this.repo.owner.login, this.repo.name).subscription
-      .read()
+      this.filehttp.getFileFromUrl(this.repo.url + '/subscription')
       .then(res => {
         this.subscription = true;
         this.isSubscribed = true;
@@ -140,8 +138,7 @@ export class RepoPage {
 
   watchRepo(repo) {
     this.watchingLoading = true;
-    this.octokat.octo.repos(repo.owner.login, repo.name).subscription
-    .add({subscribed: true})
+    this.filehttp.putRequest(this.repo.url + '/subscription', {subscribed: true})
     .then(res => {
       this.isSubscribed = true;
       this.watchingLoading = false;
@@ -150,8 +147,7 @@ export class RepoPage {
 
   unWatchRepo(repo) {
     this.watchingLoading = true;
-    this.octokat.octo.repos(repo.owner.login, repo.name).subscription
-    .remove()
+    this.filehttp.deleteRequest(this.repo.url + '/subscription')
     .then(res => {
       this.isSubscribed = false;
       this.watchingLoading = false;
@@ -160,8 +156,7 @@ export class RepoPage {
 
   checkStarring() {
     if (this.octokat.user) {
-      this.octokat.octo.me.starred(this.repo.owner.login, this.repo.name)
-      .read()
+      this.filehttp.getFileFromUrl('/user/starred/' + this.repo.full_name)
       .then(res => {
         this.starring = true;
         this.isStarring = true;
@@ -177,8 +172,7 @@ export class RepoPage {
 
   starRepo(repo) {
     this.starringLoading = true;
-    this.octokat.octo.me.starred(this.repo.owner.login, this.repo.name)
-    .add()
+    this.filehttp.putRequest('/user/starred/' + this.repo.full_name, {})
     .then(res => {
       this.isStarring = true;
       this.starringLoading = false;
@@ -187,8 +181,7 @@ export class RepoPage {
 
   unStarRepo(repo) {
     this.starringLoading = true;
-    this.octokat.octo.me.starred(this.repo.owner.login, this.repo.name)
-    .remove()
+    this.filehttp.deleteRequest('/user/starred/' + this.repo.full_name)
     .then(res => {
       this.isStarring = false;
       this.starringLoading = false;

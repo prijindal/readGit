@@ -4,6 +4,7 @@ import {NavController, NavParams} from 'ionic-angular';
 import moment from 'moment';
 
 import {OctokatService} from '../../providers/octokat';
+import {FileService} from '../../providers/filehttp';
 import {BrowserService} from '../../providers/browser';
 
 import { CommitPage } from '../commit-page/commit-page';
@@ -25,6 +26,7 @@ export class CommitsPage {
     private params: NavParams,
 
     private octokat: OctokatService,
+    private filehttp: FileService,
     private browser: BrowserService
   ) { }
 
@@ -48,10 +50,9 @@ export class CommitsPage {
   }
 
   getCommits(shouldRefresh: Boolean = false) {
-    return this.octokat.octo.fromUrl('/repos/' + this.repo + '/commits' + '?page=' + this.page + '&per_page=' + PER_PAGE)
-    .read()
-    .then(res => {
-      res = JSON.parse(res);
+    return this.filehttp.getFileFromUrl('/repos/' + this.repo + '/commits' + '?page=' + this.page + '&per_page=' + PER_PAGE)
+    .then(response => {
+      let res = response.json();
       if (shouldRefresh) {
         this.commits = [];
       }
@@ -62,7 +63,7 @@ export class CommitsPage {
       return res;
     })
     .catch(err => {
-      this.octokat.handleError(err);
+      this.filehttp.handleError(err);
     });
   }
 

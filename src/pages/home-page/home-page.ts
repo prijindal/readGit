@@ -2,6 +2,7 @@ import {Component, ChangeDetectorRef, ViewChild} from '@angular/core';
 import {NavController, Events} from 'ionic-angular';
 
 import {OctokatService} from '../../providers/octokat';
+import {FileService} from '../../providers/filehttp';
 import {EventParser} from '../../providers/eventparser';
 import {UrlParser} from '../../providers/urlparser';
 import {BrowserService} from '../../providers/browser';
@@ -41,6 +42,7 @@ export class HomePage {
     private events: Events,
 
     private octokat: OctokatService,
+    private filehttp: FileService,
     private eventParser: EventParser,
     private browser: BrowserService,
     private githubLogin: GithubLogin,
@@ -89,7 +91,7 @@ export class HomePage {
         console.log(errParsed);
         this.errorMessage = errParsed.message;
       } else {
-        this.octokat.handleError(err);
+        this.filehttp.handleError(err);
       }
     });
   }
@@ -121,13 +123,13 @@ export class HomePage {
           }
           this.favicon.set('https://avatars.githubusercontent.com/u/' + user.id + '?s=50');
         } else {
-          this.octokat.handleError({message: 'Problem with Authentication'});
+          this.filehttp.handleError({message: 'Problem with Authentication'});
         }
       })
       .catch(err => {
         this.loading = false;
         this.errorMessage = 'Some Error Occured';
-        this.octokat.handleError(err);
+        this.filehttp.handleError(err);
       });
     })
     .catch(res => {
@@ -171,7 +173,7 @@ export class HomePage {
       return res;
     })
     .catch(err => {
-      this.octokat.handleError(err);
+      this.filehttp.handleError(err);
     });
   }
 

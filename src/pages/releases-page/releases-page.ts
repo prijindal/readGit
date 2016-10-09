@@ -5,6 +5,9 @@ import moment from 'moment';
 
 import {FileService} from '../../providers/filehttp';
 
+import {TagPage} from '../tag-page/tag-page';
+import {UserPage} from '../user-page/user-page';
+
 const PER_PAGE: number = 5;
 
 @Component({
@@ -50,6 +53,14 @@ export class ReleasesPage {
         infiniteScroll.enable(false);
       }
     });
+  }
+
+  openRelease(release) {
+    this.nav.push(TagPage, {tag: release});
+  }
+
+  openUser(user) {
+    this.nav.push(UserPage, {user: user});
   }
 
   timeFromNow(time) {
