@@ -26,6 +26,7 @@
     "ionic-native": "^2.1.7",
     "ionicons": "^3.0.0",
     "moment": "^2.15.1",
+    "octicons": "^4.4.0",
     "x2js": "^3.0.1"
   },
   "devDependencies": {

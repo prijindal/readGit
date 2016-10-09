@@ -13,10 +13,13 @@ import { IssuePage } from '../issue-page/issue-page';
 const PER_PAGE: number = 30;
 
 @Component({
+  selector: 'issues-page',
   templateUrl: 'issues-page.html'
 })
 export class IssuesPage {
-  @ViewChild('issuesContent') homeContent;
+  @ViewChild('issuesContent') issuesContent;
+  @ViewChild('searchbar') searchbar;
+  public searchbarhidden: Boolean = false;
   public loading: Boolean = true;
   public issues: any = [];
   private page: number = 1;
@@ -48,6 +51,57 @@ export class IssuesPage {
     if (this.issues.length === 0) {
       this.refreshIssues();
     }
+  }
+
+  ionViewDidEnter() {
+    let scroller = this.issuesContent.getElementRef().nativeElement.querySelector('.scroll-content')
+    // let searchbar = this.searchbar.getElementRef().nativeElement;
+    let throttleTimeout	= 500;
+    let throttle = ( delay, fn ) => {
+			var last, deferTimer;
+			return function()
+			{
+				var context = this, args = arguments, now = +new Date;
+				if( last && now < last + delay )
+				{
+					clearTimeout( deferTimer );
+					deferTimer = setTimeout( function(){ last = now; fn.apply( context, args ); }, delay );
+				}
+				else
+				{
+					last = now;
+					fn.apply( context, args );
+				}
+			};
+		};
+
+		var dHeight			= 0,
+			wHeight			= 0,
+			wScrollCurrent	= 0,
+			wScrollBefore	= 0,
+			wScrollDiff		= 0;
+
+    scroller.addEventListener('scroll', throttle( throttleTimeout, () => {
+      dHeight			= scroller.offsetHeight;
+			wHeight			= this.issuesContent.height();
+			wScrollCurrent	= scroller.scrollTop;
+			wScrollDiff		= wScrollBefore - wScrollCurrent;
+
+			if( wScrollCurrent <= 0 ) {
+        this.searchbarhidden = false;
+      }
+
+			else if( wScrollDiff > 0) {
+        this.searchbarhidden = false;
+      }
+
+			else if( wScrollDiff < 0 )
+			{
+        this.searchbarhidden = true;
+			}
+
+			wScrollBefore = wScrollCurrent;
+    }));
   }
 
   refreshIssues() {

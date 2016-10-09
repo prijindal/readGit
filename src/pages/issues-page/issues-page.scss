@@ -1,5 +1,17 @@
-.issues-page {
-  .issues {
+issues-page {
+  ion-searchbar {
+		transition-duration: .5s;
+		transition-timing-function: cubic-bezier( 0.215, 0.610, 0.355, 1.000 );
+		transition-property: transform;
+    position: fixed;
+    &.hidden {
+			transform: translateY( -100% );
+    }
+  }
+  ion-list.issues {
+    margin-top: 60px;
+  }
+  .issue {
     ion-card-header {
       text-overflow: clip;
       white-space: normal;

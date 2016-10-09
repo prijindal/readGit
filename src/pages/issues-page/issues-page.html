@@ -13,8 +13,12 @@
       </button>
     </ion-buttons>
   </ion-navbar>
+</ion-header>
 
+<ion-content #issuesContent class="issues-page">
   <ion-searchbar
+    [class.hidden]="searchbarhidden"
+    #searchbar
     debounce="500"
     autocomplete="off"
     autocorrect="off"
@@ -22,10 +26,6 @@
     (ionInput)="refreshIssues()"
     [(ngModel)]="query"
   ></ion-searchbar>
-</ion-header>
-
-
-<ion-content #issuesContent class="issues-page">
   <div text-center margin-top *ngIf="issues.length === 0">
     <div *ngIf="loading">
       Loading...
@@ -34,9 +34,9 @@
       No Issues
     </div>
   </div>
-  <ion-list *ngIf="issues.length > 0">
+  <ion-list class="issues" *ngIf="issues.length > 0">
     <ion-card
-      class="issues"
+      class="issue"
       *ngFor="let issue of issues"
       (click)="openIssue(issue)"
     >
