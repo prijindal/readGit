@@ -34,11 +34,15 @@ export class MilestonesPage {
 
   ionViewWillEnter() {
     this.repo = this.params.get('repo');
-    this.loading = true;
     if (this.milestones.length === 0) {
-      this.page = 1;
-      this.getMilestones();
+      this.refreshMilestones();
     }
+  }
+
+  refreshMilestones() {
+    this.loading = true;
+    this.page = 1;
+    this.getMilestones();
   }
 
   getMilestones() {
@@ -90,12 +94,12 @@ export class MilestonesPage {
     popover.present({ev: event});
 
     popover.onDidDismiss((params) => {
-      this.state = params.state || 'open';
-      this.sort = params.sort || 'due_on';
-      this.direction = params.direction || 'asc';
-      this.loading = true;
-      this.milestones = [];
-      this.getMilestones();
+      if (params) {
+        this.state = params.state;
+        this.sort = params.sort;
+        this.direction = params.direction;
+        this.refreshMilestones();
+      }
     });
   }
 }
