@@ -220,7 +220,7 @@ export class RepoPage {
   }
 
   openPullsPage() {
-    this.browser.open(this.repo.html_url + '/pulls');
+    this.nav.push(IssuesPage, {repo: this.repo.full_name, query: 'is:pr is:open'});
   }
 
   presentPopover(event) {

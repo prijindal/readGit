@@ -11,6 +11,16 @@
 //
 // App Shared Sass variables belong in app.variables.scss.
 
+// Mixins
+@mixin light-font() {
+  font-weight: normal;
+  color: #767676;
+}
+
+@mixin dark-font() {
+  font-weight: bold;
+  color: #555;
+}
 
 // Layout Scss
 

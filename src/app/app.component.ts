@@ -18,6 +18,12 @@ import {JobsPage} from '../pages/jobs-page/jobs-page';
 import {FileService} from '../providers/filehttp';
 import {UrlParser} from '../providers/urlparser';
 
+const DEFAULT_PAGES = [
+  {title: 'Search', component: SearchPage},
+  {title: 'Github Blog', component: BlogsPage},
+  {title: 'Github Jobs', component: JobsPage}
+];
+
 @Component({
   templateUrl: 'app.component.html'
 })
@@ -25,7 +31,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
   rootPage: any = HomePage;
   profileEnabled: Boolean = false;
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{title: string, component: any}> = DEFAULT_PAGES;
 
   constructor(
     private ref: ChangeDetectorRef,
@@ -110,11 +116,7 @@ export class MyApp {
         ];
       } else {
         this.profileEnabled = false;
-        this.pages = [
-          {title: 'Search', component: SearchPage},
-          {title: 'Github Blog', component: BlogsPage},
-          {title: 'Github Jobs', component: JobsPage}
-        ];
+        this.pages = DEFAULT_PAGES;
       }
       this.ref.detectChanges();
     });

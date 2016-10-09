@@ -71,13 +71,18 @@ export class UrlParser {
       } else {
         if (urlArray[2] === 'issues') {
           if (urlArray.length === 3) {
+            var params = {
+              username: urlArray[0],
+              reponame: urlArray[1]
+            }
+            let query = urlArray[2].split('?q=')
+            if (query.length === 1) {
+              params['query'] = query[1];
+            }
             return {
               html_url: url,
               page: IssuesPage,
-              params: {
-                username: urlArray[0],
-                reponame: urlArray[1]
-              }
+              params: params
             };
           } else if (urlArray.length === 4) {
             return {
@@ -106,7 +111,8 @@ export class UrlParser {
               page: IssuesPage, // Add Other Options Here
               params: {
                 username: urlArray[0],
-                reponame: urlArray[1]
+                reponame: urlArray[1],
+                query: 'is:pr is:open'
               }
             };
           }

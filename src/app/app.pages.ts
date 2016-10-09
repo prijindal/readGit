@@ -16,7 +16,10 @@ import {GistPage} from '../pages/gist-page/gist-page';
 import {GistsPage} from '../pages/gists-page/gists-page';
 import {HomePage} from '../pages/home-page/home-page';
 import {IssuePage} from '../pages/issue-page/issue-page';
+
 import {IssuesPage} from '../pages/issues-page/issues-page';
+import {IssuesPopover} from '../pages/issues-page/issues-popover/issues-popover';
+
 import {JobPage} from '../pages/job-page/job-page';
 import {JobsPage} from '../pages/jobs-page/jobs-page';
 
@@ -60,7 +63,10 @@ export const APP_PAGES = [
   GistsPage,
   HomePage,
   IssuePage,
+
   IssuesPage,
+  IssuesPopover,
+
   JobPage,
   JobsPage,
 

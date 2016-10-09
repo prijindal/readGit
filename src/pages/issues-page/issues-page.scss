@@ -4,5 +4,9 @@
       text-overflow: clip;
       white-space: normal;
     }
+
+    .issue-description {
+      @include light-font();
+    }
   }
 }

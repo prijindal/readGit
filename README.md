@@ -10,7 +10,8 @@ Features
 - [x] List repositories
 - [x] Watch/unwatch repository
 - [x] View branches
-- [ ] View tags
+- [x] View tags
+- [x] View Milestones
 - [ ] View pull requests
 - [ ] View contributors
 - [ ] View watchers
