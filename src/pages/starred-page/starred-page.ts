@@ -38,12 +38,11 @@ export class StarredPage {
   }
 
   getStarred() {
-    return this.octokat.octo.fromUrl('/' + this.user + '/starred' + '?per_page=' + PER_PAGE).read()
+    return this.filehttp.getFileFromUrl('/' + this.user + '/starred' + '?per_page=' + PER_PAGE)
     .then(res => {
-      res = JSON.parse(res);
-      this.starred = res;
+      this.starred = res.json();
       this.ref.detectChanges();
-      return res;
+      return this.starred;
     })
     .catch(err => {
       this.filehttp.handleError(err);

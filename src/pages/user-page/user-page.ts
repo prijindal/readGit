@@ -78,11 +78,10 @@ export class UserPage {
 
   getUserInfo() {
     this.loading = true;
-    this.octokat.octo.fromUrl(this.user.url)
-    .read()
+    this.filehttp.getFileFromUrl(this.user.url)
     .then(res => {
       this.loading = false;
-      this.user = JSON.parse(res);
+      this.user = res.json();
       this.ref.detectChanges();
       if (this.user.login === this.octokat.user) {
         this.user.url = '/user';
@@ -117,11 +116,9 @@ export class UserPage {
   }
 
   getOrganizations() {
-    this.octokat.octo.fromUrl(this.user.url + '/orgs?per_page=' + PER_PAGE)
-    .read()
+    this.filehttp.getFileFromUrl(this.user.url + '/orgs?per_page=' + PER_PAGE)
     .then(res => {
-      res = JSON.parse(res);
-      this.orgs = res;
+      this.orgs = res.json();
     });
   }
 

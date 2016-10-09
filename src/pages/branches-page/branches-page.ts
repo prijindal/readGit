@@ -4,6 +4,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import {TreePage} from '../tree-page/tree-page';
 
 import {OctokatService} from '../../providers/octokat';
+import {FileService} from '../../providers/filehttp';
 
 @Component({
   selector: 'branches-page',
@@ -16,7 +17,8 @@ export class BranchesPage {
   constructor(
   	private nav: NavController,
   	private params: NavParams,
-  	public octokat: OctokatService
+  	public octokat: OctokatService,
+    private filehttp: FileService
   ) {}
 
   ionViewWillEnter() {
@@ -25,12 +27,13 @@ export class BranchesPage {
   }
 
   getBranches() {
-  	this.octokat.octo.fromUrl('/repos/' + this.repo + '/branches')
-  	.read()
+  	this.filehttp.getFileFromUrl('/repos/' + this.repo + '/branches')
   	.then(res => {
-  		res = JSON.parse(res);
-  		this.branches = res;
-  	});
+  		this.branches = res.json();
+  	})
+    .catch(err => {
+      this.filehttp.handleError(err);
+    });
   }
 
   openBranch(branch) {

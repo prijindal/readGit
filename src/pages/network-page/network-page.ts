@@ -3,7 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 
 import {RepoPage} from '../repo-page/repo-page';
 
-import {OctokatService} from '../../providers/octokat';
+import {FileService} from '../../providers/filehttp';
 
 @Component({
   selector: 'page-network-page',
@@ -16,7 +16,7 @@ export class NetworkPage {
   constructor(
   	private nav: NavController,
   	private params: NavParams,
-  	public octokat: OctokatService
+  	public filehttp: FileService
   ) {}
 
   ionViewWillEnter() {
@@ -25,12 +25,13 @@ export class NetworkPage {
   }
 
   getForks() {
-  	this.octokat.octo.fromUrl('/repos/' + this.repo + '/forks')
-  	.read()
+  	this.filehttp.getFileFromUrl('/repos/' + this.repo + '/forks')
   	.then(res => {
-  		res = JSON.parse(res);
-  		this.forks = res;
-  	});
+  		this.forks = res.json();
+  	})
+    .catch(err => {
+      this.filehttp.handleError(err);
+    })
   }
 
   openFork(fork) {

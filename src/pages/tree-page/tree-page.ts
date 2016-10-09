@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
-import {OctokatService} from '../../providers/octokat';
+import {FileService} from '../../providers/filehttp';
 
 import {BlobPage} from '../blob-page/blob-page';
 
@@ -18,7 +18,7 @@ export class TreePage {
   constructor(
     private nav: NavController,
     private params: NavParams,
-    private octokat: OctokatService
+    private filehttp: FileService
   ) {}
 
   ionViewWillEnter() {
@@ -36,11 +36,9 @@ export class TreePage {
     if (this.branch) {
       url = url + '?ref=' + this.branch;
     }
-    this.octokat.octo.fromUrl(url)
-    .read()
+    this.filehttp.getFileFromUrl(url)
     .then(res => {
-      res = JSON.parse(res);
-      this.contents = res;
+      this.contents = res.json();
     })
   }
 

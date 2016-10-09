@@ -160,9 +160,9 @@ export class HomePage {
   }
 
   getEvents(shouldRefresh: Boolean = false) {
-    return this.octokat.octo.fromUrl(this.received_eventsUrl + '?page=' + this.page + '&per_page=' + PER_PAGE).read()
-    .then(res => {
-      res = JSON.parse(res);
+    return this.filehttp.getFileFromUrl(this.received_eventsUrl + '?page=' + this.page + '&per_page=' + PER_PAGE)
+    .then(response => {
+      let res = response.json()
       if (shouldRefresh) {
         this.received_events = [];
       }

@@ -1,7 +1,7 @@
 import {Component, ChangeDetectorRef} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 
-import {OctokatService} from '../../providers/octokat';
+import {FileService} from '../../providers/filehttp';
 import {BrowserService} from '../../providers/browser';
 
 import { RepoPage } from '../repo-page/repo-page';
@@ -25,7 +25,7 @@ export class SearchPage {
     private nav: NavController,
     private params: NavParams,
 
-    private octokat: OctokatService,
+    private filehttp: FileService,
     private browser: BrowserService
   ) { }
 
@@ -39,25 +39,21 @@ export class SearchPage {
       this.clearItems();
       return ;
     };
-    this.octokat.octo.fromUrl(SEARCH_URL + '/repositories?q=' + this.searchterm + '&per_page=3')
-    .read()
+    this.filehttp.getFileFromUrl(SEARCH_URL + '/repositories?q=' + this.searchterm + '&per_page=3')
     .then(res => {
-      this.repos = JSON.parse(res);
+      this.repos = res.json();
     });
-    this.octokat.octo.fromUrl(SEARCH_URL + '/users?q=' + this.searchterm + '&per_page=3')
-    .read()
+    this.filehttp.getFileFromUrl(SEARCH_URL + '/users?q=' + this.searchterm + '&per_page=3')
     .then(res => {
-      this.users = JSON.parse(res);
+      this.users = res.json();
     });
-    this.octokat.octo.fromUrl(SEARCH_URL + '/issues?q=' + this.searchterm + '&per_page=3')
-    .read()
+    this.filehttp.getFileFromUrl(SEARCH_URL + '/issues?q=' + this.searchterm + '&per_page=3')
     .then(res => {
-      this.issues = JSON.parse(res);
+      this.issues = res.json();
     });
-    this.octokat.octo.fromUrl(SEARCH_URL + '/code?q=' + this.searchterm + '&per_page=3')
-    .read()
+    this.filehttp.getFileFromUrl(SEARCH_URL + '/code?q=' + this.searchterm + '&per_page=3')
     .then(res => {
-      this.codes = JSON.parse(res);
+      this.codes = res.json();
     });
   }
 

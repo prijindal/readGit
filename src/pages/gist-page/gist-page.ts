@@ -33,10 +33,9 @@ export class GistPage {
 
   getGist() {
     this.loading = true;
-    this.octokat.octo.fromUrl(this.gist.url)
-    .read()
-    .then(res => {
-      res = JSON.parse(res);
+    this.filehttp.getFileFromUrl(this.gist.url)
+    .then(response => {
+      let res = response.json();
       this.gist = res;
       this.loading = false;
       this.files = [];

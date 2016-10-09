@@ -51,9 +51,9 @@ export class IssuesPage {
   }
 
   getIssues(shouldRefresh: Boolean = false) {
-    return this.octokat.octo.fromUrl('/repos/' + this.repo + '/issues' + '?page=' + this.page + '&per_page=' + PER_PAGE).read()
-    .then(res => {
-      res = JSON.parse(res);
+    return this.filehttp.getFileFromUrl('/repos/' + this.repo + '/issues' + '?page=' + this.page + '&per_page=' + PER_PAGE)
+    .then(response => {
+      let res = response.json();
       if (shouldRefresh) {
         this.issues = [];
       }

@@ -44,9 +44,9 @@ export class MembersPage {
   }
 
   getMembers(shouldRefresh: Boolean = false) {
-    return this.octokat.octo.fromUrl('/' + this.user + '/members' + '?page=' + this.page + '&per_page=' + PER_PAGE).read()
-    .then(res => {
-      res = JSON.parse(res);
+    return this.filehttp.getFileFromUrl('/' + this.user + '/members' + '?page=' + this.page + '&per_page=' + PER_PAGE)
+    .then(response => {
+      let res = response.json();
       if (shouldRefresh) {
         this.members = [];
       }

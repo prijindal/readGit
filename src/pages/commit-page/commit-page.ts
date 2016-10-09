@@ -43,10 +43,9 @@ export class CommitPage {
 
   getCommit() {
     this.loading = true;
-    this.octokat.octo.fromUrl(this.commit.url, 'html')
-    .read()
+    this.filehttp.getFileFromUrl(this.commit.url, 'html')
     .then(res => {
-      this.commit = JSON.parse(res);
+      this.commit = res.json();
       let message = this.commit.commit.message;
       let messageSpliter = message.indexOf('\n');
       if (messageSpliter >= 0) {
@@ -82,10 +81,9 @@ export class CommitPage {
   }
 
   getComments() {
-    this.octokat.octo.fromUrl(this.commit.url + '/comments?per_page=10000', 'html')
-    .read()
+    this.filehttp.getFileFromUrl(this.commit.url + '/comments?per_page=10000', 'html')
     .then(res => {
-      this.comments = JSON.parse(res);
+      this.comments = res.json();
       this.ref.detectChanges();
     });
   }

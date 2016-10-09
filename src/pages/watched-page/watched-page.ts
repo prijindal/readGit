@@ -37,11 +37,11 @@ export class WatchedPage {
   }
 
   getWatched() {
-    return this.octokat.octo.fromUrl('/' + this.user + '/subscriptions' + '?per_page=' + PER_PAGE).read()
+    return this.filehttp.getFileFromUrl('/' + this.user + '/subscriptions' + '?per_page=' + PER_PAGE)
     .then(res => {
-      this.subscriptions = JSON.parse(res);
+      this.subscriptions = res.json()
       this.ref.detectChanges();
-      return res;
+      return this.subscriptions;
     })
     .catch(err => {
       this.filehttp.handleError(err);
