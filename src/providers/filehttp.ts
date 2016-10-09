@@ -39,45 +39,24 @@ export class FileService {
     });
   }
 
-  getToken() {
-    return new Promise((resolve: (res: string) => {}, reject) => {
-      this.local.storage.get('TOKEN')
-      .then(token => {
-        resolve(token);
-      })
-      .catch(err => {
-        resolve('');
-      });
-    });
-  }
-
   getFileFromUrl(url, type: string = 'raw') {
     return new Promise((resolve: (res: Response) => {}, reject) => {
-      this.getToken()
-      .then(token => {
-        this.sendRequest(url, type, token)
-        .subscribe(resolve, reject);
-      });
+      this.sendRequest(url, type)
+      .subscribe(resolve, reject);
     });
   }
 
   getHtmlFromMarkdown(markdown: string) {
     return new Promise((resolve: (res: Response) => {}, reject) => {
-      this.getToken()
-      .then(token => {
-        this.sendRequest('https://api.github.com/markdown', 'html', token, {text: markdown}, RequestMethod.Post)
-        .subscribe(resolve, reject);
-      });
+      this.sendRequest('https://api.github.com/markdown', 'html', {text: markdown}, RequestMethod.Post)
+      .subscribe(resolve, reject);
     });
   }
 
   getHeaders(url) {
     return new Promise((resolve: (res: Response) => {}, reject) => {
-      this.getToken()
-      .then(token => {
-        this.sendRequest(url, 'raw', token, null, RequestMethod.Head)
-        .subscribe(resolve, reject);
-      });
+      this.sendRequest(url, 'raw', null, RequestMethod.Head)
+      .subscribe(resolve, reject);
     });
   }
 
@@ -95,51 +74,39 @@ export class FileService {
 
   postNewRequest(url, body, type: string = 'raw') {
     return new Promise((resolve: (res: Response) => {}, reject) => {
-      this.getToken()
-      .then(token => {
-        this.sendRequest(url, type, token, body, RequestMethod.Post)
-        .subscribe(resolve, reject);
-      });
+      this.sendRequest(url, type, body, RequestMethod.Post)
+      .subscribe(resolve, reject);
     });
   }
 
   patchRequest(url, body, type: string = 'raw') {
     return new Promise((resolve: (res: Response) => {}, reject) => {
-      this.getToken()
-      .then(token => {
-        this.sendRequest(url, type, token, body, RequestMethod.Patch)
-        .subscribe(resolve, reject);
-      });
+      this.sendRequest(url, type, body, RequestMethod.Patch)
+      .subscribe(resolve, reject);
     });
   }
 
   putRequest(url, body, type: string = 'raw') {
     return new Promise((resolve: (res: Response) => {}, reject) => {
-      this.getToken()
-      .then(token => {
-        this.sendRequest(url, type, token, body, RequestMethod.Put)
-        .subscribe(resolve, reject);
-      });
+      this.sendRequest(url, type, body, RequestMethod.Put)
+      .subscribe(resolve, reject);
     });
   }
 
   deleteRequest(url, type: string = 'raw') {
     return new Promise((resolve: (res: Response) => {}, reject) => {
-      this.getToken()
-      .then(token => {
-        this.sendRequest(url, type, token, null, RequestMethod.Delete)
-        .subscribe(resolve, reject);
-      });
+      this.sendRequest(url, type, null, RequestMethod.Delete)
+      .subscribe(resolve, reject);
     });
   }
 
-  private sendRequest(url, type, token?, body?: Object, method: RequestMethod = RequestMethod.Get) {
+  private sendRequest(url, type, body?: Object, method: RequestMethod = RequestMethod.Get) {
     let headers = new Headers({
       'Accept': 'application/vnd.github.cannonball-preview.' + type + '+json',
       'Content-Type': 'application/json'
     });
-    if (token) {
-      headers.append('Authorization', 'token ' + token);
+    if (this.token) {
+      headers.append('Authorization', 'token ' + this.token);
     }
     if (url.indexOf(HOST) !== 0) {
       url = HOST + url
