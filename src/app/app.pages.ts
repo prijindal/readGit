@@ -19,6 +19,10 @@ import {IssuePage} from '../pages/issue-page/issue-page';
 import {IssuesPage} from '../pages/issues-page/issues-page';
 import {JobPage} from '../pages/job-page/job-page';
 import {JobsPage} from '../pages/jobs-page/jobs-page';
+
+import {MilestonesPage} from '../pages/milestones-page/milestones-page';
+import {MilestonesPopover} from '../pages/milestones-page/milestones-popover/milestones-popover';
+
 import {MembersPage} from '../pages/members-page/members-page';
 import {NetworkPage} from '../pages/network-page/network-page';
 
@@ -59,6 +63,10 @@ export const APP_PAGES = [
   IssuesPage,
   JobPage,
   JobsPage,
+
+  MilestonesPage,
+  MilestonesPopover,
+
   MembersPage,
   NetworkPage,
 

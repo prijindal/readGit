@@ -38,7 +38,6 @@ export class RepoPage {
     private params: NavParams,
     private popoverCtrl: PopoverController,
 
-    
     private filehttp: FileService,
     private browser: BrowserService
   ) { }

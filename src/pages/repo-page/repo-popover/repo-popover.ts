@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {ViewController, NavParams} from 'ionic-angular';
 
 import {ReleasesPage} from '../../releases-page/releases-page';
+import {MilestonesPage} from '../../milestones-page/milestones-page';
 import {FileService} from '../../../providers/filehttp';
 
 @Component({
@@ -51,7 +52,7 @@ export class RepoPopover {
   }
 
   openMilestones() {
-    // this.close(MilestonesPage);
+    this.close(MilestonesPage);
   }
 
   close(ReleasesPage) {
