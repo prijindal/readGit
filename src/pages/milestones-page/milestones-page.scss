@@ -1,3 +1,67 @@
-milestones-page {
+@mixin light-font() {
+  font-weight: normal;
+  color: #767676;
+}
 
+@mixin dark-font() {
+  font-weight: bold;
+  color: #555;
+}
+
+milestones-page {
+  .milestone-description {
+    margin: 0 0 15px;
+    @include light-font();
+  }
+
+  .milestone-progress {
+    width: 90%;
+    margin: 0 5%;
+
+    .progress-bar {
+      display: block;
+      height: 15px;
+      margin: 0 0 15px;
+      overflow: hidden;
+      background-color: #eee;
+      border-radius: 3px;
+
+      .progress {
+        display: block;
+        height: 100%;
+        background-color: #6cc644;
+      }
+    }
+  }
+
+  .stat {
+    display: inline-block;
+    font-size: 14px;
+    line-height: 1.2;
+    @include dark-font();
+    white-space: nowrap;
+
+    & + .stat {
+      margin-left: 15px;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .stat-label {
+      @include light-font();
+    }
+  }
+
+  .milestone-dates {
+    margin-top: 10px;
+    .milestone-date {
+      @include light-font();
+    }
+
+    .dark-color {
+      @include dark-font();
+    }
+  }
 }

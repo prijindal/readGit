@@ -3,7 +3,10 @@ import {NavController, NavParams, PopoverController} from 'ionic-angular';
 
 import {MilestonesPopover} from './milestones-popover/milestones-popover';
 
+import moment from 'moment';
+
 import {FileService} from '../../providers/filehttp';
+import {BrowserService} from '../../providers/browser';
 
 const PER_PAGE: number = 5;
 
@@ -25,7 +28,8 @@ export class MilestonesPage {
     private params: NavParams,
     private popoverCtrl: PopoverController,
 
-    private filehttp: FileService
+    private filehttp: FileService,
+    private browser: BrowserService
   ) { }
 
   ionViewWillEnter() {
@@ -61,6 +65,24 @@ export class MilestonesPage {
         infiniteScroll.enable(false);
       }
     });
+  }
+
+  openMilestonePage(milestone) {
+    this.browser.open(milestone.html_url);
+  }
+
+  getPercentageComplete(milestone) {
+    let total = milestone.closed_issues + milestone.open_issues
+    let per = 0;
+    if (total) {
+      per = (milestone.closed_issues * 100) / total
+      per = Math.floor(per)
+    }
+    return per + '%'
+  }
+
+  timeFromNow(time) {
+    return moment(time).fromNow();
   }
 
   presentPopover(event) {

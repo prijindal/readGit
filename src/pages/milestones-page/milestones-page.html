@@ -25,12 +25,57 @@
   <div *ngIf="milestones.length > 0">
     <ion-card *ngFor="let milestone of milestones">
       <ion-card-header *ngIf="milestone.title">
-        {{milestone.title}}
+        <h1 (click)="openMilestonePage(milestone)">
+          {{milestone.title}}
+        </h1>
       </ion-card-header>
       <ion-card-content>
-        <div>
-          {{milestone.open_issues}} Open
-          {{milestone.open_issues}} Closed
+        <div *ngIf="milestone.description" class="milestone-description">
+          <span>{{milestone.description}}</span>
+        </div>
+        <div class="milestone-progress">
+          <span class="progress-bar">
+            <span class="progress" [style.width]="getPercentageComplete(milestone)">&nbsp;</span>
+          </span>
+          <div class="stats">
+            <div class="stat">
+              <span class="progress-percent">{{getPercentageComplete(milestone)}}</span>
+              <span class="stat-label">complete</span>
+            </div>
+            <div class="stat">
+              <a>
+                {{milestone.open_issues}}
+                <span class="stat-label">open</span>
+              </a>
+            </div>
+            <div class="stat">
+              <a>
+                {{milestone.closed_issues}}
+                <span class="stat-label">closed</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="milestone-dates">
+          <div *ngIf="milestone.state === 'closed'" class="milestone-date">
+            <span *ngIf="milestone.closed_at">
+              <span class="dark-color">Closed</span> on {{timeFromNow(milestone.closed_at)}}
+            </span>
+          </div>
+          <div *ngIf="milestone.state === 'open'" class="milestone-date">
+            <span *ngIf="milestone.due_on">
+              {{timeFromNow(milestone.due_on)}}
+            </span>
+            <span *ngIf="!milestone.due_on">
+              No Due Date
+            </span>
+          </div>
+          <div class="milestone-date">
+            <span *ngIf="milestone.updated_at">
+              <ion-icon name="clock"></ion-icon>
+              Last updated {{timeFromNow(milestone.updated_at)}}
+            </span>
+          </div>
         </div>
       </ion-card-content>
     </ion-card>
