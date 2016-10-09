@@ -8,11 +8,36 @@ const HOST: string = 'https://api.github.com';
 
 @Injectable()
 export class FileService {
+  public user: string;
+  public userData: any;
+  private token: string;
+
   constructor(
     private local: LocalService,
     private errorService: ErrorService,
     private http: Http
   ) {}
+
+  checkLogin() {
+    return this.local.storage.get('TOKEN')
+    .then(token => {
+      if (token) {
+        this.token = token;
+        return token;
+      } else {
+        throw new Error('Not Authenticated');
+      }
+    });
+  }
+
+  logout() {
+    this.user = undefined;
+    this.userData = undefined;
+    return this.local.storage.clear()
+    .then(res => {
+      this.token = undefined;
+    });
+  }
 
   getToken() {
     return new Promise((resolve: (res: string) => {}, reject) => {

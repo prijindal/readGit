@@ -31,7 +31,7 @@
         Forked from <a (click)="openRepo(repo.parent)">{{repo.parent.full_name}}</a>
       </ion-card-content>
     </ion-card>
-    <ion-card *ngIf="octokat.user" class="buttons">
+    <ion-card *ngIf="filehttp.user" class="buttons">
       <ion-card-content class="layout flex around">
         <div *ngIf="subscription">
           <button ion-button clear [disabled]="watchingLoading" *ngIf="isSubscribed" (click)="unWatchRepo(repo)">

@@ -8,5 +8,4 @@
   For more info on type definition files, check out the Typescript docs here:
   https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html
 */
-declare module 'octokat';
 declare module 'x2js';

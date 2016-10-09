@@ -1,7 +1,7 @@
 import {Component, ChangeDetectorRef, ViewChild} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 
-import {OctokatService} from '../../providers/octokat';
+
 import {FileService} from '../../providers/filehttp';
 
 import { GistPage } from '../gist-page/gist-page';
@@ -24,13 +24,13 @@ export class GistsPage {
     private nav: NavController,
     private params: NavParams,
 
-    private octokat: OctokatService,
+    
     private filehttp: FileService
   ) { }
 
   ionViewWillEnter() {
     this.user = this.params.get('user');
-    if (!this.user || this.user === this.octokat.user) {
+    if (!this.user || this.user === this.filehttp.user) {
       this.user = '';
     } else {
       this.user = '/users/' + this.user;

@@ -3,7 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 
 import {TreePage} from '../tree-page/tree-page';
 
-import {OctokatService} from '../../providers/octokat';
+
 import {FileService} from '../../providers/filehttp';
 
 @Component({
@@ -17,7 +17,6 @@ export class BranchesPage {
   constructor(
   	private nav: NavController,
   	private params: NavParams,
-  	public octokat: OctokatService,
     private filehttp: FileService
   ) {}
 

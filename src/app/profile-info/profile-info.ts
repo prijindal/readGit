@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 
 import { MenuController, Nav } from 'ionic-angular';
 
-import {OctokatService} from '../../providers/octokat';
+import {FileService} from '../../providers/filehttp';
 
 import { HomePage } from '../../pages/home-page/home-page';
 import { UserPage } from '../../pages/user-page/user-page';
@@ -18,11 +18,12 @@ export class ProfileInfo {
 
   constructor(
     private menu: MenuController,
-    private octokat: OctokatService
+
+    private filehttp: FileService
   ) {}
 
   ngOnInit() {
-    this.user = this.octokat.userData;
+    this.user = this.filehttp.userData;
   }
 
   goToProfile() {
@@ -35,7 +36,7 @@ export class ProfileInfo {
   logout() {
     this.menu.close()
     .then(() => {
-      this.octokat.logout()
+      this.filehttp.logout()
       .then(() => {
         this.nav.setRoot(HomePage);
       });

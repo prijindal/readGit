@@ -45,7 +45,7 @@
         <span><a (click)="browser.open(user.blog)">{{user.blog}}</a></span>
       </div>
     </div>
-    <div *ngIf="octokat.user && followingLoaded" margin class="follow-button">
+    <div *ngIf="filehttp.user && followingLoaded" margin class="follow-button">
       <button ion-button *ngIf="!isFollowing" full light round [disabled]="followingLoading" (click)="followUser()">
         Follow
       </button>

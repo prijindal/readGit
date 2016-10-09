@@ -15,7 +15,7 @@ import {WatchedPage} from '../pages/watched-page/watched-page';
 import {BlogsPage} from '../pages/blogs-page/blogs-page';
 import {JobsPage} from '../pages/jobs-page/jobs-page';
 
-import {OctokatService} from '../providers/octokat';
+import {FileService} from '../providers/filehttp';
 import {UrlParser} from '../providers/urlparser';
 
 @Component({
@@ -33,7 +33,7 @@ export class MyApp {
     private menu: MenuController,
     private platform: Platform,
     private events: Events,
-    private octokat: OctokatService,
+    private filehttp: FileService,
     private urlparser: UrlParser
   ) {
     this.initializeApp();
@@ -118,7 +118,7 @@ export class MyApp {
       }
       this.ref.detectChanges();
     });
-    this.octokat.checkLogin()
+    this.filehttp.checkLogin()
     .catch(err => {
       this.events.publish('login', false);
     });

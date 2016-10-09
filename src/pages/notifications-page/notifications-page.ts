@@ -5,7 +5,7 @@ import {RepoPage} from '../repo-page/repo-page/';
 
 import {NotificationsPopover} from './notifications-popover/notifications-popover';
 
-import {OctokatService} from '../../providers/octokat';
+
 import {FileService} from '../../providers/filehttp';
 import {NotificationsService} from '../../providers/notifications';
 import {UrlParser} from '../../providers/urlparser';
@@ -28,7 +28,7 @@ export class NotificationsPage {
     private alertCtrl: AlertController,
     private popoverCtrl: PopoverController,
 
-    private octokat: OctokatService,
+    
     private urlparser: UrlParser,
     private filehttp: FileService,
     private notificationsService: NotificationsService
@@ -86,8 +86,7 @@ export class NotificationsPage {
 
   markRead(notification) {
     notification.unread = false;
-    this.octokat.octo.notifications.threads(notification.id)
-    .update()
+    this.filehttp.putRequest(notification.url, {})
     .then(res => {});
   }
 
@@ -111,8 +110,10 @@ export class NotificationsPage {
       }, {
         text: 'Yes',
         handler: () => {
+          this.filehttp.putRequest('/repos/' + notificationInfo.repository + '/notifications', {})
+          .then(res => {});
           notificationInfo.notifications.forEach(notification => {
-              this.markRead(notification);
+            notification.unread = false;
           });
         }
       }]

@@ -1,7 +1,7 @@
 import {Component, ChangeDetectorRef} from '@angular/core';
 import {NavController, NavParams, PopoverController} from 'ionic-angular';
 
-import {OctokatService} from '../../providers/octokat';
+
 import {FileService} from '../../providers/filehttp';
 import {BrowserService} from '../../providers/browser';
 
@@ -38,7 +38,7 @@ export class RepoPage {
     private params: NavParams,
     private popoverCtrl: PopoverController,
 
-    private octokat: OctokatService,
+    
     private filehttp: FileService,
     private browser: BrowserService
   ) { }
@@ -121,7 +121,7 @@ export class RepoPage {
   }
 
   checkWatching() {
-    if (this.octokat.user) {
+    if (this.filehttp.user) {
       this.filehttp.getFileFromUrl(this.repo.url + '/subscription')
       .then(res => {
         this.subscription = true;
@@ -155,7 +155,7 @@ export class RepoPage {
   }
 
   checkStarring() {
-    if (this.octokat.user) {
+    if (this.filehttp.user) {
       this.filehttp.getFileFromUrl('/user/starred/' + this.repo.full_name)
       .then(res => {
         this.starring = true;

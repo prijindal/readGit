@@ -3,7 +3,7 @@ import {NavController, NavParams} from 'ionic-angular';
 
 import moment from 'moment';
 
-import {OctokatService} from '../../providers/octokat';
+
 import {FileService} from '../../providers/filehttp';
 import {BrowserService} from '../../providers/browser';
 
@@ -24,7 +24,6 @@ export class IssuePage {
     private nav: NavController,
     private params: NavParams,
 
-    public octokat: OctokatService,
     private filehttp: FileService,
     private browser: BrowserService
   ) { }
@@ -79,14 +78,11 @@ export class IssuePage {
 
   commentIssue() {
     this.loading = true;
-    let urlSplit = this.issue.url.split('https://api.github.com/repos/')[1].split('/');
-    let username = urlSplit[0];
-    let reponame = urlSplit[1];
-    this.octokat.octo.repos(username, reponame).issues(this.issue.number)
-    .comments.create({
+    this.filehttp.postNewRequest(this.issue + '/comments', {
       body: this.issuecomment
     })
-    .then(res => {
+    .then(response => {
+      let res = response.json();
       this.filehttp.getFileFromUrl(res.url, 'html')
       .then(res => {
         this.issuecomment = '';

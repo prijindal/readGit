@@ -5,7 +5,7 @@ import {BlogsPopover} from './blogs-popover/blogs-popover';
 import moment from 'moment';
 import X2JS from 'x2js';
 
-import {OctokatService} from '../../providers/octokat';
+
 import {FileService} from '../../providers/filehttp';
 
 import { BlogPage } from '../blog-page/blog-page';
@@ -25,8 +25,7 @@ export class BlogsPage {
     private ref: ChangeDetectorRef,
     private nav: NavController,
     private popoverCtrl: PopoverController,
-    private filehttp: FileService,
-    private octokat: OctokatService
+    private filehttp: FileService
   ) { }
 
   ionViewWillEnter() {

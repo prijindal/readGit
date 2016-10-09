@@ -1,7 +1,7 @@
 import {Component, ChangeDetectorRef, ViewChild} from '@angular/core';
 import {NavController, Events} from 'ionic-angular';
 
-import {OctokatService} from '../../providers/octokat';
+
 import {FileService} from '../../providers/filehttp';
 import {EventParser} from '../../providers/eventparser';
 import {UrlParser} from '../../providers/urlparser';
@@ -41,7 +41,7 @@ export class HomePage {
     private nav: NavController,
     private events: Events,
 
-    private octokat: OctokatService,
+    
     private filehttp: FileService,
     private eventParser: EventParser,
     private browser: BrowserService,
@@ -104,14 +104,14 @@ export class HomePage {
 
   verifyLogin() {
     this.loading = true;
-    return this.octokat.checkLogin()
+    return this.filehttp.checkLogin()
     .then(res => {
       this.message = 'Verifying You...';
-      this.octokat.octo.me.read()
-      .then(res => {
-        res = JSON.parse(res);
-        this.octokat.userData = res;
-        this.octokat.user = res.login;
+      this.filehttp.getFileFromUrl('/user')
+      .then(response => {
+        res = response.json();
+        this.filehttp.userData = res;
+        this.filehttp.user = res.login;
         this.message = 'Logged In';
         this.events.publish('login', true);
         this.loggedIn = true;

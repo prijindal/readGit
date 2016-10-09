@@ -3,7 +3,7 @@ import {NavController, NavParams} from 'ionic-angular';
 
 import moment from 'moment';
 
-import {OctokatService} from '../../providers/octokat';
+
 import {FileService} from '../../providers/filehttp';
 import {BrowserService} from '../../providers/browser'
 
@@ -21,7 +21,7 @@ export class ComparePage {
     private nav: NavController,
     private params: NavParams,
 
-    private octokat: OctokatService,
+    
     private filehttp: FileService,
     private browser: BrowserService
   ) { }

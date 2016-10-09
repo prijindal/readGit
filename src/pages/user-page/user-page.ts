@@ -1,7 +1,7 @@
 import {Component, ChangeDetectorRef} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 
-import {OctokatService} from '../../providers/octokat';
+
 import {FileService} from '../../providers/filehttp';
 import {BrowserService} from '../../providers/browser';
 
@@ -34,7 +34,7 @@ export class UserPage {
     private nav: NavController,
     private params: NavParams,
 
-    private octokat: OctokatService,
+    
     private browser: BrowserService,
     private filehttp: FileService
   ) { }
@@ -70,7 +70,7 @@ export class UserPage {
       return ;
     }
 
-    if (this.user.login === this.octokat.user) {
+    if (this.user.login === this.filehttp.user) {
       this.user.url = 'https://api.github.com/user';
     }
     this.getUserInfo();
@@ -83,7 +83,7 @@ export class UserPage {
       this.loading = false;
       this.user = res.json();
       this.ref.detectChanges();
-      if (this.user.login === this.octokat.user) {
+      if (this.user.login === this.filehttp.user) {
         this.user.url = '/user';
       }
       if (this.user.type === 'User') {
@@ -123,9 +123,8 @@ export class UserPage {
   }
 
   checkFollow() {
-    if (this.octokat.user && this.user.login !== this.octokat.user) {
-      this.octokat.octo.user.following(this.user.login)
-      .read()
+    if (this.filehttp.user && this.user.login !== this.filehttp.user) {
+      this.filehttp.getFileFromUrl('/user/following/' + this.user.login)
       .then(res => {
         this.followingLoaded = true;
         this.isFollowing = true;
@@ -138,9 +137,8 @@ export class UserPage {
 
   followUser() {
     this.followingLoading = true;
-    if (this.octokat.user && this.user.login !== this.octokat.user) {
-      this.octokat.octo.user.following(this.user.login)
-      .add()
+    if (this.filehttp.user && this.user.login !== this.filehttp.user) {
+      this.filehttp.putRequest('/user/following/' + this.user.login, {})
       .then(res => {
         this.isFollowing = true;
         this.followingLoading = false;
@@ -150,9 +148,8 @@ export class UserPage {
 
   unFollowUser() {
     this.followingLoading = true;
-    if (this.octokat.user && this.user.login !== this.octokat.user) {
-      this.octokat.octo.user.following(this.user.login)
-      .remove()
+    if (this.filehttp.user && this.user.login !== this.filehttp.user) {
+      this.filehttp.deleteRequest('/user/following/' + this.user.login)
       .then(res => {
         this.isFollowing = false;
         this.followingLoading = false;
