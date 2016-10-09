@@ -20,15 +20,15 @@ import {FileService} from '../../../providers/filehttp';
 export class IssuesPopover {
   public stateTypes = [
     {
-      type: 'is:open',
+      type: 'is:issue is:open',
       name: 'View Open'
     },
     {
-      type: 'is:closed',
+      type: 'is:issue is:closed',
       name: 'View Closed'
     },
     {
-      type: '',
+      type: 'is:issue ',
       name: 'View All'
     }
   ]
