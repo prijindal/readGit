@@ -1,4 +1,4 @@
-import {Component, ChangeDetectorRef} from '@angular/core';
+import {Component, ChangeDetectorRef, ViewChild} from '@angular/core';
 import {Jsonp, Http} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {NavController} from 'ionic-angular';
@@ -7,16 +7,21 @@ import moment from 'moment';
 
 
 import {FileService} from '../../providers/filehttp';
+import {AutohideService} from '../../providers/autohide';
 
 import { JobPage } from '../job-page/job-page';
 
 const PER_PAGE: number = 50;
 
 @Component({
+  selector: 'jobs-page',
   templateUrl: 'jobs-page.html'
 })
 export class JobsPage {
+  @ViewChild('jobsContent') jobsContent;
   private page: number = 0;
+  public searchbarhidden: Boolean = false;
+  public search: string;
   public loading: Boolean = true;
   public jobs: any = [];
 
@@ -25,17 +30,31 @@ export class JobsPage {
     private nav: NavController,
     private jsonp: Jsonp,
     private http: Http,
-    
-    private filehttp: FileService
+
+    private filehttp: FileService,
+    private autohide: AutohideService
   ) { }
 
   ionViewWillEnter() {
-    this.refreshJobs();
+    if (this.jobs.length === 0) {
+      this.refreshJobs();
+    }
+  }
+
+  ionViewDidEnter() {
+    this.autohide.init(this.jobsContent, (value) => {
+      this.searchbarhidden = value;
+    });
+  }
+
+  ionViewWillLeave() {
+    this.autohide.destroy(this.jobsContent);
   }
 
   refreshJobs() {
     this.loading = true;
     this.page = 0;
+    this.jobs = [];
     this.getJobs(true)
     .subscribe(() => {
       this.loading = false;
@@ -46,10 +65,15 @@ export class JobsPage {
 
   getJobs(shouldRefresh: Boolean = false): Observable<any> {
     let request:Observable<any>;
+    let url = 'https://jobs.github.com/positions.json?page=' + this.page
+    if (this.search) {
+      url += '&search=' + this.search
+    }
     if (window.location.protocol === 'file:') {
-      request = this.http.get('https://jobs.github.com/positions.json?page=' + this.page)
+      request = this.http.get(url)
     } else {
-      request = this.jsonp.get('https://jobs.github.com/positions.json?callback=JSONP_CALLBACK&page=' + this.page)
+      url+='&callback=JSONP_CALLBACK'
+      request = this.jsonp.get(url)
     }
     return request
     .map(res => {

@@ -13,7 +13,17 @@
 </ion-header>
 
 
-<ion-content class="jobs-page">
+<ion-content #jobsContent class="jobs-page">
+  <ion-searchbar
+    [class.hidden]="searchbarhidden"
+    #searchbar
+    debounce="1000"
+    autocomplete="off"
+    autocorrect="off"
+    spellcheck="false"
+    (ionInput)="refreshJobs()"
+    [(ngModel)]="search"
+  ></ion-searchbar>
   <div text-center margin-top *ngIf="!jobs || jobs.length <= 0">
     <div *ngIf="loading">
       Loading...
@@ -23,7 +33,7 @@
     </div>
   </div>
   <div *ngIf="jobs">
-    <ion-list *ngIf="jobs.length > 0">
+    <ion-list class="jobs" *ngIf="jobs.length > 0">
       <button ion-item (click)="openJob(job)" *ngFor="let job of jobs">
         <ion-thumbnail item-left *ngIf="job.company_logo">
           <ion-img [src]="job.company_logo"></ion-img>

@@ -3,10 +3,11 @@ import {NavController, NavParams, PopoverController} from 'ionic-angular';
 
 import {MilestonesPopover} from './milestones-popover/milestones-popover';
 
+import {IssuesPage} from '../issues-page/issues-page';
+
 import moment from 'moment';
 
 import {FileService} from '../../providers/filehttp';
-import {BrowserService} from '../../providers/browser';
 
 const PER_PAGE: number = 5;
 
@@ -28,8 +29,7 @@ export class MilestonesPage {
     private params: NavParams,
     private popoverCtrl: PopoverController,
 
-    private filehttp: FileService,
-    private browser: BrowserService
+    private filehttp: FileService
   ) { }
 
   ionViewWillEnter() {
@@ -72,7 +72,7 @@ export class MilestonesPage {
   }
 
   openMilestonePage(milestone) {
-    this.browser.open(milestone.html_url);
+    this.nav.push(IssuesPage, {repo: this.repo, query: 'is:open milestone:' + milestone.title})
   }
 
   getPercentageComplete(milestone) {
