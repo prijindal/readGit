@@ -9,6 +9,4 @@
   https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html
 */
 declare module 'x2js';
-declare var octicons: {
-  svg: any
-};
+declare module 'octicons/build/svg.json';

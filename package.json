@@ -4,7 +4,7 @@
   "homepage": "https://readgit.herokuapp.com/",
   "private": true,
   "scripts": {
-    "build": "ionic-app-scripts build --release && npm run octicons",
+    "build": "ionic-app-scripts build --release",
     "watch": "ionic-app-scripts watch",
     "serve:before": "watch",
     "emulate:before": "build",
@@ -13,7 +13,6 @@
     "run:before": "build",
     "lint": "ionic-app-scripts lint",
     "heroku-postbuild": "sh deploy.sh",
-    "octicons": "browserify octicons.js -o www/build/octicons.js",
     "livereload": "ionic run android --livereload --address 192.168.137.1 --device",
     "android": "cordova run android --buildConfig=.vscode/build.json",
     "release": "ionic run android --release --buildConfig=.vscode/build.json",
@@ -31,8 +30,7 @@
     "x2js": "^3.0.1"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "0.0.23",
-    "browserify": "^13.1.0",
+    "@ionic/app-scripts": "0.0.30",
     "cordova": "^6.3.1",
     "ionic": "^2.1.0",
     "node-static": "^0.7.9",

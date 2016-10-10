@@ -3,6 +3,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {NavController, NavParams, PopoverController} from 'ionic-angular';
 
 import moment from 'moment';
+import octicons from 'octicons/build/svg.json';
 
 import {IssuesPopover} from './issues-popover/issues-popover';
 
@@ -137,9 +138,17 @@ export class IssuesPage {
       res.items.forEach((issue) => {
         if (octicons) {
           let icon = 'issue-opened';
-          let svg = octicons.svg[icon];
+          let iconclass = 'green'
+          if (issue.pull_request) {
+            icon = 'git-pull-request';
+            iconclass = issue.state === 'open' ? 'green' : ''
+          } else {
+            icon = issue.state === 'open' ? 'issue-opened' : 'issue-closed'
+            iconclass = issue.state === 'open' ? 'green' : 'red'
+          }
+          issue.class = 'octicon ' + iconclass;
+          let svg = octicons[icon];
           issue.icon = this.sanitizer.bypassSecurityTrustHtml(svg);
-          issue.class = 'octicon green'
         }
         this.issues.push(issue);
       });

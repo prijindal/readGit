@@ -11,7 +11,7 @@ import {FileService} from '../../../providers/filehttp';
         *ngFor="let stateType of stateTypes"
         (click)="close(stateType.type)"
       >
-        <ion-icon item-left [name]="state === stateType.type ? 'checkmark' : ''"></ion-icon>
+        <ion-icon item-left [name]="query === stateType.type ? 'checkmark' : ''"></ion-icon>
         <span>{{stateType.name}}</span>
       </button>
     </ion-list>
@@ -32,7 +32,6 @@ export class IssuesPopover {
       name: 'View All'
     }
   ]
-  public state: string;
   public query: string;
 
   constructor(
@@ -44,6 +43,7 @@ export class IssuesPopover {
   }
 
   close(query) {
+    this.query = query;
     this.viewCtrl.dismiss(query);
   }
 }

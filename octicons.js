@@ -1,1 +1,0 @@
-window.octicons = require('octicons')
