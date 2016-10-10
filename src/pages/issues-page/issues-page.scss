@@ -9,6 +9,10 @@ issues-page {
 			transform: translateY( -100% );
     }
   }
+  .item-md ion-icon.octicon[item-left] + .item-inner,
+  .item-md ion-icon.octicon[item-left] + .item-input {
+    margin-left: 4px;
+  }
   ion-list.issues {
     margin-top: 60px;
   }

@@ -17,11 +17,12 @@ import {JobsPage} from '../pages/jobs-page/jobs-page';
 
 import {FileService} from '../providers/filehttp';
 import {UrlParser} from '../providers/urlparser';
+import {OcticonService} from '../providers/octicon';
 
 const DEFAULT_PAGES = [
-  {title: 'Search', component: SearchPage},
-  {title: 'Github Blog', component: BlogsPage},
-  {title: 'Github Jobs', component: JobsPage}
+  {title: 'Search', component: SearchPage, icon:'search', type: 'ionicon'},
+  {title: 'Github Blog', component: BlogsPage, icon:'rss', type: 'octicon'},
+  {title: 'Github Jobs', component: JobsPage, icon:'code-working', type: 'ionicon'}
 ];
 
 @Component({
@@ -31,7 +32,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
   rootPage: any = HomePage;
   profileEnabled: Boolean = false;
-  pages: Array<{title: string, component: any}> = DEFAULT_PAGES;
+  pages: Array<{title: string, component: any, icon: string, type: string}> = DEFAULT_PAGES;
 
   constructor(
     private ref: ChangeDetectorRef,
@@ -40,7 +41,8 @@ export class MyApp {
     private platform: Platform,
     private events: Events,
     private filehttp: FileService,
-    private urlparser: UrlParser
+    private urlparser: UrlParser,
+    private octicon: OcticonService
   ) {
     this.initializeApp();
   }
@@ -102,17 +104,17 @@ export class MyApp {
       if (isLoggedIn[0]) {
         this.profileEnabled = true;
         this.pages = [
-          {title: 'News Feed', component: HomePage},
-          {title: 'Notifications', component: NotificationsPage},
-          {title: 'Repositories', component: ReposPage},
-          {title: 'Stars', component: StarredPage},
-          {title: 'Watching', component: WatchedPage},
-          {title: 'Followers', component: FollowersPage},
-          {title: 'Following', component: FollowingPage},
-          {title: 'Gists', component: GistsPage},
-          {title: 'Search', component: SearchPage},
-          {title: 'Github Blog', component: BlogsPage},
-          {title: 'Github Jobs', component: JobsPage}
+          {title: 'News Feed', component: HomePage, icon:'home', type: 'ionicon'},
+          {title: 'Notifications', component: NotificationsPage, icon:'notifications', type: 'ionicon'},
+          {title: 'Repositories', component: ReposPage, icon:'repo', type: 'octicon'},
+          {title: 'Stars', component: StarredPage, icon:'star', type: 'ionicon'},
+          {title: 'Watching', component: WatchedPage, icon:'eye', type: 'ionicon'},
+          {title: 'Followers', component: FollowersPage, icon:'person', type: 'ionicon'},
+          {title: 'Following', component: FollowingPage, icon:'person-add', type: 'ionicon'},
+          {title: 'Gists', component: GistsPage, icon:'gist', type: 'octicon'},
+          {title: 'Search', component: SearchPage, icon:'search', type: 'ionicon'},
+          {title: 'Github Blog', component: BlogsPage, icon:'rss', type: 'octicon'},
+          {title: 'Github Jobs', component: JobsPage, icon:'code-working', type: 'ionicon'}
         ];
       } else {
         this.profileEnabled = false;

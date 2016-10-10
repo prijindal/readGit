@@ -11,6 +11,10 @@ export class OcticonService {
   ) {}
 
   get(name: string): SafeHtml {
-    return this.sanitizer.bypassSecurityTrustHtml(octicons[name]);
+    if (name in octicons) {
+      return this.sanitizer.bypassSecurityTrustHtml(octicons[name]);
+    } else {
+      return null;
+    }
   }
 }

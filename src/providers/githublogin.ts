@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import { Http, Headers, RequestOptions, Response } from '@angular/http';
+import { Http, Headers, RequestOptions } from '@angular/http';
 
 import {Observable} from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
@@ -29,7 +29,7 @@ export class GithubLogin {
     private http: Http
   ) {}
 
-  login(username: string, password: string, twofactor?: string) {
+  login(username: string, password: string, twofactor?: string): Observable<any> {
     let headers = new Headers({
       'Accept': 'application/vnd.github.damage-preview',
       'Authorization': 'Basic ' + btoa(username + ':' + password),
