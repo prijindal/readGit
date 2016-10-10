@@ -7,6 +7,7 @@ import {FaviconService} from '../providers/favicon';
 import {BrowserService} from '../providers/browser';
 import {FileService} from '../providers/filehttp';
 import {UrlParser} from '../providers/urlparser';
+import {OcticonService} from '../providers/octicon';
 
 export const APP_PROVIDERS = [
     LocalService,
@@ -17,5 +18,6 @@ export const APP_PROVIDERS = [
     EventParser,
     BrowserService,
     FileService,
-    UrlParser
+    UrlParser,
+    OcticonService
 ]

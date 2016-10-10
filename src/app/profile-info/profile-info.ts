@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
-
 import { MenuController, Nav } from 'ionic-angular';
 
 import {FileService} from '../../providers/filehttp';
+import {OcticonService} from '../../providers/octicon';
 
 import { HomePage } from '../../pages/home-page/home-page';
 import { UserPage } from '../../pages/user-page/user-page';
@@ -17,6 +17,7 @@ export class ProfileInfo {
   user: any;
 
   constructor(
+    private octicon: OcticonService,
     private menu: MenuController,
 
     private filehttp: FileService

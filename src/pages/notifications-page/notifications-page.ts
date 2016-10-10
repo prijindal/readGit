@@ -28,7 +28,7 @@ export class NotificationsPage {
     private alertCtrl: AlertController,
     private popoverCtrl: PopoverController,
 
-    
+
     private urlparser: UrlParser,
     private filehttp: FileService,
     private notificationsService: NotificationsService
@@ -86,7 +86,7 @@ export class NotificationsPage {
 
   markRead(notification) {
     notification.unread = false;
-    this.filehttp.putRequest(notification.url, {})
+    this.filehttp.patchRequest(notification.url, {})
     .then(res => {});
   }
 
