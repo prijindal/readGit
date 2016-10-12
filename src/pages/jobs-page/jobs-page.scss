@@ -1,15 +1,8 @@
 jobs-page {
   ion-searchbar {
-		transition-duration: .5s;
-		transition-timing-function: cubic-bezier( 0.215, 0.610, 0.355, 1.000 );
-		transition-property: transform;
-    position: fixed;
-    z-index: 10;
-    &.hidden {
-			transform: translateY( -100% );
-    }
+    @include autohide-search();
   }
-  
+
   ion-list.jobs,
   [margin-top] {
     margin-top: 60px;
