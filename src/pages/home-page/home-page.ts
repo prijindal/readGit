@@ -199,11 +199,11 @@ export class HomePage {
   }
 
   openUser(user) {
-    this.nav.push(UserPage, {user: user});
+    this.nav.push(UserPage, {username: user.login});
   }
 
   openRepo(repo) {
-    this.nav.push(RepoPage, {repo: repo});
+    this.nav.push(RepoPage, {reponame: repo.name});
   }
 
   openSearchPage() {

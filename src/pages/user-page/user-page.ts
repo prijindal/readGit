@@ -1,8 +1,8 @@
 import {Component, ChangeDetectorRef} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 
-
 import {FileService} from '../../providers/filehttp';
+import {GraphApiService} from '../../providers/graphapi';
 import {BrowserService} from '../../providers/browser';
 
 import { ReposPage } from '../repos-page/repos-page';
@@ -13,7 +13,56 @@ import { GistsPage } from '../gists-page/gists-page';
 import { FollowingPage } from '../following-page/following-page';
 import { WatchedPage } from '../watched-page/watched-page';
 
-const PER_PAGE: number = 10000;
+const USER_QUERY = `
+query {
+  repositoryOwner(login:"{{username}}") {
+    id
+    login
+    avatarURL
+    ...on User {
+      name
+      location
+      email
+      websiteURL
+      bio
+      viewerCanFollow
+      viewerIsFollowing
+      followers {
+        totalCount
+      }
+      following {
+        totalCount
+      }
+      repositories {
+        totalCount
+      }
+      starredRepositories {
+        totalCount
+      }
+      watching {
+        totalCount
+      }
+      organizations(first: 30) {
+        edges {
+          node {
+            login
+            avatarURL
+          }
+        }
+      }
+    }
+    ...on Organization {
+      name
+      repositories {
+        totalCount
+      }
+      members {
+        totalCount
+      }
+    }
+  }
+}
+`
 
 @Component({
   templateUrl: 'user-page.html'
@@ -21,12 +70,11 @@ const PER_PAGE: number = 10000;
 export class UserPage {
   public loading: Boolean = true;
   public user: any;
+  public username: string;
   public starred: number;
   public watching: number;
   public members: number;
   public orgs: any;
-  public followingLoaded: Boolean;
-  public isFollowing: Boolean;
   public followingLoading: Boolean;
 
   constructor(
@@ -34,19 +82,15 @@ export class UserPage {
     private nav: NavController,
     private params: NavParams,
 
-    
     private browser: BrowserService,
-    private filehttp: FileService
+    private filehttp: FileService,
+    private graphapi: GraphApiService
   ) { }
 
   ionViewWillEnter() {
-    let user = this.params.get('user');
     let username = this.params.get('username');
-    if (user) {
-      this.loading = false;
-      this.user = user;
-    } else if (username) {
-      this.user = {url: 'https://api.github.com/users/' + username, login: username};
+    if (username) {
+      this.username = username;
       let tab = this.params.get('tab');
       if (tab) {
         this.nav.pop().then(() => {
@@ -69,70 +113,20 @@ export class UserPage {
       this.filehttp.handleError({message: 'Problem with Authentication'});
       return ;
     }
-
-    if (this.user.login === this.filehttp.user) {
-      this.user.url = 'https://api.github.com/user';
-    }
     this.getUserInfo();
   }
 
   getUserInfo() {
     this.loading = true;
-    this.filehttp.getFileFromUrl(this.user.url)
-    .then(res => {
+    let query = USER_QUERY.replace('{{username}}', this.username)
+    this.graphapi.request(query)
+    .subscribe(res => {
+      this.user = res.repositoryOwner
       this.loading = false;
-      this.user = res.json();
-      this.ref.detectChanges();
-      if (this.user.login === this.filehttp.user) {
-        this.user.url = '/user';
-      }
-      if (this.user.type === 'User') {
-        this.getStarred();
-        this.getSubscriptions();
-        this.getOrganizations();
-        this.checkFollow();
-      } else {
-        this.getMembers();
-      }
-    })
-    .catch(err => {
+    }, err => {
       this.loading = false;
       this.filehttp.handleError({message: 'Problem with Authentication'});
     });
-  }
-
-  getStarred() {
-    this.filehttp.getHeaders(this.user.url + '/starred?page=1&per_page=1')
-    .then(res => {
-      this.starred = this.filehttp.getLinkLength(res);
-    });
-  }
-
-  getSubscriptions() {
-    this.filehttp.getHeaders(this.user.url + '/subscriptions?page=1&per_page=1')
-    .then(res => {
-      this.watching = this.filehttp.getLinkLength(res);
-    });
-  }
-
-  getOrganizations() {
-    this.filehttp.getFileFromUrl(this.user.url + '/orgs?per_page=' + PER_PAGE)
-    .then(res => {
-      this.orgs = res.json();
-    });
-  }
-
-  checkFollow() {
-    if (this.filehttp.user && this.user.login !== this.filehttp.user) {
-      this.filehttp.getFileFromUrl('/user/following/' + this.user.login)
-      .then(res => {
-        this.followingLoaded = true;
-        this.isFollowing = true;
-      }).catch(err => {
-        this.followingLoaded = true;
-        this.isFollowing = false;
-      });
-    }
   }
 
   followUser() {
@@ -140,7 +134,7 @@ export class UserPage {
     if (this.filehttp.user && this.user.login !== this.filehttp.user) {
       this.filehttp.putRequest('/user/following/' + this.user.login, {})
       .then(res => {
-        this.isFollowing = true;
+        this.user.viewerIsFollowing = true;
         this.followingLoading = false;
       });
     }
@@ -151,17 +145,10 @@ export class UserPage {
     if (this.filehttp.user && this.user.login !== this.filehttp.user) {
       this.filehttp.deleteRequest('/user/following/' + this.user.login)
       .then(res => {
-        this.isFollowing = false;
+        this.user.viewerIsFollowing = false;
         this.followingLoading = false;
       });
     }
-  }
-
-  getMembers() {
-    this.filehttp.getHeaders(this.user.url + '/members?page=1&per_page=1')
-    .then(res => {
-      this.members = this.filehttp.getLinkLength(res);
-    });
   }
 
   openReposPage() {
@@ -193,6 +180,6 @@ export class UserPage {
   }
 
   openUser(user) {
-    this.nav.push(UserPage, {user: user});
+    this.nav.push(UserPage, {username: user.login});
   }
 }

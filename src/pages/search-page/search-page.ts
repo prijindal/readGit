@@ -65,11 +65,11 @@ export class SearchPage {
   }
 
   openRepository(repo) {
-    this.nav.push(RepoPage, {repo: repo});
+    this.nav.push(RepoPage, {reponame: repo.full_name});
   }
 
   openUser(user) {
-    this.nav.push(UserPage, {user: user});
+    this.nav.push(UserPage, {username: user.login});
   }
 
   openIssue(issue) {

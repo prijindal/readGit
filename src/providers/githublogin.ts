@@ -18,7 +18,8 @@ const scopes = [
   'public_repo',
   'notifications',
   'gist',
-  'delete_repo'
+  'delete_repo',
+  'read:org'
 ];
 
 @Injectable()

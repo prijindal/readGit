@@ -3,6 +3,7 @@ import {NavController, NavParams, PopoverController} from 'ionic-angular';
 
 
 import {FileService} from '../../providers/filehttp';
+import {GraphApiService} from '../../providers/graphapi';
 import {BrowserService} from '../../providers/browser';
 
 import { TreePage } from '../tree-page/tree-page';
@@ -14,6 +15,43 @@ import { CommitsPage } from '../commits-page/commits-page';
 
 import {RepoPopover} from './repo-popover/repo-popover';
 
+const REPO_QUERY = `
+query {
+  repositoryOwner(login: "{{username}}") {
+    repository(name:"{{reponame}}") {
+      isFork
+      parent {
+        owner {
+          login
+        }
+        name
+      }
+      viewerHasStarred
+      viewerSubscription
+      viewerCanSubscribe
+      name
+      owner {
+        login
+      }
+      descriptionHTML
+      homepageURL
+      issues {
+       totalCount
+      }
+      stargazers {
+        totalCount
+      }
+      forks {
+        totalCount
+      }
+      pullRequests {
+        totalCount
+      }
+    }
+  }
+}
+`;
+
 @Component({
   templateUrl: 'repo-page.html'
 })
@@ -23,12 +61,7 @@ export class RepoPage {
   public readme: string;
   public readmeError: any;
   public branches: number;
-  public pulls: number;
   public commits: number;
-  public subscription: any;
-  public isSubscribed: any;
-  public starring: any;
-  public isStarring: any;
   public watchingLoading: Boolean = false;
   public starringLoading: Boolean = false;
 
@@ -39,19 +72,15 @@ export class RepoPage {
     private popoverCtrl: PopoverController,
 
     private filehttp: FileService,
+    private graphapi: GraphApiService,
     private browser: BrowserService
   ) { }
 
   ionViewWillEnter() {
-    let repo = this.params.get('repo');
-    let username = this.params.get('username');
     let reponame = this.params.get('reponame');
-    if (repo) {
+    if (reponame) {
       this.loading = false;
-      this.repo = repo;
-      this.getRepoInfo();
-    } else if (username && reponame) {
-      this.repo = { full_name: username + '/' + reponame};
+      this.repo = { full_name: reponame};
       this.repo['url'] = 'https://api.github.com/repos/' + this.repo['full_name'];
       this.getRepoInfo();
     } else {
@@ -64,29 +93,31 @@ export class RepoPage {
 
   getRepoInfo() {
     this.loading = true;
-    this.filehttp.getFileFromUrl(this.repo.url)
-    .then(res => {
+    let splited = this.repo.full_name.split('/')
+    let username = splited[0]
+    let reponame = splited[1];
+    let query = REPO_QUERY.replace('{{username}}', username).replace('{{reponame}}', reponame)
+    this.graphapi.request(query)
+    .subscribe(res => {
       this.loading = false;
-      this.repo = res.json();
+      this.repo = res.repositoryOwner.repository;
       this.getReadMe();
       this.getBranches();
-      this.getPulls();
       this.getCommits();
-      this.checkWatching();
-      this.checkStarring();
-    })
-    .catch(err => {
+      // console.dir(res);
+    }, err => {
       this.loading = false;
       if (err.status === 404) {
         this.filehttp.handleError(err);
       } else {
         this.filehttp.handleError({message: 'Problem with Fetching Repository'});
       }
-    });
+    })
   }
 
   getReadMe() {
-    this.filehttp.getFileFromUrl(this.repo.url + '/readme', 'html')
+    let url = '/repos/' + this.repo.owner.login + '/' +this.repo.name + '/readme'
+    this.filehttp.getFileFromUrl(url, 'html')
     .then(res => {
       let text = res.text();
       this.readme = text;
@@ -99,96 +130,63 @@ export class RepoPage {
   }
 
   getBranches() {
-    this.filehttp.getHeaders(this.repo.url + '/branches?page=1&per_page=1')
+    let url = '/repos/' + this.repo.owner.login + '/' +this.repo.name + '/branches?page=1&per_page=1'
+    this.filehttp.getHeaders(url)
     .then(res => {
       this.branches = this.filehttp.getLinkLength(res);
     });
   }
 
-  getPulls() {
-    this.filehttp.getHeaders(this.repo.url + '/pulls?page=1&per_page=1')
-    .then(res => {
-      this.pulls = this.filehttp.getLinkLength(res);
-    });
-  }
-
   getCommits() {
-    this.filehttp.getHeaders(this.repo.url + '/commits?page=1&per_page=1')
+    let url = '/repos/' + this.repo.owner.login + '/' +this.repo.name + '/commits?page=1&per_page=1'
+    this.filehttp.getHeaders(url)
     .then(res => {
       this.commits = this.filehttp.getLinkLength(res);
     });
   }
 
-  checkWatching() {
-    if (this.filehttp.user) {
-      this.filehttp.getFileFromUrl(this.repo.url + '/subscription')
-      .then(res => {
-        this.subscription = true;
-        this.isSubscribed = true;
-      })
-      .catch(err => {
-        if (err.status === 404) {
-          this.isSubscribed = false;
-          this.subscription = true;
-        }
-      });
-    }
-  }
-
   watchRepo(repo) {
     this.watchingLoading = true;
-    this.filehttp.putRequest(this.repo.url + '/subscription', {subscribed: true})
+    let url = '/repos/' + this.repo.owner.login + '/' +this.repo.name + '/subscription'
+    this.filehttp.putRequest(url, {subscribed: true})
     .then(res => {
-      this.isSubscribed = true;
+      this.repo.viewerSubscription = 'SUBSRIBED';
       this.watchingLoading = false;
     });
   }
 
   unWatchRepo(repo) {
     this.watchingLoading = true;
-    this.filehttp.deleteRequest(this.repo.url + '/subscription')
+    let url = '/repos/' + this.repo.owner.login + '/' +this.repo.name + '/subscription'
+    this.filehttp.deleteRequest(url)
     .then(res => {
-      this.isSubscribed = false;
+      this.repo.viewerSubscription = 'UNSUBSCRIBED';
       this.watchingLoading = false;
     });
   }
 
-  checkStarring() {
-    if (this.filehttp.user) {
-      this.filehttp.getFileFromUrl('/user/starred/' + this.repo.full_name)
-      .then(res => {
-        this.starring = true;
-        this.isStarring = true;
-      })
-      .catch(err => {
-        if (err.status === 404) {
-          this.isStarring = false;
-          this.starring = true;
-        }
-      });
-    }
-  }
-
   starRepo(repo) {
     this.starringLoading = true;
-    this.filehttp.putRequest('/user/starred/' + this.repo.full_name, {})
+    let url = '/user/starred/' + this.repo.owner.login + '/' +this.repo.name
+    this.filehttp.putRequest(url, {})
     .then(res => {
-      this.isStarring = true;
+      this.repo.viewerHasStarred = true;
       this.starringLoading = false;
     });
   }
 
   unStarRepo(repo) {
     this.starringLoading = true;
-    this.filehttp.deleteRequest('/user/starred/' + this.repo.full_name)
+    let url = '/user/starred/' + this.repo.owner.login + '/' +this.repo.name
+    this.filehttp.deleteRequest(url)
     .then(res => {
-      this.isStarring = false;
+      this.repo.viewerHasStarred = false;
       this.starringLoading = false;
     });
   }
 
   openUser(owner) {
-    this.nav.push(UserPage, {user: owner});
+    this.nav.push(UserPage, {username: owner.login});
   }
 
   openCode() {
@@ -212,7 +210,7 @@ export class RepoPage {
   }
 
   openRepo(repo) {
-    this.nav.push(RepoPage, {repo: repo})
+    this.nav.push(RepoPage, {reponame: repo.full_name})
   }
 
   openBranchesPage() {

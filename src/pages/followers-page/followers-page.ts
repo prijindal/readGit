@@ -24,7 +24,7 @@ export class FollowersPage {
     private nav: NavController,
     private params: NavParams,
 
-    
+
     private filehttp: FileService
   ) { }
 
@@ -81,6 +81,6 @@ export class FollowersPage {
   }
 
   openUser(user) {
-    this.nav.push(UserPage, {user: user});
+    this.nav.push(UserPage, {username: user.login});
   }
 }

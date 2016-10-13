@@ -23,7 +23,7 @@ export class ReposPage {
     private nav: NavController,
     private params: NavParams,
 
-    
+
     private filehttp: FileService
   ) { }
 
@@ -76,6 +76,6 @@ export class ReposPage {
   }
 
   openRepository(repo) {
-    this.nav.push(RepoPage, {repo: repo});
+    this.nav.push(RepoPage, {reponame: repo.full_name});
   }
 }

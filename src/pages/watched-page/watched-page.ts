@@ -22,7 +22,7 @@ export class WatchedPage {
     private nav: NavController,
     private params: NavParams,
 
-    
+
     private filehttp: FileService
   ) { }
 
@@ -49,6 +49,6 @@ export class WatchedPage {
   }
 
   openRepository(repo) {
-    this.nav.push(RepoPage, {repo: repo});
+    this.nav.push(RepoPage, {reponame: repo.full_name});
   }
 }

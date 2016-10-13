@@ -24,8 +24,8 @@
   </div>
   <div margin *ngIf="user">
     <div class="user-image" *ngIf="user.id">
-      <img *ngIf="!imageLoaded" [src]="'https://avatars.githubusercontent.com/u/' + user.id +'?s=50'"/>
-      <img [class.hidden]="!imageLoaded" (load)="imageLoaded = true" [src]="'https://avatars.githubusercontent.com/u/' + user.id +'?s=400'"/>
+      <img *ngIf="!imageLoaded" [src]="user.avatarURL.split('?')[0] +'?s=50'"/>
+      <img [class.hidden]="!imageLoaded" (load)="imageLoaded = true" [src]="user.avatarURL.split('?')[0] +'?s=400'"/>
     </div>
     <div class="user-title">
       <h4>{{user.name}}</h4>
@@ -40,16 +40,16 @@
         <ion-icon name="mail"></ion-icon>
         <span><a (click)="browser.open('mailto:' + user.email)">{{user.email}}</a></span>
       </div>
-      <div *ngIf="user.blog" class="user-tag">
+      <div *ngIf="user.websiteURL" class="user-tag">
         <ion-icon name="link"></ion-icon>
-        <span><a (click)="browser.open(user.blog)">{{user.blog}}</a></span>
+        <span><a (click)="browser.open(user.websiteURL)">{{user.websiteURL}}</a></span>
       </div>
     </div>
-    <div *ngIf="filehttp.user && followingLoaded" margin class="follow-button">
-      <button ion-button *ngIf="!isFollowing" full light round [disabled]="followingLoading" (click)="followUser()">
+    <div *ngIf="user.viewerCanFollow" margin class="follow-button">
+      <button ion-button *ngIf="!user.viewerIsFollowing" full light round [disabled]="followingLoading" (click)="followUser()">
         Follow
       </button>
-      <button ion-button *ngIf="isFollowing" full light round [disabled]="followingLoading" (click)="unFollowUser()">
+      <button ion-button *ngIf="user.viewerIsFollowing" full light round [disabled]="followingLoading" (click)="unFollowUser()">
         UnFollow
       </button>
     </div>
@@ -58,41 +58,37 @@
     </div>
 
     <div class="user-icons layout flex row center wrap">
-      <div *ngIf="user.type=='User'" class="user-icon user-followers layout flex column" (click)="openFollowersPage()">
-        <div class="count">{{user.followers}}</div>
+      <div *ngIf="user.followers" class="user-icon user-followers layout flex column" (click)="openFollowersPage()">
+        <div class="count">{{user.followers.totalCount}}</div>
         <div class="icon-name">Followers</div>
       </div>
-      <div *ngIf="user.type=='User'" class="user-icon user-followers layout flex column" (click)="openFollowingPage()">
-        <div class="count">{{user.following}}</div>
+      <div *ngIf="user.following" class="user-icon user-followers layout flex column" (click)="openFollowingPage()">
+        <div class="count">{{user.following.totalCount}}</div>
         <div class="icon-name">Following</div>
       </div>
-      <div *ngIf="user.type=='User'" class="user-icon user-starred layout flex column" (click)="openGistsPage()">
-        <div class="count">{{user.public_gists + (user.private_gists ? user.private_gists : 0)}}</div>
-        <div class="icon-name">Gists</div>
-      </div>
-      <div class="user-icon user-followers layout flex column" (click)="openReposPage()">
-        <div class="count">{{user.public_repos + (user.total_private_repos ? user.total_private_repos : 0)}}</div>
+      <div *ngIf="user.repositories" class="user-icon user-followers layout flex column" (click)="openReposPage()">
+        <div class="count">{{user.repositories.totalCount}}</div>
         <div class="icon-name">Repositories</div>
       </div>
-      <div *ngIf="starred && user.type=='User'" class="user-icon user-followers layout flex column" (click)="openStarredPage()">
-        <div class="count">{{starred}}</div>
+      <div *ngIf="user.starredRepositories" class="user-icon user-followers layout flex column" (click)="openStarredPage()">
+        <div class="count">{{user.starredRepositories.totalCount}}</div>
         <div class="icon-name">Starred</div>
       </div>
-      <div *ngIf="watching && user.type=='User'" class="user-icon user-followers layout flex column" (click)="openWatchingPage()">
-        <div class="count">{{watching}}</div>
+      <div *ngIf="user.watching" class="user-icon user-followers layout flex column" (click)="openWatchingPage()">
+        <div class="count">{{user.watching.totalCount}}</div>
         <div class="icon-name">Watching</div>
       </div>
-      <div *ngIf="members && user.type=='Organization'" class="user-icon user-followers layout flex column" (click)="openMembersPage()">
-        <div class="count">{{members}}</div>
+      <div *ngIf="user.members" class="user-icon user-followers layout flex column" (click)="openMembersPage()">
+        <div class="count">{{user.members.totalCount}}</div>
         <div class="icon-name">Members</div>
       </div>
     </div>
 
-    <div *ngIf="orgs && orgs.length > 0" class="user-orgs" padding-horizontal>
+    <div *ngIf="user.organizations && user.organizations.edges.length > 0" class="user-orgs" padding-horizontal>
       <h4>Organizations</h4>
       <div class="layout flex wrap row start">
-        <div class="org-image" *ngFor="let org of orgs" margin (click)="openUser(org)">
-          <ion-img [src]="'https://avatars.githubusercontent.com/u/' + org.id + '?s=40'"></ion-img>
+        <div class="org-image" *ngFor="let org of user.organizations.edges" margin (click)="openUser(org.node)">
+          <ion-img [src]="org.node.avatarURL.split('?')[0] + '?s=40'"></ion-img>
         </div>
       </div>
     </div>

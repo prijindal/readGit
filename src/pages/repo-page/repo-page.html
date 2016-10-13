@@ -3,7 +3,9 @@
     <button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title *ngIf="repo">{{repo.full_name || repo.name}}</ion-title>
+    <ion-title *ngIf="repo">
+      <span *ngIf="repo.owner">{{repo.owner.login}}</span>/
+      {{repo.name}}</ion-title>
     <ion-buttons end>
       <button ion-button icon-only [disabled]="loading" (click)="getRepoInfo()">
         <ion-icon name="refresh"></ion-icon>
@@ -26,26 +28,29 @@
     </div>
   </div>
   <div *ngIf="repo">
-    <ion-card *ngIf="repo.fork" class="buttons">
+    <ion-card *ngIf="repo.isFork" class="buttons">
       <ion-card-content text-center *ngIf="repo.parent">
-        Forked from <a (click)="openRepo(repo.parent)">{{repo.parent.full_name}}</a>
+        Forked from <a (click)="openRepo(repo.parent)">
+          <span *ngIf="repo.parent.owner">{{repo.parent.owner.login}}</span>
+          {{repo.parent.name}}
+        </a>
       </ion-card-content>
     </ion-card>
     <ion-card *ngIf="filehttp.user" class="buttons">
-      <ion-card-content class="layout flex around">
-        <div *ngIf="subscription">
-          <button ion-button clear [disabled]="watchingLoading" *ngIf="isSubscribed" (click)="unWatchRepo(repo)">
+      <ion-card-content class="layout flex around" *ngIf="!loading">
+        <div>
+          <button ion-button clear [disabled]="watchingLoading" *ngIf="repo.viewerSubscription !== 'UNSUBSCRIBED'" (click)="unWatchRepo(repo)">
             Unwatch
           </button>
-          <button ion-button outline [disabled]="watchingLoading" *ngIf="!isSubscribed" (click)="watchRepo(repo)">
+          <button ion-button outline [disabled]="watchingLoading" *ngIf="repo.viewerSubscription === 'UNSUBSCRIBED'" (click)="watchRepo(repo)">
             Watch
           </button>
         </div>
-        <div *ngIf="starring">
-          <button ion-button clear [disabled]="starringLoading" *ngIf="isStarring" (click)="unStarRepo(repo)">
+        <div>
+          <button ion-button clear [disabled]="starringLoading" *ngIf="repo.viewerHasStarred" (click)="unStarRepo(repo)">
             Unstar
           </button>
-          <button ion-button outline [disabled]="starringLoading" *ngIf="!isStarring" (click)="starRepo(repo)">
+          <button ion-button outline [disabled]="starringLoading" *ngIf="!repo.viewerHasStarred" (click)="starRepo(repo)">
             Star
           </button>
         </div>
@@ -53,25 +58,19 @@
     </ion-card>
     <ion-card *ngIf="repo.owner">
       <ion-card-header>
-        <a (click)="openUser(repo.owner)" *ngIf="repo.owner.login">{{repo.owner.login}}</a>
+        <a (click)="openUser(repo.owner)" *ngIf="repo.owner">{{repo.owner.login}}</a>
         /
         <span>{{repo.name}}</span>
       </ion-card-header>
       <ion-card-content>
-        <p *ngIf="repo.description">
-          {{repo.description}}
-        </p>
-        <p *ngIf="repo.homepage">
-          <a (click)="browser.open(repo.homepage)">{{repo.homepage}}</a>
-        </p>
-        <p *ngIf="repo.language">
-          LANGUAGE {{repo.language}}
+        <p *ngIf="repo.description" [innerHTML]="repo.descriptionHTML"></p>
+        <p *ngIf="repo.homepageURL">
+          <a (click)="browser.open(repo.homepageURL)">{{repo.homepageURL}}</a>
         </p>
       </ion-card-content>
     </ion-card>
     <div margin>
       <button
-        *ngIf="repo.full_name"
         ion-button
         full
         margin-bottom
@@ -83,16 +82,15 @@
       <ion-card-content class="icons-ion-card-content">
         <div class="user-icons layout flex row around wrap">
           <div class="user-icon layout flex column" (click)="openIssuesPage()">
-            <div *ngIf="!pulls" class="count">{{repo.open_issues_count}}</div>
-            <div *ngIf="pulls" class="count">{{repo.open_issues_count - pulls}}</div>
+            <div *ngIf="repo.issues" class="count">{{repo.issues.totalCount - repo.pullRequests.totalCount}}</div>
             <div class="icon-name">Issues</div>
           </div>
           <div class="user-icon layout flex column" (click)="openStargazersPage()">
-            <div class="count">{{repo.stargazers_count}}</div>
+            <div class="count">{{repo.stargazers.totalCount}}</div>
             <div class="icon-name">Stargazers</div>
           </div>
           <div class="user-icon layout flex column" (click)="openForksPage()">
-            <div class="count">{{repo.forks_count}}</div>
+            <div class="count">{{repo.forks.totalCount}}</div>
             <div class="icon-name">Forks</div>
           </div>
           <div class="user-icon layout flex column" (click)="openBranchesPage()">
@@ -100,7 +98,7 @@
             <div class="icon-name">Branches</div>
           </div>
           <div class="user-icon layout flex column" (click)="openPullsPage()">
-            <div class="count">{{pulls}}</div>
+            <div class="count">{{repo.pullRequests.totalCount}}</div>
             <div class="icon-name">Pulls</div>
           </div>
           <div class="user-icon layout flex column" (click)="openCommits()">

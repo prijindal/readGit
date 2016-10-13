@@ -23,7 +23,7 @@ export class StarredPage {
     private nav: NavController,
     private params: NavParams,
 
-    
+
     private filehttp: FileService
   ) { }
 
@@ -50,6 +50,6 @@ export class StarredPage {
   }
 
   openRepository(repo) {
-    this.nav.push(RepoPage, {repo: repo});
+    this.nav.push(RepoPage, {reponame: repo.full_name});
   }
 }

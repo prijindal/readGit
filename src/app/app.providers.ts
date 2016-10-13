@@ -6,6 +6,7 @@ import {EventParser} from '../providers/eventparser';
 import {FaviconService} from '../providers/favicon';
 import {BrowserService} from '../providers/browser';
 import {FileService} from '../providers/filehttp';
+import {GraphApiService} from '../providers/graphapi';
 import {UrlParser} from '../providers/urlparser';
 import {AutohideService} from '../providers/autohide';
 import {OcticonService} from '../providers/octicon';
@@ -21,5 +22,6 @@ export const APP_PROVIDERS = [
     FileService,
     UrlParser,
     OcticonService,
-    AutohideService
+    AutohideService,
+    GraphApiService
 ]

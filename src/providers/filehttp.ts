@@ -10,7 +10,7 @@ const HOST: string = 'https://api.github.com';
 export class FileService {
   public user: string;
   public userData: any;
-  private token: string;
+  public token: string;
 
   constructor(
     private local: LocalService,

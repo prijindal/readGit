@@ -96,7 +96,7 @@ export class NotificationsPage {
   }
 
   openRepo(notificationInfo) {
-    this.nav.push(RepoPage, {repo: notificationInfo.notifications[0].repository})
+    this.nav.push(RepoPage, {reponame: notificationInfo.notifications[0].repository.full_name})
   }
 
   markRepoRead(notificationInfo) {

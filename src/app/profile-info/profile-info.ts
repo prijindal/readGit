@@ -30,7 +30,7 @@ export class ProfileInfo {
   goToProfile() {
     this.menu.close()
     .then(() => {
-      this.nav.push(UserPage, {user: this.user});
+      this.nav.push(UserPage, {username: this.user.login});
     });
   }
 

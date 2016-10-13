@@ -24,7 +24,7 @@ export class MembersPage {
     private nav: NavController,
     private params: NavParams,
 
-    
+
     private filehttp: FileService
   ) { }
 
@@ -77,6 +77,6 @@ export class MembersPage {
   }
 
   openUser(user) {
-    this.nav.push(UserPage, {user: user});
+    this.nav.push(UserPage, {username: user.login});
   }
 }

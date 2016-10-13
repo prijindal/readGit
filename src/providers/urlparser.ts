@@ -64,8 +64,7 @@ export class UrlParser {
           html_url: url,
           page: RepoPage,
           params: {
-            username: urlArray[0],
-            reponame: urlArray[1]
+            reponame: urlArray[0] + '/' + urlArray[1]
           }
         };
       } else {

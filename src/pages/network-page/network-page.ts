@@ -35,6 +35,6 @@ export class NetworkPage {
   }
 
   openFork(fork) {
-  	this.nav.push(RepoPage, {repo: fork});
+  	this.nav.push(RepoPage, {reponame: fork.full_name});
   }
 }

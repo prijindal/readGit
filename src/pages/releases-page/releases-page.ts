@@ -60,7 +60,7 @@ export class ReleasesPage {
   }
 
   openUser(user) {
-    this.nav.push(UserPage, {user: user});
+    this.nav.push(UserPage, {username: user.login});
   }
 
   timeFromNow(time) {
