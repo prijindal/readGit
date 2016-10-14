@@ -80,7 +80,11 @@ export class RepoPage {
     let reponame = this.params.get('reponame');
     if (reponame) {
       this.loading = false;
-      this.repo = { full_name: reponame};
+      if (this.repo) {
+        this.repo['full_name'] = reponame;
+      } else {
+        this.repo = { full_name: reponame};
+      }
       this.repo['url'] = 'https://api.github.com/repos/' + this.repo['full_name'];
       this.getRepoInfo();
     } else {
@@ -116,7 +120,7 @@ export class RepoPage {
   }
 
   getReadMe() {
-    let url = '/repos/' + this.repo.owner.login + '/' +this.repo.name + '/readme'
+    let url = '/repos/' + this.getFullName() + '/readme'
     this.filehttp.getFileFromUrl(url, 'html')
     .then(res => {
       let text = res.text();
@@ -130,7 +134,7 @@ export class RepoPage {
   }
 
   getBranches() {
-    let url = '/repos/' + this.repo.owner.login + '/' +this.repo.name + '/branches?page=1&per_page=1'
+    let url = '/repos/' + this.getFullName() + '/branches?page=1&per_page=1'
     this.filehttp.getHeaders(url)
     .then(res => {
       this.branches = this.filehttp.getLinkLength(res);
@@ -138,16 +142,20 @@ export class RepoPage {
   }
 
   getCommits() {
-    let url = '/repos/' + this.repo.owner.login + '/' +this.repo.name + '/commits?page=1&per_page=1'
+    let url = '/repos/' + this.getFullName() + '/commits?page=1&per_page=1'
     this.filehttp.getHeaders(url)
     .then(res => {
       this.commits = this.filehttp.getLinkLength(res);
     });
   }
 
+  getFullName(): string {
+    return this.repo.owner.login + '/' +this.repo.name
+  }
+
   watchRepo(repo) {
     this.watchingLoading = true;
-    let url = '/repos/' + this.repo.owner.login + '/' +this.repo.name + '/subscription'
+    let url = '/repos/' + this.getFullName() + '/subscription'
     this.filehttp.putRequest(url, {subscribed: true})
     .then(res => {
       this.repo.viewerSubscription = 'SUBSRIBED';
@@ -157,7 +165,7 @@ export class RepoPage {
 
   unWatchRepo(repo) {
     this.watchingLoading = true;
-    let url = '/repos/' + this.repo.owner.login + '/' +this.repo.name + '/subscription'
+    let url = '/repos/' + this.getFullName() + '/subscription'
     this.filehttp.deleteRequest(url)
     .then(res => {
       this.repo.viewerSubscription = 'UNSUBSCRIBED';
@@ -167,7 +175,7 @@ export class RepoPage {
 
   starRepo(repo) {
     this.starringLoading = true;
-    let url = '/user/starred/' + this.repo.owner.login + '/' +this.repo.name
+    let url = '/user/starred/' + this.getFullName()
     this.filehttp.putRequest(url, {})
     .then(res => {
       this.repo.viewerHasStarred = true;
@@ -177,7 +185,7 @@ export class RepoPage {
 
   unStarRepo(repo) {
     this.starringLoading = true;
-    let url = '/user/starred/' + this.repo.owner.login + '/' +this.repo.name
+    let url = '/user/starred/' + this.getFullName()
     this.filehttp.deleteRequest(url)
     .then(res => {
       this.repo.viewerHasStarred = false;
@@ -190,15 +198,15 @@ export class RepoPage {
   }
 
   openCode() {
-    this.nav.push(TreePage, {repo: this.repo.full_name, branch: this.repo.default_branch});
+    this.nav.push(TreePage, {repo: this.getFullName(), branch: this.repo.default_branch});
   }
 
   openCommits() {
-    this.nav.push(CommitsPage, {repo: this.repo.full_name});
+    this.nav.push(CommitsPage, {repo: this.getFullName()});
   }
 
   openIssuesPage() {
-    this.nav.push(IssuesPage, {repo: this.repo.full_name});
+    this.nav.push(IssuesPage, {repo: this.getFullName()});
   }
 
   openStargazersPage() {
@@ -206,19 +214,19 @@ export class RepoPage {
   }
 
   openForksPage() {
-    this.nav.push(NetworkPage, {repo: this.repo.full_name});
+    this.nav.push(NetworkPage, {repo: this.getFullName()});
   }
 
   openRepo(repo) {
-    this.nav.push(RepoPage, {reponame: repo.full_name})
+    this.nav.push(RepoPage, {reponame: repo.owner.login + '/' + repo.name})
   }
 
   openBranchesPage() {
-    this.nav.push(BranchesPage, {repo: this.repo.full_name});
+    this.nav.push(BranchesPage, {repo: this.getFullName()});
   }
 
   openPullsPage() {
-    this.nav.push(IssuesPage, {repo: this.repo.full_name, query: 'is:pr is:open'});
+    this.nav.push(IssuesPage, {repo: this.getFullName(), query: 'is:pr is:open'});
   }
 
   presentPopover(event) {

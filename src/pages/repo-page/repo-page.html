@@ -37,7 +37,7 @@
       </ion-card-content>
     </ion-card>
     <ion-card *ngIf="filehttp.user" class="buttons">
-      <ion-card-content class="layout flex around" *ngIf="!loading">
+      <ion-card-content class="layout flex around">
         <div>
           <button ion-button clear [disabled]="watchingLoading" *ngIf="repo.viewerSubscription !== 'UNSUBSCRIBED'" (click)="unWatchRepo(repo)">
             Unwatch
@@ -78,18 +78,18 @@
       >View Code</button>
       <button ion-button full (click)="openCommits()">View Commits</button>
     </div>
-    <ion-card *ngIf="!loading && repo">
+    <ion-card *ngIf="repo">
       <ion-card-content class="icons-ion-card-content">
         <div class="user-icons layout flex row around wrap">
-          <div class="user-icon layout flex column" (click)="openIssuesPage()">
+          <div *ngIf="repo.issues" class="user-icon layout flex column" (click)="openIssuesPage()">
             <div *ngIf="repo.issues" class="count">{{repo.issues.totalCount - repo.pullRequests.totalCount}}</div>
             <div class="icon-name">Issues</div>
           </div>
-          <div class="user-icon layout flex column" (click)="openStargazersPage()">
+          <div *ngIf="repo.stargazers" class="user-icon layout flex column" (click)="openStargazersPage()">
             <div class="count">{{repo.stargazers.totalCount}}</div>
             <div class="icon-name">Stargazers</div>
           </div>
-          <div class="user-icon layout flex column" (click)="openForksPage()">
+          <div *ngIf="repo.forks" class="user-icon layout flex column" (click)="openForksPage()">
             <div class="count">{{repo.forks.totalCount}}</div>
             <div class="icon-name">Forks</div>
           </div>
@@ -97,7 +97,7 @@
             <div class="count">{{branches}}</div>
             <div class="icon-name">Branches</div>
           </div>
-          <div class="user-icon layout flex column" (click)="openPullsPage()">
+          <div *ngIf="repo.pullRequests" class="user-icon layout flex column" (click)="openPullsPage()">
             <div class="count">{{repo.pullRequests.totalCount}}</div>
             <div class="icon-name">Pulls</div>
           </div>
