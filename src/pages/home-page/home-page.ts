@@ -3,6 +3,7 @@ import {NavController, Events} from 'ionic-angular';
 
 
 import {FileService} from '../../providers/filehttp';
+import {GraphApiService} from '../../providers/graphapi';
 import {EventParser} from '../../providers/eventparser';
 import {UrlParser} from '../../providers/urlparser';
 import {BrowserService} from '../../providers/browser';
@@ -13,7 +14,17 @@ import { RepoPage } from '../repo-page/repo-page';
 import { UserPage } from '../user-page/user-page';
 import { SearchPage } from '../search-page/search-page';
 
-
+const VIEWER_QUERY = `
+{
+	viewer {
+    id
+    login
+    name
+    email
+    avatarURL
+  }
+}
+`
 
 const PER_PAGE: number = 10;
 const LIMIT: number = 300;
@@ -41,8 +52,8 @@ export class HomePage {
     private nav: NavController,
     private events: Events,
 
-
     private filehttp: FileService,
+    private graphapi: GraphApiService,
     private eventParser: EventParser,
     private browser: BrowserService,
     private githubLogin: GithubLogin,
@@ -109,9 +120,9 @@ export class HomePage {
     return this.filehttp.checkLogin()
     .then(res => {
       this.message = 'Verifying You...';
-      this.filehttp.getFileFromUrl('/user')
-      .then(response => {
-        res = response.json();
+      this.graphapi.request(VIEWER_QUERY)
+      .map(res => res.viewer)
+      .subscribe(res => {
         this.filehttp.userData = res;
         this.filehttp.user = res.login;
         this.message = 'Logged In';
@@ -119,7 +130,7 @@ export class HomePage {
         this.loggedIn = true;
         let user = res;
         if (user) {
-          this.received_eventsUrl = user.received_events_url.replace('{/privacy}', '');
+          this.received_eventsUrl = '/users/' + res.login + '/received_events'
           if (this.received_events.length === 0) {
             this.refreshEvents();
           }
@@ -127,8 +138,7 @@ export class HomePage {
         } else {
           this.filehttp.handleError({message: 'Problem with Authentication'});
         }
-      })
-      .catch(err => {
+      }, err => {
         this.loading = false;
         this.errorMessage = 'Some Error Occured';
         this.filehttp.handleError(err);

@@ -4,9 +4,9 @@
 </div>
 
 <div (click)="goToProfile()" class="profile-info layout flex row start" *ngIf="user">
-  <div class="profile-image-wrapper layout flex column center" *ngIf="user.id">
+  <div class="profile-image-wrapper layout flex column center" *ngIf="user.avatarURL">
     <div class="profile-image-background"
-    [style.background-image]="'url(https://avatars.githubusercontent.com/u/' + user.id +'?s=50)'">    </div>
+    [style.background-image]="'url(' + user.avatarURL.split('?')[0] +'?s=50)'">    </div>
   </div>
   <div class="profile-info-text layout flex column center">
     <div class="profile-name">
