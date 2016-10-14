@@ -21,7 +21,7 @@ export class GistPage {
     private params: NavParams,
     private alertCtrl: AlertController,
 
-    
+
     private filehttp: FileService,
     private browser: BrowserService
   ) { }

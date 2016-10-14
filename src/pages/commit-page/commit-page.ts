@@ -23,7 +23,7 @@ export class CommitPage {
     private nav: NavController,
     private params: NavParams,
 
-    
+
     private filehttp: FileService,
     private browser: BrowserService
   ) { }

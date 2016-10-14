@@ -24,7 +24,7 @@ export class GistsPage {
     private nav: NavController,
     private params: NavParams,
 
-    
+
     private filehttp: FileService
   ) { }
 
