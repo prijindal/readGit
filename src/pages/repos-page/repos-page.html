@@ -3,7 +3,7 @@
     <button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Repos<span *ngIf="user && user !== 'user'"> of {{user.substr(6)}}</span></ion-title>
+    <ion-title>Repos<span *ngIf="user"> of {{user}}</span></ion-title>
     <ion-buttons end>
       <button ion-button icon-only [disabled]="loading" (click)="refreshRepos()">
         <ion-icon name="refresh"></ion-icon>
@@ -29,12 +29,13 @@
       (click)="openRepository(repo)"
     >
       <ion-card-header class="sound-click layout flex between">
-        <span>{{repo.full_name}}</span>
-        <span>{{repo.stargazers_count}} <ion-icon name="star"></ion-icon></span>
+        <span>
+          {{repo.owner.login}}/
+          {{repo.name}}
+        </span>
+        <span>{{repo.stargazers.totalCount}} <ion-icon name="star"></ion-icon></span>
       </ion-card-header>
-      <ion-card-content class="sound-click">
-        {{repo.description}}
-      </ion-card-content>
+      <ion-card-content *ngIf="repo.descriptionHTML" class="sound-click" [innerHTML]="repo.descriptionHTML"></ion-card-content>
     </ion-card>
   </ion-list>
 

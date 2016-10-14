@@ -134,7 +134,7 @@ export class HomePage {
           if (this.received_events.length === 0) {
             this.refreshEvents();
           }
-          this.favicon.set('https://avatars.githubusercontent.com/u/' + user.id + '?s=50');
+          this.favicon.set(user.avatarURL.split('?')[0] + '?s=50');
         } else {
           this.filehttp.handleError({message: 'Problem with Authentication'});
         }

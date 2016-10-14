@@ -63,7 +63,7 @@
         <span>{{repo.name}}</span>
       </ion-card-header>
       <ion-card-content>
-        <p *ngIf="repo.description" [innerHTML]="repo.descriptionHTML"></p>
+        <p *ngIf="repo.descriptionHTML" [innerHTML]="repo.descriptionHTML"></p>
         <p *ngIf="repo.homepageURL">
           <a (click)="browser.open(repo.homepageURL)">{{repo.homepageURL}}</a>
         </p>
