@@ -18,9 +18,9 @@ query {
   repositoryOwner(login:"{{username}}") {
     id
     login
-    avatarURL(size: 50)
     ...on User {
       name
+      avatarURL(size: 50)
       location
       email
       websiteURL
@@ -53,6 +53,7 @@ query {
     }
     ...on Organization {
       name
+      avatarURL(size: 50)
       repositories {
         totalCount
       }

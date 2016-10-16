@@ -3,7 +3,7 @@
     <button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Members<span *ngIf="user && user !== 'user'"> of {{user.substr(5)}}</span></ion-title>
+    <ion-title>Members<span *ngIf="user"> {{user}}</span></ion-title>
     <ion-buttons end>
       <button ion-button icon-only [disabled]="loading" (click)="refreshMembers()">
         <ion-icon name="refresh"></ion-icon>
@@ -13,26 +13,19 @@
 </ion-header>
 
 
-<ion-content #membersContent class="members-page">
+<ion-content>
   <div text-center margin-top *ngIf="members.length <= 0">
     <div *ngIf="loading">
       Loading...
     </div>
     <div *ngIf="!loading">
-      No Members
+      No Followers
     </div>
   </div>
   <ion-list *ngIf="members.length > 0">
-    <button ion-item
-      (click)="openUser(user)"
-      class="notification"
-      *ngFor="let user of members"
-    >
-      <ion-avatar item-left>
-        <ion-img [src]="'https://avatars.githubusercontent.com/u/' + user.id + '?s=50'"></ion-img>
-      </ion-avatar>
-      <h2>{{user.login}}</h2>
-    </button>
+    <div *ngFor="let user of members">
+      <user-info [user]="user"></user-info>
+    </div>
   </ion-list>
 
  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="20%">

@@ -1,82 +1,103 @@
 import {Component, ChangeDetectorRef, ViewChild} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {NavParams} from 'ionic-angular';
 
-
+import {GraphApiService} from '../../providers/graphapi';
 import {FileService} from '../../providers/filehttp';
 
-import { UserPage } from '../user-page/user-page';
+import {Observable} from 'rxjs';
 
 const PER_PAGE: number = 30;
-const LIMIT: number = 300;
+
+const MEMBERS_USERS_QUERY = `
+{
+  repositoryOwner(login: "{{username}}") {
+    ...on Organization {
+      members(first: ${PER_PAGE}, after: "{{after}}") {
+        edges {
+          node {
+            login
+            avatarURL(size: 50)
+          }
+        }
+        pageInfo {
+          endCursor
+          hasNextPage
+        }
+      }
+    }
+  }
+}
+`
 
 @Component({
   templateUrl: 'members-page.html'
 })
 export class MembersPage {
-  @ViewChild('membersContent') homeContent;
   public loading: Boolean = true;
   public members: any = [];
-  private page: number = 1;
+  private endCursor: string = "";
   public user: string;
 
   constructor(
     private ref: ChangeDetectorRef,
-    private nav: NavController,
     private params: NavParams,
 
-
-    private filehttp: FileService
+    private filehttp: FileService,
+    private graphapi: GraphApiService
   ) { }
 
   ionViewWillEnter() {
     this.user = this.params.get('user');
-    this.user = 'orgs/' + this.user;
+    if (!this.user) {
+      this.user = this.filehttp.user;
+    } else {
+      this.user = this.user;
+    }
     this.refreshMembers();
   }
 
   refreshMembers() {
     this.loading = true;
-    this.page = 1;
+    this.endCursor = "";
     this.getMembers(true)
-    .then(() => {
+    .subscribe(() => {
       this.loading = false;
-    });
-  }
-
-  getMembers(shouldRefresh: Boolean = false) {
-    return this.filehttp.getFileFromUrl('/' + this.user + '/members' + '?page=' + this.page + '&per_page=' + PER_PAGE)
-    .then(response => {
-      let res = response.json();
-      if (shouldRefresh) {
-        this.members = [];
-      }
-      res.forEach((notification) => {
-        this.members.push(notification);
-      });
-      this.ref.detectChanges();
-      return res;
-    })
-    .catch(err => {
+    }, err => {
       this.filehttp.handleError(err);
     });
   }
 
-  doInfinite(infiniteScroll) {
-    this.page += 1;
-    if (this.page <= LIMIT / PER_PAGE) {
-      this.getMembers()
-      .then((res) => {
-        infiniteScroll.complete();
-        if (res.length < PER_PAGE) {
-          infiniteScroll.enable(false);
-        }
-      });
+  getMembers(shouldRefresh: Boolean = false) {
+    let query = MEMBERS_USERS_QUERY.replace('{{username}}', this.user)
+    if (!this.endCursor) {
+      query = query.replace(', after: "{{after}}"', '')
     } else {
-      infiniteScroll.enable(false);
+      query = query.replace('{{after}}', this.endCursor)
     }
+    return this.graphapi.request(query)
+    .map(res => res.repositoryOwner.members)
+    .map(res => {
+      if (shouldRefresh) {
+        this.members = [];
+      }
+      res.edges.forEach((repo) => {
+        this.members.push(repo.node);
+      });
+      this.ref.detectChanges();
+      this.endCursor = res.pageInfo.endCursor;
+      return res;
+    });
   }
 
-  openUser(user) {
-    this.nav.push(UserPage, {username: user.login});
+  doInfinite(infiniteScroll) {
+    this.getMembers()
+    .subscribe(res => {
+      infiniteScroll.complete();
+      if (!res.pageInfo.hasNextPage) {
+        infiniteScroll.enable(false);
+      }
+    }, err => {
+      this.filehttp.handleError(err);
+    })
   }
 }

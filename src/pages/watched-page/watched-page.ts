@@ -41,7 +41,6 @@ const WATCHING_REPOS_QUERY = `
   templateUrl: 'watched-page.html'
 })
 export class WatchedPage {
-  
   public loading: Boolean = true;
   public watchingRepos: any = [];
   private endCursor: string = "";

@@ -3,7 +3,7 @@
     <button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Following<span *ngIf="user && user !== 'user'"> {{user.substr(6)}}</span></ion-title>
+    <ion-title>Following<span *ngIf="user"> {{user}}</span></ion-title>
     <ion-buttons end>
       <button ion-button icon-only [disabled]="loading" (click)="refreshFollowing()">
         <ion-icon name="refresh"></ion-icon>
@@ -13,26 +13,19 @@
 </ion-header>
 
 
-<ion-content #followingContent class="following-page">
+<ion-content>
   <div text-center margin-top *ngIf="following.length <= 0">
     <div *ngIf="loading">
       Loading...
     </div>
     <div *ngIf="!loading">
-      No Following
+      No Followers
     </div>
   </div>
   <ion-list *ngIf="following.length > 0">
-    <button ion-item
-      (click)="openUser(user)"
-      class="notification"
-      *ngFor="let user of following"
-    >
-      <ion-avatar item-left>
-        <ion-img [src]="'https://avatars.githubusercontent.com/u/' + user.id + '?s=50'"></ion-img>
-      </ion-avatar>
-      <h2>{{user.login}}</h2>
-    </button>
+    <div *ngFor="let user of following">
+      <user-info [user]="user"></user-info>
+    </div>
   </ion-list>
 
  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="20%">
