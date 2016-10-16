@@ -1,6 +1,6 @@
 import {Component, ViewChild, ChangeDetectorRef} from '@angular/core';
 import {App, Platform, MenuController, Nav, Events} from 'ionic-angular';
-import {StatusBar, Deeplinks} from 'ionic-native';
+import {StatusBar, Deeplinks, Splashscreen} from 'ionic-native';
 
 import {SearchPage} from '../pages/search-page/search-page';
 import {HomePage} from '../pages/home-page/home-page';
@@ -55,6 +55,7 @@ export class MyApp {
       this.registerBackButtonListener();
       this.eventsInit();
       // this.verifyLogin();
+      Splashscreen.hide();
       this.deeplinkInit();
       if (window['nativeclick']) {
         window['nativeclick'].watch(['sound-click', 'button']);
