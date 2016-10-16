@@ -33,7 +33,9 @@ export class JobsPage {
 
     private filehttp: FileService,
     private autohide: AutohideService
-  ) { }
+  ) {
+    this.search = '';
+  }
 
   ionViewWillEnter() {
     if (this.jobs.length === 0) {
