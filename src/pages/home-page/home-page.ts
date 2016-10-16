@@ -21,7 +21,7 @@ const VIEWER_QUERY = `
     login
     name
     email
-    avatarURL
+    avatarURL(size: 50)
   }
 }
 `
@@ -134,7 +134,7 @@ export class HomePage {
           if (this.received_events.length === 0) {
             this.refreshEvents();
           }
-          this.favicon.set(user.avatarURL.split('?')[0] + '?s=50');
+          this.favicon.set(user.avatarURL);
         } else {
           this.filehttp.handleError({message: 'Problem with Authentication'});
         }

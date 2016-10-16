@@ -1,55 +1,111 @@
 import {Component, ChangeDetectorRef, ViewChild} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {NavParams} from 'ionic-angular';
 
-
+import {GraphApiService} from '../../providers/graphapi';
 import {FileService} from '../../providers/filehttp';
 
-import { RepoPage } from '../repo-page/repo-page';
+import {Observable} from 'rxjs';
 
+const PER_PAGE: number = 30;
 
-const PER_PAGE: number = 10000;
+const STARRED_REPOS_QUERY = `
+{
+  repositoryOwner(login: "{{username}}") {
+    ...on User {
+      starredRepositories(first: ${PER_PAGE}, after: "{{after}}", orderBy: {field: STARRED_AT, direction: DESC}) {
+        edges {
+          node {
+            isFork
+            isPrivate
+            name
+            owner {
+              login
+            }
+            descriptionHTML
+            stargazers {
+              totalCount
+            }
+          }
+        }
+        pageInfo {
+          endCursor
+          hasNextPage
+        }
+      }
+    }
+  }
+}
+`
 
 @Component({
   templateUrl: 'starred-page.html'
 })
 export class StarredPage {
-  @ViewChild('starredContent') homeContent;
   public loading: Boolean = true;
-  public starred: any = [];
+  public starredRepos: any = [];
+  private endCursor: string = "";
   public user: string;
 
   constructor(
     private ref: ChangeDetectorRef,
-    private nav: NavController,
     private params: NavParams,
 
-
-    private filehttp: FileService
+    private filehttp: FileService,
+    private graphapi: GraphApiService
   ) { }
 
   ionViewWillEnter() {
     this.user = this.params.get('user');
-    if (!this.user || this.user === this.filehttp.user) {
-      this.user = 'user';
+    if (!this.user) {
+      this.user = this.filehttp.user;
     } else {
-      this.user = 'users/' + this.user;
+      this.user = this.user;
     }
-    this.getStarred();
+    this.refreshStarredRepos();
   }
 
-  getStarred() {
-    return this.filehttp.getFileFromUrl('/' + this.user + '/starred' + '?per_page=' + PER_PAGE)
-    .then(res => {
-      this.starred = res.json();
-      this.ref.detectChanges();
-      return this.starred;
-    })
-    .catch(err => {
+  refreshStarredRepos() {
+    this.loading = true;
+    this.endCursor = "";
+    this.getRepos(true)
+    .subscribe(() => {
+      this.loading = false;
+    }, err => {
       this.filehttp.handleError(err);
     });
   }
 
-  openRepository(repo) {
-    this.nav.push(RepoPage, {reponame: repo.full_name});
+  getRepos(shouldRefresh: Boolean = false): Observable<any> {
+    let query = STARRED_REPOS_QUERY.replace('{{username}}', this.user)
+    if (!this.endCursor) {
+      query = query.replace('after: "{{after}}",', '')
+    } else {
+      query = query.replace('{{after}}', this.endCursor)
+    }
+    return this.graphapi.request(query)
+    .map(res => res.repositoryOwner.starredRepositories)
+    .map(res => {
+      if (shouldRefresh) {
+        this.starredRepos = [];
+      }
+      res.edges.forEach((repo) => {
+        this.starredRepos.push(repo.node);
+      });
+      this.ref.detectChanges();
+      this.endCursor = res.pageInfo.endCursor;
+      return res;
+    });
+  }
+
+  doInfinite(infiniteScroll) {
+    this.getRepos()
+    .subscribe(res => {
+      infiniteScroll.complete();
+      if (!res.pageInfo.hasNextPage) {
+        infiniteScroll.enable(false);
+      }
+    }, err => {
+      this.filehttp.handleError(err);
+    })
   }
 }

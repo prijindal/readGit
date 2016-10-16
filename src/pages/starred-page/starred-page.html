@@ -3,9 +3,9 @@
     <button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Starred Repos<span *ngIf="user && user !== 'user'"> of {{user.substr(6)}}</span></ion-title>
+    <ion-title>Starred Repos<span *ngIf="user"> of {{user}}</span></ion-title>
     <ion-buttons end>
-      <button ion-button icon-only [disabled]="loading" (click)="getStarred()">
+      <button ion-button icon-only [disabled]="loading" (click)="refreshStarredRepos()">
         <ion-icon name="refresh"></ion-icon>
       </button>
     </ion-buttons>
@@ -13,28 +13,20 @@
 </ion-header>
 
 
-<ion-content #starredContent class="starred-page">
-  <div text-center margin-top *ngIf="starred.length <= 0">
+<ion-content #reposContent class="repos-page">
+  <div text-center margin-top *ngIf="starredRepos.length <= 0">
     <div *ngIf="loading">
       Loading...
     </div>
     <div *ngIf="!loading">
-      No Starred
+      No Repos
     </div>
   </div>
-  <ion-list *ngIf="starred.length > 0">
-    <ion-card
-      class="notification"
-      *ngFor="let repo of starred"
-      (click)="openRepository(repo)"
-    >
-      <ion-card-header class="sound-click layout flex between">
-        <span>{{repo.full_name}}</span>
-        <span>{{repo.stargazers_count}} <ion-icon name="star"></ion-icon></span>
-      </ion-card-header>
-      <ion-card-content class="sound-click">
-        {{repo.description}}
-      </ion-card-content>
-    </ion-card>
+  <ion-list *ngIf="starredRepos.length > 0">
+    <repo-info [repo]="repo" *ngFor="let repo of starredRepos"></repo-info>
   </ion-list>
+
+ <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="20%">
+   <ion-infinite-scroll-content></ion-infinite-scroll-content>
+ </ion-infinite-scroll>
 </ion-content>

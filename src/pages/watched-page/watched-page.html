@@ -3,9 +3,9 @@
     <button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Watching<span *ngIf="user && user !== 'user'"> {{user.substr(6)}}</span></ion-title>
+    <ion-title>Watching<span *ngIf="user"> of {{user}}</span></ion-title>
     <ion-buttons end>
-      <button ion-button icon-only [disabled]="loading" (click)="getWatched()">
+      <button ion-button icon-only [disabled]="loading" (click)="refreshWatchingRepos()">
         <ion-icon name="refresh"></ion-icon>
       </button>
     </ion-buttons>
@@ -13,28 +13,20 @@
 </ion-header>
 
 
-<ion-content #subscriptionsContent class="subscriptions-page">
-  <div text-center margin-top *ngIf="subscriptions.length <= 0">
+<ion-content #reposContent class="repos-page">
+  <div text-center margin-top *ngIf="watchingRepos.length <= 0">
     <div *ngIf="loading">
       Loading...
     </div>
     <div *ngIf="!loading">
-      No Subscriptions
+      No Repos
     </div>
   </div>
-  <ion-list *ngIf="subscriptions.length > 0">
-    <ion-card
-      class="notification"
-      *ngFor="let repo of subscriptions"
-      (click)="openRepository(repo)"
-    >
-      <ion-card-header class="sound-click layout flex between">
-        <span>{{repo.full_name}}</span>
-        <span>{{repo.stargazers_count}} <ion-icon name="star"></ion-icon></span>
-      </ion-card-header>
-      <ion-card-content class="sound-click">
-        {{repo.description}}
-      </ion-card-content>
-    </ion-card>
+  <ion-list *ngIf="watchingRepos.length > 0">
+    <repo-info [repo]="repo" *ngFor="let repo of watchingRepos"></repo-info>
   </ion-list>
+
+ <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="20%">
+   <ion-infinite-scroll-content></ion-infinite-scroll-content>
+ </ion-infinite-scroll>
 </ion-content>

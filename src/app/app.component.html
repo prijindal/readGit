@@ -1,11 +1,12 @@
 <ion-menu [content]="content">
 
-  <ion-toolbar *ngIf="profileEnabled">
-    <profile-info [nav]="nav"></profile-info>
-  </ion-toolbar>
+
 
   <ion-content>
     <ion-list>
+      <ion-toolbar *ngIf="profileEnabled">
+        <profile-info [nav]="nav"></profile-info>
+      </ion-toolbar>
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
         <ion-icon
           *ngIf="p.type === 'octicon'"

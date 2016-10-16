@@ -65,7 +65,7 @@
     <ion-card *ngIf="filehttp.user">
       <ion-item *ngIf="filehttp.userData">
         <ion-avatar item-left>
-          <ion-img [src]="filehttp.userData.avatarURL.split('?')[0] + '?s=50'"></ion-img>
+          <ion-img [src]="filehttp.userData.avatarURL"></ion-img>
         </ion-avatar>
         <h2>Write</h2>
       </ion-item>

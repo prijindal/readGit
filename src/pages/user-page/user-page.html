@@ -24,7 +24,7 @@
   </div>
   <div margin *ngIf="user">
     <div class="user-image" *ngIf="user.id">
-      <img *ngIf="!imageLoaded" [src]="user.avatarURL.split('?')[0] +'?s=50'"/>
+      <img *ngIf="!imageLoaded" [src]="user.avatarURL"/>
       <img [class.hidden]="!imageLoaded" (load)="imageLoaded = true" [src]="user.avatarURL.split('?')[0] +'?s=400'"/>
     </div>
     <div class="user-title">
@@ -88,7 +88,7 @@
       <h4>Organizations</h4>
       <div class="layout flex wrap row start">
         <div class="org-image" *ngFor="let org of user.organizations.edges" margin (click)="openUser(org.node)">
-          <ion-img [src]="org.node.avatarURL.split('?')[0] + '?s=40'"></ion-img>
+          <ion-img [src]="org.node.avatarURL"></ion-img>
         </div>
       </div>
     </div>

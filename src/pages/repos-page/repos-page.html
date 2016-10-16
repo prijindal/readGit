@@ -23,20 +23,7 @@
     </div>
   </div>
   <ion-list *ngIf="repos.length > 0">
-    <ion-card
-      class="repo"
-      *ngFor="let repo of repos"
-      (click)="openRepository(repo)"
-    >
-      <ion-card-header class="sound-click layout flex between">
-        <span>
-          {{repo.owner.login}}/
-          {{repo.name}}
-        </span>
-        <span>{{repo.stargazers.totalCount}} <ion-icon name="star"></ion-icon></span>
-      </ion-card-header>
-      <ion-card-content *ngIf="repo.descriptionHTML" class="sound-click" [innerHTML]="repo.descriptionHTML"></ion-card-content>
-    </ion-card>
+    <repo-info [repo]="repo" *ngFor="let repo of repos"></repo-info>
   </ion-list>
 
  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="20%">

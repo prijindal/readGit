@@ -5,6 +5,8 @@ import { MyApp } from './app.component';
 
 import { ProfileInfo } from './profile-info/profile-info';
 
+import {RepoInfo} from '../components/repo-info/repo-info';
+
 import {APP_PROVIDERS} from './app.providers';
 import {APP_PAGES} from './app.pages';
 
@@ -12,7 +14,8 @@ import {APP_PAGES} from './app.pages';
   declarations: [
     MyApp,
     ProfileInfo,
-    APP_PAGES
+    APP_PAGES,
+    RepoInfo
   ],
   imports: [
     IonicModule.forRoot(MyApp),

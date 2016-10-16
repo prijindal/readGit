@@ -18,7 +18,7 @@ query {
   repositoryOwner(login:"{{username}}") {
     id
     login
-    avatarURL
+    avatarURL(size: 50)
     ...on User {
       name
       location
@@ -46,7 +46,7 @@ query {
         edges {
           node {
             login
-            avatarURL
+            avatarURL(size: 40)
           }
         }
       }

@@ -1,10 +1,8 @@
 import {Component, ChangeDetectorRef, ViewChild} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {NavParams} from 'ionic-angular';
 
 import {GraphApiService} from '../../providers/graphapi';
 import {FileService} from '../../providers/filehttp';
-
-import { RepoPage } from '../repo-page/repo-page';
 
 import {Observable} from 'rxjs';
 
@@ -13,7 +11,7 @@ const PER_PAGE: number = 30;
 const REPOS_QUERY = `
 {
   repositoryOwner(login: "{{username}}") {
-    repositories(first: 30, after: "{{after}}", orderBy: {field: NAME, direction: ASC}) {
+    repositories(first: ${PER_PAGE}, after: "{{after}}", orderBy: {field: NAME, direction: ASC}) {
       edges {
         node {
           isFork
@@ -41,7 +39,6 @@ const REPOS_QUERY = `
   templateUrl: 'repos-page.html'
 })
 export class ReposPage {
-  @ViewChild('reposContent') homeContent;
   public loading: Boolean = true;
   public repos: any = [];
   private endCursor: string = "";
@@ -49,7 +46,6 @@ export class ReposPage {
 
   constructor(
     private ref: ChangeDetectorRef,
-    private nav: NavController,
     private params: NavParams,
 
     private filehttp: FileService,
@@ -68,6 +64,7 @@ export class ReposPage {
 
   refreshRepos() {
     this.loading = true;
+    this.endCursor = "";
     this.getRepos(true)
     .subscribe(() => {
       this.loading = false;
@@ -78,7 +75,11 @@ export class ReposPage {
 
   getRepos(shouldRefresh: Boolean = false): Observable<any> {
     let query = REPOS_QUERY.replace('{{username}}', this.user)
-    query = query.replace('{{after}}', this.endCursor)
+    if (!this.endCursor) {
+      query = query.replace('after: "{{after}}",', '')
+    } else {
+      query = query.replace('{{after}}', this.endCursor)
+    }
     return this.graphapi.request(query)
     .map(res => res.repositoryOwner.repositories)
     .map(res => {
@@ -97,7 +98,6 @@ export class ReposPage {
   doInfinite(infiniteScroll) {
     this.getRepos()
     .subscribe(res => {
-      console.dir(res);
       infiniteScroll.complete();
       if (!res.pageInfo.hasNextPage) {
         infiniteScroll.enable(false);
@@ -105,9 +105,5 @@ export class ReposPage {
     }, err => {
       this.filehttp.handleError(err);
     })
-  }
-
-  openRepository(repo) {
-    this.nav.push(RepoPage, {reponame: repo.owner.login + '/' + repo.name});
   }
 }

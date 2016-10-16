@@ -1,54 +1,112 @@
 import {Component, ChangeDetectorRef, ViewChild} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {NavParams} from 'ionic-angular';
 
-
+import {GraphApiService} from '../../providers/graphapi';
 import {FileService} from '../../providers/filehttp';
 
-import { RepoPage } from '../repo-page/repo-page';
+import {Observable} from 'rxjs';
 
-const PER_PAGE: number = 10000;
+const PER_PAGE: number = 30;
+
+const WATCHING_REPOS_QUERY = `
+{
+  repositoryOwner(login: "{{username}}") {
+    ...on User {
+      watching(first: ${PER_PAGE}, after: "{{after}}") {
+        edges {
+          node {
+            isFork
+            isPrivate
+            name
+            owner {
+              login
+            }
+            descriptionHTML
+            stargazers {
+              totalCount
+            }
+          }
+        }
+        pageInfo {
+          endCursor
+          hasNextPage
+        }
+      }
+    }
+  }
+}
+`
 
 @Component({
   templateUrl: 'watched-page.html'
 })
 export class WatchedPage {
-  @ViewChild('subscriptionsContent') homeContent;
+  
   public loading: Boolean = true;
-  public subscriptions: any = [];
+  public watchingRepos: any = [];
+  private endCursor: string = "";
   public user: string;
 
   constructor(
     private ref: ChangeDetectorRef,
-    private nav: NavController,
     private params: NavParams,
 
-
-    private filehttp: FileService
+    private filehttp: FileService,
+    private graphapi: GraphApiService
   ) { }
 
   ionViewWillEnter() {
     this.user = this.params.get('user');
-    if (!this.user || this.user === this.filehttp.user) {
-      this.user = 'user';
+    if (!this.user) {
+      this.user = this.filehttp.user;
     } else {
-      this.user = 'users/' + this.user;
+      this.user = this.user;
     }
-    this.getWatched();
+    this.refreshWatchingRepos();
   }
 
-  getWatched() {
-    return this.filehttp.getFileFromUrl('/' + this.user + '/subscriptions' + '?per_page=' + PER_PAGE)
-    .then(res => {
-      this.subscriptions = res.json()
-      this.ref.detectChanges();
-      return this.subscriptions;
-    })
-    .catch(err => {
+  refreshWatchingRepos() {
+    this.loading = true;
+    this.endCursor = "";
+    this.getRepos(true)
+    .subscribe(() => {
+      this.loading = false;
+    }, err => {
       this.filehttp.handleError(err);
     });
   }
 
-  openRepository(repo) {
-    this.nav.push(RepoPage, {reponame: repo.full_name});
+  getRepos(shouldRefresh: Boolean = false): Observable<any> {
+    let query = WATCHING_REPOS_QUERY.replace('{{username}}', this.user)
+    if (!this.endCursor) {
+      query = query.replace(', after: "{{after}}"', '')
+    } else {
+      query = query.replace('{{after}}', this.endCursor)
+    }
+    return this.graphapi.request(query)
+    .map(res => res.repositoryOwner.watching)
+    .map(res => {
+      if (shouldRefresh) {
+        this.watchingRepos = [];
+      }
+      res.edges.forEach((repo) => {
+        this.watchingRepos.push(repo.node);
+      });
+      this.ref.detectChanges();
+      this.endCursor = res.pageInfo.endCursor;
+      return res;
+    });
+  }
+
+  doInfinite(infiniteScroll) {
+    this.getRepos()
+    .subscribe(res => {
+      infiniteScroll.complete();
+      if (!res.pageInfo.hasNextPage) {
+        infiniteScroll.enable(false);
+      }
+    }, err => {
+      this.filehttp.handleError(err);
+    })
   }
 }
