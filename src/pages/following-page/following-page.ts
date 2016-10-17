@@ -6,13 +6,11 @@ import {FileService} from '../../providers/filehttp';
 
 import {BaseUsersPage} from '../base-users-page/base-users-page';
 
-const PER_PAGE: number = 30;
-
 const FOLLOWING_USERS_QUERY = `
-{
-  repositoryOwner(login: "{{username}}") {
+query($username: String!, $PER_PAGE: Int, $after: String) {
+  repositoryOwner(login: $username) {
     ...on User {
-      following(first: ${PER_PAGE}, after: "{{after}}") {
+      following(first: $PER_PAGE, after: $after) {
         edges {
           node {
             login
@@ -34,7 +32,8 @@ const FOLLOWING_USERS_QUERY = `
 })
 export class FollowingPage extends BaseUsersPage {
   public users_query: string = FOLLOWING_USERS_QUERY;
-  public title: string = 'Following';
+  public title: string = 'Followed by';
+  public key: string = 'following';
 
   constructor(
     public ref: ChangeDetectorRef,

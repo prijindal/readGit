@@ -14,7 +14,7 @@ export class GraphApiService {
     private filehttp: FileService
   ) {}
 
-  request(query: String): Observable<any> {
+  request(query: String, variables: Object = {}): Observable<any> {
     let headers = new Headers({
       Authorization: 'Bearer ' + this.filehttp.token
     })
@@ -23,7 +23,8 @@ export class GraphApiService {
       headers: headers
     });
     let body = {
-      query: query
+      query: query,
+      variables: variables
     }
     return this.http.post(HOST, body, options)
       .map((res: Response) => res.json())

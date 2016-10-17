@@ -6,6 +6,7 @@ import {FileService} from '../../providers/filehttp';
 
 import {Observable} from 'rxjs';
 
+const PER_PAGE: number = 30;
 
 @Component({
   templateUrl: 'base-users-page.html'
@@ -17,6 +18,7 @@ export class BaseUsersPage {
   public user: string;
   public users_query: string = ``;
   public title: string = '';
+  public key: string;
 
   constructor(
     public ref: ChangeDetectorRef,
@@ -54,8 +56,8 @@ export class BaseUsersPage {
     } else {
       query = query.replace('{{after}}', this.endCursor)
     }
-    return this.graphapi.request(query)
-    .map(res => res.repositoryOwner.members)
+    return this.graphapi.request(query, {username: this.user, after: this.endCursor, PER_PAGE: PER_PAGE})
+    .map(res => res.repositoryOwner[this.key])
     .map(res => {
       if (shouldRefresh) {
         this.users = [];

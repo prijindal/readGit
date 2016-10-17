@@ -6,13 +6,11 @@ import {FileService} from '../../providers/filehttp';
 
 import {BaseUsersPage} from '../base-users-page/base-users-page';
 
-const PER_PAGE: number = 30;
-
 const MEMBERS_USERS_QUERY = `
-{
-  repositoryOwner(login: "{{username}}") {
+query($username: String!, $PER_PAGE: Int, $after: String) {
+  repositoryOwner(login: $username) {
     ...on Organization {
-      members(first: ${PER_PAGE}, after: "{{after}}") {
+      members(first: $PER_PAGE, after: $after) {
         edges {
           node {
             login
@@ -35,6 +33,7 @@ const MEMBERS_USERS_QUERY = `
 export class MembersPage extends BaseUsersPage {
   public users_query: string = MEMBERS_USERS_QUERY;
   public title: string = 'Members of';
+  public key: string = 'members';
 
   constructor(
     public ref: ChangeDetectorRef,
