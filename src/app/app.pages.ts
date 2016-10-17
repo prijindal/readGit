@@ -1,4 +1,6 @@
 import {BaseUsersPage} from '../pages/base-users-page/base-users-page';
+import {BaseReposPage} from '../pages/base-repos-page/base-repos-page';
+
 
 import {BlobPage} from '../pages/blob-page/blob-page';
 import {BlogPage} from '../pages/blog-page/blog-page';
@@ -48,6 +50,7 @@ import {WatchedPage} from '../pages/watched-page/watched-page';
 
 export const APP_PAGES = [
   BaseUsersPage,
+  BaseReposPage,
   
   BlobPage,
   BlogPage,

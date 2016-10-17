@@ -9,14 +9,14 @@ import {Observable} from 'rxjs';
 const PER_PAGE: number = 30;
 
 @Component({
-  templateUrl: 'base-users-page.html'
+  templateUrl: 'base-repos-page.html'
 })
-export class BaseUsersPage {
+export class BaseReposPage {
   public loading: Boolean = true;
-  public users: any = [];
+  public repos: any = [];
   private endCursor: string = "";
   public user: string;
-  public users_query: string = ``;
+  public repos_query: string = ``;
   public title: string = '';
   public key: string;
 
@@ -25,7 +25,7 @@ export class BaseUsersPage {
     public params: NavParams,
 
     public filehttp: FileService,
-    public graphapi: GraphApiService 
+    public graphapi: GraphApiService
   ) { }
 
   ionViewWillEnter() {
@@ -35,13 +35,13 @@ export class BaseUsersPage {
     } else {
       this.user = this.user;
     }
-    this.refreshUsers();
+    this.refreshRepos();
   }
 
-  refreshUsers() {
+  refreshRepos() {
     this.loading = true;
     this.endCursor = "";
-    this.getUsers(true)
+    this.getRepos(true)
     .subscribe(() => {
       this.loading = false;
     }, err => {
@@ -49,19 +49,19 @@ export class BaseUsersPage {
     });
   }
 
-  getUsers(shouldRefresh: Boolean = false) {
+  getRepos(shouldRefresh: Boolean = false): Observable<any> {
     let variables = {username: this.user, PER_PAGE: PER_PAGE};
     if (this.endCursor) {
       variables['after'] = this.endCursor;
     }
-    return this.graphapi.request(this.users_query, variables)
+    return this.graphapi.request(this.repos_query, variables)
     .map(res => res.repositoryOwner[this.key])
     .map(res => {
       if (shouldRefresh) {
-        this.users = [];
+        this.repos = [];
       }
-      res.edges.forEach((user) => {
-        this.users.push(user.node);
+      res.edges.forEach((repo) => {
+        this.repos.push(repo.node);
       });
       this.ref.detectChanges();
       this.endCursor = res.pageInfo.endCursor;
@@ -70,7 +70,7 @@ export class BaseUsersPage {
   }
 
   doInfinite(infiniteScroll) {
-    this.getUsers()
+    this.getRepos()
     .subscribe(res => {
       infiniteScroll.complete();
       if (!res.pageInfo.hasNextPage) {

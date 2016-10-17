@@ -3,7 +3,7 @@
     <button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Repos<span *ngIf="user"> of {{user}}</span></ion-title>
+    <ion-title>{{title}}<span *ngIf="user"> {{user}}</span></ion-title>
     <ion-buttons end>
       <button ion-button icon-only [disabled]="loading" (click)="refreshRepos()">
         <ion-icon name="refresh"></ion-icon>
