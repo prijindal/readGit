@@ -1,7 +1,7 @@
 import {Component, ChangeDetectorRef, ViewChild} from '@angular/core';
 import {NavController, NavParams, AlertController, PopoverController} from 'ionic-angular';
 
-import {RepoPage} from '../repo-page/repo-page/';
+import {RepoPage} from '../repo-page/repo-page';
 
 import {NotificationsPopover} from './notifications-popover/notifications-popover';
 

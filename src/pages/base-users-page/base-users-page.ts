@@ -6,50 +6,24 @@ import {FileService} from '../../providers/filehttp';
 
 import {Observable} from 'rxjs';
 
-const PER_PAGE: number = 30;
-
-const REPOS_QUERY = `
-{
-  repositoryOwner(login: "{{username}}") {
-    repositories(first: ${PER_PAGE}, after: "{{after}}", orderBy: {field: NAME, direction: ASC}) {
-      edges {
-        node {
-          isFork
-          isPrivate
-          name
-          owner {
-            login
-          }
-          descriptionHTML
-          stargazers {
-            totalCount
-          }
-        }
-      }
-      pageInfo {
-        endCursor
-        hasNextPage
-      }
-    }
-  }
-}
-`
 
 @Component({
-  templateUrl: 'repos-page.html'
+  templateUrl: 'base-users-page.html'
 })
-export class ReposPage {
+export class BaseUsersPage {
   public loading: Boolean = true;
-  public repos: any = [];
+  public users: any = [];
   private endCursor: string = "";
   public user: string;
+  public users_query: string = ``;
+  public title: string = '';
 
   constructor(
-    private ref: ChangeDetectorRef,
-    private params: NavParams,
+    public ref: ChangeDetectorRef,
+    public params: NavParams,
 
-    private filehttp: FileService,
-    private graphapi: GraphApiService
+    public filehttp: FileService,
+    public graphapi: GraphApiService 
   ) { }
 
   ionViewWillEnter() {
@@ -59,13 +33,13 @@ export class ReposPage {
     } else {
       this.user = this.user;
     }
-    this.refreshRepos();
+    this.refreshUsers();
   }
 
-  refreshRepos() {
+  refreshUsers() {
     this.loading = true;
     this.endCursor = "";
-    this.getRepos(true)
+    this.getUsers(true)
     .subscribe(() => {
       this.loading = false;
     }, err => {
@@ -73,21 +47,21 @@ export class ReposPage {
     });
   }
 
-  getRepos(shouldRefresh: Boolean = false): Observable<any> {
-    let query = REPOS_QUERY.replace('{{username}}', this.user)
+  getUsers(shouldRefresh: Boolean = false) {
+    let query = this.users_query.replace('{{username}}', this.user)
     if (!this.endCursor) {
-      query = query.replace('after: "{{after}}",', '')
+      query = query.replace(', after: "{{after}}"', '')
     } else {
       query = query.replace('{{after}}', this.endCursor)
     }
     return this.graphapi.request(query)
-    .map(res => res.repositoryOwner.repositories)
+    .map(res => res.repositoryOwner.members)
     .map(res => {
       if (shouldRefresh) {
-        this.repos = [];
+        this.users = [];
       }
-      res.edges.forEach((repo) => {
-        this.repos.push(repo.node);
+      res.edges.forEach((user) => {
+        this.users.push(user.node);
       });
       this.ref.detectChanges();
       this.endCursor = res.pageInfo.endCursor;
@@ -96,7 +70,7 @@ export class ReposPage {
   }
 
   doInfinite(infiniteScroll) {
-    this.getRepos()
+    this.getUsers()
     .subscribe(res => {
       infiniteScroll.complete();
       if (!res.pageInfo.hasNextPage) {

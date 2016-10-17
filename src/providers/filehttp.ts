@@ -113,7 +113,7 @@ export class FileService {
     if (this.token) {
       headers.append('Authorization', 'token ' + this.token);
     }
-    if (url.indexOf(HOST) !== 0) {
+    if (url.indexOf(HOST) !== 0 && url.indexOf('https://github.com') !== 0) {
       url = HOST + url
     }
     let options = new RequestOptions({

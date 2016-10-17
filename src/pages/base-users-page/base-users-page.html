@@ -3,9 +3,9 @@
     <button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Members<span *ngIf="user"> {{user}}</span></ion-title>
+    <ion-title>{{title}}<span *ngIf="user"> {{user}}</span></ion-title>
     <ion-buttons end>
-      <button ion-button icon-only [disabled]="loading" (click)="refreshMembers()">
+      <button ion-button icon-only [disabled]="loading" (click)="refreshUsers()">
         <ion-icon name="refresh"></ion-icon>
       </button>
     </ion-buttons>
@@ -14,7 +14,7 @@
 
 
 <ion-content>
-  <div text-center margin-top *ngIf="members.length <= 0">
+  <div text-center margin-top *ngIf="users.length <= 0">
     <div *ngIf="loading">
       Loading...
     </div>
@@ -22,8 +22,8 @@
       No Followers
     </div>
   </div>
-  <ion-list *ngIf="members.length > 0">
-    <div *ngFor="let user of members">
+  <ion-list *ngIf="users.length > 0">
+    <div *ngFor="let user of users">
       <user-info [user]="user"></user-info>
     </div>
   </ion-list>

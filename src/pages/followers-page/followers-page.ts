@@ -1,10 +1,10 @@
-import {Component, ChangeDetectorRef, ViewChild} from '@angular/core';
+import {Component, ChangeDetectorRef} from '@angular/core';
 import {NavParams} from 'ionic-angular';
 
 import {GraphApiService} from '../../providers/graphapi';
 import {FileService} from '../../providers/filehttp';
 
-import {Observable} from 'rxjs';
+import {BaseUsersPage} from '../base-users-page/base-users-page';
 
 const PER_PAGE: number = 30;
 
@@ -30,74 +30,19 @@ const FOLLOWERS_USERS_QUERY = `
 `
 
 @Component({
-  templateUrl: 'followers-page.html'
+  templateUrl: '../base-users-page/base-users-page.html'
 })
-export class FollowersPage {
-  public loading: Boolean = true;
-  public followers: any = [];
-  private endCursor: string = "";
-  public user: string;
+export class FollowersPage extends BaseUsersPage {
+  public users_query: string = FOLLOWERS_USERS_QUERY;
+  public title: string = 'Following';
 
   constructor(
-    private ref: ChangeDetectorRef,
-    private params: NavParams,
+    public ref: ChangeDetectorRef,
+    public params: NavParams,
 
-    private filehttp: FileService,
-    private graphapi: GraphApiService
-  ) { }
-
-  ionViewWillEnter() {
-    this.user = this.params.get('user');
-    if (!this.user) {
-      this.user = this.filehttp.user;
-    } else {
-      this.user = this.user;
-    }
-    this.refreshFollowers();
-  }
-
-  refreshFollowers() {
-    this.loading = true;
-    this.endCursor = "";
-    this.getFollowers(true)
-    .subscribe(() => {
-      this.loading = false;
-    }, err => {
-      this.filehttp.handleError(err);
-    });
-  }
-
-  getFollowers(shouldRefresh: Boolean = false) {
-    let query = FOLLOWERS_USERS_QUERY.replace('{{username}}', this.user)
-    if (!this.endCursor) {
-      query = query.replace(', after: "{{after}}"', '')
-    } else {
-      query = query.replace('{{after}}', this.endCursor)
-    }
-    return this.graphapi.request(query)
-    .map(res => res.repositoryOwner.followers)
-    .map(res => {
-      if (shouldRefresh) {
-        this.followers = [];
-      }
-      res.edges.forEach((repo) => {
-        this.followers.push(repo.node);
-      });
-      this.ref.detectChanges();
-      this.endCursor = res.pageInfo.endCursor;
-      return res;
-    });
-  }
-
-  doInfinite(infiniteScroll) {
-    this.getFollowers()
-    .subscribe(res => {
-      infiniteScroll.complete();
-      if (!res.pageInfo.hasNextPage) {
-        infiniteScroll.enable(false);
-      }
-    }, err => {
-      this.filehttp.handleError(err);
-    })
+    public filehttp: FileService,
+    public graphapi: GraphApiService
+  ) {
+    super(ref, params, filehttp, graphapi);
   }
 }

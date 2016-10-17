@@ -1,10 +1,10 @@
-import {Component, ChangeDetectorRef, ViewChild} from '@angular/core';
+import {Component, ChangeDetectorRef} from '@angular/core';
 import {NavParams} from 'ionic-angular';
 
 import {GraphApiService} from '../../providers/graphapi';
 import {FileService} from '../../providers/filehttp';
 
-import {Observable} from 'rxjs';
+import {BaseUsersPage} from '../base-users-page/base-users-page';
 
 const PER_PAGE: number = 30;
 
@@ -30,74 +30,19 @@ const FOLLOWING_USERS_QUERY = `
 `
 
 @Component({
-  templateUrl: 'following-page.html'
+  templateUrl: '../base-users-page/base-users-page.html'
 })
-export class FollowingPage {
-  public loading: Boolean = true;
-  public following: any = [];
-  private endCursor: string = "";
-  public user: string;
+export class FollowingPage extends BaseUsersPage {
+  public users_query: string = FOLLOWING_USERS_QUERY;
+  public title: string = 'Following';
 
   constructor(
-    private ref: ChangeDetectorRef,
-    private params: NavParams,
+    public ref: ChangeDetectorRef,
+    public params: NavParams,
 
-    private filehttp: FileService,
-    private graphapi: GraphApiService
-  ) { }
-
-  ionViewWillEnter() {
-    this.user = this.params.get('user');
-    if (!this.user) {
-      this.user = this.filehttp.user;
-    } else {
-      this.user = this.user;
-    }
-    this.refreshFollowing();
-  }
-
-  refreshFollowing() {
-    this.loading = true;
-    this.endCursor = "";
-    this.getFollowing(true)
-    .subscribe(() => {
-      this.loading = false;
-    }, err => {
-      this.filehttp.handleError(err);
-    });
-  }
-
-  getFollowing(shouldRefresh: Boolean = false) {
-    let query = FOLLOWING_USERS_QUERY.replace('{{username}}', this.user)
-    if (!this.endCursor) {
-      query = query.replace(', after: "{{after}}"', '')
-    } else {
-      query = query.replace('{{after}}', this.endCursor)
-    }
-    return this.graphapi.request(query)
-    .map(res => res.repositoryOwner.following)
-    .map(res => {
-      if (shouldRefresh) {
-        this.following = [];
-      }
-      res.edges.forEach((repo) => {
-        this.following.push(repo.node);
-      });
-      this.ref.detectChanges();
-      this.endCursor = res.pageInfo.endCursor;
-      return res;
-    });
-  }
-
-  doInfinite(infiniteScroll) {
-    this.getFollowing()
-    .subscribe(res => {
-      infiniteScroll.complete();
-      if (!res.pageInfo.hasNextPage) {
-        infiniteScroll.enable(false);
-      }
-    }, err => {
-      this.filehttp.handleError(err);
-    })
+    public filehttp: FileService,
+    public graphapi: GraphApiService
+  ) {
+    super(ref, params, filehttp, graphapi);
   }
 }
