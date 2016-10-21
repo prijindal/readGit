@@ -20,6 +20,7 @@ import {JobsPage} from '../pages/jobs-page/jobs-page';
 import {FileService} from '../providers/filehttp';
 import {UrlParser} from '../providers/urlparser';
 import {OcticonService} from '../providers/octicon';
+import {NotificationsService} from '../providers/notifications';
 
 const DEFAULT_PAGES = [
   {title: 'Search', component: SearchPage, icon:'search', type: 'ionicon'},
@@ -44,7 +45,8 @@ export class MyApp {
     private events: Events,
     private filehttp: FileService,
     private urlparser: UrlParser,
-    private octicon: OcticonService
+    private octicon: OcticonService,
+    private notificationsService: NotificationsService
   ) {
     this.initializeApp();
   }
@@ -112,6 +114,7 @@ export class MyApp {
           {title: 'Github Blog', component: BlogsPage, icon:'rss', type: 'octicon'},
           {title: 'Github Jobs', component: JobsPage, icon:'code-working', type: 'ionicon'}
         ];
+        this.notificationsService.setUpNotifications();
       } else {
         this.profileEnabled = false;
         this.pages = DEFAULT_PAGES;

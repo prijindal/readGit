@@ -10,3 +10,4 @@
 */
 declare module 'x2js';
 declare module 'octicons/build/svg.json';
+declare var cordova: any;

@@ -77,4 +77,46 @@ export class NotificationsService {
       })
     })
   }
+
+  setUpNotifications() {
+    if (
+      cordova &&
+      cordova.plugins &&
+      cordova.plugins.notification &&
+      cordova.plugins.notification.local &&
+      cordova.plugins.notification.local &&
+      cordova.plugins.backgroundMode
+    ) {
+      cordova.plugins.notification.local.hasPermission((granted) => {
+        if (granted) {
+          this.startUpdating();
+        } else {
+          cordova.plugins.notification.local.registerPermission((granted) => {
+            this.startUpdating();
+          });
+        }
+      });
+    }
+  }
+
+  private startUpdating() {
+    cordova.plugins.backgroundMode.enable();
+    setInterval(() => {
+      this.updateNotifications()
+    }, 10000)
+  }
+
+  private updateNotifications() {
+    this.filehttp.getHeaders('/notifications?page=1&per_page=1' + '&timestamp=' + new Date().getTime())
+    .then(headerResponse => {
+      let headerNotificationsCount = this.filehttp.getLinkLength(headerResponse);
+      if(headerNotificationsCount > 0) {
+        this.filehttp.getFileFromUrl('/notifications?page=1&per_page=' + headerNotificationsCount + '&timestamp=' + new Date().getTime())
+        .then(response => {
+          console.dir(response)
+          cordova.plugins.notification.local.schedule
+        })
+      }
+    })
+  }
 }
