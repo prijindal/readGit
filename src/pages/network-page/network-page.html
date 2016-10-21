@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Forks | {{repo}}</ion-title>
+    <ion-title>Forks | {{username}}/{{reponame}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -9,7 +9,7 @@
 <ion-content padding>
 	<ion-list *ngIf="forks">
 		<button ion-item (click)="openFork(fork)" *ngFor="let fork of forks">
-			{{fork.full_name}}
+			{{fork.owner.login}}/{{fork.name}}
 		</button>
 	</ion-list>
 </ion-content>

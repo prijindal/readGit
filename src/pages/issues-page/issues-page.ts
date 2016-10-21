@@ -44,15 +44,12 @@ export class IssuesPage {
     if (Window['octicons']) {
       console.dir(Window['octicons'])
     }
-    this.repo = this.params.get('repo');
+    let username = this.params.get('username');
+    let reponame = this.params.get('reponame');
+    this.repo = username + '/' + reponame;
     let query = this.params.get('query');
     if (query) {
       this.query = query;
-    }
-    if (!this.repo) {
-      let username = this.params.get('username');
-      let reponame = this.params.get('reponame');
-      this.repo = username + '/' + reponame;
     }
     if (this.issues.length === 0) {
       this.refreshIssues();

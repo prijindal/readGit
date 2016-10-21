@@ -27,6 +27,6 @@ export class RepoInfo {
   }
 
   openRepository() {
-    this.nav.push(RepoPage, {reponame: this.repo.owner.login + '/' + this.repo.name});
+    this.nav.push(RepoPage, {username: this.repo.owner.login, reponame: this.repo.name});
   }
 }

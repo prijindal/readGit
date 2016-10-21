@@ -17,36 +17,34 @@ import {RepoPopover} from './repo-popover/repo-popover';
 
 const REPO_QUERY = `
 query($username: String!, $reponame: String!) {
-  repositoryOwner(login: $username) {
-    repository(name: $reponame) {
-      isFork
-      parent {
-        owner {
-          login
-        }
-        name
-      }
-      viewerHasStarred
-      viewerSubscription
-      viewerCanSubscribe
-      name
+  repository(owner: $username, name: $reponame) {
+    isFork
+    parent {
       owner {
         login
       }
-      descriptionHTML
-      homepageURL
-      issues {
-       totalCount
-      }
-      stargazers {
-        totalCount
-      }
-      forks {
-        totalCount
-      }
-      pullRequests {
-        totalCount
-      }
+      name
+    }
+    viewerHasStarred
+    viewerSubscription
+    viewerCanSubscribe
+    name
+    owner {
+      login
+    }
+    descriptionHTML
+    homepageURL
+    issues {
+      totalCount
+    }
+    stargazers {
+      totalCount
+    }
+    forks {
+      totalCount
+    }
+    pullRequests {
+      totalCount
     }
   }
 }
@@ -57,7 +55,8 @@ query($username: String!, $reponame: String!) {
 })
 export class RepoPage {
   public loading: Boolean = true;
-  public repo: any;
+  public full_name: string;
+  public repo: any = {};
   public readme: string;
   public readmeError: any;
   public branches: number;
@@ -77,15 +76,12 @@ export class RepoPage {
   ) { }
 
   ionViewWillEnter() {
+    let username = this.params.get('username');
     let reponame = this.params.get('reponame');
-    if (reponame) {
+    if (username && reponame) {
+      this.full_name = username + '/' + reponame
       this.loading = false;
-      if (this.repo) {
-        this.repo['full_name'] = reponame;
-      } else {
-        this.repo = { full_name: reponame};
-      }
-      this.repo['url'] = 'https://api.github.com/repos/' + this.repo['full_name'];
+      this.repo['url'] = 'https://api.github.com/repos/' + this.full_name;
       this.getRepoInfo();
     } else {
       // Replace With Better Error Handling
@@ -97,13 +93,13 @@ export class RepoPage {
 
   getRepoInfo() {
     this.loading = true;
-    let splited = this.repo.full_name.split('/')
+    let splited = this.full_name.split('/')
     let username = splited[0]
     let reponame = splited[1];
     this.graphapi.request(REPO_QUERY, {username: username, reponame: reponame})
     .subscribe(res => {
       this.loading = false;
-      this.repo = res.repositoryOwner.repository;
+      this.repo = res.repository;
       this.getReadMe();
       this.getBranches();
       this.getCommits();
@@ -205,7 +201,7 @@ export class RepoPage {
   }
 
   openIssuesPage() {
-    this.nav.push(IssuesPage, {repo: this.getFullName()});
+    this.nav.push(IssuesPage, {username: this.repo.owner.login, reponame: this.repo.name});
   }
 
   openStargazersPage() {
@@ -213,11 +209,11 @@ export class RepoPage {
   }
 
   openForksPage() {
-    this.nav.push(NetworkPage, {repo: this.getFullName()});
+    this.nav.push(NetworkPage, {username: this.repo.owner.login, reponame: this.repo.name})
   }
 
   openRepo(repo) {
-    this.nav.push(RepoPage, {reponame: repo.owner.login + '/' + repo.name})
+    this.nav.push(RepoPage, {username: repo.owner.login, reponame: repo.name})
   }
 
   openBranchesPage() {
@@ -225,7 +221,7 @@ export class RepoPage {
   }
 
   openPullsPage() {
-    this.nav.push(IssuesPage, {repo: this.getFullName(), query: 'is:pr is:open'});
+    this.nav.push(IssuesPage, {username: this.repo.owner.login, reponame: this.repo.name, query: 'is:pr is:open'});
   }
 
   presentPopover(event) {
@@ -234,7 +230,7 @@ export class RepoPage {
 
     popover.onDidDismiss((value) => {
       if (value !== null) {
-        this.nav.push(value, {repo: this.repo.full_name});
+        this.nav.push(value, {repo: this.full_name});
       }
     });
   }

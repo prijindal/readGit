@@ -96,7 +96,8 @@ export class NotificationsPage {
   }
 
   openRepo(notificationInfo) {
-    this.nav.push(RepoPage, {reponame: notificationInfo.notifications[0].repository.full_name})
+    let splited = notificationInfo.notifications[0].repository.full_name.split('/')
+    this.nav.push(RepoPage, {username: splited[0], reponame: splited[1]})
   }
 
   markRepoRead(notificationInfo) {

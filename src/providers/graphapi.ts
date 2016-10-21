@@ -15,6 +15,21 @@ export class GraphApiService {
   ) {}
 
   request(query: String, variables: Object = {}): Observable<any> {
+    return Observable.create((observer) => {
+      if (!this.filehttp.token) {
+        this.filehttp.checkLogin()
+        .then(() => {
+          this.internalRequest(query, variables)
+          .subscribe((res) => {observer.next(res)}, (err) => {observer.error(err)}, () => {observer.complete()})
+        })
+      } else {
+        this.internalRequest(query, variables)
+          .subscribe((res) => {observer.next(res)}, (err) => {observer.error(err)}, () => {observer.complete()})
+      }
+    })
+  }
+
+  private internalRequest(query: String, variables: Object = {}): Observable<any> {
     let headers = new Headers({
       Authorization: 'Bearer ' + this.filehttp.token
     })

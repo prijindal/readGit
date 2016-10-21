@@ -65,7 +65,8 @@ export class SearchPage {
   }
 
   openRepository(repo) {
-    this.nav.push(RepoPage, {reponame: repo.full_name});
+    let splited = repo.full_name.split('/')
+    this.nav.push(RepoPage, {username: splited[0], reponame: splited[1]})
   }
 
   openUser(user) {

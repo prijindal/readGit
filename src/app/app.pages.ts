@@ -1,6 +1,7 @@
+import {DeepLinkConfig} from 'ionic-angular';
+
 import {BaseUsersPage} from '../pages/base-users-page/base-users-page';
 import {BaseReposPage} from '../pages/base-repos-page/base-repos-page';
-
 
 import {BlobPage} from '../pages/blob-page/blob-page';
 import {BlogPage} from '../pages/blog-page/blog-page';
@@ -49,8 +50,6 @@ import {TagPage} from '../pages/tag-page/tag-page';
 import {TreePage} from '../pages/tree-page/tree-page';
 import {UserPage} from '../pages/user-page/user-page';
 import {WatchedPage} from '../pages/watched-page/watched-page';
-
-export {HomePage, IssuePage};
 
 export const APP_PAGES = [
   BaseUsersPage,
@@ -104,3 +103,38 @@ export const APP_PAGES = [
   UserPage,
   WatchedPage
 ]
+
+export const deepLinkConfig: DeepLinkConfig = {
+    links: [
+      {
+        component: HomePage, 
+        name: 'Home', 
+        segment: ''
+      },
+      {
+        component: UserPage,
+        name: 'User Page',
+        segment: ':username'
+      },
+      {
+        component: RepoPage,
+        name: 'Repo Page',
+        segment: ':username/:reponame'
+      },
+      {
+        component: IssuesPage,
+        name: 'Repo Page',
+        segment: ':username/:reponame/issues'
+      },
+      {
+        component: NetworkPage,
+        name: 'Network Page',
+        segment: ':username/:reponame/network'
+      },
+      {
+        component: IssuePage, 
+        name: 'Issue Page', 
+        segment: ':username/:reponame/issues/:issuenumber'
+      }
+    ]
+}

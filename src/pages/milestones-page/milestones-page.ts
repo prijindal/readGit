@@ -72,7 +72,8 @@ export class MilestonesPage {
   }
 
   openMilestonePage(milestone) {
-    this.nav.push(IssuesPage, {repo: this.repo, query: 'is:open milestone:' + milestone.title})
+    let splitted = this.repo.split('')
+    this.nav.push(IssuesPage, {username: splitted[0], reponame: splitted[1], query: 'is:open milestone:' + milestone.title})
   }
 
   getPercentageComplete(milestone) {
