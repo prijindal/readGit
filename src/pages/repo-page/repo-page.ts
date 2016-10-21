@@ -16,9 +16,9 @@ import { CommitsPage } from '../commits-page/commits-page';
 import {RepoPopover} from './repo-popover/repo-popover';
 
 const REPO_QUERY = `
-query {
-  repositoryOwner(login: "{{username}}") {
-    repository(name:"{{reponame}}") {
+query($username: String!, $reponame: String!) {
+  repositoryOwner(login: $username) {
+    repository(name: $reponame) {
       isFork
       parent {
         owner {
@@ -100,8 +100,7 @@ export class RepoPage {
     let splited = this.repo.full_name.split('/')
     let username = splited[0]
     let reponame = splited[1];
-    let query = REPO_QUERY.replace('{{username}}', username).replace('{{reponame}}', reponame)
-    this.graphapi.request(query)
+    this.graphapi.request(REPO_QUERY, {username: username, reponame: reponame})
     .subscribe(res => {
       this.loading = false;
       this.repo = res.repositoryOwner.repository;

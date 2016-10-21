@@ -49,7 +49,7 @@ export class BaseUsersPage {
     });
   }
 
-  getUsers(shouldRefresh: Boolean = false) {
+  getUsers(shouldRefresh: Boolean = false): Observable<any> {
     let variables = {username: this.user, PER_PAGE: PER_PAGE};
     if (this.endCursor) {
       variables['after'] = this.endCursor;
