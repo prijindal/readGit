@@ -1,0 +1,14 @@
+comment-card {
+  .label {
+    color: #333;
+    padding: 2px 4px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 2px;
+    box-shadow: inset 0 -1px 0 rgba(0,0,0,0.12);
+
+    &.closed {
+      background-color: #FC292B;
+    }
+  }
+}

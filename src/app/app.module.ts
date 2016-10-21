@@ -7,9 +7,10 @@ import { ProfileInfo } from './profile-info/profile-info';
 
 import {RepoInfo} from '../components/repo-info/repo-info';
 import {UserInfo} from '../components/user-info/user-info';
+import {CommentCard} from '../components/comment-card/comment-card';
 
 import {APP_PROVIDERS} from './app.providers';
-import {APP_PAGES} from './app.pages';
+import {APP_PAGES, HomePage, IssuePage} from './app.pages';
 
 @NgModule({
   declarations: [
@@ -17,10 +18,16 @@ import {APP_PAGES} from './app.pages';
     ProfileInfo,
     APP_PAGES,
     RepoInfo,
-    UserInfo
+    UserInfo,
+    CommentCard
   ],
   imports: [
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {}, {
+      links: [
+        {component: HomePage, name: 'Home', segment: ''},
+        {component: IssuePage, name: 'Issue Page', segment: ':username/:reponame/issues/:issuenumber'}
+      ]
+    }),
     JsonpModule
   ],
   bootstrap: [IonicApp],

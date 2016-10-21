@@ -8,12 +8,15 @@
       <button ion-button icon-only [disabled]="loading" (click)="getIssue()">
         <ion-icon name="refresh"></ion-icon>
       </button>
+      <button ion-button icon-only (click)="presentPopover($event)">
+        <ion-icon name="more"></ion-icon>
+      </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 
-<ion-content class="issue-page">
+<ion-content>
   <div text-center margin-top *ngIf="!issue">
     <div *ngIf="loading">
       Loading...
@@ -45,17 +48,7 @@
   </div>
   <div *ngIf="comments">
     <div *ngIf="comments.length > 0">
-      <ion-card *ngFor="let comment of comments">
-        <ion-item>
-          <ion-avatar item-left>
-            <ion-img [src]="'https://avatars.githubusercontent.com/u/' + comment.user.id + '?s=50'"></ion-img>
-          </ion-avatar>
-          <p class="layout-notoverflow">
-            {{comment.user.login}} commented {{timeFromNow(comment.created_at)}}
-          </p>
-        </ion-item>
-        <ion-card-content [innerHTML]="comment.body_html"></ion-card-content>
-      </ion-card>
+      <comment-card *ngFor="let comment of comments" [comment]="comment"></comment-card>
     </div>
     <ion-card *ngIf="comments.length === 0 && !issue.body_html">
       <ion-card-content>

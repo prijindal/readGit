@@ -18,7 +18,9 @@ import {GistNewPage} from '../pages/gist-new-page/gist-new-page';
 import {GistPage} from '../pages/gist-page/gist-page';
 import {GistsPage} from '../pages/gists-page/gists-page';
 import {HomePage} from '../pages/home-page/home-page';
+
 import {IssuePage} from '../pages/issue-page/issue-page';
+import {IssuePopover} from '../pages/issue-page/issue-popover/issue-popover';
 
 import {IssuesPage} from '../pages/issues-page/issues-page';
 import {IssuesPopover} from '../pages/issues-page/issues-popover/issues-popover';
@@ -48,6 +50,8 @@ import {TreePage} from '../pages/tree-page/tree-page';
 import {UserPage} from '../pages/user-page/user-page';
 import {WatchedPage} from '../pages/watched-page/watched-page';
 
+export {HomePage, IssuePage};
+
 export const APP_PAGES = [
   BaseUsersPage,
   BaseReposPage,
@@ -68,7 +72,9 @@ export const APP_PAGES = [
   GistPage,
   GistsPage,
   HomePage,
+  
   IssuePage,
+  IssuePopover,
 
   IssuesPage,
   IssuesPopover,

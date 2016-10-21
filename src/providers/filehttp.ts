@@ -44,9 +44,9 @@ export class FileService {
     });
   }
 
-  getFileFromUrl(url, type: string = 'raw') {
+  getFileFromUrl(url, type: string = 'raw', version?: String) {
     return new Promise((resolve: (res: Response) => {}, reject) => {
-      this.sendRequest(url, type)
+      this.sendRequest(url, type, null, RequestMethod.Get, version)
       .subscribe(resolve, reject);
     });
   }
@@ -105,9 +105,9 @@ export class FileService {
     });
   }
 
-  private sendRequest(url, type, body?: Object, method: RequestMethod = RequestMethod.Get) {
+  private sendRequest(url, type, body?: Object, method: RequestMethod = RequestMethod.Get, version: String = 'cannonball-preview') {
     let headers = new Headers({
-      'Accept': 'application/vnd.github.cannonball-preview.' + type + '+json',
+      'Accept': 'application/vnd.github.' + version + '.' + type + '+json',
       'Content-Type': 'application/json'
     });
     if (this.token) {

@@ -55,6 +55,7 @@ export class MyApp {
       this.registerBackButtonListener();
       this.eventsInit();
       // this.verifyLogin();
+      console.dir(this.app);
       Splashscreen.hide();
       this.deeplinkInit();
       if (window['nativeclick']) {

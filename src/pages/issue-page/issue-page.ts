@@ -1,8 +1,9 @@
 import {Component, ChangeDetectorRef} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {NavController, NavParams, PopoverController} from 'ionic-angular';
 
 import moment from 'moment';
 
+import {IssuePopover} from './issue-popover/issue-popover';
 
 import {FileService} from '../../providers/filehttp';
 import {BrowserService} from '../../providers/browser';
@@ -10,6 +11,7 @@ import {BrowserService} from '../../providers/browser';
 const DEFAULT_TEXTROWS = 2;
 
 @Component({
+  selector: 'issue-page',
   templateUrl: 'issue-page.html'
 })
 export class IssuePage {
@@ -23,6 +25,7 @@ export class IssuePage {
     private ref: ChangeDetectorRef,
     private nav: NavController,
     private params: NavParams,
+    private popoverCtrl: PopoverController,
 
     private filehttp: FileService,
     private browser: BrowserService
@@ -55,7 +58,7 @@ export class IssuePage {
   }
 
   getComments() {
-    this.filehttp.getFileFromUrl(this.issue.url + '/comments?per_page=10000', 'html')
+    this.filehttp.getFileFromUrl(this.issue.url + '/timeline?per_page=10000', 'html', 'mockingbird-preview')
     .then(res => {
       this.loading = false;
       this.comments = res.json();
@@ -103,5 +106,14 @@ export class IssuePage {
         message: 'There was an Error commenting'
       });
     });
+  }
+
+  presentPopover(event) {
+    let popover = this.popoverCtrl.create(IssuePopover, {subsribed: false})
+    popover.onDidDismiss((value) => {
+      console.log(value);
+    })
+
+    popover.present({ev: event})
   }
 }

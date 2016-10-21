@@ -1,0 +1,49 @@
+<div [ngSwitch]="comment.event">
+  <ion-card *ngSwitchCase="'commented'">
+    <ion-item>
+      <ion-avatar item-left>
+        <ion-img [src]="'https://avatars.githubusercontent.com/u/' + comment.user.id + '?s=50'"></ion-img>
+      </ion-avatar>
+      <p class="layout-notoverflow">
+        {{comment.user.login}} commented {{timeFromNow(comment.created_at)}}
+      </p>
+    </ion-item>
+    <ion-card-content [innerHTML]="comment.body_html"></ion-card-content>
+  </ion-card>
+  <ion-card *ngSwitchCase="'labeled'">
+    <ion-item *ngIf="comment.actor">
+      <ion-avatar item-left>
+        <ion-img [src]="'https://avatars.githubusercontent.com/u/' + comment.actor.id + '?s=50'"></ion-img>
+      </ion-avatar>
+      <p class="layout-notoverflow">
+        {{comment.actor.login}} added the
+        <span *ngIf="comment.label" 
+          class="label"
+          [style.backgroundColor]="'#' + comment.label.color"
+          [style.color]="'#' + invertColor(comment.label.color)">
+          {{comment.label.name}}</span>
+        label {{timeFromNow(comment.created_at)}}
+      </p>
+    </ion-item>
+  </ion-card>
+  <ion-card *ngSwitchCase="'cross-referenced'">
+    <ion-item *ngIf="comment.source">
+      <ion-avatar item-left>
+        <ion-img [src]="'https://avatars.githubusercontent.com/u/' + comment.source.actor.id + '?s=50'"></ion-img>
+      </ion-avatar>
+      <p class="layout-notoverflow">
+        {{comment.source.actor.login}} refrenced <a (click)="openIssue(comment.source)">this issue</a> {{timeFromNow(comment.created_at)}}
+      </p>
+    </ion-item>
+  </ion-card>
+  <ion-card *ngSwitchCase="'closed'">
+    <ion-item *ngIf="comment.actor">
+      <ion-avatar item-left>
+        <ion-img [src]="'https://avatars.githubusercontent.com/u/' + comment.actor.id + '?s=50'"></ion-img>
+      </ion-avatar>
+      <p class="layout-notoverflow">
+        {{comment.actor.login}} <span class="label closed">closed</span> this {{timeFromNow(comment.created_at)}}
+      </p>
+    </ion-item>
+  </ion-card>
+</div>
