@@ -41,7 +41,7 @@
     "zone.js": "^0.6.21"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "0.0.36",
+    "@ionic/app-scripts": "0.0.37",
     "cordova": "^6.3.1",
     "ionic": "^2.1.0",
     "node-static": "^0.7.9",
