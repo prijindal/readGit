@@ -38,7 +38,7 @@ export class CommentReactions {
   isPanelOpen: Boolean = false;
 
   constructor(
-    private octicon: OcticonService,
+    public octicon: OcticonService,
     private filehttp: FileService
   ) {}
 
