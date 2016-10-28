@@ -1,4 +1,9 @@
 comment-card {
+  ion-item {
+    .item-inner {
+      margin-right: 30px;
+    }
+  }
   .label {
     color: #333;
     padding: 2px 4px;
