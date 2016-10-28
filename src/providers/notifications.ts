@@ -80,18 +80,18 @@ export class NotificationsService {
 
   setUpNotifications() {
     if (
-      cordova &&
-      cordova.plugins &&
-      cordova.plugins.notification &&
-      cordova.plugins.notification.local &&
-      cordova.plugins.notification.local &&
-      cordova.plugins.backgroundMode
+      window['cordova'] &&
+      window['cordova'].plugins &&
+      window['cordova'].plugins.notification &&
+      window['cordova'].plugins.notification.local &&
+      window['cordova'].plugins.notification.local &&
+      window['cordova'].plugins.backgroundMode
     ) {
-      cordova.plugins.notification.local.hasPermission((granted) => {
+      window['cordova'].plugins.notification.local.hasPermission((granted) => {
         if (granted) {
           this.startUpdating();
         } else {
-          cordova.plugins.notification.local.registerPermission((granted) => {
+          window['cordova'].plugins.notification.local.registerPermission((granted) => {
             this.startUpdating();
           });
         }
@@ -100,7 +100,7 @@ export class NotificationsService {
   }
 
   private startUpdating() {
-    cordova.plugins.backgroundMode.enable();
+    window['cordova'].plugins.backgroundMode.enable();
     setInterval(() => {
       this.updateNotifications()
     }, 10000)
@@ -114,7 +114,7 @@ export class NotificationsService {
         this.filehttp.getFileFromUrl('/notifications?page=1&per_page=' + headerNotificationsCount + '&timestamp=' + new Date().getTime())
         .then(response => {
           console.dir(response)
-          cordova.plugins.notification.local.schedule
+          window['cordova'].plugins.notification.local.schedule
         })
       }
     })

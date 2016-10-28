@@ -1,0 +1,11 @@
+-<div class="overlay" [class.in]="isPanelOpen" (click)="togglePanel()"></div>
+<div class="toggle-button" [class.out]="isPanelOpen" (click)="togglePanel()">
+  <ion-icon [innerHTML]="octicon.get('plus-small')"></ion-icon>
+  <ion-icon [innerHTML]="octicon.get('smiley')"></ion-icon>
+</div>
+<div class="panel" [class.in]="isPanelOpen">
+  <div class="panel-menu-item" *ngFor="let reaction of REACTIONS" (click)="toggleReaction(reaction)">
+    <img [src]="'https://assets-cdn.github.com/images/icons/emoji/unicode/' + reaction.image + '.png'"/>
+    <span>{{reaction.content}}</span>
+  </div>
+</div>

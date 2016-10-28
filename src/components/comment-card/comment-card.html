@@ -1,4 +1,5 @@
 <div [ngSwitch]="comment.event">
+  <comment-reactions></comment-reactions>
   <ion-card *ngSwitchCase="'commented'">
     <ion-item>
       <ion-avatar item-left>
@@ -17,7 +18,7 @@
       </ion-avatar>
       <p class="layout-notoverflow">
         {{comment.actor.login}} added the
-        <span *ngIf="comment.label" 
+        <span *ngIf="comment.label"
           class="label"
           [style.backgroundColor]="'#' + comment.label.color"
           [style.color]="'#' + invertColor(comment.label.color)">

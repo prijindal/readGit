@@ -34,17 +34,20 @@
         {{issue.user.login}} opened this issue {{timeFromNow(issue.created_at)}}
       </p>
     </div>
-    <ion-card *ngIf="issue.body_html">
-      <ion-item *ngIf="issue.user">
-        <ion-avatar item-left>
-          <ion-img [src]="'https://avatars.githubusercontent.com/u/' + issue.user.id + '?s=50'"></ion-img>
-        </ion-avatar>
-        <p class="layout-notoverflow">
-          {{issue.user.login}} commented {{timeFromNow(issue.created_at)}}
-        </p>
-      </ion-item>
-      <ion-card-content [innerHTML]="issue.body_html"></ion-card-content>
-    </ion-card>
+    <div *ngIf="issue.body_html">
+      <comment-reactions></comment-reactions>
+      <ion-card>
+        <ion-item *ngIf="issue.user">
+          <ion-avatar item-left>
+            <ion-img [src]="'https://avatars.githubusercontent.com/u/' + issue.user.id + '?s=50'"></ion-img>
+          </ion-avatar>
+          <p class="layout-notoverflow">
+            {{issue.user.login}} commented {{timeFromNow(issue.created_at)}}
+          </p>
+        </ion-item>
+        <ion-card-content [innerHTML]="issue.body_html"></ion-card-content>
+      </ion-card>
+    </div>
   </div>
   <div *ngIf="comments">
     <div *ngIf="comments.length > 0">

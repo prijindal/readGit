@@ -32,14 +32,11 @@ export class IssuePage {
   ) { }
 
   ionViewWillEnter() {
-    this.issue = this.params.get('issue');
-    if (!this.issue) {
-      let username = this.params.get('username');
-      let reponame = this.params.get('reponame');
-      let issuenumber = this.params.get('issuenumber');
-      let url = 'https://api.github.com/repos/' + username + '/' + reponame + '/issues/' + issuenumber;
-      this.issue = {url: url, number: issuenumber};
-     }
+    let username = this.params.get('username');
+    let reponame = this.params.get('reponame');
+    let issuenumber = this.params.get('issuenumber');
+    let url = 'https://api.github.com/repos/' + username + '/' + reponame + '/issues/' + issuenumber;
+    this.issue = {url: url, number: issuenumber};
     this.getIssue();
     this.getComments();
   }

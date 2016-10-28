@@ -123,7 +123,8 @@ export class IssuesPage {
   }
 
   openIssue(issue) {
-    this.nav.push(IssuePage, {issue: issue});
+    let splitted = this.repo.split('/')
+    this.nav.push(IssuePage, {username: splitted[0], reponame: splitted[1], issuenumber: issue.number});
   }
 
 
