@@ -14,8 +14,8 @@ import { FollowingPage } from '../following-page/following-page';
 import { WatchedPage } from '../watched-page/watched-page';
 
 const USER_QUERY = `
-query {
-  repositoryOwner(login:"{{username}}") {
+query($username: String!) {
+  repositoryOwner(login:$username) {
     id
     login
     ...on User {
@@ -119,8 +119,7 @@ export class UserPage {
 
   getUserInfo() {
     this.loading = true;
-    let query = USER_QUERY.replace('{{username}}', this.username)
-    this.graphapi.request(query)
+    this.graphapi.request(USER_QUERY, {username: this.username})
     .subscribe(res => {
       this.user = res.repositoryOwner
       this.loading = false;
