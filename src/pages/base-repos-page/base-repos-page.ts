@@ -8,6 +8,21 @@ import {Observable} from 'rxjs';
 
 const PER_PAGE: number = 30;
 
+const REPO_INFO_FRAGMENT = `
+fragment RepoInfo on Repository {
+  isFork
+  isPrivate
+  name
+  owner {
+    login
+  }
+  descriptionHTML
+  stargazers {
+    totalCount
+  }
+}
+`
+
 @Component({
   templateUrl: 'base-repos-page.html'
 })
@@ -54,7 +69,7 @@ export class BaseReposPage {
     if (this.endCursor) {
       variables['after'] = this.endCursor;
     }
-    return this.graphapi.request(this.repos_query, variables)
+    return this.graphapi.request(this.repos_query + REPO_INFO_FRAGMENT, variables)
     .map(res => res.repositoryOwner[this.key])
     .map(res => {
       if (shouldRefresh) {

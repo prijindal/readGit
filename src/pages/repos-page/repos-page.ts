@@ -13,16 +13,7 @@ query($username: String!, $PER_PAGE: Int, $after: String) {
     repositories(first: $PER_PAGE, after: $after, orderBy: {field: NAME, direction: ASC}) {
       edges {
         node {
-          isFork
-          isPrivate
-          name
-          owner {
-            login
-          }
-          descriptionHTML
-          stargazers {
-            totalCount
-          }
+          ...RepoInfo
         }
       }
       pageInfo {

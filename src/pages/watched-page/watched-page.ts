@@ -13,16 +13,7 @@ query($username: String!, $PER_PAGE: Int, $after: String) {
       watching(first: $PER_PAGE, after: $after) {
         edges {
           node {
-            isFork
-            isPrivate
-            name
-            owner {
-              login
-            }
-            descriptionHTML
-            stargazers {
-              totalCount
-            }
+            ...RepoInfo
           }
         }
         pageInfo {

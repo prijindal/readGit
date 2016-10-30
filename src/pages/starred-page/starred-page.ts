@@ -13,16 +13,7 @@ query($username: String!, $PER_PAGE: Int, $after: String) {
       starredRepositories(first: $PER_PAGE, after: $after, orderBy: {field: STARRED_AT, direction: DESC}) {
         edges {
           node {
-            isFork
-            isPrivate
-            name
-            owner {
-              login
-            }
-            descriptionHTML
-            stargazers {
-              totalCount
-            }
+            ...RepoInfo
           }
         }
         pageInfo {
