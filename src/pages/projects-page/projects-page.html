@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Projects - {{username}}/{{reponame}}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="presentPopover($event)">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-card padding text-center *ngIf="projects.length == 0">
+    <div *ngIf="loading">
+      Loading...
+    </div>
+    <div *ngIf="!loading">
+      No projects
+    </div>
+  </ion-card>
+  <ion-list *ngIf="projects.length > 0">
+    <button ion-item
+      class="project"
+      (click)="openProject(project)"
+      *ngFor="let project of projects">
+      <h2 class="layout-notoverflow">{{project.name}}</h2>
+      <p class="layout-notoverflow">
+        <span *ngIf="project.updatedAt">
+          Updated {{timeFromNow(project.updatedAt)}}
+        </span>
+      </p>
+      <p [innerHTML]="project.bodyHTML"></p>
+    </button>
+
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="20%">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-list>
+</ion-content>

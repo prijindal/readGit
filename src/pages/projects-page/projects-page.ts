@@ -8,51 +8,36 @@ import {FileService} from '../../providers/filehttp';
 import {GraphApiService} from '../../providers/graphapi';
 import {BrowserService} from '../../providers/browser';
 
-import { CommitPage } from '../commit-page/commit-page';
+const PER_PAGE: number = 5;
 
-const PER_PAGE: number = 60;
-
-const COMMIT_QUERY = `
+const PROJECTS_QUERY = `
 query($username: String!, $reponame:String!, $PER_PAGE:Int, $after:String) {
   repository(owner: $username, name: $reponame) {
-    ref(qualifiedName: "master") {
-      target {
-				...CommitHistory
-      }
-    }
-  }
-}
-
-fragment CommitHistory on Commit {
-  history(first: $PER_PAGE, after: $after) {
-    edges {
-      node {
-        oid
-        messageHeadline
-        author {
-          user {
-            avatarURL(size: 50)
-            login
-          }
+		projects(first: $PER_PAGE, after: $after) {
+      edges {
+        node {
           name
-          date
+          number
+          updatedAt
+          bodyHTML
+          viewerCanEdit
         }
       }
-    }
-    pageInfo {
-      hasNextPage
-      endCursor
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
     }
   }
 }
 `
 
 @Component({
-  templateUrl: 'commits-page.html'
+  templateUrl: 'projects-page.html'
 })
-export class CommitsPage {
+export class ProjectsPage {
   public loading: Boolean = true;
-  public commits: any = [];
+  public projects: any = [];
   public username: string;
   public reponame: string;
   private endCursor: string = "";
@@ -65,18 +50,18 @@ export class CommitsPage {
     private filehttp: FileService,
     private graphapi: GraphApiService,
     private browser: BrowserService
-  ) { }
+  ) {}
 
   ionViewWillEnter() {
     this.username = this.params.get('username');
     this.reponame = this.params.get('reponame');
-    this.refreshCommits();
+    this.refreshProjects();
   }
 
-  refreshCommits() {
+  refreshProjects() {
     this.loading = true;
     this.endCursor = "";
-    this.getCommits(true)
+    this.getProjects(true)
     .subscribe(() => {
       this.loading = false;
     }, err => {
@@ -84,7 +69,7 @@ export class CommitsPage {
     });
   }
 
-  getCommits(shouldRefresh: Boolean = false): Observable<any> {
+  getProjects(shouldRefresh: Boolean = false): Observable<any> {
     let variables = {
       username: this.username,
       reponame: this.reponame,
@@ -93,14 +78,14 @@ export class CommitsPage {
     if (this.endCursor) {
       variables['after'] = this.endCursor
     }
-    return this.graphapi.request(COMMIT_QUERY, variables)
-    .map(res => res.repository.ref.target.history)
+    return this.graphapi.request(PROJECTS_QUERY, variables)
+    .map(res => res.repository.projects)
     .map(res => {
       if (shouldRefresh) {
-        this.commits = [];
+        this.projects = [];
       }
-      res.edges.forEach((commit) => {
-        this.commits.push(commit.node);
+      res.edges.forEach((project) => {
+        this.projects.push(project.node);
       });
       this.ref.detectChanges();
       this.endCursor = res.pageInfo.endCursor;
@@ -108,12 +93,8 @@ export class CommitsPage {
     })
   }
 
-  timeFromNow(time) {
-    return moment(time).fromNow();
-  }
-
   doInfinite(infiniteScroll) {
-    this.getCommits()
+    this.getProjects()
     .subscribe(res => {
       infiniteScroll.complete();
       if (!res.pageInfo.hasNextPage) {
@@ -124,7 +105,11 @@ export class CommitsPage {
     })
   }
 
-  openCommit(commit) {
-    this.nav.push(CommitPage, {username: this.username, reponame: this.reponame, sha: commit.oid});
+  timeFromNow(time) {
+    return moment(time).fromNow();
+  }
+
+  openProject(project) {
+
   }
 }

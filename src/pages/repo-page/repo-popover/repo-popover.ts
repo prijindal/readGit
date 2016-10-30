@@ -3,6 +3,7 @@ import {ViewController, NavParams} from 'ionic-angular';
 
 import {ReleasesPage} from '../../releases-page/releases-page';
 import {MilestonesPage} from '../../milestones-page/milestones-page';
+import {ProjectsPage} from '../../projects-page/projects-page';
 import {FileService} from '../../../providers/filehttp';
 
 @Component({
@@ -16,32 +17,33 @@ import {FileService} from '../../../providers/filehttp';
         View Milestones
         <span item-right>{{milestones}}</span>
       </button>
+      <button ion-item (click)="openProjects()">
+        View Projects
+        <span item-right>{{projects}}</span>
+      </button>
     </ion-list>
   `
 })
 export class RepoPopover {
-  url: string;
+  username: string;
+  reponame: string;
   releases: number;
   milestones: number;
+  projects: number;
   constructor(
     public viewCtrl: ViewController,
     private params: NavParams,
     private filehttp: FileService
   ) {
-    this.url = params.get('url');
-    this.getReleases();
+    this.username = params.get('username');
+    this.reponame = params.get('reponame');
+    this.releases = params.get('releasesCount');
+    this.projects = params.get('projectsCount');
     this.getMilestones();
   }
 
-  getReleases() {
-    this.filehttp.getHeaders(this.url + '/releases?page=1&per_page=1')
-    .then(res => {
-      this.releases = this.filehttp.getLinkLength(res);
-    });
-  }
-
   getMilestones() {
-    this.filehttp.getHeaders(this.url + '/milestones?page=1&per_page=1')
+    this.filehttp.getHeaders('https://api.github.com/repos/' + this.username + '/' + this.reponame + '/milestones?page=1&per_page=1')
     .then(res => {
       this.milestones = this.filehttp.getLinkLength(res);
     });
@@ -53,6 +55,10 @@ export class RepoPopover {
 
   openMilestones() {
     this.close(MilestonesPage);
+  }
+
+  openProjects() {
+    this.close(ProjectsPage);
   }
 
   close(ReleasesPage) {

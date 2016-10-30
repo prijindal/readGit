@@ -18,7 +18,8 @@ const PER_PAGE: number = 5;
 export class MilestonesPage {
   public loading: Boolean = true;
   public page: number = 1;
-  public repo: string;
+  public username: string;
+  public reponame: string;
   public milestones: any = [];
   public state: string = 'open';
   public sort: string = 'due_on';
@@ -33,7 +34,8 @@ export class MilestonesPage {
   ) { }
 
   ionViewWillEnter() {
-    this.repo = this.params.get('repo');
+    this.username = this.params.get('username');
+    this.reponame = this.params.get('reponame');
     if (this.milestones.length === 0) {
       this.refreshMilestones();
     }
@@ -46,7 +48,7 @@ export class MilestonesPage {
   }
 
   getMilestones() {
-    let url = 'https://api.github.com/repos/' + this.repo + '/milestones'
+    let url = 'https://api.github.com/repos/' + this.username + '/' + this.reponame + '/milestones'
     url+='?page=' + this.page + '&per_page=' + PER_PAGE
     url+='&state=' + this.state + '&sort=' + this.sort + '&direction=' + this.direction
     return this.filehttp.getFileFromUrl(url, 'html')
@@ -72,8 +74,7 @@ export class MilestonesPage {
   }
 
   openMilestonePage(milestone) {
-    let splitted = this.repo.split('')
-    this.nav.push(IssuesPage, {username: splitted[0], reponame: splitted[1], query: 'is:open milestone:' + milestone.title})
+    this.nav.push(IssuesPage, {username: this.username, reponame: this.reponame, query: 'is:open milestone:' + milestone.title})
   }
 
   getPercentageComplete(milestone) {

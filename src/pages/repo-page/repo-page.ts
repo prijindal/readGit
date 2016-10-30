@@ -46,6 +46,12 @@ query($username: String!, $reponame: String!) {
     pullRequests {
       totalCount
     }
+    releases {
+      totalCount
+    }
+    projects {
+      totalCount
+    }
   }
 }
 `;
@@ -197,7 +203,7 @@ export class RepoPage {
   }
 
   openCommits() {
-    this.nav.push(CommitsPage, {repo: this.getFullName()});
+    this.nav.push(CommitsPage, {username: this.repo.owner.login, reponame: this.repo.name});
   }
 
   openIssuesPage() {
@@ -225,12 +231,17 @@ export class RepoPage {
   }
 
   presentPopover(event) {
-    let popover = this.popoverCtrl.create(RepoPopover, {url: this.repo.url})
+    let popover = this.popoverCtrl.create(RepoPopover, {
+      username: this.repo.owner.login,
+      reponame: this.repo.name,
+      releasesCount: this.repo.releases.totalCount,
+      projectsCount: this.repo.projects.totalCount
+    })
     popover.present({ev: event});
 
     popover.onDidDismiss((value) => {
       if (value !== null) {
-        this.nav.push(value, {repo: this.full_name});
+        this.nav.push(value, {username: this.repo.owner.login, reponame: this.repo.name});
       }
     });
   }

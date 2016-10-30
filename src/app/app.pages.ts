@@ -38,6 +38,7 @@ import {NetworkPage} from '../pages/network-page/network-page';
 import {NotificationsPage} from '../pages/notifications-page/notifications-page';
 import {NotificationsPopover} from '../pages/notifications-page/notifications-popover/notifications-popover';
 
+import {ProjectsPage} from '../pages/projects-page/projects-page';
 import {ReleasesPage} from '../pages/releases-page/releases-page';
 
 import {RepoPage} from '../pages/repo-page/repo-page';
@@ -54,7 +55,7 @@ import {WatchedPage} from '../pages/watched-page/watched-page';
 export const APP_PAGES = [
   BaseUsersPage,
   BaseReposPage,
-  
+
   BlobPage,
   BlogPage,
 
@@ -71,7 +72,7 @@ export const APP_PAGES = [
   GistPage,
   GistsPage,
   HomePage,
-  
+
   IssuePage,
   IssuePopover,
 
@@ -90,6 +91,7 @@ export const APP_PAGES = [
   NotificationsPage,
   NotificationsPopover,
 
+  ProjectsPage,
   ReleasesPage,
 
   RepoPage,
@@ -107,8 +109,8 @@ export const APP_PAGES = [
 export const deepLinkConfig: DeepLinkConfig = {
     links: [
       {
-        component: HomePage, 
-        name: 'Home', 
+        component: HomePage,
+        name: 'Home',
         segment: ''
       },
       {
@@ -122,19 +124,44 @@ export const deepLinkConfig: DeepLinkConfig = {
         segment: ':username/:reponame'
       },
       {
+        component: CommitsPage,
+        name: 'Commits Page',
+        segment: ':username/:reponame/commits'
+      },
+      {
+        component: CommitPage,
+        name: 'Commit Page',
+        segment: ':username/:reponame/commits/:sha'
+      },
+      {
         component: IssuesPage,
-        name: 'Repo Page',
+        name: 'Issues Page',
         segment: ':username/:reponame/issues'
+      },
+      {
+        component: IssuePage,
+        name: 'Issue Page',
+        segment: ':username/:reponame/issues/:issuenumber'
+      },
+      {
+        component: ReleasesPage,
+        name: 'Releases Page',
+        segment: ':username/:reponame/releases'
+      },
+      {
+        component: MilestonesPage,
+        name: 'Milestones Page',
+        segment: ':username/:reponame/milestones'
+      },
+      {
+        component: ProjectsPage,
+        name: 'Projects Page',
+        segment: ':username/:reponame/projects'
       },
       {
         component: NetworkPage,
         name: 'Network Page',
         segment: ':username/:reponame/network'
       },
-      {
-        component: IssuePage, 
-        name: 'Issue Page', 
-        segment: ':username/:reponame/issues/:issuenumber'
-      }
     ]
 }

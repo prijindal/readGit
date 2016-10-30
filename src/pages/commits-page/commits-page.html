@@ -3,7 +3,7 @@
     <button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Commits of {{repo}}</ion-title>
+    <ion-title>Commits of {{username}}/{{reponame}}</ion-title>
     <ion-buttons end>
       <button ion-button icon-only [disabled]="loading" (click)="refreshCommits()">
         <ion-icon name="refresh"></ion-icon>
@@ -29,14 +29,13 @@
       *ngFor="let commit of commits"
     >
       <ion-avatar item-left *ngIf="commit.author">
-        <ion-img [src]="'https://avatars.githubusercontent.com/u/' + commit.author.id + '?s=50'"></ion-img>
+        <ion-img *ngIf="commit.author.user" [src]="commit.author.user.avatarURL"></ion-img>
       </ion-avatar>
-      <h2 class="layout-overflow">{{commit.commit.message}}</h2>
-      <p class="layout-notoverflow">
+      <h2 class="layout-overflow">{{commit.messageHeadline}}</h2>
+      <p *ngIf="commit.author" class="layout-notoverflow">
         committed
-        <span *ngIf="commit.author">by {{commit.author.login}}</span>
-        <span *ngIf="commit.commit.author && !commit.author">by {{commit.commit.author.name}}</span>
-        <span>{{timeFromNow(commit.commit.author.date)}}</span>
+        <span *ngIf="commit.author.user">by {{commit.author.user.login}}</span>
+        <span>{{timeFromNow(commit.author.date)}}</span>
       </p>
     </button>
   </ion-list>

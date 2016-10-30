@@ -16,7 +16,8 @@ const PER_PAGE: number = 5;
 })
 export class ReleasesPage {
   public page: number = 1;
-  public repo: string;
+  public username: string;
+  public reponame: string;
   public releases: any = [];
 
   constructor(
@@ -26,7 +27,8 @@ export class ReleasesPage {
   ) {}
 
   ionViewWillEnter() {
-    this.repo = this.params.get('repo');
+    this.username = this.params.get('username');
+    this.reponame = this.params.get('reponame');
     if (this.releases.length === 0) {
       this.page = 1;
       this.getReleases();
@@ -34,7 +36,7 @@ export class ReleasesPage {
   }
 
   getReleases() {
-    return this.filehttp.getFileFromUrl('https://api.github.com/repos/' + this.repo + '/releases?page=' + this.page + '&per_page=' + PER_PAGE, 'html')
+    return this.filehttp.getFileFromUrl('https://api.github.com/repos/' + this.username + '/' + this.reponame + '/releases?page=' + this.page + '&per_page=' + PER_PAGE, 'html')
     .then(res => {
       let releases = res.json();
       releases.forEach(release => {
