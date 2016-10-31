@@ -12,6 +12,12 @@
       class="octicon closed" 
       [innerHTML]="octicon.get('issue-closed')"
     ></ion-icon>
+    <ion-icon 
+      item-left 
+      *ngIf="issue.state=='MERGED'" 
+      class="octicon merged" 
+      [innerHTML]="octicon.get('git-pull-request')"
+    ></ion-icon>
     <span>{{issue.title}}</span>
   </ion-card-header>
   <ion-card-content>

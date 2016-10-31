@@ -1,7 +1,10 @@
 project-page {
+  .scroll-content {
+    margin-top: 56px;
+  }
+
   ion-slide.swiper-slide {
     align-items: flex-start;
-    margin-top: 56px;
     background-color: #fff;
   }
 
