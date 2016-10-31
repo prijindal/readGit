@@ -38,6 +38,7 @@ import {NetworkPage} from '../pages/network-page/network-page';
 import {NotificationsPage} from '../pages/notifications-page/notifications-page';
 import {NotificationsPopover} from '../pages/notifications-page/notifications-popover/notifications-popover';
 
+import {ProjectPage} from '../pages/project-page/project-page';
 import {ProjectsPage} from '../pages/projects-page/projects-page';
 import {ReleasesPage} from '../pages/releases-page/releases-page';
 
@@ -91,6 +92,7 @@ export const APP_PAGES = [
   NotificationsPage,
   NotificationsPopover,
 
+  ProjectPage,
   ProjectsPage,
   ReleasesPage,
 
@@ -144,6 +146,16 @@ export const deepLinkConfig: DeepLinkConfig = {
         segment: ':username/:reponame/issues/:issuenumber'
       },
       {
+        component: ProjectsPage,
+        name: 'Projects Page',
+        segment: ':username/:reponame/projects'
+      },
+      {
+        component: ProjectPage,
+        name: 'Project Page',
+        segment: ':username/:reponame/projects/:number'
+      },
+      {
         component: ReleasesPage,
         name: 'Releases Page',
         segment: ':username/:reponame/releases'
@@ -152,11 +164,6 @@ export const deepLinkConfig: DeepLinkConfig = {
         component: MilestonesPage,
         name: 'Milestones Page',
         segment: ':username/:reponame/milestones'
-      },
-      {
-        component: ProjectsPage,
-        name: 'Projects Page',
-        segment: ':username/:reponame/projects'
       },
       {
         component: NetworkPage,

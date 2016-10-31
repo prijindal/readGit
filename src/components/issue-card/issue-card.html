@@ -1,0 +1,47 @@
+<ion-card *ngIf="issue">
+  <ion-card-header class="layout-notoverflow" (click)="openIssue()">
+    <ion-icon 
+      item-left 
+      *ngIf="issue.state=='OPEN'" 
+      class="octicon opened" 
+      [innerHTML]="octicon.get('issue-opened')"
+    ></ion-icon>
+    <ion-icon 
+      item-left 
+      *ngIf="issue.state=='CLOSED'" 
+      class="octicon closed" 
+      [innerHTML]="octicon.get('issue-closed')"
+    ></ion-icon>
+    <span>{{issue.title}}</span>
+  </ion-card-header>
+  <ion-card-content>
+    <div>
+      #{{issue.number}} opened
+      <span *ngIf="issue.author">
+        by 
+        <a (click)="openUser(issue.author)">
+          {{issue.author.login}}
+        </a>
+      </span>
+    </div>
+    <div class="layout flex between">
+      <div class="labels" *ngIf="issue.labels">
+        <span 
+          class="label"
+          *ngFor="let label of issue.labels.edges"
+          [style.backgroundColor]="'#' + label.node.color"
+          [style.color]="'#' + invertColor(label.node.color)">
+          {{label.node.name}}
+        </span>
+      </div>
+      <div class="assignees" *ngIf="issue.assignees">
+        <span 
+          class="assignee"
+          (click)="openUser(assignee.node)"
+          *ngFor="let assignee of issue.assignees.edges">
+          <ion-img [src]="assignee.node.avatarURL"></ion-img>
+        </span>
+      </div>
+    </div>
+  </ion-card-content>
+</ion-card>

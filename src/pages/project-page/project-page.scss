@@ -1,0 +1,42 @@
+project-page {
+  ion-slide.swiper-slide {
+    align-items: flex-start;
+    margin-top: 56px;
+    background-color: #fff;
+  }
+
+  .column-card {
+    background-color: #FAFAFA;
+    .column-card-header {
+      font-weight: bold;
+      text-align: left;
+      border-bottom: 1px #e5e5e5 solid;
+      ion-chip {
+        font-weight: bold;
+      }
+    }
+
+    .column-card-content {
+      padding: 0;
+      overflow-y: auto;
+      height: 70vh;
+    }
+  }
+
+  .note-card {
+    background: #fff;
+    text-align: left;
+
+    ion-card-content {
+      color: #999;
+      a {
+        color: #333;
+      }
+    }
+
+    ion-icon {
+      display: inline-block;
+      width: 24px;
+    }
+  }
+}

@@ -28,7 +28,6 @@
     "@angular/platform-browser": "^2.0.0",
     "@angular/platform-browser-dynamic": "^2.0.0",
     "@angular/platform-server": "^2.0.0",
-    "@ionic/app-scripts": "0.0.37-2",
     "@ionic/storage": "^1.1.2",
     "@types/async": "^2.0.32",
     "async": "^2.0.1",
@@ -36,13 +35,13 @@
     "ionic-native": "^2.2.3",
     "ionicons": "^3.0.0",
     "moment": "^2.15.1",
-    "octicons": "^4.4.0",
+    "octicons": "^5.0.1",
     "rxjs": "5.0.0-beta.12",
     "x2js": "^3.0.1",
     "zone.js": "^0.6.21"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "0.0.37",
+    "@ionic/app-scripts": "0.0.37-5",
     "cordova": "^6.3.1",
     "ionic": "^2.1.0",
     "node-static": "^0.7.9",

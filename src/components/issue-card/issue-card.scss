@@ -1,0 +1,55 @@
+issue-card {
+  ion-card {
+    background-color: #fff !important;
+    text-align: left;
+
+    ion-card-header span {
+      color: #4078c0 !important;
+      font-weight: bold;
+
+      &:hover {
+        text-decoration: underline;
+        cursor:pointer;
+      }
+    }
+
+    ion-card-content {
+      color: #767676;
+      a {
+        color: #333;
+      }
+    }
+    
+    ion-icon.octicon {
+      display: inline-block;
+      width: 24px;
+
+      &.opened {
+        color: #6CC642
+      }
+
+      &.closed {
+        color:#bd2c00
+      }
+    }
+  }
+  
+  .labels {
+    .label {
+      color: #333;
+      padding: 2px 4px;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 2px;
+      box-shadow: inset 0 -1px 0 rgba(0,0,0,0.12);
+      margin-right: 6px;
+    }
+  }
+
+  .assignees {
+    ion-img {
+      width: 30px;
+      height: 30px;
+    }
+  }
+}

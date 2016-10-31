@@ -6,7 +6,8 @@ import moment from 'moment';
 
 import {FileService} from '../../providers/filehttp';
 import {GraphApiService} from '../../providers/graphapi';
-import {BrowserService} from '../../providers/browser';
+
+import {ProjectPage} from '../project-page/project-page';
 
 const PER_PAGE: number = 5;
 
@@ -48,8 +49,7 @@ export class ProjectsPage {
     private params: NavParams,
 
     private filehttp: FileService,
-    private graphapi: GraphApiService,
-    private browser: BrowserService
+    private graphapi: GraphApiService
   ) {}
 
   ionViewWillEnter() {
@@ -110,6 +110,10 @@ export class ProjectsPage {
   }
 
   openProject(project) {
-
+    this.nav.push(ProjectPage, {
+      username: this.username,
+      reponame: this.reponame,
+      number: project.number
+    });
   }
 }
