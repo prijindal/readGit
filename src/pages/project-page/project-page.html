@@ -7,8 +7,8 @@
 
     <ion-title><span *ngIf="project">{{project.name}}</span> | {{username}}/{{reponame}}</ion-title>
 
-    <ion-buttons end>
-      <button ion-button icon-only (click)="addProjectColumn()">
+    <ion-buttons end *ngIf="project">
+      <button *ngIf="project.viewerCanEdit" ion-button icon-only (click)="addProjectColumn()">
         <ion-icon name="add"></ion-icon>
       </button>
     </ion-buttons>

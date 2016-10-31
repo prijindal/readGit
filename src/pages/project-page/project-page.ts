@@ -1,5 +1,5 @@
 import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { NavController, NavParams, Slides } from 'ionic-angular';
+import { NavController, NavParams, Slides, AlertController } from 'ionic-angular';
 
 import moment from 'moment';
 
@@ -109,6 +109,7 @@ export class ProjectPage {
     private ref: ChangeDetectorRef,
     public nav: NavController,
     private params: NavParams,
+    private alertCtrl: AlertController,
 
     private filehttp: FileService,
     private graphapi: GraphApiService,
@@ -155,8 +156,27 @@ export class ProjectPage {
   }
 
   addProjectColumn() {
-    // this.nav.push(NewProjectColumnPage, {
-      
-    // })
+    let columnInput = this.alertCtrl.create({
+      title: 'Add a column',
+      inputs: [
+        {
+          name: 'name',
+          placeholder: 'Column name'
+        }
+      ],
+      buttons:[
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'Create Column',
+          handler: data => {
+            console.dir(data);
+          }
+        }
+      ]
+    });
+    columnInput.present();
   }
 }

@@ -122,7 +122,8 @@ export const deepLinkConfig: DeepLinkConfig = {
       {
         component: UserPage,
         name: 'User Page',
-        segment: ':username'
+        segment: ':username',
+        defaultHistory: [HomePage]
       },
       {
         component: RepoPage,
