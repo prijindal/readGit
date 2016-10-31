@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, RequestMethod, RequestOptions, Headers, Response } from '@angular/http';
+import {Events} from 'ionic-angular';
 import {Observable} from 'rxjs';
 import 'rxjs/add/operator/map';
 
@@ -7,10 +8,23 @@ import {FileService} from './filehttp';
 
 const HOST: string = 'https://api.github.com/graphql';
 
+const VIEWER_QUERY = `
+{
+	viewer {
+    id
+    login
+    name
+    email
+    avatarURL(size: 50)
+  }
+}
+`
+
 @Injectable()
 export class GraphApiService {
   constructor(
     public http: Http,
+    private events: Events,
     private filehttp: FileService
   ) {}
 
@@ -26,6 +40,22 @@ export class GraphApiService {
         this.internalRequest(query, variables)
           .subscribe((res) => {observer.next(res)}, (err) => {observer.error(err)}, () => {observer.complete()})
       }
+    })
+  }
+
+  verifyLogin() {
+    this.filehttp.checkLogin()
+    .then(res => {
+      this.request(VIEWER_QUERY)
+      .map(res => res.viewer)
+      .subscribe(res => {
+        this.filehttp.userData = res;
+        this.filehttp.user = res.login;
+        this.events.publish('login', true);
+      })
+    })
+    .catch(err => {
+      this.events.publish('login', false);
     })
   }
 

@@ -18,6 +18,7 @@ import {BlogsPage} from '../pages/blogs-page/blogs-page';
 import {JobsPage} from '../pages/jobs-page/jobs-page';
 
 import {FileService} from '../providers/filehttp';
+import {GraphApiService} from '../providers/graphapi';
 import {UrlParser} from '../providers/urlparser';
 import {OcticonService} from '../providers/octicon';
 import {NotificationsService} from '../providers/notifications';
@@ -44,6 +45,7 @@ export class MyApp {
     private platform: Platform,
     private events: Events,
     private filehttp: FileService,
+    private graphapi: GraphApiService,
     private urlparser: UrlParser,
     private octicon: OcticonService,
     private notificationsService: NotificationsService
@@ -58,7 +60,7 @@ export class MyApp {
       StatusBar.styleDefault();
       this.registerBackButtonListener();
       this.eventsInit();
-      // this.verifyLogin();
+      this.graphapi.verifyLogin();
       console.dir(this.app);
       Splashscreen.hide();
       this.deeplinkInit();

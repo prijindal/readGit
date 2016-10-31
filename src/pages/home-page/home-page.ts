@@ -14,18 +14,6 @@ import { RepoPage } from '../repo-page/repo-page';
 import { UserPage } from '../user-page/user-page';
 import { SearchPage } from '../search-page/search-page';
 
-const VIEWER_QUERY = `
-{
-	viewer {
-    id
-    login
-    name
-    email
-    avatarURL(size: 50)
-  }
-}
-`
-
 const PER_PAGE: number = 10;
 const LIMIT: number = 300;
 
@@ -63,7 +51,33 @@ export class HomePage {
 
   ionViewWillEnter() {
     this.message = 'Waiting';
-    this.verifyLogin();
+    if (this.filehttp.userData) {
+      console.log('Already Logged In')
+      // If logged in, then refreshEvents
+      this.received_eventsUrl = '/users/' + this.filehttp.userData.login + '/received_events'
+      if (this.received_events.length === 0) {
+        this.refreshEvents();
+      }
+      this.favicon.set(this.filehttp.userData.avatarURL);
+    } else {
+      this.message = 'Verifying You...';
+      this.events.subscribe('login', (isLoggedIn) => {    
+        if (isLoggedIn[0]) {
+          this.message = 'Logged In';
+          this.loggedIn = true;
+          this.received_eventsUrl = '/users/' + this.filehttp.userData.login + '/received_events'
+          if (this.received_events.length === 0) {
+            this.refreshEvents();
+          }
+          this.favicon.set(this.filehttp.userData.avatarURL);
+        } else {
+          this.loading = false;
+          this.message = '';
+          this.ref.detectChanges();
+          // Show Login Screen
+        }
+      })
+    }
   }
 
   focusInput() {
@@ -91,7 +105,7 @@ export class HomePage {
       this.message = 'Successfully Authenticated';
       this.filehttp.setToken(res.token)
       .then(() => {
-        this.verifyLogin();
+        this.graphapi.verifyLogin();
       });
     }, (err) => {
       this.waiting = false;
@@ -113,46 +127,6 @@ export class HomePage {
     if (event.key === 'Enter') {
       this.login();
     }
-  }
-
-  verifyLogin() {
-    this.loading = true;
-    return this.filehttp.checkLogin()
-    .then(res => {
-      this.message = 'Verifying You...';
-      this.graphapi.request(VIEWER_QUERY)
-      .map(res => res.viewer)
-      .subscribe(res => {
-        this.filehttp.userData = res;
-        this.filehttp.user = res.login;
-        this.message = 'Logged In';
-        this.events.publish('login', true);
-        this.loggedIn = true;
-        let user = res;
-        if (user) {
-          this.received_eventsUrl = '/users/' + res.login + '/received_events'
-          if (this.received_events.length === 0) {
-            this.refreshEvents();
-          }
-          this.favicon.set(user.avatarURL);
-        } else {
-          this.filehttp.handleError({message: 'Problem with Authentication'});
-        }
-      }, err => {
-        this.loading = false;
-        this.errorMessage = 'Some Error Occured';
-        this.filehttp.handleError(err);
-      });
-    })
-    .catch(res => {
-      this.events.publish('login', false);
-      this.loading = false;
-      this.message = '';
-      this.ref.detectChanges();
-      setTimeout(() => {
-        this.focusInput();
-      }, 100);
-    });
   }
 
   refreshEvents() {
