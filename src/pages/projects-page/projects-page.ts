@@ -116,4 +116,12 @@ export class ProjectsPage {
       number: project.number
     });
   }
+
+  createProject() {
+    // this.nav.push(NewProjectPage, {
+    //   username: this.username,
+    //   reponame: this.reponame,
+    //   ownerId: ownerId
+    // })
+  }
 }

@@ -13,6 +13,7 @@ const PROJECT_QUERY = `
 query($username: String!, $reponame:String! $number:Int!) {
   repository(owner: $username, name: $reponame) {
 		project(number: $number) {
+      id
       name
       updatedAt
       bodyHTML
@@ -118,6 +119,8 @@ export class ProjectPage {
     this.username = this.params.get('username');
     this.reponame = this.params.get('reponame');
     this.number = parseInt(this.params.get('number'));
+    this.ref.detach();
+    this.ref.detectChanges();
     this.refreshProject();
   }
 
