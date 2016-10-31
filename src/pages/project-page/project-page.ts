@@ -149,4 +149,10 @@ export class ProjectPage {
       username: user.login
     })
   }
+
+  addProjectColumn() {
+    // this.nav.push(NewProjectColumnPage, {
+      
+    // })
+  }
 }
