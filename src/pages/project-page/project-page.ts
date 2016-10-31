@@ -56,7 +56,7 @@ query($username: String!, $reponame:String! $number:Int!) {
                           }
                         }
                       }
-                      labels(first: 5) {
+                      labels(first: 10) {
                         edges {
                           node {
                             name

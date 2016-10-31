@@ -8,7 +8,7 @@
 
 
 <ion-content *ngIf="project">
-  <ion-slides #projectSlider [options]="projectSlideOptions">
+  <ion-slides #projectSlider [options]="projectSlideOptions" *ngIf="project.columns.totalCount > 0">
     <ion-slide *ngFor="let column of project.columns.edges">
       <ion-card class="column-card">
         <ion-card-header class="column-card-header">
@@ -38,4 +38,7 @@
       </ion-card>
     </ion-slide>
   </ion-slides>
+  <div text-center *ngIf="project.columns.totalCount == 0">
+    <h2>This project doesn't have any columns or cards</h2>
+  </div>
 </ion-content>
