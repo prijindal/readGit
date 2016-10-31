@@ -6,7 +6,7 @@
     <ion-title>Projects - {{username}}/{{reponame}}</ion-title>
 
     <ion-buttons end>
-      <button ion-button icon-only (click)="createProject()">
+      <button *ngIf="canCreateProjects" ion-button icon-only (click)="createProject()">
         <ion-icon name="add"></ion-icon>
       </button>
     </ion-buttons>

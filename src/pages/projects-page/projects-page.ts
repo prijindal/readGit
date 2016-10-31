@@ -16,6 +16,7 @@ const PROJECTS_QUERY = `
 query($username: String!, $reponame:String!, $PER_PAGE:Int, $after:String) {
   repository(owner: $username, name: $reponame) {
     id
+    viewerCanCreateProjects
 		projects(first: $PER_PAGE, after: $after) {
       edges {
         node {
@@ -39,6 +40,7 @@ query($username: String!, $reponame:String!, $PER_PAGE:Int, $after:String) {
   templateUrl: 'projects-page.html'
 })
 export class ProjectsPage {
+  public canCreateProjects: Boolean = false;
   public loading: Boolean = true;
   public projects: any = [];
   public username: string;
@@ -84,6 +86,7 @@ export class ProjectsPage {
     return this.graphapi.request(PROJECTS_QUERY, variables)
     .map(res => {
       this.ownerId = res.repository.id
+      this.canCreateProjects = res.repository.viewerCanCreateProjects
       return res.repository.projects
     })
     .map(res => {
