@@ -88,6 +88,8 @@ export class RepoPage {
       this.full_name = username + '/' + reponame
       this.loading = false;
       this.repo['url'] = 'https://api.github.com/repos/' + this.full_name;
+      this.ref.detach();
+      this.ref.detectChanges();
       this.getRepoInfo();
     } else {
       // Replace With Better Error Handling
@@ -95,6 +97,10 @@ export class RepoPage {
       this.loading = false;
       this.filehttp.handleError({message: 'Problem with Fetching Repository'});
     }
+  }
+
+  ionViewWillLeave() {
+    this.ref.reattach();
   }
 
   getRepoInfo() {
@@ -109,6 +115,7 @@ export class RepoPage {
       this.getReadMe();
       this.getBranches();
       this.getCommits();
+      this.ref.detectChanges();
       // console.dir(res);
     }, err => {
       this.loading = false;
@@ -139,6 +146,7 @@ export class RepoPage {
     this.filehttp.getHeaders(url)
     .then(res => {
       this.branches = this.filehttp.getLinkLength(res);
+      this.ref.detectChanges();
     });
   }
 
@@ -147,6 +155,7 @@ export class RepoPage {
     this.filehttp.getHeaders(url)
     .then(res => {
       this.commits = this.filehttp.getLinkLength(res);
+      this.ref.detectChanges();
     });
   }
 

@@ -8,12 +8,14 @@ import {FileService} from '../../providers/filehttp';
 import {GraphApiService} from '../../providers/graphapi';
 
 import {ProjectPage} from '../project-page/project-page';
+import {NewProjectPage} from '../new-project-page/new-project-page';
 
 const PER_PAGE: number = 5;
 
 const PROJECTS_QUERY = `
 query($username: String!, $reponame:String!, $PER_PAGE:Int, $after:String) {
   repository(owner: $username, name: $reponame) {
+    id
 		projects(first: $PER_PAGE, after: $after) {
       edges {
         node {
@@ -41,6 +43,7 @@ export class ProjectsPage {
   public projects: any = [];
   public username: string;
   public reponame: string;
+  private ownerId: string;
   private endCursor: string = "";
 
   constructor(
@@ -79,7 +82,10 @@ export class ProjectsPage {
       variables['after'] = this.endCursor
     }
     return this.graphapi.request(PROJECTS_QUERY, variables)
-    .map(res => res.repository.projects)
+    .map(res => {
+      this.ownerId = res.repository.id
+      return res.repository.projects
+    })
     .map(res => {
       if (shouldRefresh) {
         this.projects = [];
@@ -118,10 +124,10 @@ export class ProjectsPage {
   }
 
   createProject() {
-    // this.nav.push(NewProjectPage, {
-    //   username: this.username,
-    //   reponame: this.reponame,
-    //   ownerId: ownerId
-    // })
+    this.nav.push(NewProjectPage, {
+      username: this.username,
+      reponame: this.reponame,
+      ownerId: this.ownerId
+    })
   }
 }

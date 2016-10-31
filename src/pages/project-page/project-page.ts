@@ -124,6 +124,10 @@ export class ProjectPage {
     this.refreshProject();
   }
 
+  ionViewWillLeave() {
+    this.ref.reattach();
+  }
+
   refreshProject() {
     let variables = {
       username: this.username,

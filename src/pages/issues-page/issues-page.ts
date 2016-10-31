@@ -41,9 +41,6 @@ export class IssuesPage {
   ) { }
 
   ionViewWillEnter() {
-    if (Window['octicons']) {
-      console.dir(Window['octicons'])
-    }
     let username = this.params.get('username');
     let reponame = this.params.get('reponame');
     this.repo = username + '/' + reponame;
