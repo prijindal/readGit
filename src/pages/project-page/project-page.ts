@@ -9,6 +9,71 @@ import {OcticonService} from '../../providers/octicon';
 
 import {UserPage} from '../user-page/user-page';
 
+const COLUMN_EDGE_FRAGMENT = `
+fragment columnEdge on ProjectColumnEdge {
+  node {
+    id
+    name
+    updatedAt
+    cards(first: 30) {
+      edges {
+        node {
+          note
+          creator {
+            login
+          }
+          state
+          createdAt
+          content {
+            ...on Issueish {
+              id
+              number
+              author{
+                login
+              }
+              repository {
+                name
+                owner{
+                  login
+                }
+              }
+              title
+            }
+            ...on Issue {
+              state
+              assignees(first: 5) {
+                edges {
+                  node {
+                    login
+                    avatarURL(size: 40)
+                  }
+                }
+              }
+              labels(first: 10) {
+                edges {
+                  node {
+                    name
+                    color
+                  }
+                }
+              }
+            }
+            ...on PullRequest {
+              state
+            }
+          }
+        }
+      }
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+      totalCount
+    }
+  }
+}
+`
+
 const PROJECT_QUERY = `
 query($username: String!, $reponame:String! $number:Int!) {
   repository(owner: $username, name: $reponame) {
@@ -20,65 +85,7 @@ query($username: String!, $reponame:String! $number:Int!) {
       viewerCanEdit
       columns(first: 30) {
         edges {
-          node {
-            name
-            updatedAt
-            cards(first: 30) {
-              edges {
-                node {
-                  note
-                  creator {
-                    login
-                  }
-                  state
-                  createdAt
-                  content {
-                    ...on Issueish {
-                      id
-                      number
-                      author{
-                        login
-                      }
-                      repository {
-                        name
-                        owner{
-                          login
-                        }
-                      }
-                      title
-                    }
-										...on Issue {
-                      state
-                      assignees(first: 5) {
-                        edges {
-                          node {
-                            login
-                            avatarURL(size: 40)
-                          }
-                        }
-                      }
-                      labels(first: 10) {
-                        edges {
-                          node {
-                            name
-                            color
-                          }
-                        }
-                      }
-                    }
-                    ...on PullRequest {
-                      state
-                    }
-                  }
-                }
-              }
-              pageInfo {
-                hasNextPage
-                endCursor
-              }
-              totalCount
-            }
-          }
+          ...columnEdge
         }
         pageInfo {
           hasNextPage
@@ -89,7 +96,27 @@ query($username: String!, $reponame:String! $number:Int!) {
     }
   }
 }
-`
+
+` + COLUMN_EDGE_FRAGMENT
+
+const ADD_PROJECT_COLUMN_QUERY = `
+mutation(
+  $clientMutationId: String!, 
+  $projectId:ID!,
+  $name: String!
+) {
+  addProjectColumn(input: {
+    clientMutationId: $clientMutationId, 
+    projectId: $projectId, 
+    name: $name
+  }) {
+    columnEdge {
+      ...columnEdge
+    }
+  }
+}
+` + COLUMN_EDGE_FRAGMENT
+
 @Component({
   selector: 'project-page',
   templateUrl: 'project-page.html'
@@ -172,7 +199,37 @@ export class ProjectPage {
         {
           text: 'Create Column',
           handler: data => {
-            console.dir(data);
+            // Add Locally
+            let tempId = Date.now()
+            this.project.columns.edges.push({
+              node: {
+                id: tempId,
+                name: data.name,
+                cards: {
+                  edges: [],
+                  totalCount: 0
+                }
+              }
+            });
+            this.project.columns.totalCount+=1;
+            this.ref.detectChanges();
+            this.graphapi.request(ADD_PROJECT_COLUMN_QUERY, {
+              clientMutationId: this.filehttp.userData.id,
+              projectId: this.project.id,
+              name: data.name,
+            })
+            .map(res => res.addProjectColumn.columnEdge)
+            .subscribe(res => {
+              this.project.columns.edges.forEach(column => {
+                if (column.node.id === tempId) {
+                  column = res;
+                }
+              })
+              this.ref.detectChanges();
+              this.refreshProject();
+            }, err => {
+              this.filehttp.handleError(err);
+            })
           }
         }
       ]
