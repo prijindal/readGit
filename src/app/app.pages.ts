@@ -13,6 +13,7 @@ import {BranchesPage} from '../pages/branches-page/branches-page';
 import {CommitPage} from '../pages/commit-page/commit-page';
 import {CommitsPage} from '../pages/commits-page/commits-page';
 import {ComparePage} from '../pages/compare-page/compare-page';
+import {EditProjectPage} from '../pages/edit-project-page/edit-project-page';
 import {FollowersPage} from '../pages/followers-page/followers-page';
 import {FollowingPage} from '../pages/following-page/following-page';
 import {GistNewPage} from '../pages/gist-new-page/gist-new-page';
@@ -69,6 +70,7 @@ export const APP_PAGES = [
   CommitPage,
   CommitsPage,
   ComparePage,
+  EditProjectPage,
   FollowersPage,
   FollowingPage,
   GistNewPage,
@@ -164,6 +166,11 @@ export const deepLinkConfig: DeepLinkConfig = {
         component: ProjectPage,
         name: 'Project Page',
         segment: ':username/:reponame/projects/:number'
+      },
+      {
+        component: EditProjectPage,
+        name: 'Edit Project Page',
+        segment: ':username/:reponame/projects/:number/edit'
       },
       {
         component: ReleasesPage,

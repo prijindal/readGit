@@ -9,6 +9,7 @@ import {GraphApiService} from '../../providers/graphapi';
 
 import {ProjectPage} from '../project-page/project-page';
 import {NewProjectPage} from '../new-project-page/new-project-page';
+import {EditProjectPage} from '../edit-project-page/edit-project-page';
 
 const PER_PAGE: number = 5;
 
@@ -151,9 +152,13 @@ export class ProjectsPage {
   }
 
   editProject(project) {
-    console.log(project.id)
-    console.log(project.number)
-    // Go to edit project page (similar to new project page)
+    this.nav.push(EditProjectPage, {
+      username: this.username,
+      reponame: this.reponame,
+      ownerId: this.ownerId,
+      number: project.number,
+      project: project
+    });
   }
 
   deleteProject(project) {

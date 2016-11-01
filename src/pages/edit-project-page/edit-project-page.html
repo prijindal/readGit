@@ -1,0 +1,27 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title><span *ngIf="project">{{project.name}}</span> | {{username}}/{{reponame}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div>
+    <ion-item>
+      <ion-label floating>Name</ion-label>
+      <ion-input [(ngModel)]="project.name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Description</ion-label>
+      <ion-textarea rows="6" [(ngModel)]="project.body"></ion-textarea>
+    </ion-item>
+    <button ion-button block color="light" margin-top (click)="submit()">
+      Save Project
+    </button>
+  </div>
+</ion-content>
