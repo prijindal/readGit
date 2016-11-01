@@ -1,5 +1,5 @@
 import {Component, ChangeDetectorRef} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {NavController, NavParams, AlertController} from 'ionic-angular';
 
 import {Observable} from 'rxjs';
 import moment from 'moment';
@@ -20,6 +20,7 @@ query($username: String!, $reponame:String!, $PER_PAGE:Int, $after:String) {
 		projects(first: $PER_PAGE, after: $after) {
       edges {
         node {
+          id
           name
           number
           updatedAt
@@ -32,6 +33,20 @@ query($username: String!, $reponame:String!, $PER_PAGE:Int, $after:String) {
         endCursor
       }
     }
+  }
+}
+`
+
+const DELETE_PROJECT_QUERY = `
+mutation(
+  $clientMutationId: String!, 
+  $projectId:ID!
+) {
+  deleteProject(input: {
+    clientMutationId: $clientMutationId, 
+    projectId: $projectId
+  }) {
+    __typename
   }
 }
 `
@@ -52,6 +67,7 @@ export class ProjectsPage {
     private ref: ChangeDetectorRef,
     private nav: NavController,
     private params: NavParams,
+    private alertCtrl: AlertController,
 
     private filehttp: FileService,
     private graphapi: GraphApiService
@@ -132,5 +148,48 @@ export class ProjectsPage {
       reponame: this.reponame,
       ownerId: this.ownerId
     })
+  }
+
+  editProject(project) {
+    console.log(project.id)
+    console.log(project.number)
+    // Go to edit project page (similar to new project page)
+  }
+
+  deleteProject(project) {
+    let prompt = this.alertCtrl.create({
+      subTitle: 'Sure you want to delete this project',
+      buttons:[
+        {
+          text:'Cancel',
+          role:'cancel'
+        },
+        {
+          text:'Ok',
+          handler: () => {
+            // Delete in this.project
+            let projects = []
+            this.projects.forEach((project) => {
+              if(project.id !== project.id) {
+                projects.push(project)
+              }
+            });
+            this.projects = projects;
+            this.ref.detectChanges();
+            // Send Mutation Request
+            this.graphapi.request(DELETE_PROJECT_QUERY, {
+              clientMutationId: this.filehttp.userData.id,
+              projectId: project.id
+            })
+            .subscribe(res => {
+              this.refreshProjects();
+            }, err => {
+              this.filehttp.handleError(err);
+            })
+          }
+        }
+      ]
+    })
+    prompt.present();
   }
 }
