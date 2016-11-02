@@ -26,7 +26,11 @@ import {APP_PAGES, deepLinkConfig} from './app.pages';
     IssueCard
   ],
   imports: [
-    IonicModule.forRoot(MyApp, {}, deepLinkConfig),
+    IonicModule.forRoot(MyApp, {
+      pageTransitionDelay: 0,
+      popoverEnter: "popover-pop-in",
+      popoverLeave: "popover-pop-out"
+    }, deepLinkConfig),
     JsonpModule
   ],
   bootstrap: [IonicApp],

@@ -48,6 +48,7 @@
               <ion-card-header class="layout-notoverflow">
                 <ion-icon item-left class="octicon" [innerHTML]="octicon.get('note')"></ion-icon>
                 <span [innerHTML]="card.node.note"></span>
+                <ion-icon name="more" (click)="editColumnCard(column, card, $event)"></ion-icon>
               </ion-card-header>
               <ion-card-content>
                 <span>Added</span>

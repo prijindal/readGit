@@ -42,6 +42,7 @@ import {NotificationsPage} from '../pages/notifications-page/notifications-page'
 import {NotificationsPopover} from '../pages/notifications-page/notifications-popover/notifications-popover';
 
 import {AddCardPopover} from '../pages/project-page/add-card-popover/add-card-popover';
+import {ProjectCardPopover} from '../pages/project-page/project-card-popover/project-card-popover';
 import {ProjectPopover} from '../pages/project-page/project-popover/project-popover';
 import {ProjectPage} from '../pages/project-page/project-page';
 
@@ -101,6 +102,7 @@ export const APP_PAGES = [
   NotificationsPage,
   NotificationsPopover,
 
+  ProjectCardPopover,
   AddCardPopover,
   ProjectPopover,
   ProjectPage,

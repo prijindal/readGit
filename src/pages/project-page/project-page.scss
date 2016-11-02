@@ -45,6 +45,9 @@ project-page {
     ion-icon {
       display: inline-block;
       width: 24px;
+      &[name="more"] {
+        float: right;
+      }
     }
   }
 }

@@ -1,5 +1,5 @@
 import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { NavController, NavParams, Slides, AlertController, PopoverController } from 'ionic-angular';
+import { NavController, NavParams, Slides, AlertController, PopoverController, Events } from 'ionic-angular';
 
 import moment from 'moment';
 
@@ -12,185 +12,17 @@ import {EditProjectPage} from '../edit-project-page/edit-project-page';
 
 import {ProjectPopover} from './project-popover/project-popover';
 import {AddCardPopover} from './add-card-popover/add-card-popover';
+import {ProjectCardPopover} from './project-card-popover/project-card-popover';
 
-const PROJECT_CARD_FRAGMENT = `
-fragment projectCard on ProjectCard {
-  note
-  creator {
-    login
-  }
-  state
-  createdAt
-  content {
-    ...on Issueish {
-      id
-      number
-      author{
-        login
-      }
-      repository {
-        name
-        owner{
-          login
-        }
-      }
-      title
-    }
-    ...on Issue {
-      state
-      assignees(first: 5) {
-        edges {
-          node {
-            login
-            avatarURL(size: 40)
-          }
-        }
-      }
-      labels(first: 10) {
-        edges {
-          node {
-            name
-            color
-          }
-        }
-      }
-    }
-    ...on PullRequest {
-      state
-    }
-  }
-}
-`
-
-
-const CARD_EDGE_FRAGMENT = `
-fragment cardEdge on ProjectCardEdge {
-  node {
-    ...projectCard
-  }
-}
-` + PROJECT_CARD_FRAGMENT
-
-const PROJECT_COLUMN_FRAGMENT = `
-fragment projectColumn on ProjectColumn {
-  id
-  name
-  updatedAt
-  cards(first: 30) {
-    edges {
-      ...cardEdge
-    }
-    pageInfo {
-      hasNextPage
-      endCursor
-    }
-    totalCount
-  }
-}
-` + CARD_EDGE_FRAGMENT
-
-const COLUMN_EDGE_FRAGMENT = `
-fragment columnEdge on ProjectColumnEdge {
-  node {
-    ...projectColumn
-  }
-}
-` + PROJECT_COLUMN_FRAGMENT
-
-const PROJECT_QUERY = `
-query($username: String!, $reponame:String! $number:Int!) {
-  repository(owner: $username, name: $reponame) {
-		project(number: $number) {
-      id
-      name
-      updatedAt
-      body
-      viewerCanEdit
-      columns(first: 30) {
-        edges {
-          ...columnEdge
-        }
-        pageInfo {
-          hasNextPage
-          endCursor
-        }
-        totalCount
-      }
-    }
-  }
-}
-
-` + COLUMN_EDGE_FRAGMENT
-
-const ADD_PROJECT_COLUMN_QUERY = `
-mutation(
-  $clientMutationId: String!, 
-  $projectId:ID!,
-  $name: String!
-) {
-  addProjectColumn(input: {
-    clientMutationId: $clientMutationId, 
-    projectId: $projectId, 
-    name: $name
-  }) {
-    columnEdge {
-      ...columnEdge
-    }
-  }
-}
-` + COLUMN_EDGE_FRAGMENT
-
-const UPDATE_PROJECT_COLUMN_QUERY = `
-mutation(
-  $clientMutationId: String!, 
-  $projectColumnId:ID!,
-  $name: String!
-) {
-  updateProjectColumn(input: {
-    clientMutationId: $clientMutationId, 
-    projectColumnId: $projectColumnId, 
-    name: $name
-  }) {
-    projectColumn {
-	    ...projectColumn
-    }
-  }
-}
-` + PROJECT_COLUMN_FRAGMENT
-
-const DELETE_PROJECT_COLUMN_QUERY = `
-mutation(
-  $clientMutationId: String!, 
-  $columnId:ID!
-) {
-  deleteProjectColumn(input: {
-    clientMutationId: $clientMutationId, 
-    columnId: $columnId
-  }) {
-    deletedColumnId
-  }
-}
-`
-
-const ADD_PROJECT_CARD_QUERY = `
-mutation(
-  $clientMutationId: String!, 
-  $projectColumnId:ID!,
-  $contentId:ID,
-  $note:String
-) {
-  addProjectCard(input: {
-    clientMutationId: $clientMutationId, 
-    projectColumnId: $projectColumnId,
-    contentId: $contentId,
-    note: $note
-  }) {
-    cardEdge {
-      ...cardEdge
-    }
-  }
-}
-` + CARD_EDGE_FRAGMENT
+import {
+  PROJECT_QUERY,
+  ADD_PROJECT_COLUMN_QUERY,
+  UPDATE_PROJECT_COLUMN_QUERY,
+  DELETE_PROJECT_COLUMN_QUERY,
+  ADD_PROJECT_CARD_QUERY,
+  UPDATE_PROJECT_CARD_QUERY,
+  DELETE_PROJECT_CARD_QUERY
+} from './project-page.queries';
 
 @Component({
   selector: 'project-page',
@@ -213,6 +45,7 @@ export class ProjectPage {
     private params: NavParams,
     private alertCtrl: AlertController,
     private popoverCtrl: PopoverController,
+    private events: Events,
 
     private filehttp: FileService,
     private graphapi: GraphApiService,
@@ -371,6 +204,138 @@ export class ProjectPage {
       }
     })
     addCardPopover.present({ev: event})
+  }
+
+  editColumnCard(column, card, event) {
+    let editCardPopover = this.popoverCtrl.create(ProjectCardPopover);
+
+    this.events.subscribe('project-card-edit', events => {
+      if (events && events[0]) {
+        switch(events[0]) {
+          case 'edit':
+            this.updateColumnCard(column, card, event)
+            break;
+          case 'delete':
+            this.deleteColumnCard(column, card, event)
+            break;
+        }
+      }
+    })
+
+    editCardPopover.onDidDismiss(() => {
+      this.events.unsubscribe('project-card-edit')
+    })
+
+    editCardPopover.present({ev: event});
+  }
+  
+  updateColumnCard(column, card, event) {
+    let editColumnAlert = this.alertCtrl.create({
+      title: 'Edit note',
+      inputs:[
+        {
+          name:'note',
+          type:'text',
+          value:card.node.note
+        }
+      ],
+      buttons:[
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'Save note',
+          handler: data => {
+            column.node.cards.edges.forEach(edge => {
+              if (edge.node.id === card.node.id) {
+                edge.node.note = data.note
+              }
+            })
+            this.project.columns.edges.forEach(edge => {
+              if(edge.node.id === column.node.id) {
+                edge.node = column.node
+              }
+            })
+            this.ref.detectChanges();
+            this.graphapi.request(UPDATE_PROJECT_CARD_QUERY, {
+              clientMutationId: this.filehttp.userData.id,
+              projectCardId: card.node.id,
+              note: data.note
+            })
+            .map(res => res.updateProjectCard.projectCard)
+            .subscribe(res => {
+              column.node.cards.edges.forEach(edge => {
+                if (edge.node.id === card.node.id) {
+                  edge.node = res
+                }
+              })
+              this.project.columns.edges.forEach(edge => {
+                if(edge.node.id === column.node.id) {
+                  edge.node = column.node
+                }
+              })
+              this.ref.detectChanges();
+            })
+          }
+        }
+      ]
+    })
+    editColumnAlert.present({ev: event});
+  }
+  
+  deleteColumnCard(column, card, event) {
+    let deleteCardAlert = this.alertCtrl.create({
+      subTitle: 'Are you sure you want to delete this note' ,
+      buttons:[
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            let edges = []
+            column.node.cards.edges.forEach(edge => {
+              if (edge.node.id !== card.node.id) {
+                edges.push(edge)
+              }
+            })
+            column.node.cards.edges = edges
+            column.node.cards.totalCount-=1;
+            this.project.columns.edges.forEach(edge => {
+              if(edge.node.id === column.node.id) {
+                edge.node = column.node
+              }
+            })
+            this.ref.detectChanges();
+            this.graphapi.request(DELETE_PROJECT_CARD_QUERY, {
+              clientMutationId: this.filehttp.userData.id,
+              cardId: card.node.id
+            })
+            .map(res => res.deleteProjectCard)
+            .subscribe(res => {
+              let edges = []
+              column.node.cards.edges.forEach(edge => {
+                if (edge.node.id !== res.deletedCardId) {
+                  edges.push(edge)
+                }
+              })
+              column.node.cards.edges = edges
+              this.project.columns.edges.forEach(edge => {
+                if(edge.node.id === column.node.id) {
+                  edge.node = column.node
+                }
+              })
+              this.ref.detectChanges();
+            }, err => {
+              this.filehttp.handleError(err);
+            })
+          }
+        }
+      ]
+    })
+    deleteCardAlert.present({ev: event});
   }
 
   editColumn(column) {
