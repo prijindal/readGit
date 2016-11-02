@@ -34,7 +34,7 @@
             Updated {{timeFromNow(project.updatedAt)}}
           </span>
         </p>
-        <p [innerHTML]="project.bodyHTML"></p>
+        <p>{{project.body}}</p>
       </button>
       <ion-item-options side="right" *ngIf="project.viewerCanEdit">
         <button ion-button color="primary" (click)="editProject(project)">

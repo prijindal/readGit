@@ -4,6 +4,8 @@ import { NavController, NavParams } from 'ionic-angular';
 import {FileService} from '../../providers/filehttp';
 import {GraphApiService} from '../../providers/graphapi';
 
+import {ProjectsPage} from '../projects-page/projects-page';
+
 const PROJECT_QUERY = `
 query($username: String!, $reponame:String! $number:Int!) {
   repository(owner: $username, name: $reponame) {
@@ -47,7 +49,6 @@ export class EditProjectPage {
   public reponame: string;
   public number: number;
   public project: any;
-  private ownerId: string;
 
   constructor(
     public nav: NavController,
@@ -61,10 +62,9 @@ export class EditProjectPage {
     this.username = this.params.get('username');
     this.reponame = this.params.get('reponame');
     this.number = parseInt(this.params.get('number'));
-    this.ownerId = this.params.get('ownerId');
-    this.project = parseInt(this.params.get('project'));
-
-    if (!this.ownerId || !this.project) {
+    this.project = this.params.get('project');
+    
+    if (!this.project) {
       // Get Project Details
       this.graphapi.request(PROJECT_QUERY, {
         username: this.username,
@@ -73,7 +73,6 @@ export class EditProjectPage {
       })
       .map(res => res.repository)
       .subscribe(res => {
-        this.ownerId = res.id
         this.project = res.project
       }, err => {
         this.filehttp.handleError(err);
@@ -84,11 +83,18 @@ export class EditProjectPage {
   submit() {
     this.graphapi.request(UPDATE_PROJECT_QUERY, {
       clientMutationId: this.filehttp.userData.id,
-      ownerId: this.ownerId,
+      projectId: this.project.id,
       name: this.project.name,
       body: this.project.body
     }).subscribe(res => {
-      this.nav.pop();
+      if (this.nav.canGoBack()) {
+        this.nav.pop();
+      } else {
+        this.nav.setRoot(ProjectsPage, {
+          username: this.username,
+          reponame: this.reponame
+        })
+      }
     }, err => {
       this.filehttp.handleError(err);
     })

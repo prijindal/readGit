@@ -25,7 +25,7 @@ query($username: String!, $reponame:String!, $PER_PAGE:Int, $after:String) {
           name
           number
           updatedAt
-          bodyHTML
+          body
           viewerCanEdit
         }
       }
@@ -155,7 +155,6 @@ export class ProjectsPage {
     this.nav.push(EditProjectPage, {
       username: this.username,
       reponame: this.reponame,
-      ownerId: this.ownerId,
       number: project.number,
       project: project
     });

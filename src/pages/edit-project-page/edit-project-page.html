@@ -11,7 +11,7 @@
 
 
 <ion-content padding>
-  <div>
+  <div *ngIf="project">
     <ion-item>
       <ion-label floating>Name</ion-label>
       <ion-input [(ngModel)]="project.name"></ion-input>
