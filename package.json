@@ -4,14 +4,9 @@
   "homepage": "https://readgit.herokuapp.com/",
   "private": true,
   "scripts": {
-    "build": "ionic-app-scripts build --release",
-    "watch": "ionic-app-scripts watch",
-    "serve:before": "watch",
-    "emulate:before": "build",
-    "deploy:before": "build",
-    "build:before": "build",
-    "run:before": "build",
-    "lint": "ionic-app-scripts lint",
+    "ionic:build": "ionic-app-scripts build",
+    "ionic:serve": "ionic-app-scripts serve",
+    "test": "ionic-app-scripts lint",
     "heroku-postbuild": "sh deploy.sh",
     "livereload": "ionic run android --livereload --address 192.168.137.1 --device",
     "android": "cordova run android --buildConfig=.vscode/build.json",
@@ -19,65 +14,38 @@
     "deeplink": "adb shell am start -a android.intent.action.VIEW -d 'github://github.com/prijindal/readGit'"
   },
   "dependencies": {
-    "@angular/common": "2.0.0",
-    "@angular/compiler": "2.0.0",
-    "@angular/compiler-cli": "0.6.2",
-    "@angular/core": "2.0.0",
-    "@angular/forms": "2.0.0",
-    "@angular/http": "2.0.0",
-    "@angular/platform-browser": "2.0.0",
-    "@angular/platform-browser-dynamic": "2.0.0",
-    "@angular/platform-server": "2.0.0",
+    "@angular/common": "2.1.1",
+    "@angular/compiler": "2.1.1",
+    "@angular/compiler-cli": "2.1.1",
+    "@angular/core": "2.1.1",
+    "@angular/forms": "2.1.1",
+    "@angular/http": "2.1.1",
+    "@angular/platform-browser": "2.1.1",
+    "@angular/platform-browser-dynamic": "2.1.1",
+    "@angular/platform-server": "2.1.1",
     "@ionic/storage": "1.1.6",
-    "@types/async": "^2.0.32",
-    "async": "^2.0.1",
-    "ionic-angular": "2.0.0-rc.1",
+    "@types/async": "^2.0.34",
+    "async": "^2.1.4",
+    "ionic-angular": "2.0.0-rc.3",
     "ionic-native": "2.2.3",
     "ionicons": "3.0.0",
-    "moment": "^2.15.1",
+    "moment": "^2.17.0",
     "octicons": "^5.0.1",
     "rxjs": "5.0.0-beta.12",
     "x2js": "^3.0.1",
-    "zone.js": "0.6.21"
+    "zone.js": "0.6.26"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "0.0.39",
-    "cordova": "^6.4.0",
-    "ionic": "^2.1.4",
-    "node-static": "^0.7.9",
-    "typescript": "^2.0.6"
+    "@ionic/app-scripts": "0.0.45",
+    "typescript": "2.0.6"
   },
   "cordovaPlugins": [
+    "cordova-plugin-whitelist",
+    "cordova-plugin-statusbar",
     "cordova-plugin-device",
     "cordova-plugin-console",
-    "cordova-plugin-whitelist",
     "cordova-plugin-splashscreen",
-    "cordova-plugin-statusbar",
-    "ionic-plugin-keyboard",
-    "cordova-plugin-nativeclicksound",
-    "cordova-plugin-browsertab",
-    "cordova-plugin-compat",
-    {
-      "id": "ionic-plugin-deeplinks",
-      "locator": "ionic-plugin-deeplinks",
-      "variables": {
-        "URL_SCHEME": "github",
-        "DEEPLINK_SCHEME": "https",
-        "DEEPLINK_HOST": "github.com"
-      }
-    },
-    "cordova-plugin-x-toast"
+    "ionic-plugin-keyboard"
   ],
-  "cordovaPlatforms": [
-    {
-      "platform": "android",
-      "version": "",
-      "locator": "android"
-    },
-    {
-      "platform": "browser",
-      "version": "",
-      "locator": "browser"
-    }
-  ]
+  "cordovaPlatforms": []
 }

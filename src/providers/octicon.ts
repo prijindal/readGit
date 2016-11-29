@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 
-import octicons from 'octicons/build/data.json';
+// import octicons from 'octicons/build/data.json';
+
+const octicons = {
+
+}
 
 @Injectable()
 export class OcticonService {
