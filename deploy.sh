@@ -1,3 +1,2 @@
-ionic platform add browser
-ionic build browser
-gzip -k -r --best --force platforms/browser/www
+ionic-app-scripts build
+gzip -k -r --best --force www
