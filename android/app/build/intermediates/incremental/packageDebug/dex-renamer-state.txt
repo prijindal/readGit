@@ -1,0 +1,4 @@
+#Mon Jun 19 05:06:19 IST 2017
+base.0=/home/prijindal/projects/readGit/android/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main
+renamed.0=classes.dex
+file.0=/home/prijindal/projects/readGit/android/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex

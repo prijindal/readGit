@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/home/prijindal/projects/readGit/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-okhttp3/1.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="ba9b39366b723ccff6359d1117332968e98a4aca">
+        <dex dex="/home/prijindal/projects/readGit/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-okhttp3-1.0.1_292e0313f56caa1abdeddf1657fed8d87f6892e8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/prijindal/projects/readGit/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="/home/prijindal/projects/readGit/android/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.0.1_f657b5adf192552d173f12976946c953488b90f2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/prijindal/projects/readGit/android/app/build/intermediates/exploded-aar/com.facebook.fbui.textlayoutbuilder/textlayoutbuilder/1.0.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="f90b593491e4044903f0bbf68dc3fa2790b151b9">
+        <dex dex="/home/prijindal/projects/readGit/android/app/build/intermediates/pre-dexed/debug/com.facebook.fbui.textlayoutbuilder-textlayoutbuilder-1.0.0_887090042cb2460b1c3ac4bbfd02245b39062cea.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/prijindal/.gradle/caches/modules-2/files-2.1/com.facebook.fbui.textlayoutbuilder/staticlayout-proxy/1.0/f162442a19fff13995fbd51ba414d9ee05579080/staticlayout-proxy-1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="f162442a19fff13995fbd51ba414d9ee05579080">
+        <dex dex="/home/prijindal/projects/readGit/android/app/build/intermediates/pre-dexed/debug/staticlayout-proxy-1.0_8f2aba5e421e110fcc6ebf2506e81462ef1a4f8e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/prijindal/projects/readGit/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-base/1.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="050f688115ea65a0292d8483a6ffe6bcdab1e2ef">
+        <dex dex="/home/prijindal/projects/readGit/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-base-1.0.1_a25f5dda99c82f1aa345dff7997f2004a5274b32.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/prijindal/projects/readGit/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fresco/1.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="cf836a435a496eb22ff2aa69aa1e619462549f81">
+        <dex dex="/home/prijindal/projects/readGit/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fresco-1.0.1_f2d95f184ff8050ab756c8bd0e29de0e26aac070.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/prijindal/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-tasks/1.4.0/d85884acf6810a3bbbecb587f239005cbc846dc4/bolts-tasks-1.4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="d85884acf6810a3bbbecb587f239005cbc846dc4">
+        <dex dex="/home/prijindal/projects/readGit/android/app/build/intermediates/pre-dexed/debug/bolts-tasks-1.4.0_1431b7d3984fc7fd3661fbc4e583277b1e359b9e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/prijindal/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.9.0/f824591a0016efbaeddb8300bee54832a1398cfa/okio-1.9.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="f824591a0016efbaeddb8300bee54832a1398cfa">
+        <dex dex="/home/prijindal/projects/readGit/android/app/build/intermediates/pre-dexed/debug/okio-1.9.0_193d2b012440f9ba46997727537d9c35497b70a3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/prijindal/projects/readGit/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.44.3/jars/libs/infer-annotations-1.5.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="dcac634e137395f79693ec760f081a86eb2bd84e">
+        <dex dex="/home/prijindal/projects/readGit/android/app/build/intermediates/pre-dexed/debug/infer-annotations-1.5_1f1c8c4dd7cd1961fd848859a8dddf26d5b6fe19.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/prijindal/projects/readGit/android/app/build/intermediates/exploded-aar/com.facebook.soloader/soloader/0.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="8f615bca00639150c9eb6175d4b5471193f70794">
+        <dex dex="/home/prijindal/projects/readGit/android/app/build/intermediates/pre-dexed/debug/com.facebook.soloader-soloader-0.1.0_706818198c1522afa5de5e965fe4562a20826602.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/prijindal/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/6975da39a7040257bd51d21a231b76c915872d38/javax.inject-1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="6975da39a7040257bd51d21a231b76c915872d38">
+        <dex dex="/home/prijindal/projects/readGit/android/app/build/intermediates/pre-dexed/debug/javax.inject-1_dfe37ba207856c54927e4d792144a11e72dbe382.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/prijindal/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.0/5871fb60dc68d67da54a663c3fd636a10a532948/jsr305-3.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="5871fb60dc68d67da54a663c3fd636a10a532948">
+        <dex dex="/home/prijindal/projects/readGit/android/app/build/intermediates/pre-dexed/debug/jsr305-3.0.0_2125e0054cd959bb8169bf68ca15a5ca6b80044f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/prijindal/projects/readGit/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline/1.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="d9c4402c3057225d80cbbbec52154e7a25b0ebdf">
+        <dex dex="/home/prijindal/projects/readGit/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-1.0.1_a97072d337b4162e8faace2c17d0693f4b101762.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/prijindal/projects/readGit/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/libs/internal_impl-23.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="/home/prijindal/projects/readGit/android/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.1_7c41775f31ac7ec896ef1320bbf73efabc76ed40.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/prijindal/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.4.1/c7c4f9e35c2fd5900da24f9872e3971801f08ce0/okhttp-3.4.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="c7c4f9e35c2fd5900da24f9872e3971801f08ce0">
+        <dex dex="/home/prijindal/projects/readGit/android/app/build/intermediates/pre-dexed/debug/okhttp-3.4.1_e9b75b9457e394effe1318d59d197195dbd865a4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/prijindal/softwares/android-sdk-linux/extras/android/m2repository/com/android/support/support-annotations/23.0.1/support-annotations-23.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
+        <dex dex="/home/prijindal/projects/readGit/android/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.1_45d320dfb28cd031f2b5fcd5092d8c210f35b8ee.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/prijindal/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp-urlconnection/3.4.1/63994437f62bc861bc20c605d12962f7246116d1/okhttp-urlconnection-3.4.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="63994437f62bc861bc20c605d12962f7246116d1">
+        <dex dex="/home/prijindal/projects/readGit/android/app/build/intermediates/pre-dexed/debug/okhttp-urlconnection-3.4.1_5c64e73d640ff3b3b656f02bea64639dab743c60.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/prijindal/projects/readGit/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="/home/prijindal/projects/readGit/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.0.1_d860e38846c8288a0efa10cca462bab9928f4024.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/prijindal/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp-ws/3.4.1/8ace66ef7002d98f633377c9e67daeeb196d8c3b/okhttp-ws-3.4.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="8ace66ef7002d98f633377c9e67daeeb196d8c3b">
+        <dex dex="/home/prijindal/projects/readGit/android/app/build/intermediates/pre-dexed/debug/okhttp-ws-3.4.1_26389e2b97456aca8a0c0963e397d8f585e73370.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/prijindal/projects/readGit/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fbcore/1.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="2668e49e4e31c7d451b76a36009b902bf44e0d70">
+        <dex dex="/home/prijindal/projects/readGit/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fbcore-1.0.1_7207aadc37a1e732308cfdd5d376293e49140833.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/prijindal/projects/readGit/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.44.3/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="af9665a44df26b4098e24c934c1109507845ef5e">
+        <dex dex="/home/prijindal/projects/readGit/android/app/build/intermediates/pre-dexed/debug/com.facebook.react-react-native-0.44.3_af00356b0d7ef4d4b95b0a325d149ed6c7f3351b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/prijindal/projects/readGit/android/app/build/intermediates/exploded-aar/com.facebook.fresco/drawee/1.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="5a61f17cd72e20aa4323cbf5f909b7c609619275">
+        <dex dex="/home/prijindal/projects/readGit/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-drawee-1.0.1_0fcd9ed8d46a7ab7fc8bea67b6051b37114a71ad.jar" />
+    </item>
+
+</items>
