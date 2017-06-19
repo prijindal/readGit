@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Text, FlatList, View, ScrollView, ActivityIndicator } from 'react-native';
 
 import { primary } from '../colors';
+import sleep from '../helpers/sleep';
 
 import Layout from '../components/Layout';
 import ListItem from '../components/ListItem';
@@ -16,9 +17,27 @@ const styles = {
   }
 }
 
+const Loading = () => (
+  <View style={styles.loading}>
+    <ActivityIndicator color={primary} size={24}/>
+  </View>
+)
+
 class Home extends Component {
   componentWillMount() {
-    this.updateData();
+    this.initData();
+  }
+
+  initData = async () => {
+    this.setState({
+      refreshing: true,
+    })
+    await sleep(1000);
+    let data = Array(10).fill().map((_, i) => ({key: i.toString(), title : (i * i).toString()}));
+    this.setState({
+      data,
+      refreshing: false,
+    });
   }
 
   updateData = () => {
@@ -30,6 +49,7 @@ class Home extends Component {
 
   state = {
     data: [],
+    refreshing: true,
   }
 
   render() {
@@ -41,12 +61,13 @@ class Home extends Component {
           <FlatList
             contentContainerStyle={styles.scrollView}
             data={this.state.data}
+            removeClippedSubviews
             renderItem={({item}) => <ListItem item={item}/>}
             ListFooterComponent={() => (
-              <View style={styles.loading}>
-                <ActivityIndicator color={primary} size={24}/>
-              </View>
+              <Loading />
             )}
+            refreshing={this.state.refreshing}
+            onRefresh={this.initData}
             onEndReached={this.updateData}
           />
       </Layout>
