@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { DrawerLayoutAndroid, BackAndroid, Dimensions } from 'react-native';
+import { DrawerLayoutAndroid, BackHandler, Dimensions } from 'react-native';
 import { closeDrawer, openDrawer } from '../actions/drawer';
 
 import AppBar from '../components/AppBar';
@@ -23,14 +23,14 @@ class DrawerNavigator extends Component {
   }
 
   componentWillUnmount() {
-    BackAndroid.removeEventListener('hardwareBackPress');
+    BackHandler.removeEventListener('hardwareBackPress');
   }
 
   drawer: any
   approutes: any
 
   registerBackButton() {
-    BackAndroid.addEventListener('hardwareBackPress', () => {
+    BackHandler.addEventListener('hardwareBackPress', () => {
       if (this.props.drawer) {
         this.drawer.closeDrawer();
         return true;
