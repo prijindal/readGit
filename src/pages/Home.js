@@ -33,18 +33,24 @@ class Home extends Component {
       refreshing: true,
     })
     await sleep(1000);
-    let data = Array(10).fill().map((_, i) => ({key: i.toString(), title : (i * i).toString()}));
+    let data = await fetch('https://api.github.com/users');
+    data = await data.json();
     this.setState({
       data,
       refreshing: false,
     });
   }
 
-  updateData = () => {
-    let data = Array(this.state.data.length + 10).fill().map((_, i) => ({key: i.toString(), title : (i * i).toString()}));
-    this.setState({
-      data,
-    });
+  updateData = async () => {
+    let newData = await fetch(`https://api.github.com/users?since=${this.state.data[this.state.data.length - 1].id}`);
+    newData = await newData.json();
+    this.setState(prevState => ({
+      data: [
+        ...prevState.data,
+        ...newData,
+      ],
+      refreshing: false,
+    }));
   }
 
   state = {
@@ -62,7 +68,8 @@ class Home extends Component {
             contentContainerStyle={styles.scrollView}
             data={this.state.data}
             removeClippedSubviews
-            renderItem={({item}) => <ListItem item={item}/>}
+            keyExtractor={(item) => item.id}
+            renderItem={({item}) => <ListItem item={{title: item.login, image: item.avatar_url}}/>}
             ListFooterComponent={() => (
               <Loading />
             )}

@@ -10,15 +10,16 @@ const styles = {
     backgroundColor: white,
     borderBottomWidth: 1,
     minHeight: 56,
-    // alignItems: 'center',
+    alignItems: 'center',
     paddingHorizontal: 16,
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
     flexDirection: 'row',
   },
   image: {
-    marginTop: 8,
-    width: 80,
-    height: 80,
+    marginVertical: 8,
+    width: 48,
+    height: 48,
+    borderRadius: 50,
   },
   content: {
     justifyContent: 'center',
@@ -82,13 +83,13 @@ class ListItem extends Component {
     return (
       <TouchableNativeFeedback onPress={onPress}>
         <View style={[styles.view, this.getAdditionalStyles()]}>
+          {item.image &&
+            <Image source={{ uri: item.image }} style={styles.image} />
+          }
           <View style={styles.content}>
             <Text style={styles.text}>{item.title}</Text>
             <Text>{this.getBody()}</Text>
           </View>
-          {item.image &&
-            <Image source={{ uri: item.image }} style={styles.image} />
-          }
         </View>
       </TouchableNativeFeedback>
     );
