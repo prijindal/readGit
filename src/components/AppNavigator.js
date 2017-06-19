@@ -11,6 +11,7 @@ import AppRoutes from '../AppRoutes';
 
 class DrawerNavigator extends Component {
   componentWillReceiveProps({ drawer }) {
+    console.log(this.approutes);
     if (drawer) {
       this.drawer.openDrawer();
     } else {
@@ -19,6 +20,7 @@ class DrawerNavigator extends Component {
   }
 
   drawer: any
+  approutes: any
 
   render() {
     return (
@@ -26,12 +28,14 @@ class DrawerNavigator extends Component {
         drawerWidth={300}
         ref={(c) => this.drawer = c}
         drawerPosition={DrawerLayoutAndroid.positions.Left}
-        renderNavigationView={() => SideBar}
+        renderNavigationView={() =>
+          <SideBar dispatch={this.drawer ? this.drawer.dispatch : () => ({})}/>
+        }
         onDrawerOpen={this.props.onDrawerOpen}
         onDrawerClose={this.props.onDrawerClose}
       >
         <AppBar />
-        <AppRoutes />
+        <AppRoutes ref={(c) => this.approutes = c}/>
       </DrawerLayoutAndroid>
     );
   }

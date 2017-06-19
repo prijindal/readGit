@@ -11,7 +11,7 @@ const styles = {
   }
 }
 
-const Toolbar = ({ children }) => (
+const Toolbar = ({ children }: any) => (
   <ToolbarAndroid
     title="Read Git"
     {...children}

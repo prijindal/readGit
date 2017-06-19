@@ -12,7 +12,7 @@ const styles = {
   }
 }
 
-const Layout = ({ children, toolbarTitle='Read Git', menuEnabled=false, openDrawer }) => (
+const Layout = ({ children, toolbarTitle='Read Git', menuEnabled=false, openDrawer }: any) => (
   <View>
     <ToolbarAndroid
       titleColor={textPrimary}
