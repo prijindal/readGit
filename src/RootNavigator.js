@@ -8,7 +8,7 @@ import LoginPage from './pages/Login';
 
 const RootNavigator = StackNavigator({
   Login: { screen: LoginPage },
-  App: { screen: AppContainer },
+  Home: { screen: AppContainer },
 }, {
   headerMode: 'none',
 });

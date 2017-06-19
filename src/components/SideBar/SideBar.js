@@ -1,6 +1,6 @@
 /* @flow */
 import React, { Component, PropTypes } from 'react';
-import { ScrollView, Text, Image, View, Alert } from 'react-native';
+import { ScrollView, Text, Image, View, Alert, AsyncStorage } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 
 import { white, textPrimary, textSecondary } from '../../colors';
@@ -130,6 +130,7 @@ class SideBar extends Component {
   }
 
   logoutLogic = () => {
+    this.props.closeDrawer();
     this.props.logout();
     this.props.dispatch(NavigationActions.reset({
       index: 0,
@@ -139,10 +140,11 @@ class SideBar extends Component {
         })
       ]
     }));
+    AsyncStorage.removeItem('token');
+    AsyncStorage.removeItem('user');
   }
 
   render() {
-    // const { user } = this.props;
     return (
       <View onLayout={this.onScrollViewLayout} style={styles.container}>
         <ScrollView>
@@ -166,8 +168,8 @@ class SideBar extends Component {
           <View style={styles.list}>
             <List>
               <MenuItem
-                item={{ name: 'Notifications', icon: 'drafts' }}
-                onPress={() => this.openPage('home')}
+                item={{ name: 'Home', icon: 'drafts' }}
+                onPress={() => this.openPage('Home')}
               />
               <MenuItem
                 item={{ name: 'My Orders', icon: 'send' }}

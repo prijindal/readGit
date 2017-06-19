@@ -47,6 +47,9 @@ class DrawerNavigator extends Component {
     return width - 56;
   }
 
+  dispatch = (config) => {
+    this.approutes.dispatch(config)
+  }
 
   render() {
     return (
@@ -55,7 +58,7 @@ class DrawerNavigator extends Component {
         ref={(c) => this.drawer = c}
         drawerPosition={DrawerLayoutAndroid.positions.Left}
         renderNavigationView={() =>
-          <SideBar dispatch={this.drawer ? this.drawer.dispatch : () => ({})}/>
+          <SideBar dispatch={this.dispatch}/>
         }
         onDrawerOpen={this.props.onDrawerOpen}
         onDrawerClose={this.props.onDrawerClose}

@@ -11,7 +11,7 @@ const navigateToApp = NavigationActions.reset({
   index: 0,
   actions: [
     NavigationActions.navigate({
-      routeName: 'App',
+      routeName: 'Home',
     })
   ]
 })
