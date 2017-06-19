@@ -1,27 +1,16 @@
 // @flow
 import React, { Component } from 'react';
-import { Text, FlatList, View, ScrollView, ActivityIndicator } from 'react-native';
-
-import { primary } from '../colors';
-import sleep from '../helpers/sleep';
+import { Text, FlatList, ScrollView } from 'react-native';
 
 import Layout from '../components/Layout';
 import ListItem from '../components/ListItem';
+import Loading from '../components/Loading';
 
 const styles = {
   scrollView: {
     paddingBottom: 56,
-  },
-  loading: {
-    paddingVertical: 12,
   }
 }
-
-const Loading = () => (
-  <View style={styles.loading}>
-    <ActivityIndicator color={primary} size={24}/>
-  </View>
-)
 
 class Home extends Component {
   componentWillMount() {
@@ -32,7 +21,6 @@ class Home extends Component {
     this.setState({
       refreshing: true,
     })
-    await sleep(1000);
     let data = await fetch('https://api.github.com/users');
     data = await data.json();
     this.setState({
