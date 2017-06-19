@@ -12,14 +12,14 @@ const styles = {
   }
 }
 
-const Layout = ({ children, toolbarTitle='Read Git', menuEnabled=false, openDrawer }: any) => (
+const Layout = ({ children, toolbarTitle='Read Git', menuEnabled=false, openDrawer, backButton=false, onBackButtonPress }: any) => (
   <View>
     <ToolbarAndroid
       titleColor={textPrimary}
       style={styles.toolbar}
       title={toolbarTitle}
-      navIconName={menuEnabled ? 'menu' : null}
-      onIconClicked={menuEnabled ? openDrawer : () => ({})}
+      navIconName={menuEnabled ? 'menu' : (backButton ? 'arrow-back' : null)}
+      onIconClicked={menuEnabled ? openDrawer : onBackButtonPress}
     />
     {children}
   </View>

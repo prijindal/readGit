@@ -46,6 +46,10 @@ class Home extends Component {
     refreshing: true,
   }
 
+  openUser(item) {
+    this.props.navigation.navigate('User', { user: item });
+  }
+
   render() {
     return (
       <Layout
@@ -57,7 +61,12 @@ class Home extends Component {
             data={this.state.data}
             removeClippedSubviews
             keyExtractor={(item) => item.id}
-            renderItem={({item}) => <ListItem item={{title: item.login, image: item.avatar_url}}/>}
+            renderItem={({item}) => (
+              <ListItem
+                item={{title: item.login, image: item.avatar_url}}
+                onPress={() => this.openUser(item)}
+              />
+            )}
             ListFooterComponent={() => (
               <Loading />
             )}
