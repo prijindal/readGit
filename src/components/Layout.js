@@ -3,8 +3,6 @@ import React from 'react';
 import { View } from 'react-native';
 import { ToolbarAndroid } from 'react-native-vector-icons/MaterialIcons';
 
-import AppBar from './AppBar';
-
 import { primary, textPrimary } from '../colors';
 
 const styles = {
@@ -16,7 +14,6 @@ const styles = {
 
 const Layout = ({ children, toolbarTitle='Read Git', menuEnabled=false }) => (
   <View>
-    <AppBar />
     <ToolbarAndroid
       titleColor={textPrimary}
       style={styles.toolbar}
