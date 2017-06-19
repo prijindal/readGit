@@ -3,10 +3,11 @@ import React, { Component } from 'react';
 import { AsyncStorage } from 'react-native';
 import AppShell from './components/AppShell';
 import RootNavigator from './RootNavigator';
-import AppNavigator from './AppNavigator';
+import AppContainer from './AppContainer';
 
 export default class Root extends Component {
-  componentWillMount() {
+  constructor(props: any) {
+    super(props)
     this.checkToken();
   }
 
@@ -28,7 +29,7 @@ export default class Root extends Component {
     if(loading) {
       return <AppShell />;
     } else if (loggedin) {
-      return <AppNavigator />;
+      return <AppContainer />;
     } else {
       return <RootNavigator />
     }

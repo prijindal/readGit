@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Text, Button, AsyncStorage } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 
-import Layout from '../components/Layout';
+import Layout from '../components/Layout/Layout';
 
 const navigateToApp = NavigationActions.reset({
   index: 0,
@@ -16,7 +16,9 @@ const navigateToApp = NavigationActions.reset({
 
 export default class Login extends Component {
   login = async () => {
-    let isSaved = await AsyncStorage.setItem('token', 'newtoken');
+    await AsyncStorage.setItem('token', 'token');
+    const user = {user: 'user'}
+    await AsyncStorage.setItem('user', JSON.stringify(user));
     const { dispatch } = this.props.navigation;
     dispatch(navigateToApp);
   }
