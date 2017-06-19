@@ -1,16 +1,21 @@
 // @flow
 import React, { Component } from 'react';
+import { AsyncStorage } from 'react-native';
 import AppShell from './components/AppShell';
 import RootNavigator from './RootNavigator';
 import AppNavigator from './AppNavigator';
 
 export default class Root extends Component {
   componentWillMount() {
-    setTimeout(() =>
-      this.setState({
-        loading: false
-      }),
-      2000)
+    this.checkToken();
+  }
+
+  checkToken = async () => {
+    let token = await AsyncStorage.getItem('token');
+    this.setState({
+      loading: false,
+      loggedin: token != undefined,
+    })
   }
 
   state = {

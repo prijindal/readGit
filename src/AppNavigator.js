@@ -3,14 +3,10 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
-const HomeScreen = () => (
-  <View>
-    <Text>Home Screen</Text>
-  </View>
-)
+import HomePage from './pages/Home';
 
 const AppNavigator = StackNavigator({
-  Home: { screen: HomeScreen },
+  Home: { screen: HomePage },
 }, {
   headerMode: 'none',
 });

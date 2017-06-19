@@ -4,14 +4,10 @@ import { Text, View } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import AppNavigator from './AppNavigator';
 
-const LoginScreen = () => (
-  <View>
-    <Text>Login Screen</Text>
-  </View>
-)
+import LoginPage from './pages/Login';
 
 const RootNavigator = StackNavigator({
-  Login: { screen: LoginScreen },
+  Login: { screen: LoginPage },
   App: { screen: AppNavigator },
 }, {
   headerMode: 'none',

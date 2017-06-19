@@ -1,27 +1,21 @@
 // @flow
 import React from 'react';
-import { StatusBar, View, Text, ToolbarAndroid } from 'react-native';
+import { View, ToolbarAndroid } from 'react-native';
 
-import { primary, textPrimary, primaryDark, transparent } from '../colors';
+import { primary, textPrimary } from '../colors';
+
+import AppBar from './AppBar';
 
 const styles = {
   toolbar: {
     height: 56,
     backgroundColor: primary
-  },
-  appbar: {
-    height: 24,
-    backgroundColor: primaryDark,
   }
 }
 
 const AppShell = () => (
   <View>
-    <View style={styles.appbar} />
-    <StatusBar
-      backgroundColor={transparent}
-      translucent={true}
-    />
+    <AppBar />
     <ToolbarAndroid
       title="Read Git"
       titleColor={textPrimary}
