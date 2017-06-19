@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { DrawerLayoutAndroid } from 'react-native';
+import { DrawerLayoutAndroid, BackAndroid, Dimensions } from 'react-native';
 import { closeDrawer, openDrawer } from '../actions/drawer';
 
 import AppBar from '../components/AppBar';
@@ -10,8 +10,11 @@ import SideBar from '../components/SideBar';
 import AppRoutes from '../AppRoutes';
 
 class DrawerNavigator extends Component {
+  componentDidMount() {
+    this.registerBackButton();
+  }
+
   componentWillReceiveProps({ drawer }) {
-    console.log(this.approutes);
     if (drawer) {
       this.drawer.openDrawer();
     } else {
@@ -19,13 +22,36 @@ class DrawerNavigator extends Component {
     }
   }
 
+  componentWillUnmount() {
+    BackAndroid.removeEventListener('hardwareBackPress');
+  }
+
   drawer: any
   approutes: any
+
+  registerBackButton() {
+    BackAndroid.addEventListener('hardwareBackPress', () => {
+      if (this.props.drawer) {
+        this.drawer.closeDrawer();
+        return true;
+      }
+      return false;
+    });
+  }
+
+  drawerWidth = () => {
+    const { width } = Dimensions.get('window');
+    if (width - 56 > 320) {
+      return 320;
+    }
+    return width - 56;
+  }
+
 
   render() {
     return (
       <DrawerLayoutAndroid
-        drawerWidth={300}
+        drawerWidth={this.drawerWidth()}
         ref={(c) => this.drawer = c}
         drawerPosition={DrawerLayoutAndroid.positions.Left}
         renderNavigationView={() =>
