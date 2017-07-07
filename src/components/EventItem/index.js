@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import { TouchableNativeFeedback, View, Text, Image } from 'react-native';
 import { textDarkPrimary, textDarkDivider, textDarkSecondary, white } from '../../colors';
-import { getTitle } from './functions';
+import { getInfo } from './functions';
 
 const styles = {
   view: {
@@ -54,11 +54,7 @@ class EventItem extends PureComponent {
     infoExtractor: PropTypes.func,
   }
 
-  state = {
-    expanded: false
-  }
-
-  getInfo = () => getTitle(this.props.item);
+  getInfo = () => getInfo(this.props.item);
 
   getDate = () => {
     return moment(this.props.item.created_at).fromNow();
@@ -79,14 +75,7 @@ class EventItem extends PureComponent {
           <View style={styles.content}>
             <Text style={styles.text}>{title}</Text>
             <Text style={styles.date}>{this.getDate()}</Text>
-            {body &&
-              <View>
-                {this.state.expanded ?
-                  <Text>{body}</Text>:
-                  <Text>{body.substr(0, 160)}</Text>
-                }
-              </View>
-            }
+            {body}
           </View>
         </View>
       </TouchableNativeFeedback>
