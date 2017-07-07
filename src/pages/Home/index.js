@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { Text, FlatList, ScrollView, View } from 'react-native';
+import moment from 'moment';
 
 import Layout from '../../components/Layout';
 import EventItem from '../../components/EventItem';
@@ -29,6 +30,7 @@ class Home extends Component {
     this.setState({
       data,
       refreshing: false,
+      last_updated: Date.now()
     });
   }
 
@@ -54,6 +56,7 @@ class Home extends Component {
 
   state = {
     data: [],
+    last_updated: false,
     refreshing: true,
     loading: false,
   }
@@ -62,7 +65,8 @@ class Home extends Component {
     return (
       <Layout
         menuEnabled
-        toolbarTitle="News Feed"
+        toolbarTitle="News Feed" //TODO: Add last updated at
+        toolbarSubitle={this.state.last_updated ? `Last updated ${moment(this.state.last_updated).fromNow()}`: undefined}
       >
           <FlatList
             contentContainerStyle={styles.scrollView}
