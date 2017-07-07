@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Text, FlatList, ScrollView, View, ToastAndroid } from 'react-native';
 import moment from 'moment';
 
+import { saveCache, getCache } from '../../helpers/networkCache';
 import { textDarkSecondary } from '../../colors';
 
 import Layout from '../../components/Layout';
@@ -25,22 +26,41 @@ const styles = {
 
 class Home extends Component {
   componentWillMount() {
-    this.initData();
+    this.init();
   }
 
-  initData = async () => {
+  init = async () => {
     this.setState({
       refreshing: true,
     })
     try {
-      let data = await fetch(`https://api.github.com/users/${USER}/received_events`);
-      data = await data.json();
+      let { time, body } = await getCache(`https://api.github.com/users/${USER}/received_events`);
+      body = JSON.parse(body);
+      this.setState({
+        error: null,
+        data: body,
+        refreshing: false,
+        last_updated: time,
+      })
+    } catch(e) {
+      console.log(e);
+    } finally {
+      this.initData();
+    }
+  }
+
+  initData = async () => {
+    try {
+      let dataResponse = await fetch(`https://api.github.com/users/${USER}/received_events`);
+      console.log(dataResponse);
+      data = await dataResponse.json();
       this.setState({
         error: null,
         data,
         refreshing: false,
-        last_updated: Date.now()
+        last_updated: dataResponse.headers.map.date[0],
       });
+      await saveCache(dataResponse, JSON.stringify(data));
     } catch(e) {
       ToastAndroid.show(e.message, ToastAndroid.LONG);
       this.setState({
