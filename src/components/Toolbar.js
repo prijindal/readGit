@@ -3,7 +3,7 @@ import React from 'react';
 import { View, Text, TouchableNativeFeedback } from 'react-native';
 import Icon, { ToolbarAndroid } from 'react-native-vector-icons/MaterialIcons';
 
-import { primary, textPrimary, transparent } from '../colors';
+import { primary, textPrimary, transparent, textSecondary } from '../colors';
 
 const styles = {
   toolbar: {
@@ -27,7 +27,7 @@ const styles = {
     fontSize: 20,
   },
   subtitle: {
-    color: textPrimary,
+    color: textSecondary,
   }
 }
 

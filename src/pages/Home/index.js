@@ -1,7 +1,9 @@
 // @flow
 import React, { Component } from 'react';
-import { Text, FlatList, ScrollView, View } from 'react-native';
+import { Text, FlatList, ScrollView, View, ToastAndroid } from 'react-native';
 import moment from 'moment';
+
+import { textDarkSecondary } from '../../colors';
 
 import Layout from '../../components/Layout';
 import EventItem from '../../components/EventItem';
@@ -13,6 +15,11 @@ const styles = {
   scrollView: {
     paddingTop: 4,
     paddingBottom: 56,
+  },
+  error: {
+    padding: 8,
+    color: textDarkSecondary,
+    textAlign: 'center'
   }
 }
 
@@ -25,13 +32,23 @@ class Home extends Component {
     this.setState({
       refreshing: true,
     })
-    let data = await fetch(`https://api.github.com/users/${USER}/received_events`);
-    data = await data.json();
-    this.setState({
-      data,
-      refreshing: false,
-      last_updated: Date.now()
-    });
+    try {
+      let data = await fetch(`https://api.github.com/users/${USER}/received_events`);
+      data = await data.json();
+      this.setState({
+        error: null,
+        data,
+        refreshing: false,
+        last_updated: Date.now()
+      });
+    } catch(e) {
+      ToastAndroid.show(e.message, ToastAndroid.LONG);
+      this.setState({
+        error: e.message,
+        refreshing: false,
+        ended: true,
+      })
+    }
   }
 
   updateData = async () => {
@@ -39,19 +56,35 @@ class Home extends Component {
     this.setState({
       loading: true
     })
-    let url = `https://api.github.com/users/${USER}/received_events?page=${((this.state.data.length / 30) + 1)}`;
-    console.log(url);
-    let newData = await fetch(url);
-    newData = await newData.json();
-    this.setState(prevState => ({
-      data: [
-        ...prevState.data,
-        ...newData,
-      ],
-      refreshing: false,
-      loading: (newData.length == undefined || newData.length < 30),
-      ended: (newData.length == undefined || newData.length < 30),
-    }));
+    try {
+      let url = `https://api.github.com/users/${USER}/received_events?page=${((this.state.data.length / 30) + 1)}`;
+      console.log(url);
+      let newData = await fetch(url);
+      newData = await newData.json();
+      this.setState(prevState => ({
+        data: [
+          ...prevState.data,
+          ...newData,
+        ],
+        refreshing: false,
+        loading: (newData.length == undefined || newData.length < 30),
+        ended: (newData.length == undefined || newData.length < 30),
+      }));
+    } catch(e) {
+      ToastAndroid.show(e.message, ToastAndroid.LONG);
+      this.setState({
+        loading: false,
+      })
+    }
+  }
+
+  lastUpdatedTime = () => {
+    if(!this.state.last_updated) return undefined;
+    let moment_last_updated = moment(this.state.last_updated);
+    if(moment_last_updated.diff(moment(), 'days') > 1) {
+      return `Last updated ${moment_last_updated.calendar()}`;
+    }
+    return `Last updated ${moment_last_updated.fromNow()}`;
   }
 
   state = {
@@ -59,6 +92,7 @@ class Home extends Component {
     last_updated: false,
     refreshing: true,
     loading: false,
+    error: null,
   }
 
   render() {
@@ -66,8 +100,11 @@ class Home extends Component {
       <Layout
         menuEnabled
         toolbarTitle="News Feed" //TODO: Add last updated at
-        toolbarSubitle={this.state.last_updated ? `Last updated ${moment(this.state.last_updated).fromNow()}`: undefined}
+        toolbarSubitle={this.lastUpdatedTime()}
       >
+        {this.state.error !== null &&
+          <Text style={styles.error}>{this.state.error}</Text>
+        }
           <FlatList
             contentContainerStyle={styles.scrollView}
             data={this.state.data}
@@ -80,9 +117,13 @@ class Home extends Component {
             )}
             ListFooterComponent={() => (
               <View>
-                {this.state.ended ?
-                  <Text>No more events</Text>:
-                  <Loading />
+                {this.state.error === null &&
+                  <View>
+                    {this.state.ended ?
+                      <Text style={styles.error}>No more events</Text>:
+                      <Loading />
+                    }
+                  </View>
                 }
               </View>
             )}
