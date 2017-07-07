@@ -12,7 +12,7 @@ const styles = {
   }
 }
 
-class Home extends Component {
+class Users extends Component {
   componentWillMount() {
     this.initData();
   }
@@ -30,6 +30,7 @@ class Home extends Component {
   }
 
   updateData = async () => {
+    if(this.state.data.length === 0) return ;
     let newData = await fetch(`https://api.github.com/users?since=${this.state.data[this.state.data.length - 1].id}`);
     newData = await newData.json();
     this.setState(prevState => ({
@@ -54,7 +55,7 @@ class Home extends Component {
     return (
       <Layout
         menuEnabled
-        toolbarTitle="Home"
+        toolbarTitle="Users"
       >
           <FlatList
             contentContainerStyle={styles.scrollView}
@@ -79,4 +80,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default Users;

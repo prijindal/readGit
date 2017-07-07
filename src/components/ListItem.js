@@ -1,5 +1,6 @@
 /* @flow */
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { TouchableNativeFeedback, View, Text, Image } from 'react-native';
 import { textDarkPrimary, textDarkDivider, white } from '../colors';
 
@@ -32,7 +33,7 @@ const styles = {
   },
 };
 
-class ListItem extends Component {
+class ListItem extends PureComponent {
   static defaultProps = {
     idx: 0,
     length: 1,

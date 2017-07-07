@@ -17,6 +17,8 @@
   },
   "dependencies": {
     "color": "^1.0.3",
+    "moment": "^2.18.1",
+    "prop-types": "^15.5.10",
     "react": "16.0.0-alpha.12",
     "react-native": "0.46.0",
     "react-native-vector-icons": "^4.2.0",

@@ -1,5 +1,6 @@
 /* @flow */
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { ScrollView, Text, Image, View, Alert, AsyncStorage } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 
@@ -95,7 +96,6 @@ class SideBar extends Component {
   }
 
   onScrollViewLayout = (event: any) => {
-    console.log(this.props)
     const { width } = event.nativeEvent.layout;
     const imageHeight = (width * 9) / 16;
     // Put in redux state
@@ -172,8 +172,8 @@ class SideBar extends Component {
                 onPress={() => this.openPage('Home')}
               />
               <MenuItem
-                item={{ name: 'My Orders', icon: 'send' }}
-                onPress={() => this.openPage('myorders')}
+                item={{ name: 'All Users', icon: 'person' }}
+                onPress={() => this.openPage('Users')}
               />
               <MenuItem
                 item={{ name: 'Claim Orders', icon: 'touch-app' }}

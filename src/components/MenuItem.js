@@ -1,5 +1,6 @@
 /* @flow */
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { TouchableNativeFeedback, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
