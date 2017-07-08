@@ -6,6 +6,7 @@ import { saveUser } from './actions/user';
 
 import configureStore from './configureStore';
 import AppNavigator from './components/AppNavigator';
+import AppShell from './components/AppShell';
 
 const store = configureStore();
 
@@ -13,6 +14,10 @@ class AppContainer extends Component {
   constructor(props: any) {
     super(props)
     this.saveToken();
+  }
+
+  state = {
+    loaded: false,
   }
 
   saveToken = async () => {
@@ -23,9 +28,13 @@ class AppContainer extends Component {
       ...user,
       token
     }))
+    this.setState({
+      loaded: true,
+    })
   }
 
   render() {
+    if(!this.state.loaded) return <AppShell />
     return (
       <Provider store={store}>
         <AppNavigator />

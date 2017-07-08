@@ -54,7 +54,9 @@ class EventItem extends PureComponent {
     infoExtractor: PropTypes.func,
   }
 
-  getInfo = () => getInfo(this.props.item);
+  getInfo = () => {
+    return getInfo(this.props.item);
+  }
 
   getDate = () => {
     return moment(this.props.item.created_at).fromNow();
@@ -63,9 +65,6 @@ class EventItem extends PureComponent {
   render() {
     const { item } = this.props;
     const { title, body } = this.getInfo();
-    // if(item.type !== this.getTitle()) {
-    //   return <View></View>
-    // }
     return (
       <TouchableNativeFeedback onPress={this.onPress}>
         <View style={styles.view}>

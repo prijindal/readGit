@@ -10,7 +10,8 @@ const styles = {
     height: 56,
     backgroundColor: primary,
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    elevation: 8,
   },
   leftIcon: {
     backgroundColor: transparent,
@@ -31,11 +32,11 @@ const styles = {
   }
 }
 
-const Toolbar = ({ title, onIconClicked, subtitle }: any) => (
+const Toolbar = ({ title, onIconClicked, subtitle, navIconName }: any) => (
   <View style={styles.toolbar}>
     <TouchableNativeFeedback onPress={onIconClicked} background={TouchableNativeFeedback.SelectableBackgroundBorderless()}>
       <View style={styles.leftIcon}>
-        <Icon name="menu" size={24} color={textPrimary.toString()}/>
+        <Icon name={navIconName} size={24} color={textPrimary.toString()}/>
       </View>
     </TouchableNativeFeedback>
     <View style={styles.titleContainer}>
