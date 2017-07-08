@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import { TouchableNativeFeedback, View, Text, Image } from 'react-native';
 import { textDarkPrimary, textDarkDivider, textDarkSecondary, white } from '../../colors';
-import { getInfo } from './functions';
+import getInfo from './functions';
 
 const styles = {
   view: {
@@ -41,30 +41,29 @@ const styles = {
 };
 
 class EventItem extends PureComponent {
-  static defaultProps = {
-    idx: 0,
-    length: 1,
-    infoExtractor: null,
-  }
 
   static propTypes = {
-    idx: PropTypes.number,
-    length: PropTypes.number,
     item: PropTypes.shape({}).isRequired,
-    infoExtractor: PropTypes.func,
+    onPress: PropTypes.func,
   }
 
-  getInfo = () => {
-    return getInfo(this.props.item);
+  state = {
+    event: getInfo(this.props.item),
   }
 
   getDate = () => {
     return moment(this.props.item.created_at).fromNow();
   }
 
+  onPress = () => {
+    if(this.state.event.link) {
+      this.props.onPress(this.state.event.link);
+    }
+  }
+
   render() {
     const { item } = this.props;
-    const { title, body } = this.getInfo();
+    const { title, body, link } = this.state.event;
     return (
       <TouchableNativeFeedback onPress={this.onPress}>
         <View style={styles.view}>

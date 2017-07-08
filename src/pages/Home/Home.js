@@ -118,6 +118,10 @@ class Home extends Component {
     return `Last updated ${moment_last_updated.fromNow()}`;
   }
 
+  openPage = (routeInfo) => {
+    this.props.navigation.dispatch(routeInfo);
+  }
+
   state = {
     data: [],
     last_updated: false,
@@ -130,7 +134,7 @@ class Home extends Component {
     return (
       <Layout
         menuEnabled
-        toolbarTitle="News Feed" //TODO: Add last updated at
+        toolbarTitle="News Feed"
         toolbarSubitle={this.lastUpdatedTime()}
       >
         {this.state.error !== null &&
@@ -143,6 +147,7 @@ class Home extends Component {
             keyExtractor={(item) => item.id}
             renderItem={({item}) => (
               <EventItem
+                onPress={this.openPage}
                 item={item}
               />
             )}
