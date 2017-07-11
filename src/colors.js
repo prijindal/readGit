@@ -13,6 +13,7 @@ export const white = '#fff';
 
 export const textPrimary = color(white).alpha(1).hsl();
 export const textSecondary = color(white).alpha(0.7).hsl();
+export const textDisabled = color(white).alpha(0.3).hsl();
 
 export const textDark = '#000000';
 export const textDarkPrimary = color(textDark).alpha(0.87).hsl();
