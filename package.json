@@ -27,6 +27,7 @@
     "redux": "^3.7.0",
     "redux-logger": "^3.0.6",
     "reduxsauce": "^0.5.0",
-    "seamless-immutable": "^7.1.2"
+    "seamless-immutable": "^7.1.2",
+    "styled-components": "^2.1.1"
   }
 }

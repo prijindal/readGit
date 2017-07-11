@@ -1,34 +1,35 @@
 // @flow
 import React, { PureComponent } from 'react';
-import { Text, View, TouchableNativeFeedback } from 'react-native';
+import { TouchableNativeFeedback } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import styled from 'styled-components/native';
 
 import { textDisabled, transparent, textDarkPrimary } from '../colors';
 
-const styles=  {
-  container: {
-    backgroundColor: textDisabled,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 16
-  },
-  title: {
-    color: textDarkPrimary
-  },
-  icon: {
-    color: textDarkPrimary,
-    paddingVertical: 8,
-  }
-}
+const View = styled.View`
+  background-color: ${textDisabled.toString()};
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-horizontal: 16;
+`
+
+const Title = styled.Text`
+  color: ${textDarkPrimary.toString()}
+`
+
+const StyledIcon = styled(Icon)`
+  color: ${textDarkPrimary.toString()};
+  padding-vertical: 8;
+`
 
 class SectionHeader extends PureComponent {
   render() {
     return (
       <TouchableNativeFeedback onPress={this.props.onPress}>
-        <View style={styles.container}>
-          <Text style={styles.title}>{this.props.title}</Text>
-          <Icon style={styles.icon} size={18} name="playlist-add-check"/>
+        <View>
+          <Title>{this.props.title}</Title>
+          <StyledIcon size={18} name="playlist-add-check"/>
         </View>
       </TouchableNativeFeedback>
     )

@@ -27,7 +27,7 @@ const styles = {
     justifyContent: 'center',
     paddingVertical: 8,
     paddingHorizontal: 16,
-    maxWidth: 300
+    maxWidth: 270
   },
   text: {
     color: textDarkPrimary,
@@ -93,7 +93,7 @@ class ListItem extends PureComponent {
             <Image source={{ uri: item.image }} style={styles.image} />
           }
           <View style={styles.content}>
-            <Text style={[styles.text, textStyles]}>{item.title}</Text>
+            <Text style={[styles.text, textStyles]} ellipsizeMode="tail" numberOfLines={1}>{item.title}</Text>
             <Text style={[styles.body, textStyles]} ellipsizeMode="tail" numberOfLines={1}>{item.body}</Text>
           </View>
           <View>
