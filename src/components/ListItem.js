@@ -1,8 +1,9 @@
 /* @flow */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import { TouchableNativeFeedback, View, Text, Image } from 'react-native';
-import { textDarkPrimary, textDarkSecondary, textDarkDivider, textDisabled, white } from '../colors';
+import { textDarkPrimary, textDarkSecondary, textDarkDivider, white } from '../colors';
 
 const styles = {
   view: {
@@ -12,6 +13,7 @@ const styles = {
     borderBottomWidth: 1,
     minHeight: 56,
     alignItems: 'center',
+    justifyContent: 'space-between',
     paddingHorizontal: 16,
     flexDirection: 'row',
   },
@@ -25,6 +27,7 @@ const styles = {
     justifyContent: 'center',
     paddingVertical: 8,
     paddingHorizontal: 16,
+    maxWidth: 300
   },
   text: {
     color: textDarkPrimary,
@@ -34,7 +37,7 @@ const styles = {
     color: textDarkSecondary,
     fontSize: 14,
   },
-  additional: {
+  date: {
     color: textDarkSecondary,
     fontSize: 14,
   }
@@ -52,7 +55,7 @@ class ListItem extends PureComponent {
       title: PropTypes.string,
       body: PropTypes.string,
       image: PropTypes.string,
-      additional: PropTypes.string,
+      date: PropTypes.string,
     }).isRequired,
     disabled: PropTypes.bool,
     onPress: PropTypes.func,
@@ -64,6 +67,19 @@ class ListItem extends PureComponent {
       fontWeight: disabled ? 'normal' : 'bold',
       color: textDarkPrimary
     };
+  }
+
+  getTime() {
+    let { date } = this.props.item;
+    date = moment(date);
+    const TODAY_FORMAT = 'H:mm A'
+    const ELSE_FORMAT = 'MMM D'
+    return date.calendar(null, {
+      sameDay: TODAY_FORMAT,
+      lastDay: ELSE_FORMAT,
+      lastWeek: ELSE_FORMAT,
+      sameElse: ELSE_FORMAT
+    });
   }
 
   render() {
@@ -79,7 +95,9 @@ class ListItem extends PureComponent {
           <View style={styles.content}>
             <Text style={[styles.text, textStyles]}>{item.title}</Text>
             <Text style={[styles.body, textStyles]} ellipsizeMode="tail" numberOfLines={1}>{item.body}</Text>
-            <Text style={styles.additional}>{item.additional}</Text>
+          </View>
+          <View>
+            <Text style={[styles.date, textStyles]}>{this.getTime()}</Text>
           </View>
         </View>
       </TouchableNativeFeedback>

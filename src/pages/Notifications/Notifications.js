@@ -10,6 +10,7 @@ import fetch, { HOST } from '../../helpers/restFetch';
 
 import Layout from '../../components/Layout';
 import ListItem from '../../components/ListItem';
+import SectionHeader from '../../components/SectionHeader';
 import Loading from '../../components/Loading';
 
 const USER = 'mdo';
@@ -119,23 +120,29 @@ class Notifications extends Component {
 
   dataToSections = (data) => {
     const sections = [
-      { title: 'Today', to: 24*3600*1000, data:[] },
-      { title: 'Yesterday', to: 2*24*3600*1000, data:[] },
-      { title: 'Last 3 Days', to: 3*24*3600*1000, data:[] },
-      { title: 'This week', to: 7*24*3600*1000, data:[] },
-      { title: 'This month', to: 30*24*3600*1000, data:[] },
-      { title: 'This year', to: 365*24*3600*1000, data:[] },
+      { title: 'Today', data:[] },
+      { title: 'This week', data:[] },
+      { title: 'This month', data:[] },
+      { title: 'This year', data:[] },
+      { title: 'Older', data:[] },
     ]
+    let now = moment();
     data.forEach(notification => {
       let time = moment(notification.updated_at);
-      let diff = (Date.now() - time);
-      for(var i = 1;i < sections.length;i++) {
-        if((sections[i - 1].to < diff) && (diff < sections[i].to)) {
-          sections[i].data.push(notification)
-          return;
-        }
+      let index = sections.length - 1;
+      if (time.year() === now.year()) {
+        index--;
       }
-      sections[0].data.push(notification)
+      if (time.month() === now.month()) {
+        index--;
+      }
+      if (time.isoWeek() === now.isoWeek()) {
+        index--;
+      }
+      if (time.date() === now.date()) {
+        index--;
+      }
+      sections[index].data.push(notification);
     })
     return sections;
   }
@@ -190,11 +197,17 @@ class Notifications extends Component {
             renderItem={({item}) => (
               <ListItem
                 onPress={this.openPage}
-                item={{title: item.repository.full_name, body: item.subject.title, additional: moment(item.updated_at).fromNow()}}
+                item={{title: item.repository.full_name, body: item.subject.title, date: item.updated_at}}
                 disabled={!item.unread}
               />
             )}
-            renderSectionHeader={({section}) => <Text>{section.title}</Text>}
+            renderSectionHeader={({section}) =>
+              <View>
+                {section.data.length > 0 &&
+                  <SectionHeader title={section.title}/>
+                }
+              </View>
+            }
             ListFooterComponent={() => (
               <View>
                 {this.state.error === null &&
