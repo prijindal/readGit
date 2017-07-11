@@ -1,8 +1,3 @@
-import React from 'react';
-import { Text, View, Image } from 'react-native';
-
-import Avatar from '../../Avatar';
-
 import createEventInfo from './createEvent';
 import deleteEventInfo from './deleteEvent';
 import forkEventInfo from './forkEvent';

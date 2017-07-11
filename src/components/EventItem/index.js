@@ -2,43 +2,26 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { TouchableNativeFeedback, View, Text, Image } from 'react-native';
+import styled from 'styled-components/native';
+import { TouchableNativeFeedback, View, Image } from 'react-native';
 import { textDarkPrimary, textDarkDivider, textDarkSecondary, white } from '../../colors';
 import getInfo from './functions';
 
-const styles = {
-  view: {
-    elevation: 2,
-    borderColor: textDarkDivider,
-    backgroundColor: white,
-    borderBottomWidth: 1,
-    minHeight: 56,
-    alignItems: 'center',
-    marginHorizontal: 8,
-    marginVertical: 4,
-    // justifyContent: 'space-between',
-    flexDirection: 'row',
-  },
-  image: {
-    marginVertical: 8,
-    width: 48,
-    height: 48,
-    borderRadius: 50,
-  },
-  content: {
-    justifyContent: 'center',
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-  },
-  text: {
-    color: textDarkPrimary,
-    fontSize: 16,
-  },
-  date: {
-    color: textDarkSecondary,
-    fontSize: 14,
-  }
-};
+import { Container, Text, Title, Content } from '../ListItem';
+
+const ContainerView = styled(Container)`
+  margin-horizontal: 8;
+  margin-vertical: 4;
+  padding-horizontal: 0;
+`
+
+const ContentView = styled(Content)`
+  max-width: 320;
+`
+
+const TitleText = styled(Title)`
+  font-size: 16;
+`
 
 class EventItem extends PureComponent {
 
@@ -66,16 +49,13 @@ class EventItem extends PureComponent {
     const { title, body, link } = this.state.event;
     return (
       <TouchableNativeFeedback onPress={this.onPress}>
-        <View style={styles.view}>
-          {item.image &&
-            <Image source={{ uri: item.image }} style={styles.image} />
-          }
-          <View style={styles.content}>
-            <Text style={styles.text}>{title}</Text>
-            <Text style={styles.date}>{this.getDate()}</Text>
+        <ContainerView>
+          <ContentView>
+            <TitleText>{title}</TitleText>
+            <Text>{this.getDate()}</Text>
             {body}
-          </View>
-        </View>
+          </ContentView>
+        </ContainerView>
       </TouchableNativeFeedback>
     );
   }

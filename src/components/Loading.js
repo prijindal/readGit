@@ -1,17 +1,15 @@
 // @flow
 import React from 'react';
-import { View, ActivityIndicator } from 'react-native';
-
+import { ActivityIndicator } from 'react-native';
+import styled from 'styled-components/native';
 import { primary } from '../colors';
 
-const styles = {
-  loading: {
-    paddingVertical: 12,
-  }
-}
+const View = styled.View`
+  padding-vertical: 12;
+`
 
 const Loading = () => (
-  <View style={styles.loading}>
+  <View>
     <ActivityIndicator color={primary} size={24}/>
   </View>
 )

@@ -21,6 +21,7 @@ const Title = styled.Text`
 const StyledIcon = styled(Icon)`
   color: ${textDarkPrimary.toString()};
   padding-vertical: 8;
+  font-size: 18;
 `
 
 class SectionHeader extends PureComponent {
@@ -29,7 +30,7 @@ class SectionHeader extends PureComponent {
       <TouchableNativeFeedback onPress={this.props.onPress}>
         <View>
           <Title>{this.props.title}</Title>
-          <StyledIcon size={18} name="playlist-add-check"/>
+          <StyledIcon name="playlist-add-check"/>
         </View>
       </TouchableNativeFeedback>
     )

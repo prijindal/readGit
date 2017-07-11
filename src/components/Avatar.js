@@ -1,17 +1,16 @@
 // @flow
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View } from 'react-native';
+import styled from 'styled-components/native';
 
-const styles = {
-  avatar: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-  }
-}
+const Image = styled.Image`
+  width: 50;
+  height: 50;
+  border-radius: 25;
+`
 
 const Avatar = ({ url, style }) => (
-  <Image source={{uri: url}} style={[styles.avatar, style]}/>
+  <Image source={{uri: url}} style={style}/>
 )
 
 export default Avatar;

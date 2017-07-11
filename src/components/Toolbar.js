@@ -1,51 +1,53 @@
 // @flow
 import React from 'react';
 import { View, Text, TouchableNativeFeedback } from 'react-native';
+import styled from 'styled-components/native';
 import Icon, { ToolbarAndroid } from 'react-native-vector-icons/MaterialIcons';
 
 import { primary, textPrimary, transparent, textSecondary } from '../colors';
 
-const styles = {
-  toolbar: {
-    height: 56,
-    backgroundColor: primary,
-    flexDirection: 'row',
-    alignItems: 'center',
-    elevation: 8,
-  },
-  leftIcon: {
-    backgroundColor: transparent,
-    borderRadius: 50,
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-  },
-  titleContainer: {
-    flexDirection: 'column',
-    marginHorizontal: 4
-  },
-  title: {
-    color: textPrimary,
-    fontSize: 20,
-  },
-  subtitle: {
-    color: textSecondary,
-  }
-}
+const Container = styled.View`
+  height: 56;
+  background-color: ${primary.toString()};
+  flex-direction: row;
+  align-items: center;
+  elevation: 8;
+`
+
+const LeftIcon = styled.View`
+  background-color: transparent;
+  border-radius: 50;
+  padding-vertical: 8;
+  padding-horizontal: 12;
+`
+
+const TitleContainer = styled.View`
+  flex-direction: column;
+  margin-horizontal: 4;
+`
+
+const Title = styled.Text`
+  color: ${textPrimary.toString()};
+  font-size: 20;
+`
+const Subtitle = styled.Text`
+  color: ${textSecondary.toString()};
+`
 
 const Toolbar = ({ title, onIconClicked, subtitle, navIconName }: any) => (
-  <View style={styles.toolbar}>
+  <Container>
     <TouchableNativeFeedback onPress={onIconClicked} background={TouchableNativeFeedback.SelectableBackgroundBorderless()}>
-      <View style={styles.leftIcon}>
+      <LeftIcon>
         <Icon name={navIconName} size={24} color={textPrimary.toString()}/>
-      </View>
+      </LeftIcon>
     </TouchableNativeFeedback>
-    <View style={styles.titleContainer}>
-      <Text style={styles.title}>{ title }</Text>
+    <TitleContainer>
+      <Title>{ title }</Title>
       {subtitle !== undefined &&
-        <Text style={styles.subtitle}>{subtitle}</Text>
+        <Subtitle>{subtitle}</Subtitle>
       }
-    </View>
-  </View>
+    </TitleContainer>
+  </Container>
 );
 
 export default Toolbar;

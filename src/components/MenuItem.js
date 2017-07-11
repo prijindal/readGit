@@ -1,30 +1,31 @@
 /* @flow */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { TouchableNativeFeedback, Text, View } from 'react-native';
+import styled from 'styled-components/native';
+import { TouchableNativeFeedback, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import { white, textDarkPrimary, textDarkSecondary } from '../colors';
 
-const styles = {
-  view: {
-    backgroundColor: white,
-    paddingHorizontal: 16,
-    height: 48,
-    alignItems: 'center',
-    flexDirection: 'row',
-  },
-  icon: {
-    fontSize: 24,
-  },
-  text: {
-    fontSize: 14,
-    fontWeight: '500',
-    fontFamily: 'sans-serif-light',
-    paddingLeft: 32,
-    color: textDarkPrimary,
-  },
-};
+const Container = styled.View`
+  background-color: ${white.toString()};
+  padding-horizontal: 16;
+  height: 48;
+  align-items: center;
+  flex-direction: row;
+`
+
+const MenuIcon = styled(Icon)`
+  font-size: 24;
+`
+
+const Text = styled.Text`
+  font-size: 14;
+  font-weight: 500;
+  font-family: sans-serif-light;
+  padding-left: 32;
+  color: ${textDarkPrimary.toString()};
+`
 
 class MenuItem extends Component {
   static defaultProps = {
@@ -54,10 +55,10 @@ class MenuItem extends Component {
     const { name, icon } = item;
     return (
       <TouchableNativeFeedback onPress={onPress}>
-        <View style={styles.view}>
-          <Icon name={icon} style={[styles.icon, { color: iconColor }]} />
-          <Text style={[styles.text, { color: textColor }]}>{name}</Text>
-        </View>
+        <Container>
+          <MenuIcon name={icon} style={{ color: iconColor }} />
+          <Text style={{ color: textColor }}>{name}</Text>
+        </Container>
       </TouchableNativeFeedback>
     );
   }
