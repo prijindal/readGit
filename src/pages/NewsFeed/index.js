@@ -1,7 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
-import Home from './Home';
+import NewsFeed from './NewsFeed';
 
 export default connect(
   ({ user }) => ({ user })
-)(Home);
+)(NewsFeed);

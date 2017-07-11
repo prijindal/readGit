@@ -1,31 +1,25 @@
 // @flow
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Text, FlatList, ScrollView, View, ToastAndroid } from 'react-native';
+import styled from 'styled-components/native';
+import { Text, FlatList, View, ToastAndroid } from 'react-native';
 import moment from 'moment';
 
 import { saveCache, getCache } from '../../helpers/networkCache';
-import { textDarkSecondary } from '../../colors';
 
 import Layout from '../../components/Layout';
 import EventItem from '../../components/EventItem';
+import ErrorText from '../../components/ErrorText';
 import Loading from '../../components/Loading';
-
-const USER = 'mdo';
 
 const styles = {
   scrollView: {
     paddingTop: 4,
     paddingBottom: 56,
   },
-  error: {
-    padding: 8,
-    color: textDarkSecondary,
-    textAlign: 'center'
-  }
 }
 
-class Home extends Component {
+class NewsFeed extends Component {
   static propTypes = {
     user: PropTypes.shape({
       name: PropTypes.string,
@@ -138,7 +132,7 @@ class Home extends Component {
         toolbarSubitle={this.lastUpdatedTime()}
       >
         {this.state.error !== null &&
-          <Text style={styles.error}>{this.state.error}</Text>
+          <ErrorText>{this.state.error}</ErrorText>
         }
           <FlatList
             contentContainerStyle={styles.scrollView}
@@ -156,7 +150,7 @@ class Home extends Component {
                 {this.state.error === null &&
                   <View>
                     {this.state.ended ?
-                      <Text style={styles.error}>No more events</Text>:
+                      <ErrorText>No more events</ErrorText>:
                       <Loading />
                     }
                   </View>
@@ -172,4 +166,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default NewsFeed;

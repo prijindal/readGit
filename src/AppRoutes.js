@@ -3,14 +3,14 @@ import { StackNavigator } from 'react-navigation';
 
 import LoginPage from './pages/Login';
 
-import HomePage from './pages/Home';
+import NewsFeedPage from './pages/NewsFeed';
 import NotificationsPage from './pages/Notifications';
 import UsersPage from './pages/Users';
 import UserPage from './pages/User';
 
 const AppRoutes = StackNavigator({
-  Notifications: { screen: NotificationsPage },
-  Home: { screen: HomePage },
+  Home: { screen: NotificationsPage },
+  NewsFeed: { screen: NewsFeedPage },
   Users: { screen: UsersPage },
   Login: { screen: LoginPage },
   User: { screen: UserPage }

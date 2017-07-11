@@ -168,16 +168,16 @@ class SideBar extends Component {
           <View style={styles.list}>
             <List>
               <MenuItem
-                item={{ name: 'Home', icon: 'drafts' }}
+                item={{ name: 'Notifications', icon: 'drafts' }}
                 onPress={() => this.openPage('Home')}
+              />
+              <MenuItem
+                item={{ name: 'News Feed', icon: 'person' }}
+                onPress={() => this.openPage('NewsFeed')}
               />
               <MenuItem
                 item={{ name: 'All Users', icon: 'person' }}
                 onPress={() => this.openPage('Users')}
-              />
-              <MenuItem
-                item={{ name: 'Claim Orders', icon: 'touch-app' }}
-                onPress={() => this.openPage('claimorders')}
               />
             </List>
             <List>

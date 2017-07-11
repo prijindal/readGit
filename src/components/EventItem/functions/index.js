@@ -1,3 +1,4 @@
+import commitCommentEventInfo from './commitCommentEvent';
 import createEventInfo from './createEvent';
 import deleteEventInfo from './deleteEvent';
 import forkEventInfo from './forkEvent';
@@ -12,7 +13,9 @@ import watchEventInfo from './watchEvent';
 
 const getInfo = (event) => {
   const { actor, created_at, id, payload, repo, type } = event;
-  if(type === 'CreateEvent') {
+  if(type === 'CommitCommentEvent') {
+    return commitCommentEventInfo(event);
+  } else if(type === 'CreateEvent') {
     return createEventInfo(event);
   } else if(type === 'DeleteEvent') {
     return deleteEventInfo(event);

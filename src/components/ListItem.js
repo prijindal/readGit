@@ -89,7 +89,7 @@ class ListItem extends PureComponent {
       <TouchableNativeFeedback onPress={onPress}>
         <Container>
           {item.image &&
-            <Image source={{ uri: item.image }} style={styles.image} />
+            <Image source={{ uri: item.image }} />
           }
           <Content>
             <Title style={textStyles} ellipsizeMode="tail" numberOfLines={1}>{item.title}</Title>
