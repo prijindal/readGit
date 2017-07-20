@@ -15,7 +15,9 @@ const AppRoutes = StackNavigator({
   Login: { screen: LoginPage },
   User: { screen: UserPage }
 }, {
-  headerMode: 'none',
+  navigationOptions: {
+    header: null
+  }
 });
 
 export default AppRoutes;

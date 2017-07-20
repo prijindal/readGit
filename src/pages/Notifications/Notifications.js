@@ -1,274 +1,80 @@
 // @flow
 import React, { Component } from 'react';
+import { Alert } from 'react-native';
 import PropTypes from 'prop-types';
-import { Text, SectionList, View, ToastAndroid, Alert, Linking } from 'react-native';
-import moment from 'moment';
+import { TabNavigator } from 'react-navigation';
 
-import { textDarkSecondary, textPrimary, textSecondary, textDivider } from '../../colors';
-import fetch, { HOST } from '../../helpers/restFetch';
+import {
+  textDarkSecondary, textPrimary, textSecondary, textDivider, primary,
+  accent
+} from '../../colors';
 
 import Layout from '../../components/Layout';
-import ListItem from '../../components/ListItem';
-import SectionHeader from '../../components/SectionHeader';
-import Loading from '../../components/Loading';
 
-const styles = {
-  scrollView: {
-    paddingTop: 4,
-    paddingBottom: 56,
+import NotificationsTab from './NotificationsTab';
+
+const Unread = () => (
+  <NotificationsTab
+    unread={true}
+  />
+)
+
+const All = () => (
+  <NotificationsTab
+    unread={false}
+  />
+)
+
+const Participating = () => (
+  <NotificationsTab
+    unread={false}
+    participating={true}
+  />
+)
+
+const NotificationsApp = TabNavigator({
+  Unread: {
+    screen: Unread,
   },
-  error: {
-    padding: 8,
-    color: textDarkSecondary,
-    textAlign: 'center'
-  }
-}
+  All: {
+    screen: All,
+  },
+  Participating: {
+    screen: Participating,
+  },
+}, {
+  tabBarOptions: {
+    activeTintColor: textPrimary,
+    inactiveTintColor: textSecondary,
+    scrollEnabled: false,
+    labelStyle: {
+      fontSize: 14,
+      color: textPrimary
+    },
+    tabStyle: {
+      height: 48,
+    },
+    style: {
+      backgroundColor: primary
+    },
+    indicatorStyle: {
+      backgroundColor: accent,
+      height: 2
+    }
+  },
+  lazy: false,
+  swipeEnabled: true,
+  animationEnabled: true,
+})
 
-class Notifications extends Component {
-  static propTypes = {
-    user: PropTypes.shape({
-      name: PropTypes.string,
-      token: PropTypes.string,
-    })
-  }
+class Header extends Component {
 
   state = {
-    sections: [],
-    refreshing: true,
-    loading: false,
-    error: null,
     grouprepo: false, // TODO: User settings
-    unread: true, // TODO: User settings
-  }
-
-  componentWillMount() {
-    this.initData();
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    if(this.state.sections.length !== nextState.sections.length) {
-      return true;
-    }
-    for (var i = 0; i < this.state.sections.length; i++) {
-      if (this.state.sections[i].data.length !== nextState.sections[i].data.length) {
-        return true;
-      }
-    }
-    if (
-      this.state.refreshing !== nextState.refreshing ||
-      this.state.loading !== nextState.loading ||
-      this.state.unread !== nextState.unread ||
-      this.state.error !== nextState.error
-    ) {
-      return true;
-    }
-    return false;
-  }
-
-  initData = async () => {
-    this.setState({
-      refreshing: true,
-      ended: false,
-      loading: true,
-    })
-    try {
-      let url = `/notifications?all=${!this.state.unread}&page=1`
-      console.log(url);
-      let dataResponse = await fetch(url);
-      data = await dataResponse.json();
-      this.setState({
-        error: null,
-        sections: this.dataToSections(data),
-        ended: (data.length == undefined || data.length < 30),
-        refreshing: false,
-        loading: false,
-        page: 1,
-      });
-    } catch(e) {
-      ToastAndroid.show(e.message, ToastAndroid.LONG);
-      this.setState({
-        error: e.message,
-        refreshing: false,
-        ended: true,
-      })
-    }
-  }
-
-  updateData = async () => {
-    if(this.state.sections.length === 0 || this.state.loading === true) return ;
-    this.setState({
-      loading: true
-    })
-    let prevData = this.sectionToData(this.state.sections);
-    try {
-      let url = `/notifications?all=${!this.state.unread}&page=${this.state.page + 1}`;
-      console.log(url);
-      let newData = await fetch(url);
-      newData = await newData.json();
-      let completeData = [
-        ...prevData,
-        ...newData,
-      ]
-      this.setState(prevState => ({
-        sections: this.dataToSections(completeData),
-        refreshing: false,
-        page: prevState.page + 1,
-        loading: (newData.length == undefined || newData.length < 30),
-        ended: (newData.length == undefined || newData.length < 30),
-      }));
-    } catch(e) {
-      ToastAndroid.show(e.message, ToastAndroid.LONG);
-      this.setState({
-        loading: false,
-      })
-    }
-  }
-
-  dataToSections = (data) => {
-    if (this.state.grouprepo) {
-      return this.groupByRepo(data);
-    }
-    return this.groupByDate(data);
-  }
-
-  groupByRepo = (data) => {
-    const sections = [];
-    data.forEach(notification => {
-      let name = notification.repository.full_name
-      for (var i = 0; i < sections.length; i++) {
-        if(sections[i].title === name) {
-          sections[i].data.push(notification)
-          return;
-        }
-      }
-      sections.push({
-        title: name,
-        data: [notification]
-      })
-    })
-    return sections
-  }
-
-  groupByDate = (data) => {
-    const sections = [
-      { title: 'Today', data:[] },
-      { title: 'This week', data:[] },
-      { title: 'This month', data:[] },
-      { title: 'This year', data:[] },
-      { title: 'Older', data:[] },
-    ]
-    let now = moment();
-    data.forEach(notification => {
-      let time = moment(notification.updated_at);
-      let index = sections.length - 1;
-      if (time.year() === now.year()) {
-        index--;
-      }
-      if (time.month() === now.month()) {
-        index--;
-      }
-      if (time.isoWeek() === now.isoWeek()) {
-        index--;
-      }
-      if (time.date() === now.date()) {
-        index--;
-      }
-      sections[index].data.push(notification);
-    })
-    return sections;
-  }
-
-  sectionToData = (sections) => {
-    let data = []
-    sections.forEach(i => {
-      data = [
-        ...data,
-        ...i.data
-      ]
-    })
-    return data
-  }
-
-  openPage = async (notification) => {
-    const {subject, id, unread} = notification;
-    let url = 'https://github.com';
-    if (subject.type === 'Issue') {
-      url = [url, subject.url.split('/').slice(4).join('/')].join('/')
-    } else if (subject.type === 'PullRequest') {
-      let splitedUrl = subject.url.split('/').slice(4)
-      splitedUrl[2] = 'pull'
-      url = [url, splitedUrl.join('/')].join('/')
-    } else {
-      console.log(subject);
-    }
-    let latest_comment_url = subject.latest_comment_url
-    if (latest_comment_url) {
-      latest_comment_url = latest_comment_url.split('/')
-      let commentid = latest_comment_url[latest_comment_url.length - 1];
-      url += `#issuecomment-${commentid}`
-    }
-    Linking.openURL(url);
-    // Mark Read
-    if(await this.markRead(id) === false) {
-      return;
-    }
-    this.setState(prevState => ({
-      sections: prevState.sections.map(section => ({
-        title: section.title,
-        data: section.data.map(item => ({
-          ...item,
-          unread: item.id === id ? false : item.unread,
-        }))
-      }))
-    }), this.forceUpdate)
-    // this.props.navigation.dispatch(routeInfo);
-  }
-
-  markRead = async (id) => {
-    let postUrl = `/notifications/threads/${id}`
-    let resp = await fetch(postUrl, { method: 'PATCH' });
-    return resp.status === 205;
-  }
-
-  clearSection = async ({ title, data }) => {
-    let length = data.filter(i => i.unread).length
-    if(length == 0) {
-      return ;
-    }
-    Alert.alert(
-      'Are you sure',
-      `${length} notifications will be cleared`,
-      [{
-        text: 'Cancel',
-        style: 'cancel'
-      },{
-        'text': 'Clear',
-        onPress: () => {
-          data.forEach(async (i) => await this.markRead(i.id));
-          let ids = data.map(i => i.id);
-          this.setState(prevState => ({
-            sections: prevState.sections.map(section => ({
-              title: section.title,
-              data: section.data.map(item => ({
-                ...item,
-                unread: ids.filter(i => i === item.id).length > 0 ? false : item.unread,
-              }))
-            }))
-          }), this.forceUpdate)
-        }
-      }]
-    )
   }
 
   onActionSelected = (pos) => {
     if (pos === 0) {
-      this.initData();
-    } else if (pos === 1) {
-      this.setState(prevState => ({
-        unread: !prevState.unread,
-        sections: [],
-      }), this.initData)
-    } else if (pos === 2) {
       Alert.alert(
         'Group by',
         undefined,
@@ -297,68 +103,27 @@ class Notifications extends Component {
         menuEnabled
         toolbarTitle="Notifications"
         actions={[{
-          title: 'Refresh',
-          show: 'always',
-          iconName: 'refresh',
-          iconColor: this.state.refreshing ? textDivider.toString() : textPrimary.toString()
-        },
-        {
-          title: 'Read/Unread',
-          show: 'always',
-          iconName: this.state.unread ? 'mail' : 'drafts'
-        },{
           title: 'Group by',
           show: 'always',
           iconName: 'filter-list'
         }]}
         onActionSelected={this.onActionSelected}
         toolbarSubtitle={this.state.unread ? 'Unread' : 'All'}
-      >
-        {this.state.error !== null &&
-          <Text style={styles.error}>{this.state.error}</Text>
-        }
-          <SectionList
-            maxToRenderPerBatch={50}
-            updateCellsBatchingPeriod={1}
-            contentContainerStyle={styles.scrollView}
-            sections={this.state.sections}
-            removeClippedSubviews
-            keyExtractor={(item) => item.id}
-            renderItem={({item}) => (
-              <ListItem
-                onPress={() => this.openPage(item)}
-                item={{title: item.repository.full_name, body: item.subject.title, date: item.updated_at}}
-                disabled={!item.unread}
-              />
-            )}
-            renderSectionHeader={({section}) =>
-              <View>
-                {section.data.length > 0 &&
-                  <SectionHeader
-                    title={section.title}
-                    onPress={() => this.clearSection(section)}
-                    disabled={section.data.filter(i => i.unread).length === 0}
-                  />
-                }
-              </View>
-            }
-            ListFooterComponent={() => (
-              <View>
-                {this.state.error === null &&
-                  <View>
-                    {this.state.ended ?
-                      <Text style={styles.error}>No more notifications</Text>:
-                      <Loading />
-                    }
-                  </View>
-                }
-              </View>
-            )}
-            refreshing={this.state.refreshing}
-            onRefresh={this.initData}
-            onEndReached={this.updateData}
-          />
-      </Layout>
+      />
+    )
+  }
+}
+
+class Notifications extends Component {
+  static navigationOptions = {
+    header: () => (
+      <Header />
+    )
+  }
+
+  render() {
+    return (
+      <NotificationsApp />
     )
   }
 }

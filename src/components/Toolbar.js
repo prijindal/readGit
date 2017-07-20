@@ -12,7 +12,7 @@ const Container = styled.View`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  elevation: 8;
+  elevation: 2;
 `
 
 const LeftIcon = styled.View`
@@ -70,12 +70,12 @@ const Toolbar = ({ title, onIconClicked, subtitle, navIconName, titleColor, subt
   </Container>
 );
 
-const ToolbarAndroidStyled = styled(ToolbarAndroid)`
-  height: 56;
-  elevation: 8;
-  background-color: ${primary.toString()};
-`
+// const ToolbarAndroidStyled = styled(ToolbarAndroid)`
+//   height: 56;
+//   elevation: 8;
+//   background-color: ${primary.toString()};
+// `
+//
+// export default ToolbarAndroidStyled;
 
-export default ToolbarAndroidStyled;
-
-// export default Toolbar;
+export default Toolbar;

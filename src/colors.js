@@ -7,6 +7,8 @@ export const primary = '#9C27B0';
 
 export const primaryDark = '#7b1fa2';
 
+export const accent = '#b2ff59';
+
 export const errorColor = color('#FF1744').alpha(0.87).hsl();
 
 export const white = '#fff';
