@@ -4,15 +4,13 @@ import PropTypes from 'prop-types';
 import { Text, SectionList, View, ToastAndroid, Alert, Linking } from 'react-native';
 import moment from 'moment';
 
-import { textDarkSecondary, textPrimary, textDivider } from '../../colors';
+import { textDarkSecondary, textPrimary, textSecondary, textDivider } from '../../colors';
 import fetch, { HOST } from '../../helpers/restFetch';
 
 import Layout from '../../components/Layout';
 import ListItem from '../../components/ListItem';
 import SectionHeader from '../../components/SectionHeader';
 import Loading from '../../components/Loading';
-
-const USER = 'mdo';
 
 const styles = {
   scrollView: {
@@ -314,7 +312,7 @@ class Notifications extends Component {
           iconName: 'filter-list'
         }]}
         onActionSelected={this.onActionSelected}
-        toolbarSubitle={this.state.unread ? 'Unread' : 'All'}
+        toolbarSubtitle={this.state.unread ? 'Unread' : 'All'}
       >
         {this.state.error !== null &&
           <Text style={styles.error}>{this.state.error}</Text>

@@ -72,6 +72,7 @@ const Toolbar = ({ title, onIconClicked, subtitle, navIconName, titleColor, subt
 
 const ToolbarAndroidStyled = styled(ToolbarAndroid)`
   height: 56;
+  elevation: 8;
   background-color: ${primary.toString()};
 `
 

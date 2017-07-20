@@ -17,11 +17,13 @@
   },
   "dependencies": {
     "color": "^1.0.3",
+    "lodash": "^4.17.4",
     "moment": "^2.18.1",
     "next-frame": "^0.2.3",
     "prop-types": "^15.5.10",
     "react": "16.0.0-alpha.12",
     "react-native": "0.46.0",
+    "react-native-animatable": "^1.2.2",
     "react-native-vector-icons": "^4.2.0",
     "react-navigation": "^1.0.0-beta.11",
     "react-redux": "^5.0.5",

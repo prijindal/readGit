@@ -25,8 +25,8 @@ const StyledIcon = styled(Icon)`
 `
 
 const EmptyView = styled.Text`
-  padding-vertical: 8;
-  font-size: 18;
+  padding-vertical: 12;
+  font-size: 20;
 `
 
 class SectionHeader extends PureComponent {
