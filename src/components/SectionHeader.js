@@ -24,13 +24,21 @@ const StyledIcon = styled(Icon)`
   font-size: 18;
 `
 
+const EmptyView = styled.Text`
+  padding-vertical: 8;
+  font-size: 18;
+`
+
 class SectionHeader extends PureComponent {
   render() {
     return (
       <TouchableNativeFeedback onPress={this.props.onPress}>
         <View>
           <Title>{this.props.title}</Title>
-          <StyledIcon name="playlist-add-check"/>
+          {this.props.disabled ?
+            <EmptyView/> :
+            <StyledIcon name="playlist-add-check"/>
+          }
         </View>
       </TouchableNativeFeedback>
     )

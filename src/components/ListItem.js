@@ -61,6 +61,9 @@ class ListItem extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
+    if (this.props.disabled !== nextProps.disabled) {
+      return true;
+    }
     return false;
   }
 

@@ -70,4 +70,11 @@ const Toolbar = ({ title, onIconClicked, subtitle, navIconName, titleColor, subt
   </Container>
 );
 
-export default Toolbar;
+const ToolbarAndroidStyled = styled(ToolbarAndroid)`
+  height: 56;
+  background-color: ${primary.toString()};
+`
+
+export default ToolbarAndroidStyled;
+
+// export default Toolbar;

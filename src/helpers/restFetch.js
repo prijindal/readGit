@@ -2,17 +2,21 @@ import { TOKEN } from '../tokens';
 
 export const HOST = 'https://api.github.com';
 
-export const restFetch = async (url, method='GET', initHeaders={}) => {
-  url = HOST + url; // TODO: Better url merge
-  let headers = {
-    Authorization: 'token ' + TOKEN,
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
-    ...initHeaders,
+export const restFetch = async (url, options={ headers: {} }) => {
+  if (url.indexOf(HOST) === -1) {
+    url = HOST + url; // TODO: Better url merge
   }
-  let options = {
-    method,
-    headers
+  const initHeaders = options.headers;
+  delete options.headers;
+  options = {
+    method: 'GET',
+    headers: {
+      Authorization: 'token ' + TOKEN,
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      ...initHeaders,
+    },
+    ...options,
   }
   return await fetch(url, options);
 }
