@@ -1,5 +1,5 @@
 /* @flow */
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import styled from 'styled-components/native';
@@ -23,7 +23,7 @@ const TitleText = styled(Title)`
   font-size: 16;
 `
 
-class EventItem extends PureComponent {
+class EventItem extends Component {
 
   static propTypes = {
     item: PropTypes.shape({}).isRequired,
@@ -32,6 +32,10 @@ class EventItem extends PureComponent {
 
   state = {
     event: getInfo(this.props.item),
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return false;
   }
 
   getDate = () => {

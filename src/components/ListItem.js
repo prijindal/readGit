@@ -1,5 +1,5 @@
 /* @flow */
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import styled from 'styled-components/native';
@@ -42,7 +42,7 @@ export const Text = styled.Text`
   font-size: 14;
 `
 
-class ListItem extends PureComponent {
+class ListItem extends Component {
   static defaultProps = {
     onPress: () => {},
     infoExtractor: null,
@@ -58,6 +58,10 @@ class ListItem extends PureComponent {
     }).isRequired,
     disabled: PropTypes.bool,
     onPress: PropTypes.func,
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return false;
   }
 
   getAdditionalStyles() {

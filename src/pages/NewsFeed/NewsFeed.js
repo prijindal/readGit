@@ -5,8 +5,6 @@ import styled from 'styled-components/native';
 import { Text, FlatList, View, ToastAndroid } from 'react-native';
 import moment from 'moment';
 
-import { saveCache, getCache } from '../../helpers/networkCache';
-
 import Layout from '../../components/Layout';
 import EventItem from '../../components/EventItem';
 import ErrorText from '../../components/ErrorText';
@@ -27,33 +25,36 @@ class NewsFeed extends Component {
     })
   }
 
-  componentWillMount() {
-    this.init();
+  state = {
+    data: [],
+    last_updated: false,
+    refreshing: true,
+    loading: false,
+    error: null,
   }
 
-  init = async () => {
-    this.setState({
-      refreshing: true,
-    })
-    try {
-      let { time, body } = await getCache(`https://api.github.com/users/${this.props.user.name}/received_events`);
-      body = JSON.parse(body);
-      this.setState({
-        error: null,
-        data: body,
-        refreshing: false,
-        last_updated: time,
-      })
-    } catch(e) {
-      console.log(e);
-    } finally {
-      this.initData();
+  shouldComponentUpdate(nextProps, nextState) {
+    if(this.state.data.length < nextState.data.length) {
+      return true;
     }
+    else if (
+      this.state.refreshing !== nextState.refreshing ||
+      this.state.loading !== nextState.loading ||
+      this.state.error !== nextState.error
+    ) {
+      return true;
+    }
+    return false;
+  }
+
+  componentWillMount() {
+    this.initData();
   }
 
   initData = async () => {
     this.setState({
       ended: false,
+      refreshing: true,
     })
     try {
       let url = `https://api.github.com/users/${this.props.user.name}/received_events`
@@ -66,7 +67,6 @@ class NewsFeed extends Component {
         refreshing: false,
         last_updated: dataResponse.headers.map.date[0],
       });
-      await saveCache(dataResponse, JSON.stringify(data));
     } catch(e) {
       ToastAndroid.show(e.message, ToastAndroid.LONG);
       this.setState({
@@ -116,14 +116,6 @@ class NewsFeed extends Component {
     this.props.navigation.dispatch(routeInfo);
   }
 
-  state = {
-    data: [],
-    last_updated: false,
-    refreshing: true,
-    loading: false,
-    error: null,
-  }
-
   render() {
     return (
       <Layout
@@ -135,6 +127,8 @@ class NewsFeed extends Component {
           <ErrorText>{this.state.error}</ErrorText>
         }
           <FlatList
+            maxToRenderPerBatch={50}
+            updateCellsBatchingPeriod={1}
             contentContainerStyle={styles.scrollView}
             data={this.state.data}
             removeClippedSubviews

@@ -1,10 +1,9 @@
 // @flow
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Text, SectionList, ScrollView, View, ToastAndroid } from 'react-native';
+import { Text, SectionList, FlatList, ScrollView, View, ToastAndroid } from 'react-native';
 import moment from 'moment';
 
-import { saveCache, getCache } from '../../helpers/networkCache';
 import { textDarkSecondary } from '../../colors';
 import fetch, { HOST } from '../../helpers/restFetch';
 
@@ -35,38 +34,46 @@ class Notifications extends Component {
     })
   }
 
-  componentWillMount() {
-    this.init();
+  state = {
+    sections: [],
+    last_updated: false,
+    refreshing: true,
+    loading: false,
+    error: null,
   }
 
-  init = async () => {
-    this.setState({
-      refreshing: true,
-    })
-    try {
-      let { time, body } = await getCache(HOST + '/notifications?all=true&page=1');
-      body = JSON.parse(body);
-      console.log(body);
-      this.setState({
-        error: null,
-        sections: this.dataToSections(body),
-        refreshing: false,
-        last_updated: time,
-      })
-    } catch(e) {
-      console.log(e);
-    } finally {
-      this.initData();
+  componentWillMount() {
+    this.initData();
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if(this.state.sections.length < nextState.sections.length) {
+      return true;
     }
+    for (var i = 0; i < this.state.sections.length; i++) {
+      if (this.state.sections[i].data.length < nextState.sections[i].data.length) {
+        return true;
+      }
+    }
+    if (
+      this.state.refreshing !== nextState.refreshing ||
+      this.state.loading !== nextState.loading ||
+      this.state.error !== nextState.error
+    ) {
+      return true;
+    }
+    return false;
   }
 
   initData = async () => {
     this.setState({
+      refreshing: true,
       ended: false,
       loading: true,
     })
     try {
       let url = '/notifications?all=true&page=1'
+      console.log(url);
       let dataResponse = await fetch(url);
       data = await dataResponse.json();
       this.setState({
@@ -77,7 +84,6 @@ class Notifications extends Component {
         page: 1,
         last_updated: dataResponse.headers.map.date[0],
       });
-      await saveCache(dataResponse, JSON.stringify(data));
     } catch(e) {
       ToastAndroid.show(e.message, ToastAndroid.LONG);
       this.setState({
@@ -171,12 +177,10 @@ class Notifications extends Component {
     this.props.navigation.dispatch(routeInfo);
   }
 
-  state = {
-    sections: [],
-    last_updated: false,
-    refreshing: true,
-    loading: false,
-    error: null,
+  onActionSelected = (pos) => {
+    if (pos === 0) {
+      alert('Position 0');
+    }
   }
 
   render() {
@@ -184,12 +188,20 @@ class Notifications extends Component {
       <Layout
         menuEnabled
         toolbarTitle="Notifications"
+        actions={[{
+          title: 'Group by',
+          show: 'always',
+          iconName: 'filter-list'
+        }]}
+        onActionSelected={this.onActionSelected}
         toolbarSubitle={this.lastUpdatedTime()}
       >
         {this.state.error !== null &&
           <Text style={styles.error}>{this.state.error}</Text>
         }
           <SectionList
+            maxToRenderPerBatch={50}
+            updateCellsBatchingPeriod={1}
             contentContainerStyle={styles.scrollView}
             sections={this.state.sections}
             removeClippedSubviews

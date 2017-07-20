@@ -1,18 +1,18 @@
 // @flow
 import React from 'react';
 import { View } from 'react-native';
-// import { ToolbarAndroid as Toolbar } from 'react-native-vector-icons/MaterialIcons';
 
 import Toolbar from '../Toolbar';
 
-import { primary, textPrimary } from '../../colors';
+import { textSecondary, textPrimary } from '../../colors';
 
-const Layout = ({ children, toolbarTitle='Read Git', toolbarSubitle, menuEnabled=false, openDrawer, backButton=false, onBackButtonPress }: any) => (
+const Layout = ({ children, toolbarTitle='Read Git', toolbarSubitle, menuEnabled=false, openDrawer, backButton=false, onBackButtonPress, actions, onActionSelected }: any) => (
   <View>
     <Toolbar
-      // titleColor={textPrimary}
-      // subtitleColor={textPrimary}
-      // style={{height: 56, backgroundColor: primary}}
+      titleColor={textPrimary}
+      subtitleColor={textSecondary}
+      actions={actions}
+      onActionSelected={onActionSelected}
       title={toolbarTitle}
       subtitle={toolbarSubitle}
       navIconName={menuEnabled ? 'menu' : (backButton ? 'arrow-back' : null)}
