@@ -20,7 +20,7 @@ const styles = {
 class NewsFeed extends Component {
   static propTypes = {
     user: PropTypes.shape({
-      name: PropTypes.string,
+      login: PropTypes.string,
       token: PropTypes.string,
     })
   }
@@ -57,7 +57,7 @@ class NewsFeed extends Component {
       refreshing: true,
     })
     try {
-      let url = `https://api.github.com/users/${this.props.user.name}/received_events`
+      let url = `https://api.github.com/users/${this.props.user.login}/received_events`
       console.log(url);
       let dataResponse = await fetch(url);
       data = await dataResponse.json();
@@ -83,7 +83,7 @@ class NewsFeed extends Component {
       loading: true
     })
     try {
-      let url = `https://api.github.com/users/${this.props.user.name}/received_events?page=${((this.state.data.length / 30) + 1)}`;
+      let url = `https://api.github.com/users/${this.props.user.login}/received_events?page=${((this.state.data.length / 30) + 1)}`;
       let newData = await fetch(url);
       newData = await newData.json();
       this.setState(prevState => ({

@@ -12,10 +12,10 @@ export default class Root extends Component {
   }
 
   checkToken = async () => {
-    let token = await AsyncStorage.getItem('token');
+    let user = await AsyncStorage.getItem('user');
     this.setState({
       loading: false,
-      loggedin: token != undefined,
+      loggedin: user != undefined,
     })
   }
 

@@ -21,13 +21,9 @@ class AppContainer extends Component {
   }
 
   saveToken = async () => {
-    let token = await AsyncStorage.getItem('token');
     let user = await AsyncStorage.getItem('user');
     user = JSON.parse(user);
-    store.dispatch(saveUser({
-      ...user,
-      token
-    }))
+    store.dispatch(saveUser(user))
     this.setState({
       loaded: true,
     })

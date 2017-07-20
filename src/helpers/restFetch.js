@@ -1,8 +1,6 @@
-import { TOKEN } from '../tokens';
-
 export const HOST = 'https://api.github.com';
 
-export const restFetch = async (url, options={ headers: {} }) => {
+export const restFetch = async (url,token, options={ headers: {} }) => {
   if (url.indexOf(HOST) === -1) {
     url = HOST + url; // TODO: Better url merge
   }
@@ -11,7 +9,7 @@ export const restFetch = async (url, options={ headers: {} }) => {
   options = {
     method: 'GET',
     headers: {
-      Authorization: 'token ' + TOKEN,
+      Authorization: 'token ' + token,
       'Content-Type': 'application/json',
       'Accept': 'application/json',
       ...initHeaders,

@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import { Text, SectionList, View, ToastAndroid, Alert, Linking, ScrollView } from 'react-native';
 import moment from 'moment';
 
-import { textDarkSecondary, textPrimary, textSecondary, textDivider } from '../../colors';
-import fetch, { HOST } from '../../helpers/restFetch';
+import { textDarkSecondary, textPrimary, textSecondary, textDivider } from '../../../colors';
+import fetch from '../../../helpers/restFetch';
 
-import ListItem from '../../components/ListItem';
-import SectionHeader from '../../components/SectionHeader';
-import Loading from '../../components/Loading';
+import ListItem from '../../../components/ListItem';
+import SectionHeader from '../../../components/SectionHeader';
+import Loading from '../../../components/Loading';
 
 const styles = {
   scrollView: {
@@ -69,7 +69,7 @@ export default class NotificationsTab extends Component {
     try {
       let url = `/notifications?all=${!this.props.unread}&participating=${this.props.participating}&page=1`
       console.log(url);
-      let dataResponse = await fetch(url);
+      let dataResponse = await fetch(url, this.props.token);
       data = await dataResponse.json();
       this.setState({
         error: null,
@@ -98,7 +98,7 @@ export default class NotificationsTab extends Component {
     try {
       let url = `/notifications?all=${!this.props.unread}&participating=${this.props.participating}&page=${this.state.page + 1}`;
       console.log(url);
-      let newData = await fetch(url);
+      let newData = await fetch(url, this.props.token);
       newData = await newData.json();
       let completeData = [
         ...prevData,
@@ -221,7 +221,7 @@ export default class NotificationsTab extends Component {
 
   markRead = async (id) => {
     let postUrl = `/notifications/threads/${id}`
-    let resp = await fetch(postUrl, { method: 'PATCH' });
+    let resp = await fetch(postUrl, this.props.token, { method: 'PATCH' });
     return resp.status === 205;
   }
 
