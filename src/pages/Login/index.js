@@ -5,7 +5,7 @@ import { NavigationActions } from 'react-navigation';
 
 import { primary } from '../../colors';
 import Layout from '../../components/Layout/Layout';
-import sleep from '../../helpers/sleep';
+import btoa from '../../helpers/btoa';
 
 import graphqlFetch from '../../helpers/graphqlFetch';
 import { CLIENT_ID, CLIENT_SECRET, scopes, GIT_APP_NAME } from '../../tokens';
