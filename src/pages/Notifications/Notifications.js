@@ -1,10 +1,10 @@
 // @flow
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Text, SectionList, FlatList, ScrollView, View, ToastAndroid } from 'react-native';
+import { Text, SectionList, View, ToastAndroid, Alert, Linking } from 'react-native';
 import moment from 'moment';
 
-import { textDarkSecondary } from '../../colors';
+import { textDarkSecondary, textPrimary, textDivider } from '../../colors';
 import fetch, { HOST } from '../../helpers/restFetch';
 
 import Layout from '../../components/Layout';
@@ -36,10 +36,11 @@ class Notifications extends Component {
 
   state = {
     sections: [],
-    last_updated: false,
     refreshing: true,
     loading: false,
     error: null,
+    grouprepo: false, // TODO: User settings
+    unread: true, // TODO: User settings
   }
 
   componentWillMount() {
@@ -47,17 +48,18 @@ class Notifications extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    if(this.state.sections.length < nextState.sections.length) {
+    if(this.state.sections.length !== nextState.sections.length) {
       return true;
     }
     for (var i = 0; i < this.state.sections.length; i++) {
-      if (this.state.sections[i].data.length < nextState.sections[i].data.length) {
+      if (this.state.sections[i].data.length !== nextState.sections[i].data.length) {
         return true;
       }
     }
     if (
       this.state.refreshing !== nextState.refreshing ||
       this.state.loading !== nextState.loading ||
+      this.state.unread !== nextState.unread ||
       this.state.error !== nextState.error
     ) {
       return true;
@@ -72,17 +74,17 @@ class Notifications extends Component {
       loading: true,
     })
     try {
-      let url = '/notifications?all=true&page=1'
+      let url = `/notifications?all=${!this.state.unread}&page=1`
       console.log(url);
       let dataResponse = await fetch(url);
       data = await dataResponse.json();
       this.setState({
         error: null,
         sections: this.dataToSections(data),
+        ended: (data.length == undefined || data.length < 30),
         refreshing: false,
         loading: false,
         page: 1,
-        last_updated: dataResponse.headers.map.date[0],
       });
     } catch(e) {
       ToastAndroid.show(e.message, ToastAndroid.LONG);
@@ -101,7 +103,7 @@ class Notifications extends Component {
     })
     let prevData = this.sectionToData(this.state.sections);
     try {
-      let url = `/notifications?all=true&page=${this.state.page + 1}`;
+      let url = `/notifications?all=${!this.state.unread}&page=${this.state.page + 1}`;
       console.log(url);
       let newData = await fetch(url);
       newData = await newData.json();
@@ -125,6 +127,31 @@ class Notifications extends Component {
   }
 
   dataToSections = (data) => {
+    if (this.state.grouprepo) {
+      return this.groupByRepo(data);
+    }
+    return this.groupByDate(data);
+  }
+
+  groupByRepo = (data) => {
+    const sections = [];
+    data.forEach(notification => {
+      let name = notification.repository.full_name
+      for (var i = 0; i < sections.length; i++) {
+        if(sections[i].title === name) {
+          sections[i].data.push(notification)
+          return;
+        }
+      }
+      sections.push({
+        title: name,
+        data: [notification]
+      })
+    })
+    return sections
+  }
+
+  groupByDate = (data) => {
     const sections = [
       { title: 'Today', data:[] },
       { title: 'This week', data:[] },
@@ -164,22 +191,105 @@ class Notifications extends Component {
     return data
   }
 
-  lastUpdatedTime = () => {
-    if(!this.state.last_updated) return undefined;
-    let moment_last_updated = moment(this.state.last_updated);
-    if(moment_last_updated.diff(moment(), 'days') > 1) {
-      return `Last updated ${moment_last_updated.calendar()}`;
+  openPage = async (notification) => {
+    const {subject, id, unread} = notification;
+    let url = 'https://github.com';
+    if (subject.type === 'Issue') {
+      url = [url, subject.url.split('/').slice(4).join('/')].join('/')
+    } else if (subject.type === 'PullRequest') {
+      let splitedUrl = subject.url.split('/').slice(4)
+      splitedUrl[2] = 'pull'
+      url = [url, splitedUrl.join('/')].join('/')
+    } else {
+      console.log(subject);
     }
-    return `Last updated ${moment_last_updated.fromNow()}`;
+    let latest_comment_url = subject.latest_comment_url
+    if (latest_comment_url) {
+      latest_comment_url = latest_comment_url.split('/')
+      let commentid = latest_comment_url[latest_comment_url.length - 1];
+      url += `#issuecomment-${commentid}`
+    }
+    Linking.openURL(url);
+    // Mark Read
+    if(await this.markRead(id) === false) {
+      return;
+    }
+    this.setState(prevState => ({
+      sections: prevState.sections.map(section => ({
+        title: section.title,
+        data: section.data.map(item => ({
+          ...item,
+          unread: item.id === id ? false : item.unread,
+        }))
+      }))
+    }), this.forceUpdate)
+    // this.props.navigation.dispatch(routeInfo);
   }
 
-  openPage = (routeInfo) => {
-    this.props.navigation.dispatch(routeInfo);
+  markRead = async (id) => {
+    let postUrl = `/notifications/threads/${id}`
+    let resp = await fetch(postUrl, { method: 'PATCH' });
+    return resp.status === 205;
+  }
+
+  clearSection = async ({ title, data }) => {
+    let length = data.filter(i => i.unread).length
+    if(length == 0) {
+      return ;
+    }
+    Alert.alert(
+      'Are you sure',
+      `${length} notifications will be cleared`,
+      [{
+        text: 'Cancel',
+        style: 'cancel'
+      },{
+        'text': 'Clear',
+        onPress: () => {
+          data.forEach(async (i) => await this.markRead(i.id));
+          let ids = data.map(i => i.id);
+          this.setState(prevState => ({
+            sections: prevState.sections.map(section => ({
+              title: section.title,
+              data: section.data.map(item => ({
+                ...item,
+                unread: ids.filter(i => i === item.id).length > 0 ? false : item.unread,
+              }))
+            }))
+          }), this.forceUpdate)
+        }
+      }]
+    )
   }
 
   onActionSelected = (pos) => {
     if (pos === 0) {
-      alert('Position 0');
+      this.initData();
+    } else if (pos === 1) {
+      this.setState(prevState => ({
+        unread: !prevState.unread,
+        sections: [],
+      }), this.initData)
+    } else if (pos === 2) {
+      Alert.alert(
+        'Group by',
+        undefined,
+        [{
+          text: 'Date',
+          onPress: () => {
+            this.setState({
+              grouprepo: false,
+            }, this.initData)
+          }
+        },{
+          text: 'Repository',
+          onPress: () => {
+            this.setState({
+              grouprepo: true,
+            }, this.initData)
+          }
+        }]
+      )
     }
   }
 
@@ -189,12 +299,22 @@ class Notifications extends Component {
         menuEnabled
         toolbarTitle="Notifications"
         actions={[{
+          title: 'Refresh',
+          show: 'always',
+          iconName: 'refresh',
+          iconColor: this.state.refreshing ? textDivider.toString() : textPrimary.toString()
+        },
+        {
+          title: 'Read/Unread',
+          show: 'always',
+          iconName: this.state.unread ? 'mail' : 'drafts'
+        },{
           title: 'Group by',
           show: 'always',
           iconName: 'filter-list'
         }]}
         onActionSelected={this.onActionSelected}
-        toolbarSubitle={this.lastUpdatedTime()}
+        toolbarSubitle={this.state.unread ? 'Unread' : 'All'}
       >
         {this.state.error !== null &&
           <Text style={styles.error}>{this.state.error}</Text>
@@ -208,7 +328,7 @@ class Notifications extends Component {
             keyExtractor={(item) => item.id}
             renderItem={({item}) => (
               <ListItem
-                onPress={this.openPage}
+                onPress={() => this.openPage(item)}
                 item={{title: item.repository.full_name, body: item.subject.title, date: item.updated_at}}
                 disabled={!item.unread}
               />
@@ -216,7 +336,11 @@ class Notifications extends Component {
             renderSectionHeader={({section}) =>
               <View>
                 {section.data.length > 0 &&
-                  <SectionHeader title={section.title}/>
+                  <SectionHeader
+                    title={section.title}
+                    onPress={() => this.clearSection(section)}
+                    disabled={section.data.filter(i => i.unread).length === 0}
+                  />
                 }
               </View>
             }
