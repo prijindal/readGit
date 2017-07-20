@@ -10,8 +10,8 @@ import { TextInput, ErrorText, ButtonContainer } from './formcomponents';
 
 export default class UserCredentials extends Component {
   state = {
-    username: 'prijindal',
-    password: 'Priyanshu@95',
+    username: '',
+    password: '',
     loading: false,
   }
 
