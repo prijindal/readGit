@@ -68,7 +68,7 @@ export default class Login extends Component {
     dispatch(navigateToApp);
   }
 
-  onLogin = async ({ username, password }) => {
+  onLogin = async ({ username, password }: { username: string, password: string }) => {
     let resp = await this.tryLogin(username, password)
     let otpRequest = resp.headers.get('x-github-otp');
     if(otpRequest && otpRequest.search('required') === 0) {
@@ -83,7 +83,7 @@ export default class Login extends Component {
     }
   }
 
-  onOtpVerify = async({ otp }) => {
+  onOtpVerify = async({ otp }: { otp: string }) => {
     let resp = await this.tryLogin(this.state.username, this.state.password, otp);
     console.log(resp);
     resp = await resp.json();
