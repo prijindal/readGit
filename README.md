@@ -1,4 +1,4 @@
-![Build status](https://build.mobile.azure.com/v0.1/apps/7a667b75-6b39-4ed9-94c6-8622fc343b68/branches/expo/badge)
+![Build status](https://build.mobile.azure.com/v0.1/apps/7a667b75-6b39-4ed9-94c6-8622fc343b68/branches/master/badge)
 [![Build Status](https://travis-ci.org/prijindal/readGit.svg?branch=master)](https://travis-ci.org/prijindal/readGit)
 
 ## Table of Contents
