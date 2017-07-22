@@ -105,12 +105,10 @@ android {
     }
     signingConfigs {
         release {
-            if (project.hasProperty('READGIT_RELEASE_STORE_FILE')) {
-                storeFile file(READGIT_RELEASE_STORE_FILE)
-                storePassword READGIT_RELEASE_STORE_PASSWORD
-                keyAlias READGIT_RELEASE_KEY_ALIAS
-                keyPassword READGIT_RELEASE_KEY_PASSWORD
-            }
+          storeFile file(String.valueOf(System.getenv("GRADLE_KEYSTORE")))
+          storePassword System.getenv("GRADLE_KEYSTORE_PASSWORD")
+          keyAlias System.getenv("GRADLE_KEYSTORE_ALIAS")
+          keyPassword System.getenv("GRADLE_KEYSTORE_ALIAS_PASSWORD")
         }
     }
     splits {
