@@ -13,6 +13,7 @@
     "android:release": "cd android && ./gradlew assembleRelease",
     "android:install": "adb install -r app/build/outputs/apk/app-release.apk",
     "android:launch": "adb shell am start -a android.intent.action.MAIN -n com.readgit/.MainActivity",
+    "android:sign": "jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore android/app/release.keystore android/app/build/outputs/apk-release.apk $MYAPP_RELEASE_KEY_ALIAS --storepass $MYAPP_RELEASE_STORE_PASSWORD --keypass $MYAPP_RELEASE_KEY_PASSWORD",
     "ios": "react-native run-ios",
     "test": "node node_modules/jest/bin/jest.js",
     "flow": "flow"

@@ -103,14 +103,6 @@ android {
             abiFilters "armeabi-v7a", "x86"
         }
     }
-    signingConfigs {
-        release {
-            storeFile file(READGIT_RELEASE_STORE_FILE)
-            storePassword READGIT_RELEASE_STORE_PASSWORD
-            keyAlias READGIT_RELEASE_KEY_ALIAS
-            keyPassword READGIT_RELEASE_KEY_PASSWORD
-        }
-    }
     splits {
         abi {
             reset()
@@ -123,7 +115,6 @@ android {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
-            signingConfig signingConfigs.release
         }
     }
     // applicationVariants are e.g. debug, release
