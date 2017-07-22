@@ -10,7 +10,8 @@
   "scripts": {
     "start": "react-native start",
     "android": "react-native run-android",
-    "android:release": "cd android && ./gradlew assembleRelease && adb install -r app/build/outputs/apk/app-release.apk",
+    "android:release": "cd android && ./gradlew assembleRelease",
+    "android:install": "adb install -r app/build/outputs/apk/app-release.apk",
     "android:launch": "adb shell am start -a android.intent.action.MAIN -n com.readgit/.MainActivity",
     "ios": "react-native run-ios",
     "test": "node node_modules/jest/bin/jest.js --watch",
