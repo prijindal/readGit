@@ -1,4 +1,4 @@
-# yarn run android:release
+yarn run android:release
 
 rm -rf build
 
