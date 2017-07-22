@@ -1,10 +1,10 @@
-yarn run android:release
+yarn run android:release && yarn run android:sign
 
 rm -rf build
 
 mkdir build
 
-cp android/app/build/outputs/apk/app-release.apk build/
+cp android/app/build/outputs/apk/app-release-unsigned.apk build/app-release.apk
 
 cd build
 
