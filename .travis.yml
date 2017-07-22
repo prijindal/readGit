@@ -1,0 +1,45 @@
+language: android
+sudo: false
+jdk: oraclejdk8
+
+before_install:
+- nvm install 8
+- node --version
+
+install:
+- npm install
+
+android:
+  components:
+  - tools
+  - platform-tools
+  - tools
+  - build-tools-25.0.1
+  - build-tools-23.0.3
+  - build-tools-23.0.1
+  - android-25
+  - android-23
+  - extra-android-m2repository
+  - extra-google-google_play_services
+  - extra-google-m2repository
+  - addon-google_apis-google-23
+
+script:
+  - npm test
+  # - if [[ "$NODE_VERSION" = 7 ]]; then sh upload.sh; fi
+
+after_success:
+  - npm run android:release
+  - sh build.sh
+
+cache:
+  directories:
+    - $HOME/.nvm
+    - node_modules
+
+notifications:
+  email:
+    recipients:
+      - priyanshujindal1995@gmail.com
+    on_failure: change
+    on_success: change

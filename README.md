@@ -6,7 +6,7 @@
 
 ## Packaged Apps
 
-[Download android app]('')
+[Download android app]('https://github.com/prijindal/readgit/raw/build/app-release.apk')
 
 ## Building
 
