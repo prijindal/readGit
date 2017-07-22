@@ -1,4 +1,4 @@
-yarn run android:release && yarn run android:sign
+npm run android:release && npm run android:sign
 
 rm -rf build
 

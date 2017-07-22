@@ -21,7 +21,6 @@ script:
   # - if [[ "$NODE_VERSION" = 7 ]]; then sh upload.sh; fi
 
 after_success:
-  - npm run android:release
   - sh build.sh
 
 cache:
