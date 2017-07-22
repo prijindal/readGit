@@ -1,3 +1,5 @@
+![Build status](https://build.mobile.azure.com/v0.1/apps/7a667b75-6b39-4ed9-94c6-8622fc343b68/branches/expo/badge)
+
 ## Table of Contents
 
 * [Packaged Apps](#packaged-apps)
