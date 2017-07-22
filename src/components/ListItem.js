@@ -60,7 +60,7 @@ class ListItem extends Component {
     onPress: PropTypes.func,
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(nextProps: any, nextState: any) {
     if (this.props.disabled !== nextProps.disabled) {
       return true;
     }

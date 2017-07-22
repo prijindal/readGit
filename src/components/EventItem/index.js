@@ -34,7 +34,7 @@ class EventItem extends Component {
     event: getInfo(this.props.item),
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(nextProps: any, nextState: any) {
     return false;
   }
 

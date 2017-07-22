@@ -9,7 +9,12 @@ const Image = styled.Image`
   border-radius: 25;
 `
 
-const Avatar = ({ url, style }) => (
+type AvatarType = {
+  url: string;
+  style: Object;
+}
+
+const Avatar = ({ url, style }: AvatarType) => (
   <Image source={{uri: url}} style={style}/>
 )
 

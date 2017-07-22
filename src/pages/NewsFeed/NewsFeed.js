@@ -31,9 +31,10 @@ class NewsFeed extends Component {
     refreshing: true,
     loading: false,
     error: null,
+    ended: false
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(nextProps: any, nextState: any) {
     if(this.state.data.length < nextState.data.length) {
       return true;
     }
@@ -60,7 +61,7 @@ class NewsFeed extends Component {
       let url = `https://api.github.com/users/${this.props.user.login}/received_events`
       console.log(url);
       let dataResponse = await fetch(url);
-      data = await dataResponse.json();
+      let data = await dataResponse.json();
       this.setState({
         error: null,
         data,
@@ -77,7 +78,7 @@ class NewsFeed extends Component {
     }
   }
 
-  updateData = async () => {
+  updateData = async (): Promise<void> => {
     if(this.state.data.length === 0 || this.state.loading === true) return ;
     this.setState({
       loading: true
@@ -112,7 +113,7 @@ class NewsFeed extends Component {
     return `Last updated ${moment_last_updated.fromNow()}`;
   }
 
-  openPage = (routeInfo) => {
+  openPage = (routeInfo: any) => {
     this.props.navigation.dispatch(routeInfo);
   }
 

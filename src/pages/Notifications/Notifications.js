@@ -83,14 +83,14 @@ class Header extends Component {
           onPress: () => {
             this.setState({
               grouprepo: false,
-            }, this.initData)
+            })
           }
         },{
           text: 'Repository',
           onPress: () => {
             this.setState({
               grouprepo: true,
-            }, this.initData)
+            })
           }
         }]
       )

@@ -12,7 +12,7 @@ export type State = {
 const INITIAL_STATE = Immutable({});
 
 const HANDLERS = {
-  [SAVE_USER]: (state: State = INITIAL_STATE, action: Action): State => action.payload,
+  [SAVE_USER]: (state: State = INITIAL_STATE, action: Action): State => ({ ...action.payload }),
   [LOGOUT_USER]: () => INITIAL_STATE,
 };
 

@@ -29,8 +29,8 @@ class Users extends Component {
     });
   }
 
-  updateData = async () => {
-    if(this.state.data.length === 0) return ;
+  updateData = async (): Promise<void> => {
+    if(this.state.data.length === 0) return;
     let newData = await fetch(`https://api.github.com/users?since=${this.state.data[this.state.data.length - 1].id}`);
     newData = await newData.json();
     this.setState(prevState => ({
@@ -47,7 +47,7 @@ class Users extends Component {
     refreshing: true,
   }
 
-  openUser(item) {
+  openUser(item: any) {
     this.props.navigation.navigate('User', { user: item });
   }
 

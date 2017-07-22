@@ -24,12 +24,12 @@ const navigateToApp = NavigationActions.reset({
 
 export default class Login extends Component {
   state = {
-    username: null,
-    password: null,
+    username: '',
+    password: '',
     otpinput: false
   }
 
-  tryLogin = async (username, password, otp) => {
+  tryLogin = async (username: string, password: string, otp?: string) => {
     let headers = {
       'Authorization': 'Basic ' + btoa(username + ':' + password),
       'Content-Type': 'application/json'
@@ -51,7 +51,7 @@ export default class Login extends Component {
     return resp;
   }
 
-  successLogin = async ({ token }) => {
+  successLogin = async ({ token }: { token: string }) => {
     let query = `{
     	viewer {
         id
