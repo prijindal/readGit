@@ -1,17 +1,25 @@
 import { gql } from 'react-apollo';
 import Repository from '../../components/Repository';
+import User from '../../components/User';
 
 const searchResultsFragment = gql`
   fragment searchResultsFragment on SearchResultItemConnection {
     edges {
+      cursor
       node {
         ...on Repository {
           ...repositoryFragment
         }
-        ...on User {
+        ...on RepositoryOwner{
           login
+          avatarUrl
+          url
+        }
+        ...on User {
           name
-          avatarUrl(size: 48)
+        }
+        ...on Organization {
+          name
         }
       }
     }

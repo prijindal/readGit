@@ -15,7 +15,7 @@ const styles = {
 
 class Search extends PureComponent {
   state = {
-    searchText: '',
+    searchText: 'ionic',
   }
 
   onBackPress = () => {

@@ -8,31 +8,37 @@ import styled from 'styled-components/native';
 import { View, TouchableNativeFeedback, Linking } from 'react-native';
 
 import { Container, Content, Title, Text } from './ListItem';
-import { textDarkPrimary } from '../colors';
+import { textDarkPrimary, textDarkDivider, textSecondary } from '../colors';
 
 const StargazersView = styled.View`
   flex-direction: row;
-  margin-top: 16;
   align-items: center;
 `
 
 const Round = styled.View`
   width: 12;
-  margin-right: 4;
+  margin-horizontal: 4;
   height: 12;
   border-radius: 10;
   background-color: ${textDarkPrimary.toString()};
 `
 
 const styles = {
+  container: {
+    paddingVertical: 8,
+    borderBottomWidth: 1,
+    borderBottomColor: textDarkDivider,
+    backgroundColor: textSecondary
+  },
   mainContent: {
-    maxWidth: 220
+    maxWidth: null
   },
   additionalContent: {
-    alignItems: 'flex-start'
+    justifyContent: 'flex-start',
+    flexDirection: 'row'
   },
   starIcon: {
-    marginRight: 4
+    marginHorizontal: 4
   }
 }
 
@@ -53,14 +59,14 @@ const Language = ({language}) => (
 class Repository extends PureComponent {
   onPress = () => {
     const { repository } = this.props
-    Linking.openURL(`https://github.com/${repository.owner.login}/${repository.name}`);
+    Linking.openURL(repository.url);
   }
 
   render() {
     const { repository } = this.props
     return (
       <TouchableNativeFeedback onPress={this.onPress}>
-        <Container>
+        <View style={styles.container}>
           <Content style={styles.mainContent}>
             <Title>{`${repository.owner.login}/${repository.name}`}</Title>
             <Text>{repository.description}</Text>
@@ -73,7 +79,7 @@ class Repository extends PureComponent {
             ))}
             <Stargazers stargazers={repository.stargazers.totalCount}/>
           </Content>
-        </Container>
+        </View>
       </TouchableNativeFeedback>
     )
   }
@@ -85,6 +91,7 @@ Repository.fragment = gql`
     owner {
       login
     }
+    url
     description
     stargazers {
       totalCount

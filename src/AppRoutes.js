@@ -10,12 +10,12 @@ import UserPage from './pages/User';
 import SearchPage from './pages/Search';
 
 const AppRoutes = StackNavigator({
+  Search: { screen: SearchPage },
   Home: { screen: NotificationsPage },
   NewsFeed: { screen: NewsFeedPage },
   Users: { screen: UsersPage },
   Login: { screen: LoginPage },
   User: { screen: UserPage },
-  Search: { screen: SearchPage },
 }, {
   navigationOptions: {
     header: null

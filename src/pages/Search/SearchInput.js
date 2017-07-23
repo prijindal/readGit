@@ -19,6 +19,7 @@ class SearchInput extends PureComponent {
         <TitleContainer>
           <TextInput
             onChangeText={this.props.onChangeText}
+            value={this.props.searchText}
             placeholder="Search"
             keyboardType="web-search"
             returnKeyType="search"
