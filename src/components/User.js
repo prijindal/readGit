@@ -1,6 +1,6 @@
 // @flow
 import React, { PureComponent } from 'react';
-import { Linking } from 'react-native';
+import { NavigationActions } from 'react-navigation';
 import { gql } from 'react-apollo';
 
 import ListItem from './ListItem';
@@ -8,8 +8,9 @@ import ListItem from './ListItem';
 class User extends PureComponent {
   onPress = () => {
     const { user } = this.props;
-    Linking.openURL(user.url);
+    this.props.dispatch(NavigationActions.navigate({ routeName: 'User' , params: { user }}));
   }
+  
   render() {
     const { user } = this.props;
     return (

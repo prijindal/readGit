@@ -14,7 +14,10 @@ class SearchResultTab extends PureComponent {
     if (data.loading) {
       return <Loading />;
     }
-    if (data.search.edges.length === 0) {
+    if (data.error) {
+      return <CenterText>{data.error.message}</CenterText>;
+    }
+    if (!data.search || !data.search.edges || data.search.edges.length === 0) {
       return <CenterText>No Results Found</CenterText>;
     }
     return (

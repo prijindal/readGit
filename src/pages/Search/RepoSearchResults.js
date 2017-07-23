@@ -8,7 +8,7 @@ const UserSearchResults = ({ screenProps }) => (
   <SearchResultTab
     query={screenProps.searchText}
     type="REPOSITORY"
-    renderItem={({item}) => <Repository repository={item.node}/>}
+    renderItem={({item}) => <Repository dispatch={screenProps.dispatch} repository={item.node}/>}
   />
 )
 

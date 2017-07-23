@@ -70,29 +70,48 @@ class Repository extends PureComponent {
           <Content style={styles.mainContent}>
             <Title>{`${repository.owner.login}/${repository.name}`}</Title>
             <Text>{repository.description}</Text>
-            <Text></Text>
-            <Text>{'Updated ' + moment(repository.pushedAt).fromNow()}</Text>
+            {repository.pushedAt !== undefined &&
+              <View style={styles.additionalContent}>
+                <Text></Text>
+                <Text>{'Updated ' + moment(repository.pushedAt).fromNow()}</Text>
+              </View>
+            }
           </Content>
-          <Content style={styles.additionalContent}>
-            {repository.languages.edges.map(edge => (
-              <Language key={edge.node.id} language={edge.node}/>
-            ))}
-            <Stargazers stargazers={repository.stargazers.totalCount}/>
-          </Content>
+          {(repository.languages !== undefined && repository.stargazers !== undefined) &&
+            <Content style={styles.additionalContent}>
+              {repository.languages !== undefined &&
+                <View>
+                  {repository.languages.edges.map(edge => (
+                    <Language key={edge.node.id} language={edge.node}/>
+                  ))}
+                </View>
+              }
+              {repository.stargazers !== undefined &&
+                <Stargazers stargazers={repository.stargazers.totalCount}/>
+              }
+            </Content>
+          }
         </View>
       </TouchableNativeFeedback>
     )
   }
 }
 
-Repository.fragment = gql`
-  fragment repositoryFragment on Repository {
+Repository.shortFragment = gql`
+  fragment repositoryShortFragment on Repository {
+    id
     name
     owner {
       login
     }
     url
     description
+  }
+`
+
+Repository.fragment = gql`
+  fragment repositoryFragment on Repository {
+    ...repositoryShortFragment
     stargazers {
       totalCount
     }
@@ -107,6 +126,7 @@ Repository.fragment = gql`
     }
     pushedAt
   }
+  ${Repository.shortFragment}
 `
 
 export default Repository;

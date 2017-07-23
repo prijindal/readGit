@@ -15,7 +15,7 @@ const styles = {
 
 class Search extends PureComponent {
   state = {
-    searchText: 'ionic',
+    searchText: '',
   }
 
   onBackPress = () => {
@@ -39,6 +39,7 @@ class Search extends PureComponent {
         />
         <SearchResults
           searchText={this.state.searchText}
+          dispatch={this.props.navigation.dispatch}
         />
       </View>
     )

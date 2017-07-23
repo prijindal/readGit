@@ -1,7 +1,7 @@
 /* @flow */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ScrollView, Text, Image, View, Alert, AsyncStorage } from 'react-native';
+import { ScrollView, Text, Image, View, Alert, AsyncStorage, TouchableNativeFeedback } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 
 import { white, textPrimary, textSecondary } from '../../colors';
@@ -74,13 +74,6 @@ const styles = {
 };
 
 
-const user = {
-  name: 'Priyanshu Jindal',
-  email: 'priyanshujindal1995@gmail.com',
-  uri: 'https://lh3.googleusercontent.com/AQReAe_Kc0b7vEpY68NmyinordjwmTI9YAstfxNA8uZUlmyv7q8N1wVsgBUxq697e10dHg=s630',
-  avatar: 'https://avatars2.githubusercontent.com/u/10034872?v=3&s=460',
-};
-
 class SideBar extends Component {
   static propTypes = {
     logout: PropTypes.func.isRequired,
@@ -144,26 +137,41 @@ class SideBar extends Component {
     AsyncStorage.removeItem('user');
   }
 
+  openUser = () => {
+    let { user, data } = this.props
+    if (!data.loading && !data.error) {
+      user = data.viewer
+    }
+    this.props.closeDrawer();
+    this.props.dispatch(NavigationActions.navigate({ routeName: 'User' , params: { user }}));
+  }
+
   render() {
+    let { user, data } = this.props
+    if (!data.loading && !data.error) {
+      user = data.viewer
+    }
     return (
       <View onLayout={this.onScrollViewLayout} style={styles.container}>
         <ScrollView>
           <Image
-            source={{ uri: user.uri }}
+            source={{ uri: user.avatarUrl }}
             style={[styles.image, { height: this.state.imageHeight }]}
           >
-            <View style={styles.imageOverlay}>
-              <Image
-                style={styles.avatar}
-                source={{ uri: user.avatar }}
-              />
-              <View style={styles.profileInfoContainer}>
-                <View style={styles.profileInfo}>
-                  <Text style={styles.name}>{user.name}</Text>
-                  <Text style={styles.email}>{user.email}</Text>
+            <TouchableNativeFeedback onPress={this.openUser}>
+              <View style={styles.imageOverlay}>
+                <Image
+                  style={styles.avatar}
+                  source={{ uri: user.avatarUrl }}
+                />
+                <View style={styles.profileInfoContainer}>
+                  <View style={styles.profileInfo}>
+                    <Text style={styles.name}>{user.name}</Text>
+                    <Text style={styles.email}>{user.email}</Text>
+                  </View>
                 </View>
               </View>
-            </View>
+            </TouchableNativeFeedback>
           </Image>
           <View style={styles.list}>
             <List>
