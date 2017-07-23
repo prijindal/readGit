@@ -4,19 +4,10 @@ import { gql, graphql } from 'react-apollo';
 
 import { View, FlatList } from 'react-native';
 
-import ListItem from '../../components/ListItem';
 import CenterText from './CenterText';
 import Loading from '../../components/Loading';
+import Repository from '../../components/Repository';
 import searchResultsFragment from './searchResultsFragment';
-
-const Repository = ({repository}) => (
-  <ListItem
-    item={{
-      title: `${repository.owner.login}/${repository.name}`
-    }}
-    disabled
-  />
-)
 
 class RepoSearchResults extends PureComponent {
   render() {
@@ -42,7 +33,7 @@ class RepoSearchResults extends PureComponent {
 
 const SearchQuery = gql`
   query($query: String!, $after: String) {
-    search(first: 5, query: $query, after: $after, type: REPOSITORY) {
+    search(first: 10, query: $query, after: $after, type: REPOSITORY) {
       ...searchResultsFragment
     }
   }

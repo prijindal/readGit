@@ -27,11 +27,7 @@ const SearchResultsTabs = TabNavigator({
 })
 
 class SearchResults extends PureComponent {
-
   render() {
-    if (!this.props.searchText) {
-      return <CenterText>Please Enter a search result</CenterText>
-    }
     return (
       <SearchResultsTabs
         screenProps={this.props}

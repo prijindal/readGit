@@ -1,13 +1,12 @@
 import { gql } from 'react-apollo';
+import Repository from '../../components/Repository';
+
 const searchResultsFragment = gql`
   fragment searchResultsFragment on SearchResultItemConnection {
     edges {
       node {
         ...on Repository {
-          name
-          owner {
-            login
-          }
+          ...repositoryFragment
         }
         ...on User {
           login
@@ -17,6 +16,7 @@ const searchResultsFragment = gql`
       }
     }
   }
+  ${Repository.fragment}
 `
 
 export default searchResultsFragment;

@@ -45,7 +45,7 @@ class UserSearchResults extends PureComponent {
 
 const SearchQuery = gql`
   query($query: String!, $after: String) {
-    search(first: 5, query: $query, after: $after, type: USER) {
+    search(first: 10, query: $query, after: $after, type: USER) {
       ...searchResultsFragment
     }
   }
