@@ -22,3 +22,23 @@ export const textDark = '#000000';
 export const textDarkPrimary = color(textDark).alpha(0.87).hsl();
 export const textDarkSecondary = color(textDark).alpha(0.54).hsl();
 export const textDarkDivider = color(textDark).alpha(0.12).hsl();;
+
+export const tabBarOptions = {
+  activeTintColor: textPrimary,
+  inactiveTintColor: textSecondary,
+  scrollEnabled: false,
+  labelStyle: {
+    fontSize: 14,
+    color: textPrimary
+  },
+  tabStyle: {
+    height: 48,
+  },
+  style: {
+    backgroundColor: primary
+  },
+  indicatorStyle: {
+    backgroundColor: accent,
+    height: 2
+  }
+}

@@ -6,7 +6,7 @@ import Icon, { ToolbarAndroid } from 'react-native-vector-icons/MaterialIcons';
 
 import { primary, textPrimary, transparent, textSecondary } from '../colors';
 
-const Container = styled.View`
+export const Container = styled.View`
   height: 56;
   background-color: ${primary.toString()};
   flex-direction: row;
@@ -15,36 +15,37 @@ const Container = styled.View`
   elevation: 2;
 `
 
-const LeftIcon = styled.View`
+export const LeftIcon = styled.View`
   background-color: transparent;
   border-radius: 50;
   padding-vertical: 8;
   padding-horizontal: 12;
 `
 
-const TitleContainer = styled.View`
+export const TitleContainer = styled.View`
   flex-direction: column;
   margin-horizontal: 4;
   flex-grow:1;
 `
 
-const Title = styled.Text`
+export const Title = styled.Text`
   color: ${textPrimary.toString()};
   font-size: 20;
 `
-const Subtitle = styled.Text`
+
+export const Subtitle = styled.Text`
   color: ${textSecondary.toString()};
 `
 
-const RightIconsContainer = styled.View`
+export const RightIconsContainer = styled.View`
   padding-vertical: 8;
   flex-direction: row;
 `;
 
-const RightIcon = ({name, size, onPress}) => (
+export const RightIcon = ({name, size, onPress, color=textPrimary.toString()}: { name: string, size: number, onPress: any, color: string }) => (
   <TouchableNativeFeedback onPress={onPress} background={TouchableNativeFeedback.SelectableBackgroundBorderless()}>
     <LeftIcon>
-      <Icon name={name} size={size} color={textPrimary.toString()}/>
+      <Icon name={name} size={size} color={color}/>
     </LeftIcon>
   </TouchableNativeFeedback>
 )

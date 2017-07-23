@@ -95,9 +95,6 @@ class ListItem extends Component {
     return (
       <TouchableNativeFeedback onPress={onPress}>
         <Container>
-          {item.image &&
-            <Image source={{ uri: item.image }} />
-          }
           <Content>
             <Title style={textStyles} ellipsizeMode="tail" numberOfLines={1}>{item.title}</Title>
             <Text style={textStyles} ellipsizeMode="tail" numberOfLines={1}>{item.body}</Text>
@@ -106,6 +103,9 @@ class ListItem extends Component {
             <View>
               <Text style={textStyles}>{this.getTime()}</Text>
             </View>
+          }
+          {item.image &&
+            <Image source={{ uri: item.image }} />
           }
         </Container>
       </TouchableNativeFeedback>

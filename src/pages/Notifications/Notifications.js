@@ -2,11 +2,11 @@
 import React, { Component } from 'react';
 import { Alert } from 'react-native';
 import PropTypes from 'prop-types';
-import { TabNavigator } from 'react-navigation';
+import { TabNavigator, NavigationActions } from 'react-navigation';
 
 import {
   textDarkSecondary, textPrimary, textSecondary, textDivider, primary,
-  accent
+  accent, tabBarOptions
 } from '../../colors';
 
 import Layout from '../../components/Layout';
@@ -43,25 +43,7 @@ const NotificationsApp = TabNavigator({
     screen: Participating,
   },
 }, {
-  tabBarOptions: {
-    activeTintColor: textPrimary,
-    inactiveTintColor: textSecondary,
-    scrollEnabled: false,
-    labelStyle: {
-      fontSize: 14,
-      color: textPrimary
-    },
-    tabStyle: {
-      height: 48,
-    },
-    style: {
-      backgroundColor: primary
-    },
-    indicatorStyle: {
-      backgroundColor: accent,
-      height: 2
-    }
-  },
+  tabBarOptions,
   lazy: false,
   swipeEnabled: true,
   animationEnabled: true,
@@ -94,6 +76,8 @@ class Header extends Component {
           }
         }]
       )
+    } else if (pos === 1) {
+      this.props.dispatch(NavigationActions.navigate({ routeName: 'Search' }),);
     }
   }
 
@@ -106,6 +90,10 @@ class Header extends Component {
           title: 'Group by',
           show: 'always',
           iconName: 'filter-list'
+        },{
+          title: 'Search',
+          show: 'always',
+          iconName: 'search'
         }]}
         onActionSelected={this.onActionSelected}
         toolbarSubtitle={this.state.unread ? 'Unread' : 'All'}
@@ -116,8 +104,8 @@ class Header extends Component {
 
 class Notifications extends Component {
   static navigationOptions = {
-    header: () => (
-      <Header />
+    header: (props) => (
+      <Header dispatch={props.navigation.dispatch}/>
     )
   }
 
