@@ -6,7 +6,6 @@ import { View, Text, FlatList } from 'react-native';
 
 import { tabBarOptions } from '../../colors';
 
-import Loading from '../../components/Loading';
 import ListItem from '../../components/ListItem';
 
 import CenterText from './CenterText';
@@ -30,10 +29,7 @@ const SearchResultsTabs = TabNavigator({
 class SearchResults extends PureComponent {
 
   render() {
-    if(this.props.loading) {
-      return <Loading />
-    }
-    if (!this.props.results || !this.props.results.data) {
+    if (!this.props.searchText) {
       return <CenterText>Please Enter a search result</CenterText>
     }
     return (

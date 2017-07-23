@@ -1,10 +1,13 @@
 // @flow
-import React from 'react';
+import React, { PureComponent } from 'react';
+import { gql, graphql } from 'react-apollo';
 
 import { View, FlatList } from 'react-native';
 
 import ListItem from '../../components/ListItem';
 import CenterText from './CenterText';
+import Loading from '../../components/Loading';
+import searchResultsFragment from './searchResultsFragment';
 
 const Repository = ({repository}) => (
   <ListItem
@@ -15,17 +18,47 @@ const Repository = ({repository}) => (
   />
 )
 
-const RepoSearchResults = ({ screenProps: { loading, results }  }) => (
-  <View>
-    {results.data.reporesults.edges.length === 0 ?
-      <CenterText>No Results Found</CenterText> :
-      <FlatList
-        data={results.data.reporesults.edges}
-        keyExtractor={(item, index) => index}
-        renderItem={({item}) => <Repository repository={item.node}/>}
-      />
+class RepoSearchResults extends PureComponent {
+  render() {
+    const { data } = this.props
+    return (
+      <View>
+        {data.loading ? <Loading/>:
+          <View>
+            {data.search.edges.length === 0 ?
+              <CenterText>No Results Found</CenterText> :
+              <FlatList
+                data={data.search.edges}
+                keyExtractor={(item, index) => index}
+                renderItem={({item}) => <Repository repository={item.node}/>}
+              />
+            }
+          </View>
+        }
+      </View>
+    )
+  }
+}
+
+const SearchQuery = gql`
+  query($query: String!, $after: String) {
+    search(first: 5, query: $query, after: $after, type: REPOSITORY) {
+      ...searchResultsFragment
     }
-  </View>
-)
+  }
+  ${searchResultsFragment}
+`
+
+RepoSearchResults = graphql(
+  SearchQuery,
+  {
+    options: ({ screenProps: { searchText } }) => ({
+      variables: {
+        query: searchText,
+        after: null
+      }
+    })
+  }
+)(RepoSearchResults)
 
 export default RepoSearchResults;

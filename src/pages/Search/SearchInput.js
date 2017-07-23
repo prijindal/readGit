@@ -30,9 +30,7 @@ class SearchInput extends PureComponent {
               color: textDarkPrimary.toString(),
               fontSize: 18,
             }}
-            onSubmitEditing={this.props.onSubmitEditing}
             autoFocus
-            blurOnSubmit
           />
         </TitleContainer>
         <RightIconsContainer>

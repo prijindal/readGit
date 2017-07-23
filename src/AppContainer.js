@@ -2,13 +2,13 @@
 import React, { Component } from 'react';
 import { AsyncStorage } from 'react-native';
 import { Provider } from 'react-redux';
+import { ApolloProvider } from 'react-apollo';
 import { saveUser } from './actions/user';
 
-import configureStore from './configureStore';
 import AppNavigator from './components/AppNavigator';
 import AppShell from './components/AppShell';
-
-const store = configureStore();
+import store from './store';
+import client, { installAuthentication } from './apollo';
 
 class AppContainer extends Component {
   constructor(props: any) {
@@ -24,6 +24,7 @@ class AppContainer extends Component {
     let user = await AsyncStorage.getItem('user');
     user = JSON.parse(user);
     store.dispatch(saveUser(user))
+    installAuthentication(user.token);
     this.setState({
       loaded: true,
     })
@@ -32,9 +33,11 @@ class AppContainer extends Component {
   render() {
     if(!this.state.loaded) return <AppShell />
     return (
-      <Provider store={store}>
-        <AppNavigator />
-      </Provider>
+      <ApolloProvider client={client}>
+        <Provider store={store}>
+          <AppNavigator />
+        </Provider>
+      </ApolloProvider>
     )
   }
 }
