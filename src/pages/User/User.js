@@ -9,6 +9,8 @@ import {
 } from '../../colors';
 import Layout from '../../components/Layout';
 import Overview from './Overview';
+import Repositories from './Repositories';
+import StarredRepositories from './StarredRepositories';
 
 const paramsToState = (props) => {
   const { state } = props.navigation;
@@ -28,7 +30,7 @@ class Header extends Component {
   state = {
     user: paramsToState(this.props),
   }
-  
+
   render() {
     const { user } = this.state;
     return (
@@ -45,9 +47,18 @@ class Header extends Component {
 const UserTabs = TabNavigator({
   Overview: {
     screen: Overview
+  },
+  Repositories: {
+    screen: Repositories
+  },
+  Starred: {
+    screen: StarredRepositories
   }
 }, {
-  tabBarOptions,
+  tabBarOptions: {
+    ...tabBarOptions,
+    scrollEnabled: true
+  },
   lazy: true,
   swipeEnabled: true,
   animationEnabled: true,
