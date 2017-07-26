@@ -3,9 +3,9 @@ import styled from 'styled-components/native';
 import { gql } from 'react-apollo';
 import { View, Text } from 'react-native';
 
-import Loading from '../../components/Loading';
-import { textDarkDivider } from '../../colors';
-import Repository from '../../components/Repository'
+import Loading from '../../../components/Loading';
+import { textDarkDivider } from '../../../colors';
+import Repository from '../../../components/Repository'
 
 const Container = styled.View`
   border-top-width: 1;
@@ -16,10 +16,7 @@ const Container = styled.View`
 class PinnedRepositories extends PureComponent {
   render() {
     const { pinnedRepositories } = this.props
-    if (!pinnedRepositories || !pinnedRepositories.edges) {
-      return <Loading />
-    }
-    if (pinnedRepositories.edges.length === 0) {
+    if (!pinnedRepositories || !pinnedRepositories.edges || pinnedRepositories.edges.length === 0) {
       return <View />
     }
     return (

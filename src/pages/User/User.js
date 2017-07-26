@@ -1,93 +1,68 @@
 // @flow
 import React, { Component } from 'react';
 import styled from 'styled-components/native';
-import { View, Linking, TouchableNativeFeedback } from 'react-native';
+import { View } from 'react-native';
+import { TabNavigator } from 'react-navigation';
 
-import Layout from '../../components/Layout';
-import Loading from '../../components/Loading';
 import {
-  textDarkPrimary,
-  textDarkSecondary,
-  textDarkDivider,
-  white,
-  textPrimary,
-  textSecondary,
-  accent
+  tabBarOptions
 } from '../../colors';
+import Layout from '../../components/Layout';
+import Overview from './Overview';
 
-import PinnedRepositories from './PinnedRepositories';
+const paramsToState = (props) => {
+  const { state } = props.navigation;
+  console.log(state);
+  if (state.routes[state.index].params) {
+    return state.routes[state.index].params.user;
+  } else {
+    return {};
+  }
+}
 
-const Image = styled.Image`
-  margin-top: 8;
-  width: 120;
-  height: 120;
-`
+class Header extends Component {
+  shouldComponentUpdate(nextProps) {
+    return false;
+  }
 
-const Container = styled.ScrollView`
-  padding-top: 8;
-  background-color: ${textPrimary.toString()};
-  padding-horizontal: 12;
-`
-
-const Partial = styled.View`
-  flex-direction: row;
-`
-
-const Content = styled.View`
-  padding-vertical: 8;
-  padding-horizontal: 12;
-`
-
-export const Title = styled.Text`
-  color: ${textDarkPrimary.toString()};
-  font-size: 18;
-`
-
-export const Text = styled.Text`
-  color: ${textDarkSecondary.toString()};
-  font-size: 14;
-`
-
-export const Bio = styled(Text)`
-  padding-horizontal: 4;
-  padding-vertical: 16;
-`
-
-const Hyperlink = ({children, link}) => (
-  <TouchableNativeFeedback onPress={() => Linking.openURL(link)}>
-    <Text>{children}</Text>
-  </TouchableNativeFeedback>
-)
-
-class User extends Component {
+  state = {
+    user: paramsToState(this.props),
+  }
+  
   render() {
-    const { data } = this.props
-    let { user } = this.props.navigation.state.params;
-    if (!data.loading && !data.error) {
-      user = data.repositoryOwner
-    }
+    const { user } = this.state;
     return (
       <Layout
         backButton
         onBackButtonPress={() => this.props.navigation.goBack()}
         toolbarTitle={user.login}
         toolbarSubtitle={user.name}
-      >
-        <Container>
-          <Partial>
-            <Image source={{ uri: user.avatarUrl }}/>
-            <Content>
-              <Title>{user.name}</Title>
-              <Text>{user.login}</Text>
-              <Text />
-              <Hyperlink link={`mailto:${user.email}`}>{user.email}</Hyperlink>
-              <Hyperlink link={user.websiteUrl}>{user.websiteUrl}</Hyperlink>
-            </Content>
-          </Partial>
-          <Bio>{user.bio}</Bio>
-          <PinnedRepositories pinnedRepositories={user.pinnedRepositories}/>
-        </Container>
-      </Layout>
+      />
+    )
+  }
+}
+
+const UserTabs = TabNavigator({
+  Overview: {
+    screen: Overview
+  }
+}, {
+  tabBarOptions,
+  lazy: true,
+  swipeEnabled: true,
+  animationEnabled: true,
+})
+
+class User extends Component {
+  static navigationOptions = {
+    header: (props, extraProps) => (
+      <Header {...props}/>
+    )
+  }
+
+  render() {
+    return (
+      <UserTabs screenProps={this.props} />
     )
   }
 }
