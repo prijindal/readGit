@@ -29,6 +29,10 @@ export default class NotificationsTab extends Component {
     })
   }
 
+  static defaultProps = {
+    grouprepo: false
+  }
+
   state = {
     sections: [],
     refreshing: true,
@@ -40,7 +44,16 @@ export default class NotificationsTab extends Component {
     this.initData();
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.grouprepo !== nextProps.grouprepo) {
+      this.initData();
+    }
+  }
+
   shouldComponentUpdate(nextProps, nextState) {
+    if (this.props.grouprepo !== nextProps.grouprepo) {
+      return true;
+    }
     if(this.state.sections.length !== nextState.sections.length) {
       return true;
     }

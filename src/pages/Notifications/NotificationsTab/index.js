@@ -3,5 +3,5 @@ import { connect } from 'react-redux';
 import NotificationsTab from './NotificationsTab';
 
 export default connect(
-  ({ user }) => ({ token: user.token })
+  ({ user, settings }) => ({ token: user.token, grouprepo: settings.grouprepo })
 )(NotificationsTab);

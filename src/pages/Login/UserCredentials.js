@@ -27,6 +27,10 @@ export default class UserCredentials extends Component {
     })
   }
 
+  onUsernameSubmit = () => {
+    this.passwordInput.root.focus();
+  }
+
   render() {
     return (
       <View>
@@ -36,7 +40,7 @@ export default class UserCredentials extends Component {
           value={this.state.username}
           returnKeyType="next"
           editable={!this.state.loading}
-          onSubmitEditing={() => this.passwordInput.focus()}
+          onSubmitEditing={this.onUsernameSubmit}
           autoFocus
         />
         <TextInput

@@ -13,14 +13,14 @@ import client, { installAuthentication } from './apollo';
 class AppContainer extends Component {
   constructor(props: any) {
     super(props)
-    this.saveToken();
+    this.getUserInfo();
   }
 
   state = {
     loaded: false,
   }
 
-  saveToken = async () => {
+  getUserInfo = async () => {
     let user = await AsyncStorage.getItem('user');
     user = JSON.parse(user);
     store.dispatch(saveUser(user))
@@ -28,6 +28,9 @@ class AppContainer extends Component {
     this.setState({
       loaded: true,
     })
+    // let settings = await AsyncStorage.getItem('settings');
+    // settings = JSON.parse(settings);
+    // store.dispatch(saveSettings(settings));
   }
 
   render() {
