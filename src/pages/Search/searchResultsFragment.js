@@ -11,20 +11,13 @@ const searchResultsFragment = gql`
           ...repositoryFragment
         }
         ...on RepositoryOwner{
-          login
-          avatarUrl
-          url
-        }
-        ...on User {
-          name
-        }
-        ...on Organization {
-          name
+          ...userFragment
         }
       }
     }
   }
   ${Repository.fragment}
+  ${User.fragment}
 `
 
 export default searchResultsFragment;

@@ -11,6 +11,7 @@ import Layout from '../../components/Layout';
 import Overview from './Overview';
 import Repositories from './Repositories';
 import StarredRepositories from './StarredRepositories';
+import Followers from './Followers';
 
 const paramsToState = (props) => {
   const { state } = props.navigation;
@@ -53,6 +54,9 @@ const UserTabs = TabNavigator({
   },
   Starred: {
     screen: StarredRepositories
+  },
+  Followers: {
+    screen: Followers
   }
 }, {
   tabBarOptions: {
