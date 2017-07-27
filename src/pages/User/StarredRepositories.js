@@ -2,6 +2,7 @@
 import React, { PureComponent } from 'react';
 import { gql, graphql } from 'react-apollo';
 import RepositoriesList from './RepositoriesList';
+import Repository from '../../components/Repository';
 
 class StarredRepositories extends PureComponent {
   render() {
@@ -16,12 +17,18 @@ class StarredRepositories extends PureComponent {
 const userQuery = gql`
   query($login: String!) {
     repositoryOwner(login: $login){
-      starredRepositories(first: 10) {
-        ...repositoriesListFragment
+      ...on User {
+        repositories: starredRepositories(first: 10, orderBy: {field: STARRED_AT, direction: DESC}) {
+          edges {
+            node {
+              ...repositoryFragment
+            }
+          }
+        }
       }
     }
   }
-  ${RepositoriesList.fragment}
+  ${Repository.fragment}
 `
 
 export default graphql(

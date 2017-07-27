@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import styled from 'styled-components/native';
-import { View, Linking, TouchableNativeFeedback } from 'react-native';
+import { ScrollView, Linking, TouchableNativeFeedback } from 'react-native';
 
 import Loading from '../../../components/Loading';
 
@@ -12,7 +12,6 @@ import {
   white,
   textPrimary,
   textSecondary,
-  accent
 } from '../../../colors';
 
 import PinnedRepositories from './PinnedRepositories';
@@ -23,7 +22,15 @@ const Image = styled.Image`
   height: 120;
 `
 
-const Container = styled.ScrollView`
+const ImageLoading = styled.View`
+  margin-top: 8;
+  justify-content: center;
+  align-items: center;
+  width: 120;
+  height: 120;
+`
+
+const Container = styled.View`
   padding-top: 8;
   background-color: ${textPrimary.toString()};
   padding-horizontal: 12;
@@ -67,20 +74,27 @@ class Overview extends Component {
       user = data.repositoryOwner
     }
     return (
-      <Container>
-        <Partial>
-          <Image source={{ uri: user.avatarUrl }}/>
-          <Content>
-            <Title>{user.name}</Title>
-            <Text>{user.login}</Text>
-            <Text />
-            <Hyperlink link={`mailto:${user.email}`}>{user.email}</Hyperlink>
-            <Hyperlink link={user.websiteUrl}>{user.websiteUrl}</Hyperlink>
-          </Content>
-        </Partial>
-        <Bio>{user.bio}</Bio>
+      <ScrollView>
+        <Container>
+          <Partial>
+            {data.loading ?
+              <ImageLoading>
+                <Loading />
+              </ImageLoading> :
+              <Image source={{ uri: user.avatarUrl }}/>
+            }
+            <Content>
+              <Title>{user.name}</Title>
+              <Text>{user.login}</Text>
+              <Text />
+              <Hyperlink link={`mailto:${user.email}`}>{user.email}</Hyperlink>
+              <Hyperlink link={user.websiteUrl}>{user.websiteUrl}</Hyperlink>
+            </Content>
+          </Partial>
+          <Bio>{user.bio}</Bio>
+        </Container>
         <PinnedRepositories pinnedRepositories={user.pinnedRepositories}/>
-      </Container>
+      </ScrollView>
     )
   }
 }

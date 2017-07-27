@@ -16,7 +16,7 @@ class Repositories extends PureComponent {
 const userQuery = gql`
   query($login: String!) {
     repositoryOwner(login: $login){
-      repositories(first: 10) {
+      repositories(first: 10, orderBy: {field: PUSHED_AT, direction: DESC}) {
         ...repositoriesListFragment
       }
     }

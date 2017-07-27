@@ -6,7 +6,7 @@ import { TabNavigator } from 'react-navigation';
 
 import {
   textDarkSecondary, textPrimary, textSecondary, textDivider, primary,
-  accent, tabBarOptions
+  tabBarOptions
 } from '../../colors';
 
 import NotificationsTab from './NotificationsTab';
@@ -42,7 +42,10 @@ const NotificationsApp = TabNavigator({
     screen: Participating,
   },
 }, {
-  tabBarOptions,
+  tabBarOptions: {
+    ...tabBarOptions,
+    scrollEnabled: true,
+  },
   lazy: false,
   swipeEnabled: true,
   animationEnabled: true,
