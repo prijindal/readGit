@@ -2,7 +2,7 @@
 import React, { PureComponent } from 'react';
 import moment from 'moment';
 import { gql } from 'react-apollo';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from '@expo/vector-icons/MaterialIcons';
 import styled from 'styled-components/native';
 
 import { View, TouchableNativeFeedback, Linking } from 'react-native';

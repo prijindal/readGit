@@ -2,7 +2,7 @@
 import React, { PureComponent } from 'react';
 import { View, TextInput, TouchableNativeFeedback } from 'react-native';
 
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from '@expo/vector-icons/MaterialIcons';
 import { Container, LeftIcon, TitleContainer, RightIconsContainer, RightIcon } from '../../components/Toolbar';
 
 import { textPrimary, textDarkPrimary, textDarkSecondary, transparent } from '../../colors';

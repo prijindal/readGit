@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import { TouchableNativeFeedback, View } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from '@expo/vector-icons/MaterialIcons';
 
 import { white, textDarkPrimary, textDarkSecondary } from '../colors';
 

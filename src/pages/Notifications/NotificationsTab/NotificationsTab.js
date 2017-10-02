@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Text, SectionList, View, ToastAndroid, Alert, Linking, ScrollView } from 'react-native';
+import { Text, SectionList, View, Alert, Linking, ScrollView } from 'react-native';
 import moment from 'moment';
 
 import { textDarkSecondary, textPrimary, textSecondary, textDivider } from '../../../colors';
@@ -93,7 +93,6 @@ export default class NotificationsTab extends Component {
         page: 1,
       });
     } catch(e) {
-      ToastAndroid.show(e.message, ToastAndroid.LONG);
       this.setState({
         error: e.message,
         refreshing: false,
@@ -125,7 +124,6 @@ export default class NotificationsTab extends Component {
         ended: (newData.length == undefined || newData.length < 30),
       }));
     } catch(e) {
-      ToastAndroid.show(e.message, ToastAndroid.LONG);
       this.setState({
         loading: false,
       })

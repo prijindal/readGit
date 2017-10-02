@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { View, ToastAndroid } from 'react-native';
+import { View } from 'react-native';
 import { Button } from 'react-native';
 
 import { primary } from '../../colors';

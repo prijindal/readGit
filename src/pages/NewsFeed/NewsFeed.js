@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
-import { Text, FlatList, View, ToastAndroid } from 'react-native';
+import { Text, FlatList, View } from 'react-native';
 import moment from 'moment';
 
 import Layout from '../../components/Layout';
@@ -69,7 +69,6 @@ class NewsFeed extends Component {
         last_updated: dataResponse.headers.map.date[0],
       });
     } catch(e) {
-      ToastAndroid.show(e.message, ToastAndroid.LONG);
       this.setState({
         error: e.message,
         refreshing: false,
@@ -97,7 +96,6 @@ class NewsFeed extends Component {
         ended: (newData.length == undefined || newData.length < 30),
       }));
     } catch(e) {
-      ToastAndroid.show(e.message, ToastAndroid.LONG);
       this.setState({
         loading: false,
       })

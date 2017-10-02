@@ -1,8 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { BackHandler, Dimensions } from 'react-native';
-import Drawer from 'react-native-drawer'
+import { DrawerLayoutAndroid, BackHandler, Dimensions } from 'react-native';
 import { closeDrawer, openDrawer } from '../actions/drawer';
 
 import AppBar from '../components/AppBar';
@@ -17,9 +16,9 @@ class DrawerNavigator extends Component {
 
   componentWillReceiveProps({ drawer }) {
     if (drawer) {
-      this.drawer.open();
+      this.drawer.openDrawer();
     } else {
-      this.drawer.close();
+      this.drawer.closeDrawer();
     }
   }
 
@@ -33,7 +32,7 @@ class DrawerNavigator extends Component {
   registerBackButton() {
     BackHandler.addEventListener('hardwareBackPress', () => {
       if (this.props.drawer) {
-        this.drawer.close();
+        this.drawer.closeDrawer();
         return true;
       }
       return false;
@@ -54,16 +53,19 @@ class DrawerNavigator extends Component {
 
   render() {
     return (
-      <Drawer
+      <DrawerLayoutAndroid
         drawerWidth={this.drawerWidth()}
         ref={(c) => this.drawer = c}
-        content={<SideBar dispatch={this.dispatch}/>}
-        onOpen={this.props.onDrawerOpen}
-        onClose={this.props.onDrawerClose}
+        drawerPosition={DrawerLayoutAndroid.positions.Left}
+        renderNavigationView={() =>
+          <SideBar dispatch={this.dispatch}/>
+        }
+        onDrawerOpen={this.props.onDrawerOpen}
+        onDrawerClose={this.props.onDrawerClose}
       >
         <AppBar />
         <AppRoutes ref={(c) => this.approutes = c}/>
-      </Drawer>
+      </DrawerLayoutAndroid>
     );
   }
 }

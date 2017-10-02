@@ -3,6 +3,7 @@ import React from 'react';
 import { View } from 'react-native';
 import styled from 'styled-components/native';
 import { primary, textPrimary } from '../colors';
+import Toolbar from './Toolbar'
 
 import AppBar from './AppBar';
 
@@ -13,15 +14,10 @@ const styles = {
   }
 }
 
-const ToolbarAndroid = styled.ToolbarAndroid`
-  height: 56;
-  background-color: ${primary.toString()};
-`
-
 const AppShell = () => (
   <View>
     <AppBar />
-    <ToolbarAndroid
+    <Toolbar
       title="Read Git"
       titleColor={textPrimary}
       style={styles.toolbar}

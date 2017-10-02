@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { Button, AsyncStorage, ToastAndroid } from 'react-native';
+import { Button, AsyncStorage } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 
 import { primary } from '../../colors';

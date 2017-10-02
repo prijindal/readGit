@@ -2,7 +2,7 @@
 import React from 'react';
 import { View, Text, TouchableNativeFeedback } from 'react-native';
 import styled from 'styled-components/native';
-import Icon, { ToolbarAndroid } from 'react-native-vector-icons/MaterialIcons';
+import Icon from '@expo/vector-icons/MaterialIcons';
 
 import { primary, textPrimary, transparent, textSecondary } from '../colors';
 
@@ -52,11 +52,13 @@ export const RightIcon = ({name, size, onPress, color=textPrimary.toString()}: {
 
 const Toolbar = ({ title, onIconClicked, subtitle, navIconName, titleColor, subtitleColor, actions=[], onActionSelected = () => {} }: any) => (
   <Container>
-    <TouchableNativeFeedback onPress={onIconClicked} background={TouchableNativeFeedback.SelectableBackgroundBorderless()}>
-      <LeftIcon>
-        <Icon name={navIconName} size={24} color={textPrimary.toString()}/>
-      </LeftIcon>
-    </TouchableNativeFeedback>
+    {navIconName &&
+      <TouchableNativeFeedback onPress={onIconClicked} background={TouchableNativeFeedback.SelectableBackgroundBorderless()}>
+        <LeftIcon>
+          <Icon name={navIconName} size={24} color={textPrimary.toString()}/>
+        </LeftIcon>
+      </TouchableNativeFeedback>
+    }
     <TitleContainer>
       <Title style={{color: titleColor}}>{ title }</Title>
       {subtitle !== undefined &&

@@ -1,7 +1,7 @@
 // @flow
 import React, { PureComponent } from 'react';
 import { TouchableNativeFeedback } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from '@expo/vector-icons/MaterialIcons';
 import styled from 'styled-components/native';
 
 import { textDisabled, transparent, textDarkPrimary } from '../colors';
