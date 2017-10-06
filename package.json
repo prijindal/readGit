@@ -24,5 +24,13 @@
     "reduxsauce": "^0.7.0",
     "seamless-immutable": "^7.1.2",
     "styled-components": "^2.2.0"
+  },
+  "eslintConfig": {
+    "extends": "expo/native"
+  },
+  "devDependencies": {
+    "eslint": "^4.8.0",
+    "eslint-config-expo": "^6.0.0",
+    "prettier": "^1.7.4"
   }
 }
