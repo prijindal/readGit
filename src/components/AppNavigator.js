@@ -55,6 +55,11 @@ class DrawerNavigator extends Component {
   render() {
     return (
       <Drawer
+        type="overlay"
+        tapToClose={true}
+        openDrawerOffset={0.2} // 20% gap on the right side of drawer
+        captureGestures={true}
+        elevation={4}
         drawerWidth={this.drawerWidth()}
         ref={(c) => this.drawer = c}
         content={<SideBar dispatch={this.dispatch}/>}
