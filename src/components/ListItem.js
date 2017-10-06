@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import styled from 'styled-components/native';
-import { TouchableNativeFeedback, View } from 'react-native';
+import { View } from 'react-native';
+import TouchablePlatformFeedback from './TouchablePlatformFeedback';
 import { textDarkPrimary, textDarkSecondary, textDarkDivider, white } from '../colors';
 
 export const Container = styled.View`
@@ -93,7 +94,7 @@ class ListItem extends Component {
     const item = this.props.item;
     const textStyles = this.getAdditionalStyles();
     return (
-      <TouchableNativeFeedback onPress={onPress}>
+      <TouchablePlatformFeedback onPress={onPress}>
         <Container>
           <Content>
             <Title style={textStyles} ellipsizeMode="tail" numberOfLines={1}>{item.title}</Title>
@@ -108,7 +109,7 @@ class ListItem extends Component {
             <Image source={{ uri: item.image }} />
           }
         </Container>
-      </TouchableNativeFeedback>
+      </TouchablePlatformFeedback>
     );
   }
 }

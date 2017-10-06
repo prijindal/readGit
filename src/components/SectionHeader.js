@@ -1,8 +1,8 @@
 // @flow
 import React, { PureComponent } from 'react';
-import { TouchableNativeFeedback } from 'react-native';
 import Icon from '@expo/vector-icons/MaterialIcons';
 import styled from 'styled-components/native';
+import TouchablePlatformFeedback from './TouchablePlatformFeedback';
 
 import { textDisabled, transparent, textDarkPrimary } from '../colors';
 
@@ -32,7 +32,7 @@ const EmptyView = styled.Text`
 class SectionHeader extends PureComponent {
   render() {
     return (
-      <TouchableNativeFeedback onPress={this.props.onPress}>
+      <TouchablePlatformFeedback onPress={this.props.onPress}>
         <View>
           <Title>{this.props.title}</Title>
           {this.props.disabled ?
@@ -40,7 +40,7 @@ class SectionHeader extends PureComponent {
             <StyledIcon name="playlist-add-check"/>
           }
         </View>
-      </TouchableNativeFeedback>
+      </TouchablePlatformFeedback>
     )
   }
 }

@@ -1,7 +1,8 @@
 // @flow
 import React, { Component } from 'react';
 import styled from 'styled-components/native';
-import { ScrollView, Linking, TouchableNativeFeedback } from 'react-native';
+import { ScrollView, Linking } from 'react-native';
+import TouchablePlatformFeedback from '../../../components/TouchablePlatformFeedback';
 
 import Loading from '../../../components/Loading';
 
@@ -61,9 +62,9 @@ export const Bio = styled(Text)`
 `
 
 const Hyperlink = ({children, link}) => (
-  <TouchableNativeFeedback onPress={() => Linking.openURL(link)}>
+  <TouchablePlatformFeedback onPress={() => Linking.openURL(link)}>
     <Text>{children}</Text>
-  </TouchableNativeFeedback>
+  </TouchablePlatformFeedback>
 )
 
 class Overview extends Component {

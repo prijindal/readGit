@@ -2,7 +2,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
-import { TouchableNativeFeedback, View } from 'react-native';
+import { View } from 'react-native';
+import TouchablePlatformFeedback from './TouchablePlatformFeedback';
 import Icon from '@expo/vector-icons/MaterialIcons';
 
 import { white, textDarkPrimary, textDarkSecondary } from '../colors';
@@ -54,12 +55,12 @@ class MenuItem extends Component {
     const { item, iconColor, textColor, onPress } = this.props;
     const { name, icon } = item;
     return (
-      <TouchableNativeFeedback onPress={onPress}>
+      <TouchablePlatformFeedback onPress={onPress}>
         <Container>
           <MenuIcon name={icon} style={{ color: iconColor }} />
           <Text style={{ color: textColor }}>{name}</Text>
         </Container>
-      </TouchableNativeFeedback>
+      </TouchablePlatformFeedback>
     );
   }
 }

@@ -5,7 +5,8 @@ import { gql } from 'react-apollo';
 import Icon from '@expo/vector-icons/MaterialIcons';
 import styled from 'styled-components/native';
 
-import { View, TouchableNativeFeedback, Linking } from 'react-native';
+import { View, Linking } from 'react-native';
+import TouchablePlatformFeedback from './TouchablePlatformFeedback';
 
 import { Container, Content, Title, Text } from './ListItem';
 import { textDarkPrimary, textDarkDivider, textSecondary } from '../colors';
@@ -65,7 +66,7 @@ class Repository extends PureComponent {
   render() {
     const { repository } = this.props
     return (
-      <TouchableNativeFeedback onPress={this.onPress}>
+      <TouchablePlatformFeedback onPress={this.onPress}>
         <View style={styles.container}>
           <Content style={styles.mainContent}>
             <Title>{`${repository.owner.login}/${repository.name}`}</Title>
@@ -92,7 +93,7 @@ class Repository extends PureComponent {
             </Content>
           }
         </View>
-      </TouchableNativeFeedback>
+      </TouchablePlatformFeedback>
     )
   }
 }

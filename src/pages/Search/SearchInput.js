@@ -1,9 +1,9 @@
 // @flow
 import React, { PureComponent } from 'react';
-import { View, TextInput, TouchableNativeFeedback } from 'react-native';
+import { TextInput } from 'react-native';
 
-import Icon from '@expo/vector-icons/MaterialIcons';
-import { Container, LeftIcon, TitleContainer, RightIconsContainer, RightIcon } from '../../components/Toolbar';
+import { Container, TitleContainer, RightIconsContainer } from '../../components/Toolbar/styles';
+import RightIcon from '../../components/Toolbar/RightIcon';
 
 import { textPrimary, textDarkPrimary, textDarkSecondary, transparent } from '../../colors';
 
@@ -11,11 +11,7 @@ class SearchInput extends PureComponent {
   render() {
     return (
       <Container style={{backgroundColor: textPrimary}}>
-        <TouchableNativeFeedback onPress={this.props.onBackPress} background={TouchableNativeFeedback.SelectableBackgroundBorderless()}>
-          <LeftIcon>
-            <Icon name="arrow-back" size={24} color={textDarkPrimary.toString()}/>
-          </LeftIcon>
-        </TouchableNativeFeedback>
+        <RightIcon onPress={this.props.onBackPress} name={'arrow-back'} size={24} color={textDarkPrimary.toString()} />
         <TitleContainer>
           <TextInput
             onChangeText={this.props.onChangeText}

@@ -3,7 +3,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import styled from 'styled-components/native';
-import { TouchableNativeFeedback, View, Image } from 'react-native';
+import { View, Image } from 'react-native';
+import TouchablePlatformFeedback from '../TouchablePlatformFeedback';
+
 import { textDarkPrimary, textDarkDivider, textDarkSecondary, white } from '../../colors';
 import getInfo from './functions';
 
@@ -52,7 +54,7 @@ class EventItem extends Component {
     const { item } = this.props;
     const { title, body, link } = this.state.event;
     return (
-      <TouchableNativeFeedback onPress={this.onPress}>
+      <TouchablePlatformFeedback onPress={this.onPress}>
         <ContainerView>
           <ContentView>
             <TitleText>{title}</TitleText>
@@ -60,7 +62,7 @@ class EventItem extends Component {
             {body}
           </ContentView>
         </ContainerView>
-      </TouchableNativeFeedback>
+      </TouchablePlatformFeedback>
     );
   }
 }

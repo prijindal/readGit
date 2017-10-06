@@ -1,8 +1,9 @@
 /* @flow */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ScrollView, Text, Image, View, Alert, AsyncStorage, TouchableNativeFeedback } from 'react-native';
+import { ScrollView, Text, Image, View, Alert, AsyncStorage } from 'react-native';
 import { NavigationActions } from 'react-navigation';
+import TouchablePlatformFeedback from '../TouchablePlatformFeedback';
 
 import { white, textPrimary, textSecondary } from '../../colors';
 
@@ -158,7 +159,7 @@ class SideBar extends Component {
             source={{ uri: user.avatarUrl }}
             style={[styles.image, { height: this.state.imageHeight }]}
           >
-            <TouchableNativeFeedback onPress={this.openUser}>
+            <TouchablePlatformFeedback onPress={this.openUser}>
               <View style={styles.imageOverlay}>
                 <Image
                   style={styles.avatar}
@@ -171,7 +172,7 @@ class SideBar extends Component {
                   </View>
                 </View>
               </View>
-            </TouchableNativeFeedback>
+            </TouchablePlatformFeedback>
           </Image>
           <View style={styles.list}>
             <List>
