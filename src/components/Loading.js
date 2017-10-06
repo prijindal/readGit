@@ -10,7 +10,7 @@ const View = styled.View`
 
 const Loading = () => (
   <View>
-    <ActivityIndicator color={primary} size={24}/>
+    <ActivityIndicator color={primary} size={'small'}/>
   </View>
 )
 

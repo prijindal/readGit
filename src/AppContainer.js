@@ -7,14 +7,9 @@ import { saveUser } from './actions/user';
 
 import AppNavigator from './components/AppNavigator';
 import AppShell from './components/AppShell';
+import ErrorScreen from './components/ErrorScreen';
 import store from './store';
 import client, { installAuthentication } from './apollo';
-
-const ErrorScreen = ({error}) => (
-  <View>
-    <Text>{JSON.stringify(error)}</Text>
-  </View>
-)
 
 class AppContainer extends Component {
   constructor(props: any) {
@@ -33,14 +28,12 @@ class AppContainer extends Component {
       console.log(user)
       user = JSON.parse(user);
       store.dispatch(saveUser(user))
-      throw new Error({message: 'Some Fucking Error'});
       installAuthentication(user.token);
       this.setState({
         loaded: true,
         error: null
       })
     } catch(e) {
-      console.error('Some Error occured in initial loading')
       this.setState({
         error: e
       })
