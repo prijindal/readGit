@@ -9,4 +9,4 @@ export default connect(
     addGroupRepo: () => dispatch(addSetting('grouprepo', true)),
     removeGroupRepo: () => dispatch(removeSetting('grouprepo')),
   })
-)(Header)
+)(Header);

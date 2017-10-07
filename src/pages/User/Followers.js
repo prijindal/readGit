@@ -2,16 +2,11 @@
 import React, { PureComponent } from 'react';
 import { gql, graphql } from 'react-apollo';
 import UsersList from './UsersList';
-import User from '../../components/User'
+import User from '../../components/User';
 
 class Followers extends PureComponent {
   render() {
-    return (
-      <UsersList
-        navigation={this.props.screenProps.navigation}
-        data={this.props.data}
-      />
-    )
+    return <UsersList navigation={this.props.screenProps.navigation} data={this.props.data} />;
   }
 }
 
@@ -30,15 +25,12 @@ const userQuery = gql`
     }
   }
   ${User.fragment}
-`
+`;
 
-export default graphql(
-  userQuery,
-  {
-    options: ({ screenProps }) => ({
-      variables: {
-        login: screenProps.navigation.state.params.user.login
-      }
-    })
-  }
-)(Followers);
+export default graphql(userQuery, {
+  options: ({ screenProps }) => ({
+    variables: {
+      login: screenProps.navigation.state.params.user.login,
+    },
+  }),
+})(Followers);

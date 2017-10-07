@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { AsyncStorage, View, Text } from 'react-native';
+import { AsyncStorage } from 'react-native';
 import { Provider } from 'react-redux';
 import { ApolloProvider } from 'react-apollo';
 import { saveUser } from './actions/user';
@@ -13,46 +13,46 @@ import client, { installAuthentication } from './apollo';
 
 class AppContainer extends Component {
   constructor(props: any) {
-    super(props)
+    super(props);
     this.getUserInfo();
   }
 
   state = {
     loaded: false,
-    error: null
-  }
+    error: null,
+  };
 
   getUserInfo = async () => {
     try {
       let user = await AsyncStorage.getItem('user');
-      console.log(user)
+      console.log(user);
       user = JSON.parse(user);
-      store.dispatch(saveUser(user))
+      store.dispatch(saveUser(user));
       installAuthentication(user.token);
       this.setState({
         loaded: true,
-        error: null
-      })
-    } catch(e) {
+        error: null,
+      });
+    } catch (e) {
       this.setState({
-        error: e
-      })
+        error: e,
+      });
     }
     // let settings = await AsyncStorage.getItem('settings');
     // settings = JSON.parse(settings);
     // store.dispatch(saveSettings(settings));
-  }
+  };
 
   render() {
-    if(this.state.error) return <ErrorScreen error={this.state.error}/>
-    if(!this.state.loaded) return <AppShell />
+    if (this.state.error) return <ErrorScreen error={this.state.error} />;
+    if (!this.state.loaded) return <AppShell />;
     return (
       <ApolloProvider client={client}>
         <Provider store={store}>
           <AppNavigator />
         </Provider>
       </ApolloProvider>
-    )
+    );
   }
 }
 

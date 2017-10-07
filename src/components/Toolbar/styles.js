@@ -20,7 +20,7 @@ export const LeftIcon = styled.View`
 export const TitleContainer = styled.View`
   flex-direction: column;
   margin-horizontal: 4;
-  flex-grow:1;
+  flex-grow: 1;
 `;
 
 export const Title = styled.Text`

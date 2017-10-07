@@ -1,4 +1,4 @@
-const fetch = require('node-fetch')
+const fetch = require('node-fetch');
 
 const IntrospectionQuery = `
 {
@@ -12,26 +12,26 @@ const IntrospectionQuery = `
     }
   }
 }
-`
+`;
 
 async function intro() {
+  let resp;
   try {
-    let resp = await fetch('https://api.github.com/graphql',{
+    resp = await fetch('https://api.github.com/graphql', {
       body: JSON.stringify({
         query: IntrospectionQuery,
-        variables: {}
+        variables: {},
       }),
       method: 'POST',
       'Content-type': 'application/json',
-      headers: {
-      }
-    })
+      headers: {},
+    });
     resp = await resp.json();
-  } catch(e) {
+  } catch (e) {
     console.error(e);
   } finally {
     console.log(resp);
   }
 }
 
-intro()
+intro();

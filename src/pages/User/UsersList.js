@@ -3,11 +3,11 @@ import React, { PureComponent } from 'react';
 import { Text, FlatList } from 'react-native';
 
 import Loading from '../../components/Loading';
-import User from '../../components/User'
+import User from '../../components/User';
 
 class UsersList extends PureComponent {
   render() {
-    const { data } = this.props
+    const { data } = this.props;
     if (data.loading) {
       return <Loading />;
     }
@@ -20,14 +20,11 @@ class UsersList extends PureComponent {
     return (
       <FlatList
         data={data.repositoryOwner.users.edges}
-        keyExtractor={(item) => item.node.id}
-        renderItem={({ item }) =>
-          <User user={item.node} dispatch={this.props.navigation.dispatch}/>
-        }
+        keyExtractor={item => item.node.id}
+        renderItem={({ item }) => <User user={item.node} dispatch={this.props.navigation.dispatch} />}
       />
-    )
+    );
   }
 }
 
-
-export default UsersList
+export default UsersList;

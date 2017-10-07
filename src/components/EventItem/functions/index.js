@@ -11,17 +11,17 @@ import publicEventInfo from './publicEvent';
 import pushEventInfo from './pushEvent';
 import watchEventInfo from './watchEvent';
 
-const getInfo = (event) => {
-  const { actor, created_at, id, payload, repo, type } = event;
-  if(type === 'CommitCommentEvent') {
+const getInfo = event => {
+  const { type } = event;
+  if (type === 'CommitCommentEvent') {
     return commitCommentEventInfo(event);
-  } else if(type === 'CreateEvent') {
+  } else if (type === 'CreateEvent') {
     return createEventInfo(event);
-  } else if(type === 'DeleteEvent') {
+  } else if (type === 'DeleteEvent') {
     return deleteEventInfo(event);
-  } else if(type === 'ForkEvent') {
+  } else if (type === 'ForkEvent') {
     return forkEventInfo(event);
-  } else if(type === 'IssueCommentEvent') {
+  } else if (type === 'IssueCommentEvent') {
     return issueCommentEventInfo(event);
   } else if (type === 'IssuesEvent') {
     return issueEventInfo(event);
@@ -38,11 +38,11 @@ const getInfo = (event) => {
   } else if (type === 'WatchEvent') {
     return watchEventInfo(event);
   } else {
-    console.error(type)
+    console.error(type);
     return {
       title: type,
-    }
+    };
   }
-}
+};
 
 export default getInfo;

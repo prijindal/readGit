@@ -24,15 +24,12 @@ const userQuery = gql`
     }
   }
   ${PinnedRepositories.fragment}
-`
+`;
 
-export default graphql(
-  userQuery,
-  {
-    options: ({ screenProps }) => ({
-      variables: {
-        login: screenProps.navigation.state.params.user.login
-      }
-    })
-  }
-)(Overview);
+export default graphql(userQuery, {
+  options: ({ screenProps }) => ({
+    variables: {
+      login: screenProps.navigation.state.params.user.login,
+    },
+  }),
+})(Overview);

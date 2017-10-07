@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BackHandler, Dimensions } from 'react-native';
-import Drawer from 'react-native-drawer'
+import Drawer from 'react-native-drawer';
 import { closeDrawer, openDrawer } from '../actions/drawer';
 
 import AppBar from '../components/AppBar';
@@ -27,8 +27,8 @@ class DrawerNavigator extends Component {
     BackHandler.removeEventListener('hardwareBackPress');
   }
 
-  drawer: any
-  approutes: any
+  drawer: any;
+  approutes: any;
 
   registerBackButton() {
     BackHandler.addEventListener('hardwareBackPress', () => {
@@ -46,28 +46,27 @@ class DrawerNavigator extends Component {
       return 320;
     }
     return width - 56;
-  }
+  };
 
-  dispatch = (config) => {
-    this.approutes.dispatch(config)
-  }
+  dispatch = config => {
+    this.approutes.dispatch(config);
+  };
 
   render() {
     return (
       <Drawer
         type="overlay"
-        tapToClose={true}
+        tapToClose
         openDrawerOffset={0.2} // 20% gap on the right side of drawer
-        captureGestures={true}
+        captureGestures
         elevation={4}
         drawerWidth={this.drawerWidth()}
-        ref={(c) => this.drawer = c}
-        content={<SideBar dispatch={this.dispatch}/>}
+        ref={c => (this.drawer = c)}
+        content={<SideBar dispatch={this.dispatch} />}
         onOpen={this.props.onDrawerOpen}
-        onClose={this.props.onDrawerClose}
-      >
+        onClose={this.props.onDrawerClose}>
         <AppBar />
-        <AppRoutes ref={(c) => this.approutes = c}/>
+        <AppRoutes ref={c => (this.approutes = c)} />
       </Drawer>
     );
   }

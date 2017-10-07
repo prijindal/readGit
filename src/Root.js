@@ -8,7 +8,7 @@ import ErrorScreen from './components/ErrorScreen';
 
 export default class Root extends Component {
   constructor(props: any) {
-    super(props)
+    super(props);
     this.checkToken();
   }
 
@@ -17,33 +17,33 @@ export default class Root extends Component {
       let user = await AsyncStorage.getItem('user');
       this.setState({
         loading: false,
-        loggedin: user != undefined,
-        error: null
-      })
-    } catch(e) {
+        loggedin: user !== undefined,
+        error: null,
+      });
+    } catch (e) {
       this.setState({
-        error: e
-      })
+        error: e,
+      });
     }
-  }
+  };
 
   state = {
     loading: true,
     loggedin: false,
-    error: null
-  }
+    error: null,
+  };
 
   render() {
     const { loading, loggedin, error } = this.state;
-    if(error) {
-      return <ErrorScreen error={error} />
+    if (error) {
+      return <ErrorScreen error={error} />;
     }
-    if(loading) {
+    if (loading) {
       return <AppShell />;
     } else if (loggedin) {
       return <AppContainer />;
     } else {
-      return <RootNavigator />
+      return <RootNavigator />;
     }
   }
 }

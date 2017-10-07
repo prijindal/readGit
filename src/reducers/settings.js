@@ -12,17 +12,13 @@ const INITIAL_STATE = Immutable({});
 
 const addSetting = (state: State = INITIAL_STATE, action: Action): State => ({
   ...state,
-  [action.key]: action.value
-})
+  [action.key]: action.value,
+});
 
-const removeSetting = (state: State = INITIAL_STATE, action: Action): State => (
-  Object.keys(state).filter(
-    i => i!=='grouprepo'
-  ).reduce(
-    (prev, key) => ({ ...prev,[key]: state[key]}),
-    {}
-  )
-)
+const removeSetting = (state: State = INITIAL_STATE, action: Action): State =>
+  Object.keys(state)
+    .filter(i => i !== 'grouprepo')
+    .reduce((prev, key) => ({ ...prev, [key]: state[key] }), {});
 
 const HANDLERS = {
   [ADD_SETTING]: addSetting,

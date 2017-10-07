@@ -11,6 +11,6 @@ const RightIcon = ({ name, size, onPress, color = textPrimary.toString() }) => (
       <Icon name={name} size={size} color={color} />
     </LeftIcon>
   </TouchableNativeFeedback>
-)
+);
 
 export default RightIcon;

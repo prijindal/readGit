@@ -2,7 +2,7 @@
 import React, { PureComponent } from 'react';
 import { gql, graphql } from 'react-apollo';
 
-import { View, FlatList } from 'react-native';
+import { FlatList } from 'react-native';
 
 import CenterText from './CenterText';
 import Loading from '../../components/Loading';
@@ -10,7 +10,7 @@ import searchResultsFragment from './searchResultsFragment';
 
 class SearchResultTab extends PureComponent {
   render() {
-    const { data, renderItem } = this.props
+    const { data, renderItem } = this.props;
     if (data.loading) {
       return <Loading />;
     }
@@ -28,7 +28,7 @@ class SearchResultTab extends PureComponent {
         refreshing={data.loading}
         onRefresh={this.props.data.refetch}
       />
-    )
+    );
   }
 }
 
@@ -39,19 +39,16 @@ const SearchQuery = gql`
     }
   }
   ${searchResultsFragment}
-`
+`;
 
-SearchResultTab = graphql(
-  SearchQuery,
-  {
-    options: ({ query, type }) => ({
-      variables: {
-        query,
-        after: null,
-        type
-      }
-    })
-  }
-)(SearchResultTab)
+SearchResultTab = graphql(SearchQuery, {
+  options: ({ query, type }) => ({
+    variables: {
+      query,
+      after: null,
+      type,
+    },
+  }),
+})(SearchResultTab);
 
 export default SearchResultTab;

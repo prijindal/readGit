@@ -26,8 +26,8 @@ class DrawerNavigator extends Component {
     BackHandler.removeEventListener('hardwareBackPress');
   }
 
-  drawer: any
-  approutes: any
+  drawer: any;
+  approutes: any;
 
   registerBackButton() {
     BackHandler.addEventListener('hardwareBackPress', () => {
@@ -45,26 +45,23 @@ class DrawerNavigator extends Component {
       return 320;
     }
     return width - 56;
-  }
+  };
 
-  dispatch = (config) => {
-    this.approutes.dispatch(config)
-  }
+  dispatch = config => {
+    this.approutes.dispatch(config);
+  };
 
   render() {
     return (
       <DrawerLayoutAndroid
         drawerWidth={this.drawerWidth()}
-        ref={(c) => this.drawer = c}
+        ref={c => (this.drawer = c)}
         drawerPosition={DrawerLayoutAndroid.positions.Left}
-        renderNavigationView={() =>
-          <SideBar dispatch={this.dispatch}/>
-        }
+        renderNavigationView={() => <SideBar dispatch={this.dispatch} />}
         onDrawerOpen={this.props.onDrawerOpen}
-        onDrawerClose={this.props.onDrawerClose}
-      >
+        onDrawerClose={this.props.onDrawerClose}>
         <AppBar />
-        <AppRoutes ref={(c) => this.approutes = c}/>
+        <AppRoutes ref={c => (this.approutes = c)} />
       </DrawerLayoutAndroid>
     );
   }

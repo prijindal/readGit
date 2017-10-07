@@ -1,19 +1,15 @@
 // @flow
 import React, { Component } from 'react';
-import styled from 'styled-components/native';
-import { View } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 
-import {
-  tabBarOptions
-} from '../../colors';
+import { tabBarOptions } from '../../colors';
 import Layout from '../../components/Layout';
 import Overview from './Overview';
 import Repositories from './Repositories';
 import StarredRepositories from './StarredRepositories';
 import Followers from './Followers';
 
-const paramsToState = (props) => {
+const paramsToState = props => {
   const { state } = props.navigation;
   console.log(state);
   if (state.routes[state.index].params) {
@@ -21,7 +17,7 @@ const paramsToState = (props) => {
   } else {
     return {};
   }
-}
+};
 
 class Header extends Component {
   shouldComponentUpdate(nextProps) {
@@ -30,55 +26,47 @@ class Header extends Component {
 
   state = {
     user: paramsToState(this.props),
-  }
+  };
 
   render() {
     const { user } = this.state;
-    return (
-      <Layout
-        backButton
-        onBackButtonPress={() => this.props.navigation.goBack()}
-        toolbarTitle={user.login}
-        toolbarSubtitle={user.name}
-      />
-    )
+    return <Layout backButton onBackButtonPress={() => this.props.navigation.goBack()} toolbarTitle={user.login} toolbarSubtitle={user.name} />;
   }
 }
 
-const UserTabs = TabNavigator({
-  Overview: {
-    screen: Overview
+const UserTabs = TabNavigator(
+  {
+    Overview: {
+      screen: Overview,
+    },
+    Repositories: {
+      screen: Repositories,
+    },
+    Starred: {
+      screen: StarredRepositories,
+    },
+    Followers: {
+      screen: Followers,
+    },
   },
-  Repositories: {
-    screen: Repositories
-  },
-  Starred: {
-    screen: StarredRepositories
-  },
-  Followers: {
-    screen: Followers
+  {
+    tabBarOptions: {
+      ...tabBarOptions,
+      scrollEnabled: true,
+    },
+    lazy: true,
+    swipeEnabled: true,
+    animationEnabled: true,
   }
-}, {
-  tabBarOptions: {
-    ...tabBarOptions,
-    scrollEnabled: true
-  },
-  lazy: true,
-  swipeEnabled: true,
-  animationEnabled: true,
-})
+);
 
 class User extends Component {
   static navigationOptions = {
-    header: (props, extraProps) => (
-      <Header {...props}/>
-    )
-  }
+    header: (props, extraProps) => <Header {...props} />,
+  };
 
   render() {
-    return (
-      <UserTabs screenProps={this.props} />
-    )
+    return <UserTabs screenProps={this.props} />;
   }
 }
 

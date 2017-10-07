@@ -1,32 +1,30 @@
 // @flow
 import React, { PureComponent } from 'react';
-import { View, Text, FlatList, ScrollView, Keyboard } from 'react-native';
-
-import sleep from '../../helpers/sleep';
+import { View } from 'react-native';
 
 import SearchInput from './SearchInput';
 import SearchResults from './SearchResults';
 
 const styles = {
   container: {
-    flex: 1
-  }
-}
+    flex: 1,
+  },
+};
 
 class Search extends PureComponent {
   state = {
     searchText: '',
-  }
+  };
 
   onBackPress = () => {
-    if(this.state.searchText) {
+    if (this.state.searchText) {
       this.setState({
         searchText: '',
-      })
+      });
     } else {
-      this.props.navigation.goBack()
+      this.props.navigation.goBack();
     }
-  }
+  };
 
   render() {
     return (
@@ -35,14 +33,11 @@ class Search extends PureComponent {
           navigation={this.props.navigation}
           onBackPress={this.onBackPress}
           searchText={this.state.searchText}
-          onChangeText={(searchText) => this.setState({searchText})}
+          onChangeText={searchText => this.setState({ searchText })}
         />
-        <SearchResults
-          searchText={this.state.searchText}
-          dispatch={this.props.navigation.dispatch}
-        />
+        <SearchResults searchText={this.state.searchText} dispatch={this.props.navigation.dispatch} />
       </View>
-    )
+    );
   }
 }
 

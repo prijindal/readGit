@@ -2,9 +2,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
-import { View } from 'react-native';
-import TouchablePlatformFeedback from './TouchablePlatformFeedback';
 import Icon from '@expo/vector-icons/MaterialIcons';
+import TouchablePlatformFeedback from './TouchablePlatformFeedback';
 
 import { white, textDarkPrimary, textDarkSecondary } from '../colors';
 
@@ -14,11 +13,11 @@ const Container = styled.View`
   height: 48;
   align-items: center;
   flex-direction: row;
-`
+`;
 
 const MenuIcon = styled(Icon)`
   font-size: 24;
-`
+`;
 
 const Text = styled.Text`
   font-size: 14;
@@ -26,30 +25,24 @@ const Text = styled.Text`
   font-family: sans-serif-light;
   padding-left: 32;
   color: ${textDarkPrimary.toString()};
-`
+`;
 
 class MenuItem extends Component {
   static defaultProps = {
     iconColor: textDarkSecondary,
     textColor: textDarkPrimary,
     onPress: () => {},
-  }
+  };
 
   static propTypes = {
     item: PropTypes.shape({
       name: PropTypes.string,
       icon: PropTypes.string,
     }).isRequired,
-    iconColor: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.object,
-    ]),
-    textColor: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.object,
-    ]),
+    iconColor: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+    textColor: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     onPress: PropTypes.func,
-  }
+  };
 
   render() {
     const { item, iconColor, textColor, onPress } = this.props;

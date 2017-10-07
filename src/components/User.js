@@ -8,8 +8,8 @@ import ListItem from './ListItem';
 class User extends PureComponent {
   onPress = () => {
     const { user } = this.props;
-    this.props.dispatch(NavigationActions.navigate({ routeName: 'User' , params: { user }}));
-  }
+    this.props.dispatch(NavigationActions.navigate({ routeName: 'User', params: { user } }));
+  };
 
   render() {
     const { user } = this.props;
@@ -19,11 +19,11 @@ class User extends PureComponent {
         item={{
           title: user.login,
           body: user.name,
-          image: user.avatarUrl
+          image: user.avatarUrl,
         }}
         disabled
       />
-    )
+    );
   }
 }
 
@@ -33,13 +33,13 @@ User.fragment = gql`
     login
     avatarUrl
     url
-    ...on User {
+    ... on User {
       name
     }
-    ...on Organization {
+    ... on Organization {
       name
     }
   }
-`
+`;
 
 export default User;

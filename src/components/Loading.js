@@ -6,13 +6,12 @@ import { primary } from '../colors';
 
 const View = styled.View`
   padding-vertical: 12;
-`
+`;
 
 const Loading = () => (
   <View>
-    <ActivityIndicator color={primary} size={'small'}/>
+    <ActivityIndicator color={primary} size={'small'} />
   </View>
-)
-
+);
 
 export default Loading;

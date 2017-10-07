@@ -35,8 +35,7 @@ const styles = {
     height: 62,
     borderRadius: 50,
   },
-  profileInfo: {
-  },
+  profileInfo: {},
   name: {
     opacity: 1,
     color: textPrimary,
@@ -74,7 +73,6 @@ const styles = {
   },
 };
 
-
 class SideBar extends Component {
   static propTypes = {
     logout: PropTypes.func.isRequired,
@@ -83,25 +81,25 @@ class SideBar extends Component {
     }).isRequired,
     dispatch: PropTypes.func,
     closeDrawer: PropTypes.func.isRequired,
-  }
+  };
 
   state = {
     imageHeight: 180,
-  }
+  };
 
   onScrollViewLayout = (event: any) => {
     const { width } = event.nativeEvent.layout;
-    const imageHeight = (width * 9) / 16;
+    const imageHeight = width * 9 / 16;
     // Put in redux state
     this.setState({
       imageHeight,
     });
-  }
+  };
 
   openPage = (page: any) => {
     this.props.closeDrawer();
-    this.props.dispatch(NavigationActions.navigate({ routeName: page }),);
-  }
+    this.props.dispatch(NavigationActions.navigate({ routeName: page }));
+  };
 
   logout = () => {
     Alert.alert(
@@ -119,52 +117,48 @@ class SideBar extends Component {
           },
         },
       ],
-      { cancelable: false },
+      { cancelable: false }
     );
-  }
+  };
 
   logoutLogic = () => {
     this.props.closeDrawer();
     this.props.logout();
-    this.props.dispatch(NavigationActions.reset({
-      index: 0,
-      actions: [
-        NavigationActions.navigate({
-          routeName: 'Login',
-        })
-      ]
-    }));
+    this.props.dispatch(
+      NavigationActions.reset({
+        index: 0,
+        actions: [
+          NavigationActions.navigate({
+            routeName: 'Login',
+          }),
+        ],
+      })
+    );
     AsyncStorage.removeItem('token');
     AsyncStorage.removeItem('user');
-  }
+  };
 
   openUser = () => {
-    let { user, data } = this.props
+    let { user, data } = this.props;
     if (!data.loading && !data.error) {
-      user = data.viewer
+      user = data.viewer;
     }
     this.props.closeDrawer();
-    this.props.dispatch(NavigationActions.navigate({ routeName: 'User' , params: { user }}));
-  }
+    this.props.dispatch(NavigationActions.navigate({ routeName: 'User', params: { user } }));
+  };
 
   render() {
-    let { user, data } = this.props
+    let { user, data } = this.props;
     if (!data.loading && !data.error) {
-      user = data.viewer
+      user = data.viewer;
     }
     return (
       <View onLayout={this.onScrollViewLayout} style={styles.container}>
         <ScrollView>
-          <Image
-            source={{ uri: user.avatarUrl }}
-            style={[styles.image, { height: this.state.imageHeight }]}
-          >
+          <Image source={{ uri: user.avatarUrl }} style={[styles.image, { height: this.state.imageHeight }]}>
             <TouchablePlatformFeedback onPress={this.openUser}>
               <View style={styles.imageOverlay}>
-                <Image
-                  style={styles.avatar}
-                  source={{ uri: user.avatarUrl }}
-                />
+                <Image style={styles.avatar} source={{ uri: user.avatarUrl }} />
                 <View style={styles.profileInfoContainer}>
                   <View style={styles.profileInfo}>
                     <Text style={styles.name}>{user.name}</Text>
@@ -176,34 +170,16 @@ class SideBar extends Component {
           </Image>
           <View style={styles.list}>
             <List>
-              <MenuItem
-                item={{ name: 'Notifications', icon: 'drafts' }}
-                onPress={() => this.openPage('Home')}
-              />
-              <MenuItem
-                item={{ name: 'News Feed', icon: 'person' }}
-                onPress={() => this.openPage('NewsFeed')}
-              />
-              <MenuItem
-                item={{ name: 'All Users', icon: 'person' }}
-                onPress={() => this.openPage('Users')}
-              />
+              <MenuItem item={{ name: 'Notifications', icon: 'drafts' }} onPress={() => this.openPage('Home')} />
+              <MenuItem item={{ name: 'News Feed', icon: 'person' }} onPress={() => this.openPage('NewsFeed')} />
+              <MenuItem item={{ name: 'All Users', icon: 'person' }} onPress={() => this.openPage('Users')} />
             </List>
             <List>
-              <MenuItem
-                item={{ name: 'Logout', icon: 'exit-to-app' }}
-                onPress={this.logout}
-              />
+              <MenuItem item={{ name: 'Logout', icon: 'exit-to-app' }} onPress={this.logout} />
             </List>
             <List>
-              <MenuItem
-                item={{ name: 'Settings', icon: 'settings' }}
-                onPress={() => this.openPage('settings')}
-              />
-              <MenuItem
-                item={{ name: 'Help and Feedback', icon: 'help' }}
-                onPress={() => this.openPage('help')}
-              />
+              <MenuItem item={{ name: 'Settings', icon: 'settings' }} onPress={() => this.openPage('settings')} />
+              <MenuItem item={{ name: 'Help and Feedback', icon: 'help' }} onPress={() => this.openPage('help')} />
             </List>
           </View>
         </ScrollView>

@@ -18,6 +18,6 @@ const searchResultsFragment = gql`
   }
   ${Repository.fragment}
   ${User.fragment}
-`
+`;
 
 export default searchResultsFragment;

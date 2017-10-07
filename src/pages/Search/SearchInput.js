@@ -10,7 +10,7 @@ import { textPrimary, textDarkPrimary, textDarkSecondary, transparent } from '..
 class SearchInput extends PureComponent {
   render() {
     return (
-      <Container style={{backgroundColor: textPrimary}}>
+      <Container style={{ backgroundColor: textPrimary }}>
         <RightIcon onPress={this.props.onBackPress} name={'arrow-back'} size={24} color={textDarkPrimary.toString()} />
         <TitleContainer>
           <TextInput
@@ -30,13 +30,13 @@ class SearchInput extends PureComponent {
           />
         </TitleContainer>
         <RightIconsContainer>
-          {this.props.searchText.length > 0 &&
-            <RightIcon name="cancel" size={24} onPress={this.props.onBackPress} color={textDarkSecondary.toString()}/>
-          }
+          {this.props.searchText.length > 0 && (
+            <RightIcon name="cancel" size={24} onPress={this.props.onBackPress} color={textDarkSecondary.toString()} />
+          )}
           <RightIcon name="search" size={24} onPress={this.props.onSubmitEditing} color={textDarkSecondary.toString()} />
         </RightIconsContainer>
       </Container>
-    )
+    );
   }
 }
 

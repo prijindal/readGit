@@ -1,7 +1,7 @@
 // @flow
-import SideBar from './SideBar';
 import { graphql, gql } from 'react-apollo';
 import { connect } from 'react-redux';
+import SideBar from './SideBar';
 
 import { logoutUser } from '../../actions/user';
 import { closeDrawer } from '../../actions/drawer';
@@ -16,7 +16,7 @@ const UserQuery = gql`
       avatarUrl
     }
   }
-`
+`;
 
 export default connect(
   ({ user }) => ({ user }),
@@ -24,8 +24,4 @@ export default connect(
     logout: () => dispatch(logoutUser()),
     closeDrawer: () => dispatch(closeDrawer()),
   })
-)(
-  graphql(
-    UserQuery
-  )(SideBar)
-);
+)(graphql(UserQuery)(SideBar));

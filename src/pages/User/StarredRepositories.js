@@ -6,11 +6,7 @@ import Repository from '../../components/Repository';
 
 class StarredRepositories extends PureComponent {
   render() {
-    return (
-      <RepositoriesList
-        data={this.props.data}
-      />
-    )
+    return <RepositoriesList data={this.props.data} />;
   }
 }
 
@@ -29,15 +25,12 @@ const userQuery = gql`
     }
   }
   ${Repository.fragment}
-`
+`;
 
-export default graphql(
-  userQuery,
-  {
-    options: ({ screenProps }) => ({
-      variables: {
-        login: screenProps.navigation.state.params.user.login
-      }
-    })
-  }
-)(StarredRepositories);
+export default graphql(userQuery, {
+  options: ({ screenProps }) => ({
+    variables: {
+      login: screenProps.navigation.state.params.user.login,
+    },
+  }),
+})(StarredRepositories);

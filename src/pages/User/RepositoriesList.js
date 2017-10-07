@@ -4,11 +4,11 @@ import { Text, FlatList } from 'react-native';
 import { gql } from 'react-apollo';
 
 import Loading from '../../components/Loading';
-import Repository from '../../components/Repository'
+import Repository from '../../components/Repository';
 
 class RepositoriesList extends PureComponent {
   render() {
-    const { data } = this.props
+    const { data } = this.props;
     if (data.loading) {
       return <Loading />;
     }
@@ -21,12 +21,10 @@ class RepositoriesList extends PureComponent {
     return (
       <FlatList
         data={data.repositoryOwner.repositories.edges}
-        keyExtractor={(item) => item.node.id}
-        renderItem={({ item }) =>
-          <Repository repository={item.node}/>
-        }
+        keyExtractor={item => item.node.id}
+        renderItem={({ item }) => <Repository repository={item.node} />}
       />
-    )
+    );
   }
 }
 
@@ -39,6 +37,6 @@ fragment repositoriesListFragment on RepositoryConnection {
   }
 }
 ${Repository.fragment}
-`
+`;
 
-export default RepositoriesList
+export default RepositoriesList;

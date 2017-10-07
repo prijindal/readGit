@@ -5,11 +5,7 @@ import RepositoriesList from './RepositoriesList';
 
 class Repositories extends PureComponent {
   render() {
-    return (
-      <RepositoriesList
-        data={this.props.data}
-      />
-    )
+    return <RepositoriesList data={this.props.data} />;
   }
 }
 
@@ -22,15 +18,12 @@ const userQuery = gql`
     }
   }
   ${RepositoriesList.fragment}
-`
+`;
 
-export default graphql(
-  userQuery,
-  {
-    options: ({ screenProps }) => ({
-      variables: {
-        login: screenProps.navigation.state.params.user.login
-      }
-    })
-  }
-)(Repositories);
+export default graphql(userQuery, {
+  options: ({ screenProps }) => ({
+    variables: {
+      login: screenProps.navigation.state.params.user.login,
+    },
+  }),
+})(Repositories);
