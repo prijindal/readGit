@@ -13,7 +13,7 @@ const AppBar = styled.View`
 const AppStatusBar = () => (
   <View>
     <AppBar />
-    <StatusBar backgroundColor={transparent} translucent />
+    <StatusBar backgroundColor={primaryDark} translucent={false} barStyle="light-content" />
   </View>
 );
 

@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { BackHandler, Dimensions } from 'react-native';
+import { BackHandler } from 'react-native';
 import Drawer from 'react-native-drawer';
 import { closeDrawer, openDrawer } from '../actions/drawer';
 
@@ -40,14 +40,6 @@ class DrawerNavigator extends Component {
     });
   }
 
-  drawerWidth = () => {
-    const { width } = Dimensions.get('window');
-    if (width - 56 > 320) {
-      return 320;
-    }
-    return width - 56;
-  };
-
   dispatch = config => {
     this.approutes.dispatch(config);
   };
@@ -58,10 +50,15 @@ class DrawerNavigator extends Component {
         type="overlay"
         tapToClose
         openDrawerOffset={0.2} // 20% gap on the right side of drawer
-        captureGestures
+        panCloseMask={0.2}
         elevation={4}
-        drawerWidth={this.drawerWidth()}
+        closedDrawerOffset={-3}
         ref={c => (this.drawer = c)}
+        styles={{
+          drawer: {
+            backgroundColor: '#ffffff',
+          }
+        }}
         content={<SideBar dispatch={this.dispatch} />}
         onOpen={this.props.onDrawerOpen}
         onClose={this.props.onDrawerClose}>

@@ -34,6 +34,7 @@ class AppContainer extends Component {
         error: null,
       });
     } catch (e) {
+      console.error(e)
       this.setState({
         error: e,
       });

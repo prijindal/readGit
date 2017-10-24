@@ -22,7 +22,6 @@ const MenuIcon = styled(Icon)`
 const Text = styled.Text`
   font-size: 14;
   font-weight: 500;
-  font-family: sans-serif-light;
   padding-left: 32;
   color: ${textDarkPrimary.toString()};
 `;

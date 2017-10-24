@@ -17,7 +17,7 @@ export default class Root extends Component {
       let user = await AsyncStorage.getItem('user');
       this.setState({
         loading: false,
-        loggedin: user !== undefined,
+        loggedin: user,
         error: null,
       });
     } catch (e) {

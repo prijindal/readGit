@@ -1,4 +1,4 @@
-language: android
+language: nodejs
 sudo: false
 
 before_install:
@@ -8,25 +8,12 @@ before_install:
 install:
 - npm install
 
-android:
-  components:
-  - tools
-  - platform-tools
-  - build-tools-23.0.1
-  - android-23
-  - extra-android-m2repository
-
 script:
   - npm test
   # - if [[ "$NODE_VERSION" = 7 ]]; then sh upload.sh; fi
 
 after_success:
   - sh build.sh
-
-cache:
-  directories:
-    - $HOME/.nvm
-    - node_modules
 
 notifications:
   email:
